@@ -1,0 +1,62 @@
+/* نور الذكر V40.12 — التسجيل الاحترافي، المستخدمون، مكتبة الأذكار والإعلانات */
+
+/* صفحة التسجيل */
+.auth-card-v4012{max-height:min(92vh,760px);overflow:auto}
+.auth-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.auth-mode-btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:12px;font-weight:900}
+.auth-mode-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 28%,transparent)}
+#authSubmit:disabled{opacity:.72;cursor:wait}
+.auth-result{margin-top:12px;padding:13px 14px;border-radius:14px;line-height:1.75;font-weight:700}
+.auth-result.success{display:block!important;background:#16855d1f;border:1px solid #16855d66;color:color-mix(in srgb,var(--ink) 88%,#16855d)}
+.auth-result.warning{display:block!important;background:#c89b4b1f;border:1px solid #c89b4b77;color:var(--ink)}
+.auth-result.error{display:block!important;background:#b6424218;border:1px solid #b6424266;color:var(--danger)}
+.auth-result-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+
+/* إعلان المستخدمين */
+.public-announcements{display:grid;gap:10px;margin:0 0 18px}
+.public-announcement{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:14px;padding:17px 18px;border-radius:22px;border:1px solid color-mix(in srgb,var(--accent2) 58%,var(--line));background:linear-gradient(135deg,color-mix(in srgb,var(--accent2) 18%,var(--card)),var(--card));box-shadow:var(--shadow)}
+.announcement-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--accent);font-size:21px}
+.announcement-copy strong{display:block;font-size:18px;margin-bottom:5px}
+.announcement-copy p{margin:0;line-height:1.8;white-space:pre-wrap}
+.announcement-close{width:36px;height:36px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:24px;line-height:1}
+
+/* بوابة المالك */
+.owner-section{margin-top:16px}
+.owner-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+.owner-toolbar .icon-btn{min-width:240px;flex:1}
+.owner-toolbar-3{display:grid;grid-template-columns:1.4fr .8fr .8fr}
+.owner-count{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,var(--card));border:1px solid var(--line);font-weight:900;white-space:nowrap}
+.table-wrap{width:100%;overflow:auto;border:1px solid var(--line);border-radius:16px}
+.owner-table{min-width:900px;background:var(--card)}
+.owner-table thead{position:sticky;top:0;background:color-mix(in srgb,var(--card) 88%,var(--accent) 12%);z-index:1}
+.owner-role,.origin-chip{display:inline-flex;padding:5px 9px;border-radius:999px;border:1px solid var(--line);font-size:12px;font-weight:900}
+.role-owner{background:#c89b4b2b;border-color:#c89b4b88}.role-admin{background:#6f63d92b}.role-editor{background:#3786d42b}.role-user{background:#7772}
+.status-active{background:#1f9c6a28;border-color:#1f9c6a66}.status-inactive{background:#b6424220;border-color:#b6424266}
+
+.admin-dhikr-library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;max-height:760px;overflow:auto;padding-inline-end:4px}
+.admin-library-item{border:1px solid var(--line);border-radius:18px;padding:16px;background:color-mix(in srgb,var(--card) 94%,var(--accent) 6%)}
+.admin-library-item h3{margin:6px 0 8px}.admin-library-text{font-size:18px;line-height:1.9;white-space:pre-wrap}
+.library-benefit{padding:9px 11px;border-radius:12px;background:color-mix(in srgb,var(--accent2) 13%,var(--card))}
+.origin-builtin{background:#7772}.origin-cloud{background:#1f9c6a28;border-color:#1f9c6a66}
+
+.announcement-form{margin-top:14px}
+.check-line{display:flex;align-items:center;gap:9px;font-weight:800;margin:4px 0 14px}
+.check-line input{width:20px;height:20px;accent-color:var(--accent)}
+.announcement-admin-list{display:grid;gap:10px;margin-top:16px}
+.announcement-admin-card{border:1px solid var(--line);border-radius:18px;padding:16px;background:color-mix(in srgb,var(--card) 94%,var(--accent) 6%)}
+.announcement-admin-card h3{margin:0 0 5px}.announcement-admin-card p{white-space:pre-wrap;line-height:1.75}
+
+/* تحسين الجداول القديمة داخل بوابة المالك */
+#portalApp section.card>.table{display:block;overflow:auto;white-space:nowrap}
+
+@media(max-width:850px){
+  .auth-result-actions{grid-template-columns:1fr}
+  .public-announcement{grid-template-columns:auto 1fr;padding:14px}
+  .announcement-close{position:absolute;left:8px;top:8px}
+  .owner-toolbar-3{grid-template-columns:1fr}
+  .owner-toolbar .icon-btn{min-width:0;width:100%}
+  .admin-dhikr-library{grid-template-columns:1fr;max-height:none}
+  .announcement-form{grid-template-columns:1fr!important}
+}
+
+.modal-card{width:min(820px,100%);max-height:90vh;overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow)}

@@ -1,0 +1,105 @@
+/* نور الذكر V40.7 — تحسين ألوان قوائم الاختبار ورفع تقييم الأعراض قليلًا */
+
+/* جعل القوائم المنسدلة في اختبارات الحفظ واضحة تمامًا في الوضع الليلي والفاتح. */
+#memorization select,
+.quiz-page select,
+#memorization select option,
+.quiz-page select option,
+body.dark #memorization select,
+body.dark .quiz-page select,
+body.dark #memorization select option,
+body.dark .quiz-page select option,
+html[data-theme="dark"] #memorization select,
+html[data-theme="dark"] .quiz-page select,
+html[data-theme="dark"] #memorization select option,
+html[data-theme="dark"] .quiz-page select option{
+  background:#fffaf0!important;
+  color:#173a35!important;
+  -webkit-text-fill-color:#173a35!important;
+}
+
+#memorization select,
+.quiz-page select{
+  font-weight:800!important;
+  border-color:#cdbd96!important;
+}
+
+#memorization select option,
+.quiz-page select option{
+  padding:10px!important;
+  font-weight:800!important;
+}
+
+#memorization select option:checked,
+.quiz-page select option:checked,
+#memorization select option:hover,
+.quiz-page select option:hover,
+body.dark #memorization select option:checked,
+body.dark .quiz-page select option:checked,
+html[data-theme="dark"] #memorization select option:checked,
+html[data-theme="dark"] .quiz-page select option:checked{
+  background:#dfeee5!important;
+  color:#0d624c!important;
+}
+
+/* تحسين وضوح رقم الاختيار داخل أزرار الإجابات. */
+#memorization .quiz-option > span,
+.quiz-page .quiz-option > span,
+body.dark #memorization .quiz-option > span,
+body.dark .quiz-page .quiz-option > span,
+html[data-theme="dark"] #memorization .quiz-option > span,
+html[data-theme="dark"] .quiz-page .quiz-option > span{
+  background:#e1eee6!important;
+  color:#0b5d49!important;
+  border:1px solid #b4ccbf!important;
+  box-shadow:none!important;
+}
+
+/* رفع قسم تقييم الأعراض قليلًا وجعله أكثر توازنًا بصريًا. */
+#assessment.page,
+.assessment-page{
+  padding-top:0!important;
+}
+
+.assessment-hero{
+  margin:8px 0 10px!important;
+  padding:30px 34px 24px!important;
+}
+
+.assessment-hero h1{
+  margin:4px 0 6px!important;
+}
+
+.assessment-hero p{
+  margin:0!important;
+}
+
+#assessmentHub,
+.assessment-hub{
+  margin-top:0!important;
+}
+
+.assessment-warning{
+  margin-bottom:12px!important;
+}
+
+.assessment-types{
+  margin-top:0!important;
+  gap:14px!important;
+}
+
+.assessment-types button{
+  min-height:228px!important;
+  padding:22px 22px 20px!important;
+}
+
+@media(max-width:850px){
+  .assessment-hero{
+    padding:24px 22px 18px!important;
+    margin:6px 0 8px!important;
+  }
+  .assessment-types button{
+    min-height:unset!important;
+    padding:20px!important;
+  }
+}
