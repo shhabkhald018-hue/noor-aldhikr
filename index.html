@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><script>
+(function(){
+  var h=location.hash||'';
+  var q=location.search||'';
+  if(/(?:^|[#&])type=recovery(?:&|$)/.test(h) || /(?:^|[?&])type=recovery(?:&|$)/.test(q)){
+    location.replace('reset-password.html'+q+h);
+  }
+})();
+</script><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#2f735e" name="theme-color"/><meta name="description" content="نور الذكر: القرآن الكريم والأذكار والرقية الشرعية والعلوم الشرعية ومواقيت الصلاة في تجربة عربية متكاملة."><meta content="light dark" name="color-scheme"/><meta content="index,follow" name="robots"/><title>نور الذكر | القرآن والأذكار والرقية الشرعية</title><link href="manifest.webmanifest" rel="manifest"/><link href="icon.svg" rel="icon"/><link href="apple-touch-icon.png" rel="apple-touch-icon"/><link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/><script>try{if(location.hash)history.replaceState(null,"",location.pathname+location.search)}catch(e){}</script><link href="assets/css/app.css?v=39.2" rel="stylesheet"/><link href="assets/css/v40-identity.css?v=40.1" rel="stylesheet"/><link href="assets/css/v40-2-quran.css?v=40.2" rel="stylesheet"/><link href="assets/css/v40-3-professional.css?v=40.3" rel="stylesheet"/><link href="assets/css/v40-4-final.css?v=40.4" rel="stylesheet"/><link href="assets/css/v40-5-fixes.css?v=40.5" rel="stylesheet"/><link href="assets/css/v40-6-quiz-answers.css?v=40.6" rel="stylesheet"/><link href="assets/css/v40-7-assessment-quiz-tuning.css?v=40.7" rel="stylesheet"/><link href="assets/css/v40-10-navigation-qibla.css?v=40.10" rel="stylesheet"/><link href="assets/css/v40-12-users-owner.css?v=40.12" rel="stylesheet"/><link href="assets/css/v40-13-mobile-quran-assessment-ads.css?v=40.13" rel="stylesheet"/><link href="assets/css/v40-17-scholar-ai-assessment.css?v=40.17" rel="stylesheet"/><link href="assets/css/v40-18-owner-cms.css?v=40.18" rel="stylesheet"/><link href="assets/css/v40-19-experience.css?v=40.19" rel="stylesheet"/><link href="assets/css/v40-21-private-chat.css?v=40.21" rel="stylesheet"/><link href="assets/css/v40-22-spiritual-assessment.css?v=40.22" rel="stylesheet"/><link href="assets/css/v40-23-fixes-library.css?v=40.25" rel="stylesheet"/><script defer="" src="assets/js/ads-config.js?v=69.0"></script><link href="assets/css/v40-24-islamic-academy.css?v=45.0" rel="stylesheet"/><link href="assets/css/v43-academy-exams.css?v=47.0" rel="stylesheet"/>
+<link href="assets/css/v40-27-global-pro.css?v=40.27" rel="stylesheet"/>
+<link href="assets/css/v40-28-mushaf-ruqyah.css?v=40.28" rel="stylesheet"/>
+<link href="assets/css/v40-29-site-polish.css?v=40.29" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/v48-student-dashboard.css?v=48.0"><link rel="stylesheet" href="assets/css/v64-final-polish.css?v=64.0"><link rel="stylesheet" href="assets/css/v65-unified-colors.css?v=65.0"><link rel="stylesheet" href="assets/css/v66-ai-assistant.css?v=66.0"><link rel="stylesheet" href="assets/css/v67-balanced-theme.css?v=68.0"><link rel="canonical" href="/"><meta property="og:locale" content="ar_AR"><meta property="og:type" content="website"><meta property="og:title" content="نور الذكر | القرآن والأذكار والرقية الشرعية"><meta property="og:description" content="نور الذكر: القرآن الكريم والأذكار والرقية الشرعية والعلوم الشرعية ومواقيت الصلاة في تجربة عربية متكاملة."><link rel="stylesheet" href="assets/css/v69-production-polish.css?v=69.0"><link rel="stylesheet" href="assets/css/v80-security.css?v=80.0">
+<link rel="stylesheet" href="assets/css/v81-owner-studio.css?v=81.0">
+</head><body>
+<div aria-label="إصدار التطبيق" class="v382-build-badge">V65.0 — نسخة الألوان الموحدة</div>
+<header class="topbar"><div class="container"><div class="brand"><span class="mark">☾</span>نور الذكر <span class="offline-badge" id="onlineState"></span></div><div class="actions"><button class="icon-btn" id="themeBtn">◐</button><button class="icon-btn" id="logoutBtn">خروج</button></div></div></header>
+<main class="container"><section class="hero"><div class="hero-card"><div><h1>رفيقك اليومي للذكر والقرآن</h1><p>أذكار، قرآن كريم، مواقيت الصلاة ومسبحة في مكان واحد.</p><div class="notice hidden" id="dbNotice" style="margin-top:14px">النسخة غير مربوطة بعد بالمشروع الجديد. أكمل مفتاح الربط في <b>assets/js/config.js</b>.</div></div><div class="next-prayer"><span>الصلاة القادمة</span><strong id="nextPrayerName">—</strong><div id="nextPrayerCountdown">اختر موقعك</div></div></div></section>
+<section aria-label="البحث في نور الذكر" class="quick-search-launcher">
+<span aria-hidden="true" class="quick-search-icon">⌕</span>
+<input aria-label="ابحث في القرآن والأذكار والعقيدة والفقه والحديث والسيرة…" autocomplete="off" id="quickSearchLauncher" placeholder="ابحث في القرآن والأذكار والعقيدة والفقه والحديث والسيرة…" type="search"/>
+<button class="btn primary" id="openQuickSearch" type="button">فتح البحث</button>
+</section><nav class="nav">
+<button class="active" data-page="home">الرئيسية</button>
+<button data-page="adhkar">الأذكار</button><button data-page="ruqyah">الرقية الشرعية</button><button data-page="assessment">تقييم الأعراض</button><button data-page="dreams">تعبير الرؤى</button>
+<a class="nav-direct-link" href="mushaf.html">القرآن والتفسير</a><button data-page="creed">العقيدة</button><button data-page="fiqh">الفقه</button><button data-page="seerah">السيرة النبوية</button><button data-page="hadith">الحديث</button><button data-page="studentDashboard">لوحة الطالب</button><a class="nav-direct-link" href="exams.html">الاختبارات الشرعية</a><button data-page="memorization">اختبارات الحفظ</button>
+<button data-page="prayer">الصلاة</button>
+<button data-page="qibla">القبلة</button>
+<button data-page="tasbeeh">المسبحة</button>
+
+<button data-page="favorites">المفضلة</button>
+<span aria-hidden="true" class="nav-utility-divider"></span><button class="nav-utility-link private-chat-nav" data-page="privateChat">محادثة المالك <span class="private-chat-unread hidden" id="privateChatUnreadBadge">0</span></button><button class="nav-utility-link" data-page="library">المراجع وسياسة المصادر</button><button class="nav-utility-link" data-page="support">الدعم والخصوصية</button></nav>
+<section aria-labelledby="v38HomeTitle" class="page active v38-home" id="home"><aside aria-label="مساحة إعلانية" class="noor-ad-slot hidden" data-ad-key="homeTop"></aside>
+<section class="v38-home-hero">
+<div class="v38-home-copy">
+<div class="v38-home-kicker"><span aria-hidden="true">✦</span><span id="v38Greeting">السلام عليكم ورحمة الله</span></div>
+<h1 id="v38HomeTitle">قلبٌ يذكر،<br/><em>ويومٌ يطمئن.</em></h1>
+<p>ابدأ وردك اليومي من مكان واحد: القرآن الكريم، الأذكار الصحيحة، الرقية الشرعية، مواقيت الصلاة، ومراجعة الحفظ.</p>
+<div class="v38-home-actions">
+<button class="btn v38-action-primary" onclick="navTo('adhkar')" type="button">ابدأ أذكار اليوم</button>
+<button class="btn v38-action-secondary" onclick="location.href='mushaf.html'" type="button">متابعة قراءة القرآن</button><a class="btn v38-action-secondary" href="exams.html" style="text-decoration:none">الاختبارات الشرعية</a>
+</div>
+<div aria-label="مزايا التطبيق" class="v38-home-assurances">
+<span>✓ مصادر معلنة</span><span>✓ يحفظ تقدمك</span><span>✓ يعمل دون إنترنت</span>
+</div>
+</div>
+<aside aria-label="ملخص اليوم" class="v38-today-card">
+<div class="v38-today-head"><div><small>ملخص اليوم</small><strong id="v38TodayDate">—</strong></div><span class="v38-live-dot">مباشر</span></div>
+<div class="v38-verse"><span aria-hidden="true">﷽</span><p>﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾</p><small>سورة الرعد، الآية 28</small></div>
+<div class="v38-daily-progress"><div><span>تقدمك اليوم</span><b id="v38ProgressValue">0%</b></div><div class="v38-progress-track"><i id="v38ProgressBar"></i></div></div>
+<div class="v38-next-prayer-home"><div><small>الصلاة القادمة</small><strong id="v38PrayerName">حدد موقعك</strong></div><b id="v38PrayerCountdown">--:--</b></div>
+<button class="v38-card-link" onclick="navTo('prayer')" type="button">عرض مواقيت الصلاة كاملة ←</button>
+</aside>
+</section>
+<section aria-labelledby="v38StartTitle" class="v38-start-section">
+<div class="v38-section-head"><div><span>ابدأ الآن</span><h2 id="v38StartTitle">ما الذي تحتاجه اليوم؟</h2></div><p>اختصارات واضحة توصلك مباشرة إلى أهم أقسام نور الذكر.</p></div>
+<div class="v38-feature-grid">
+<button class="v38-feature-card v38-feature-primary" onclick="location.href='mushaf.html'" type="button"><span class="v38-feature-icon">📖</span><span class="v38-feature-copy"><b>القرآن الكريم</b><small>قراءة وتفسير ومفضلة وحفظ آخر موضع</small></span><span class="v38-feature-arrow">←</span></button>
+<button class="v38-feature-card" onclick="navTo('adhkar')" type="button"><span class="v38-feature-icon">✨</span><span class="v38-feature-copy"><b>الأذكار اليومية</b><small>الصباح والمساء والنوم والاستيقاظ</small></span><span class="v38-feature-arrow">←</span></button>
+<button class="v38-feature-card" onclick="navTo('ruqyah')" type="button"><span class="v38-feature-icon">🤲</span><span class="v38-feature-copy"><b>الرقية الشرعية</b><small>رقية جامعة وآيات وأدعية موثقة</small></span><span class="v38-feature-arrow">←</span></button>
+<button class="v38-feature-card" onclick="navTo('memorization')" type="button"><span class="v38-feature-icon">🧠</span><span class="v38-feature-copy"><b>اختبارات الحفظ</b><small>اختبارات مرنة وسجل للنتائج</small></span><span class="v38-feature-arrow">←</span></button><button class="v38-feature-card" onclick="navTo('creed')" type="button"><span class="v38-feature-icon">☝️</span><span class="v38-feature-copy"><b>العقيدة</b><small>أركان الإيمان والتوحيد بأدلة مختصرة</small></span><span class="v38-feature-arrow">←</span></button><button class="v38-feature-card" onclick="navTo('fiqh')" type="button"><span class="v38-feature-icon">⚖️</span><span class="v38-feature-copy"><b>الفقه</b><small>الطهارة والصلاة والعبادات والمعاملات</small></span><span class="v38-feature-arrow">←</span></button><button class="v38-feature-card" onclick="navTo('seerah')" type="button"><span class="v38-feature-icon">🕌</span><span class="v38-feature-copy"><b>السيرة النبوية</b><small>خط زمني ودروس من حياة النبي ﷺ</small></span><span class="v38-feature-arrow">←</span></button><button class="v38-feature-card" onclick="navTo('hadith')" type="button"><span class="v38-feature-icon">📜</span><span class="v38-feature-copy"><b>الحديث</b><small>الصحيح والحسن والتحذير من الضعيف والمكذوب</small></span><span class="v38-feature-arrow">←</span></button>
+<button class="v38-feature-card" onclick="navTo('qibla')" type="button"><span class="v38-feature-icon">🕋</span><span class="v38-feature-copy"><b>اتجاه القبلة</b><small>تحديد الاتجاه من موقعك الحالي</small></span><span class="v38-feature-arrow">←</span></button>
+<button class="v38-feature-card" onclick="navTo('tasbeeh')" type="button"><span class="v38-feature-icon">◉</span><span class="v38-feature-copy"><b>المسبحة</b><small>عداد بسيط يحفظ عددك تلقائيًا</small></span><span class="v38-feature-arrow">←</span></button>
+</div>
+</section>
+
+
+<aside aria-label="مساحة إعلانية" class="noor-ad-slot hidden" data-ad-key="homeMiddle"></aside>
+<section aria-label="متابعة الورد اليومي" class="v38-home-dashboard">
+<article class="v38-journey-card">
+<div class="v38-card-heading"><div><span>وردك اليومي</span><h2>خطوات صغيرة، أثر مستمر</h2></div><button onclick="navTo('favorites')" type="button">المفضلة</button></div>
+<div class="v38-journey-list">
+<button onclick="navTo('adhkar')" type="button"><i id="v38AdhkarStatus">1</i><span><b>أذكار اليوم</b><small id="v38AdhkarText">ابدأ أذكارك الآن</small></span><em>←</em></button>
+<button onclick="location.href='mushaf.html'" type="button"><i id="v38QuranStatus">2</i><span><b>ورد القرآن</b><small id="v38QuranText">افتح المصحف وحدد وردك</small></span><em>←</em></button>
+<button onclick="navTo('memorization')" type="button"><i id="v38MemoryStatus">3</i><span><b>مراجعة الحفظ</b><small id="v38MemoryText">اختبر حفظك في دقائق</small></span><em>←</em></button>
+</div>
+</article>
+<article class="v38-source-card">
+<span class="v38-source-badge">الموثوقية أولًا</span><h2>معلومة واضحة،<br/>ومصدر ظاهر.</h2><p>نوضح السورة ورقم الآية، واسم كتاب الحديث ودرجته عند الحاجة، ومرجع المحتوى المنقول عن العلماء.</p>
+<div class="v38-source-pills"><span>القرآن الكريم</span><span>السنة الصحيحة</span><span>كتب العلماء</span></div>
+<button class="btn v38-action-light" onclick="navTo('library')" type="button">استعرض المراجع والمصادر</button>
+</article>
+</section>
+<section class="v38-home-cta"><div><span>اجعل لك وردًا لا ينقطع</span><h2>ابدأ اليوم بما تستطيع، وداوم عليه.</h2><p>نور الذكر يحفظ تقدمك على جهازك لتعود من حيث توقفت.</p></div><button class="btn v38-action-primary" onclick="navTo('adhkar')" type="button">ابدأ رحلتك اليومية</button></section>
+<aside aria-label="مساحة إعلانية" class="noor-ad-slot hidden" data-ad-key="homeBottom"></aside><section aria-label="المراجع والدعم" class="home-bottom-services"><div class="home-bottom-services-head"><h2>المراجع والدعم</h2><p>الروابط النظامية والمصادر في نهاية الصفحة لتظل الأقسام اليومية في المقدمة.</p></div><div class="home-bottom-services-grid"><button class="home-bottom-service-card" onclick="navTo('library')" type="button"><span aria-hidden="true">📚</span><b>المراجع وسياسة المصادر</b><small>الكتب المعتمدة، نسبة المحتوى، ومنهج التوثيق.</small><em>←</em></button><button class="home-bottom-service-card" onclick="navTo('support')" type="button"><span aria-hidden="true">🛡️</span><b>الدعم والخصوصية</b><small>الإبلاغ عن مشكلة، الاقتراحات، وسياسة الخصوصية.</small><em>←</em></button></div></section></section>
+<section class="page search-page-v38" id="search">
+<div class="search-hero-v38">
+<div>
+<span class="eyebrow">محرك البحث الذكي</span>
+<h1>ابحث في محتوى نور الذكر من مكان واحد</h1>
+<p>بحث موحّد في أسماء السور، الأذكار، الرقية، المكتبة، وصفحات التطبيق، مع ترتيب النتائج حسب قوة المطابقة.</p>
+</div>
+<div class="search-shortcut-note"><kbd>Ctrl</kbd><span>+</span><kbd>K</kbd><small>فتح البحث سريعًا</small></div>
+</div>
+<div class="card search-console-v38">
+<div class="search-input-wrap-v38">
+<span aria-hidden="true">⌕</span>
+<input aria-label="مثال: الشفاء، الكرب، الفاتحة، الحسد…" autocomplete="off" class="global-search" id="globalSearch" inputmode="search" placeholder="مثال: الشفاء، الكرب، الفاتحة، الحسد…"/>
+<button class="btn small" id="clearGlobalSearch" type="button">مسح</button>
+</div>
+<div aria-label="تصفية نتائج البحث" class="search-filters-v38" id="searchFilters">
+<button class="active" data-search-type="all" type="button">الكل</button>
+<button data-search-type="quran" type="button">القرآن</button>
+<button data-search-type="adhkar" type="button">الأذكار</button>
+<button data-search-type="ruqyah" type="button">الرقية</button>
+<button data-search-type="library" type="button">المكتبة</button>
+<button data-search-type="pages" type="button">الصفحات</button>
+</div>
+<div class="search-toolbar-v38">
+<span id="searchResultCount">0 نتيجة</span>
+<button class="btn gold" id="quranOnlineSearch" type="button">بحث داخل نص القرآن</button>
+</div>
+<div class="search-info-v38">
+<b>يعمل البحث الأساسي دون إنترنت.</b>
+<span>البحث داخل نص القرآن يحتاج اتصالًا بالإنترنت عند استخدامه أول مرة.</span>
+</div>
+<div class="search-results search-results-v38" id="globalSearchResults"></div>
+</div>
+</section>
+<section class="page" id="adhkar"><button class="adhkar-home-back" onclick="navTo('home')">⌂ العودة إلى الصفحة الرئيسية</button>
+<div id="adhkarCategoriesView">
+<div class="page-intro-card"><span class="eyebrow">اختر القسم</span><h2>ماذا تريد أن تقرأ الآن؟</h2><p>اضغط على القسم لتظهر أذكاره فقط، ويمكنك العودة إلى الأقسام في أي وقت.</p></div>
+<div class="adhkar-category-grid" id="adhkarCategoryCards"></div>
+</div>
+<div class="hidden" id="adhkarReaderView">
+<div class="reader-toolbar">
+<button class="btn" id="backToAdhkarCategories">← أقسام الأذكار</button>
+<div><span class="muted">القسم الحالي</span><h2 id="activeAdhkarCategoryTitle">الأذكار</h2></div>
+<input aria-label="ابحث داخل هذا القسم" class="icon-btn" id="dhikrSearch" placeholder="ابحث داخل هذا القسم"/>
+<select aria-label="قسم الأذكار" class="hidden" id="dhikrCategory"><option value="all">كل الأقسام</option><option value="morning">الصباح</option><option value="evening">المساء</option><option value="sleep">النوم</option><option value="wake">الاستيقاظ</option><option value="after_prayer">بعد الصلاة</option><option value="home">المنزل</option><option value="mosque">المسجد</option><option value="food">الطعام</option><option value="travel">السفر</option><option value="distress">الهم والكرب</option><option value="ruqyah">الرقية الشرعية</option><option value="virtue">فضل الذكر</option><option value="general">أذكار عامة</option></select>
+</div>
+<div class="adhkar-list" id="adhkarList"></div>
+</div>
+</section>
+<section class="page islamic-library-page" id="creed"></section>
+<section class="page islamic-library-page" id="fiqh"></section>
+<section class="page islamic-library-page" id="seerah"></section>
+<section class="page islamic-library-page" id="hadith"></section>
+<section class="page" id="studentDashboard"></section>
+<section class="page quiz-page" id="memorization">
+<div class="section-title"><div><h2>اختبارات حفظ القرآن</h2><p class="muted">حدد الأجزاء التي حفظتها، ثم اختر نوع الاختبار وعدد الأسئلة.</p></div></div>
+<div class="memorization-layout">
+<aside class="card quiz-settings">
+<div class="row between"><h3>اختيار الأجزاء</h3><div class="row"><button class="btn small" id="selectAllJuz" type="button">تحديد الكل</button><button class="btn small" id="clearAllJuz" type="button">إلغاء الكل</button></div></div>
+<div class="juz-selector" id="juzSelector"></div>
+<div class="field"><label for="quizType">نوع الاختبار</label><select aria-label="نوع اختبار الحفظ" id="quizType">
+<option value="next">اختر الآية التالية</option>
+<option value="location">حدد السورة ورقم الآية</option>
+</select></div>
+<div class="field"><label for="quizCount">عدد الأسئلة</label><select aria-label="عدد أسئلة اختبار الحفظ" id="quizCount"><option>5</option><option selected="">10</option><option>15</option><option>20</option></select></div>
+<button class="btn primary" id="startQuiz" style="width:100%">بدء الاختبار</button>
+<p class="muted" id="quizLoadStatus"></p>
+</aside>
+<div>
+<div class="card" id="quizWelcome">
+<h3>كيف يعمل الاختبار؟</h3>
+<p>يحمّل التطبيق آيات الأجزاء التي تختارها، ثم ينشئ أسئلة عشوائية. تُحفظ الأجزاء بعد تحميلها لتعمل لاحقًا دون إنترنت على نفس الجهاز.</p>
+<div class="notice">الاختبار وسيلة للمراجعة وليس بديلًا عن التسميع على شيخ أو معلم متقن.</div>
+</div>
+<div class="card hidden" id="quizBox"></div>
+<div class="card hidden" id="quizResult"></div>
+<div class="card quiz-history" id="quizHistory"></div>
+</div>
+</div>
+</section>
+<section class="page" id="prayer"><div class="section-title"><h2>مواقيت الصلاة</h2><button class="btn gold" id="useLocation">تحديد موقعي تلقائيًا</button></div><div class="card"><form class="grid" id="cityPrayerForm"><div class="field"><label for="country">الدولة</label><select aria-label="اختر الدولة" id="country" required=""><option selected="" value="السعودية">السعودية</option><option value="مصر">مصر</option><option value="الإمارات">الإمارات</option><option value="الكويت">الكويت</option><option value="قطر">قطر</option><option value="البحرين">البحرين</option><option value="عُمان">عُمان</option><option value="الأردن">الأردن</option></select></div><div class="field"><label for="city">المدينة</label><select aria-label="اختر المدينة" id="city" required=""><option selected="" value="الرياض">الرياض</option><option value="مكة المكرمة">مكة المكرمة</option><option value="المدينة المنورة">المدينة المنورة</option><option value="جدة">جدة</option><option value="الدمام">الدمام</option></select></div><div class="field"><label for="calcMethod">طريقة الحساب</label><select aria-label="طريقة حساب مواقيت الصلاة" id="calcMethod"><option value="4">أم القرى</option><option value="5">الهيئة المصرية</option><option value="3">رابطة العالم الإسلامي</option><option value="8">منطقة الخليج</option><option value="2">أمريكا الشمالية</option><option value="13">تركيا</option></select></div><button class="btn primary" type="submit">عرض المواقيت</button></form><p class="muted" id="prayerStatus"></p></div><div class="prayer-grid" id="prayerGrid" style="margin-top:14px"></div><div class="notice" style="margin-top:14px">المواقيت حسابية وقد تختلف دقائق قليلة عن توقيت المسجد المحلي؛ اختر طريقة الحساب المعتمدة في بلدك.</div></section>
+<section class="page ruqyah-app-page" id="ruqyah">
+<div class="ruqyah-product-hero">
+<div>
+<span class="eyebrow">الرقية الشرعية</span>
+<h1>اقرأ الرقية بترتيب واضح ومصادر معلومة</h1>
+<p>قسم مستقل للرقية الشاملة، وآيات العين والحسد، وآيات السحر، وآيات الشفاء والسكينة، والأدعية النبوية، ثم دليل الوقاية والعلاج.</p>
+</div>
+<div class="ruqyah-hero-actions">
+<button class="btn premium-primary" data-rq-open="complete">ابدأ الرقية الشاملة</button>
+<button class="btn premium-secondary" data-rq-open="eye">آيات العين والحسد</button>
+</div>
+</div>
+<div class="source-disclosure-v30"><span>المصادر موثقة</span><p>المواد المرجعية ملخّصة بصياغة أصلية ومنسوبة إلى أصحابها. لا يستضيف الموقع كتبًا حديثة كاملة دون إذن صريح.</p><button onclick="navTo('sourcesPolicy')">التفاصيل</button></div>
+<section class="smart-ai-shell ruqyah-smart-ai" id="ruqyahSmartAssistant"><div class="smart-ai-head"><div><span class="eyebrow">مساعد الرقية من مصادر العلماء</span><h2>اكتب الأعراض كما تشعر بها</h2><p>يبحث الذكاء في منشورات الشيخ خالد بن إبراهيم الحبشي وكتب الشيخ وحيد عبدالسلام بالي، ويعرض الإجابة مع مصادرها دون رد محلي جاهز.</p></div><div class="smart-ai-badge">🧭</div></div><div class="smart-ai-body"><label for="ruqyahAiInput">صف الأعراض ووقت بدايتها وتكرارها</label><textarea id="ruqyahAiInput" placeholder="مثال: عندي أرق وصداع وخوف متكرر من أسبوعين، والأعراض تزيد مساءً…"></textarea><div class="smart-ai-tools"><button class="btn primary" id="ruqyahAiAnalyze" type="button">اجمع الإجابة من مصادر العلماء</button><span class="smart-ai-privacy">تُرسل الأعراض إلى دالة آمنة في Supabase لتجميع الإجابة من المصادر المسموح بها.</span></div><div aria-live="polite" class="smart-ai-result hidden" id="ruqyahAiResult"></div></div></section>
+<div class="ruqyah-hub" id="ruqyahHub">
+<div class="ruqyah-main-grid">
+<button class="ruqyah-program-card featured" data-rq-open="complete">
+<span class="rq-card-icon">🤲</span><div><small>ابدأ من هنا</small><h2>الرقية الشرعية الشاملة</h2>
+<p>الفاتحة، آية الكرسي، خواتيم البقرة، آيات السحر، المعوذات، والأدعية الصحيحة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="eye">
+<span class="rq-card-icon">🛡️</span><div><small>مرجع الشيخ خالد الحبيش</small><h3>آيات العين والحسد</h3>
+<p>قائمة الآيات الواردة في المرجع المرفوع، مرتبة حسب سور القرآن.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="magic">
+<span class="rq-card-icon">📖</span><div><small>القرآن الكريم</small><h3>آيات السحر</h3>
+<p>المواضع القرآنية المشهورة في قصة السحر وإبطاله.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="healing">
+<span class="rq-card-icon">🌿</span><div><small>آيات الشفاء</small><h3>الشفاء والسكينة</h3>
+<p>آيات ورد فيها الشفاء، مع بطاقة مستقلة لآيات السكينة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="duas">
+<span class="rq-card-icon">☁️</span><div><small>السنة الصحيحة</small><h3>الأدعية النبوية</h3>
+<p>أدعية الرقية والألم وعيادة المريض، مع مصدر كل حديث.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="symptoms">
+<span class="rq-card-icon">🧭</span><div><small>فهم الحالة</small><h3>الأعراض والعلامات</h3>
+<p>العين والحسد، السحر، الاقتران، والرؤى المرتبطة بالحالة بعد استبعاد السبب الطبي.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="treatments">
+<span class="rq-card-icon">📋</span><div><small>برامج عملية</small><h3>البرامج العلاجية</h3>
+<p>برامج علاجية مفصلة للعين والحسد والسحر والمس والتحصين والأسرة والأطفال.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="warnings">
+<span class="rq-card-icon">⚠️</span><div><small>تنبيهات مهمة</small><h3>التحذيرات والبوابات</h3>
+<p>بوابات الضعف، علامات الدجل، الخصوصية، السلامة الطبية، والتحذير من الإيذاء.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="specialVerses">
+<span class="rq-card-icon">🔥</span><div><small>مجموعات مختارة</small><h3>آيات الحرق كاملة</h3>
+<p>آيات قرآنية موسعة داخل القسم بدل صفحة فاضية، دون أدعية غير ثابتة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card" data-rq-open="guide">
+<span class="rq-card-icon">📚</span><div><small>الوقاية والعلاج</small><h3>الدليل العملي الموثق</h3>
+<p>طريقة الرقية الذاتية، الوقاية، والمحاذير، مع الإحالة للمراجع الأصلية.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card assessment-feature" onclick="navTo('assessment')">
+<span class="rq-card-icon">🧭</span><div><small>تقييم إرشادي غير تشخيصي</small><h3>بنك أسئلة الأعراض</h3>
+<p>تقييم منفصل للعين والحسد والسحر والمس، مع نسبة تطابق ومصدر كل مجموعة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card encyclopedia-feature" data-rq-encyclopedia="home">
+<span class="rq-card-icon">📚</span><div><small>المرحلة الخامسة</small><h3>موسوعة الرقية الشرعية</h3>
+<p>دليل منظم: المفهوم، الضوابط، الطريقة، الأسئلة الشائعة، والتحذيرات مع المصادر.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card eye-encyclopedia-feature" data-eye-encyclopedia="home">
+<span class="rq-card-icon">👁️</span><div><small>المرحلة السادسة</small><h3>موسوعة العين</h3>
+<p>الأدلة، الفرق بين العين والحسد، الوقاية، الرقية الذاتية، الاغتسال، والأخطاء الشائعة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card hasad-encyclopedia-feature" data-hasad-encyclopedia="home">
+<span class="rq-card-icon">🧿</span><div><small>المرحلة السابعة</small><h3>موسوعة الحسد</h3>
+<p>المفهوم والأدلة والفرق عن العين وتزكية النفس والوقاية والرقية، مع 125 سؤالًا وجوابًا.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card magic-encyclopedia-feature" data-magic-encyclopedia="">
+<span class="rq-card-icon">🪄</span><div><small>المرحلة الثامنة</small><h3>موسوعة السحر</h3>
+<p>المفهوم والأدلة والوقاية والرقية وعلامات الدجل والتعامل الآمن مع الاشتباه.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card mas-encyclopedia-feature" data-mas-encyclopedia="">
+<span class="rq-card-icon">👤</span><div><small>المرحلة التاسعة</small><h3>موسوعة المس</h3>
+<p>ضوابط الفهم، الصحة النفسية، الرقية الذاتية، حماية الأسرة، والأسئلة الشائعة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card protection-programs-feature" data-rq-open="protectionPrograms">
+<span class="rq-card-icon">🛡️</span><div><small>برنامج يومي عملي</small><h3>برامج التحصين</h3>
+<p>تحصين الصباح والمساء، النوم، المنزل، الأطفال، السفر، والمرض بخطوات واضحة.</p></div><span class="rq-arrow">←</span>
+</button>
+<button class="ruqyah-program-card knowledge-feature" data-knowledge-bank="">
+<span class="rq-card-icon">❓</span><div><small>المرحلة العاشرة</small><h3>بنك المعرفة الإسلامي</h3>
+<p>بحث في الأسئلة والأجوبة حسب الرقية والعين والحسد والسحر والمس والعبادات.</p></div><span class="rq-arrow">←</span>
+</button>
+</div>
+<section class="ruqyah-safety-strip">
+<div><b>التوثيق أولًا</b><span>كل آية باسم السورة ورقمها، وكل دعاء بمصدره.</span></div>
+<div><b>لا تشخيص قطعي</b><span>القوائم لا تحكم على شخص بأنه مصاب بسحر أو عين.</span></div>
+<div><b>الرقية لا تمنع العلاج</b><span>يجمع المسلم بين الدعاء والأسباب الطبية المباحة عند الحاجة.</span></div>
+</section>
+</div>
+<div aria-live="polite" class="ruqyah-encyclopedia hidden" id="ruqyahEncyclopedia"></div>
+<div aria-live="polite" class="eye-encyclopedia hidden" id="eyeEncyclopedia"></div>
+<div aria-live="polite" class="hasad-encyclopedia hidden" id="hasadEncyclopedia"></div>
+<div aria-live="polite" class="magic-encyclopedia hidden" id="magicEncyclopedia"></div>
+<div aria-live="polite" class="mas-encyclopedia hidden" id="masEncyclopedia"></div>
+<div aria-live="polite" class="complete-ruqyah hidden" id="completeRuqyah"></div>
+<div aria-live="polite" class="knowledge-bank hidden" id="knowledgeBank"></div>
+<div class="ruqyah-reader hidden" id="ruqyahReader">
+<div class="ruqyah-reader-head">
+<button class="btn" id="backToRuqyahHub">← أقسام الرقية</button>
+<div><small id="rqReaderKicker">الرقية الشرعية</small><h2 id="rqReaderTitle">الرقية</h2><p id="rqReaderDescription"></p></div>
+<div class="rq-reader-actions"><button class="btn small" id="rqFontDown">أ−</button><button class="btn small" id="rqFontUp">أ+</button><button class="btn small" id="rqResetProgress">تصفير التقدم</button></div>
+</div>
+<div class="notice hidden" id="rqLoadState"></div>
+<div class="ruqyah-reader-content" id="rqReaderContent"></div>
+</div>
+</section>
+<section class="page assessment-page" id="assessment">
+<div class="assessment-hero">
+<div>
+<span class="eyebrow">تقييم إرشادي موثّق</span>
+<h1>بنك أسئلة الأعراض</h1>
+<p>اختر نوع التقييم، ثم أجب عن الأسئلة. النتيجة تقيس مقدار التشابه مع الأعراض المذكورة في المرجع فقط، ولا تثبت وجود عين أو سحر أو مس.</p>
+</div>
+<button class="btn premium-secondary" onclick="navTo('ruqyah')">فتح الرقية الشرعية</button>
+</div>
+<div class="assessment-hub" id="assessmentHub">
+<div class="assessment-warning">
+<b>تنبيه مهم</b>
+<p>هذه القوائم منقولة بالمعنى عن المراجع المذكورة، وبعض الأعراض قد يكون لها سبب طبي أو نفسي شائع. لا تستخدم النتيجة لاتهام شخص أو لإيقاف دواء أو لتأخير مراجعة الطبيب.</p>
+</div>
+<div class="assessment-types">
+<button data-assessment="eye"><span>🛡️</span><h3>العين والحسد</h3><p>أسئلة من قائمة أعراض العين في الموقع الرسمي للشيخ خالد الحبيش.</p><small>10 أسئلة</small></button>
+<button data-assessment="magic"><span>📖</span><h3>السحر</h3><p>أسئلة من أعراض السحر المذكورة في المرجع الرسمي.</p><small>10 أسئلة</small></button>
+<button data-assessment="touch"><span>🌙</span><h3>المس</h3><p>أسئلة إرشادية من أبواب المس وأنواعه وعلاماته في المرجع.</p><small>10 أسئلة</small></button>
+</div>
+</div>
+<div class="assessment-runner hidden" id="assessmentRunner">
+<div class="assessment-runner-head">
+<button class="btn" id="assessmentBack">← أنواع التقييم</button>
+<div><small>التقييم الحالي</small><h2 id="assessmentTitle"></h2><p id="assessmentSource"></p></div>
+</div>
+<div class="assessment-progress"><i id="assessmentProgressBar"></i></div>
+<div class="assessment-question-card" id="assessmentQuestion"></div>
+</div>
+<div class="assessment-result hidden" id="assessmentResult"></div>
+</section>
+<section class="page dreams-v31" id="dreams">
+<div class="dreams-shell">
+<header class="dreams-header">
+<button class="legal-v30-back" onclick="navTo('home')">← العودة للرئيسية</button>
+<span class="eyebrow">الرؤى والمنامات</span>
+<h1>تعبير الرؤى</h1>
+<p>دليل معرفي يوضح آداب الرؤيا وأشهر كتب التعبير، دون تقديم أحكام قطعية أو تنبؤ بالمستقبل.</p>
+</header>
+<div class="dreams-warning">
+<b>تنبيه علمي</b>
+<p>تعبير الرؤيا اجتهاد يختلف باختلاف حال الرائي وزمانه وواقعه. لا يُبنى عليه حكم شرعي أو قرار طبي أو مالي أو اتهام لأحد.</p>
+</div>
+<section class="smart-ai-shell dream-smart-ai" id="dreamSmartAssistant"><div class="smart-ai-head"><div><span class="eyebrow">مفسّر الرؤى الذكي</span><h2>اكتب حلمك مباشرة</h2><p>يستخرج الرموز والسياق ويعرض قراءات احتمالية مستفادة من أشهر كتب التعبير عند النابلسي وابن شاهين والمشهور المنسوب إلى ابن سيرين.</p></div><div class="smart-ai-badge">🌙</div></div><div class="smart-ai-body"><label for="dreamAiInput">اكتب الحلم من البداية للنهاية</label><textarea id="dreamAiInput" placeholder="مثال: رأيت أنني أمشي في طريق طويل ثم وجدت بابًا ومفتاحًا، وكنت أشعر بالراحة…"></textarea><div class="smart-ai-tools"><button class="btn primary" id="dreamAiAnalyze" type="button">تفسير الرؤيا بذكاء</button><span class="smart-ai-privacy">لا تكتب أسماء كاملة أو بيانات شخصية. التحليل محلي على جهازك.</span></div><div aria-live="polite" class="smart-ai-result hidden" id="dreamAiResult"></div></div></section>
+<section class="dreams-feature">
+<div class="dreams-book-cover"><span>كتاب</span><b>منتخب الكلام</b><small>المنسوب إلى ابن سيرين</small></div>
+<div>
+<span class="dreams-tag">نسبة غير ثابتة</span>
+<h2>الكتاب المنسوب إلى محمد بن سيرين</h2>
+<p>اشتهر بين الناس باسم «تفسير الأحلام لابن سيرين»، لكن نسبة الكتاب المتداول إلى ابن سيرين غير ثابتة عند عدد من الباحثين؛ لذلك يعرضه التطبيق بهذه الصيغة الدقيقة.</p>
+<div class="dreams-source">يُستخدم للاستئناس التاريخي فقط، وليس قاموسًا يقرر معنى كل حلم بصورة قطعية.</div>
+</div>
+</section>
+<h2 class="dreams-section-title">أشهر علماء وكتب تعبير الرؤى في التراث</h2>
+<div class="dreams-scholars">
+<article><span>01</span><h3>محمد بن سيرين</h3><p>تابعي اشتهر بتعبير الرؤى، مع التنبيه إلى أن الكتاب المتداول باسمه غير ثابت النسبة.</p></article>
+<article><span>02</span><h3>عبد الغني النابلسي</h3><p>صاحب كتاب «تعطير الأنام في تعبير المنام».</p></article>
+<article><span>03</span><h3>خليل بن شاهين الظاهري</h3><p>من أشهر من نُسبت إليهم مصنفات موسعة في الإشارات والعبارات.</p></article>
+<article><span>04</span><h3>ابن قتيبة الدينوري</h3><p>يُنسب إليه كتاب «تعبير الرؤيا» ضمن التراث العلمي في هذا الباب.</p></article>
+</div>
+<section class="dreams-etiquette">
+<h2>ماذا تفعل بعد الرؤيا؟</h2>
+<div><b>الرؤيا الحسنة</b><p>يحمد المسلم الله عليها، ويحدّث بها من يحب أو من يحسن التعبير.</p></div>
+<div><b>الحلم المكروه</b><p>يستعيذ بالله من شره ومن الشيطان، وينفث عن يساره ثلاثًا، ولا يحدث به أحدًا.</p></div>
+</section>
+</div>
+</section>
+<section class="page references-page" id="library"><div aria-label="أقسام الصفحة" class="combined-page-tabs">
+<button class="active" data-combined-group="library" data-combined-target="references" type="button">المراجع والكتب</button>
+<button data-combined-group="library" data-combined-target="sources" type="button">سياسة المصادر</button>
+</div><div class="combined-panel" data-combined-panel="references" data-combined-panel-group="library" id="libraryPrimaryPanel">
+<div class="references-hero">
+<div><span class="eyebrow">المراجع العلمية</span><h1>الكتب والمصادر المعتمدة</h1>
+<p>ملخصات مرجعية منظمة مع نسبتها إلى أصحابها. نور الذكر تطبيق مستقل وغير تابع للمؤلفين أو الناشرين المذكورين.</p></div>
+<input aria-label="ابحث في المراجع والموضوعات" id="librarySearch" placeholder="ابحث في المراجع والموضوعات"/>
+</div>
+<div class="reference-books-grid">
+<article class="reference-book-card" data-book-card="waqaya"><span>01</span><h3>وقاية الإنسان من الجن والشيطان</h3><p>الشيخ وحيد عبدالسلام بالي</p><button class="btn" data-library-filter="waqaya">عرض الموضوعات</button></article>
+<article class="reference-book-card" data-book-card="sarim"><span>02</span><h3>الصارم البتار</h3><p>الشيخ وحيد عبدالسلام بالي</p><button class="btn" data-library-filter="sarim">عرض الموضوعات</button></article>
+<article class="reference-book-card" data-book-card="khalid"><span>03</span><h3>تخصيص الآيات في الرقية</h3><p>الشيخ خالد بن إبراهيم الحبيش</p><button class="btn" data-library-filter="khalid">عرض الموضوعات</button></article>
+<article class="reference-book-card" data-book-card="ayat"><span>04</span><h3>آيات العين والحسد</h3><p>الموقع الرسمي للشيخ خالد الحبيش</p><button class="btn" data-library-filter="ayat">عرض الموضوعات</button></article>
+</div>
+<div class="references-layout">
+<aside class="references-index">
+<button class="library-index-btn active" data-library-filter="all">جميع الموضوعات</button>
+<button class="library-index-btn" data-library-filter="waqaya">الوقاية والتحصين</button>
+<button class="library-index-btn" data-library-filter="sarim">السحر وإبطاله</button>
+<button class="library-index-btn" data-library-filter="khalid">منهج الرقية</button>
+<button class="library-index-btn" data-library-filter="ayat">آيات العين والحسد</button>
+</aside>
+<div class="reference-articles" id="libraryArticles">
+<article class="library-topic" data-book="waqaya" data-search="العلاج بالقرآن الوقاية التوحيد الطاعات المحرمات">
+<span class="topic-number">01</span><div><span class="source-badge">وقاية الإنسان من الجن والشيطان</span><h3>أصل الوقاية والعلاج الشرعي</h3>
+<p>يعرض المؤلف العلاج بالقرآن والسنة على أنه طريق يربط المريض بالله، ويؤكد المحافظة على الطاعات والبعد عن المحرمات، ويحذر من السحرة والمشعوذين.</p>
+<div class="topic-source"><b>المصدر:</b> الشيخ وحيد عبدالسلام بالي، مقدمة الطبعة العاشرة، ص 7–9.</div></div>
+</article>
+<article class="library-topic" data-book="waqaya" data-search="مداخل الشيطان التحصينات الذكر الصلاة">
+<span class="topic-number">02</span><div><span class="source-badge">وقاية الإنسان من الجن والشيطان</span><h3>مداخل الشيطان والتحصينات</h3>
+<p>يخصص الكتاب أبوابًا لعلاقة الشيطان بالإنسان، ومداخله لإفساد القلوب، ثم يجمع تحصينات المسلم في فصل مستقل.</p>
+<div class="topic-source"><b>المصدر:</b> فهرس كتاب <em>وقاية الإنسان من الجن والشيطان</em>، الفصول الرابع والخامس والسادس.</div></div>
+</article>
+<article class="library-topic" data-book="sarim" data-search="تعريف السحر أنواعه حكمه السحرة">
+<span class="topic-number">03</span><div><span class="source-badge">الصارم البتار</span><h3>تعريف السحر وأقسامه وأحكامه</h3>
+<p>يبدأ الكتاب بتعريف السحر وبيان بعض وسائل السحرة، ثم الأدلة على وجود السحر والجن، وأقسام السحر، وحكم تعلمه وممارسته.</p>
+<div class="topic-source"><b>المصدر:</b> الشيخ وحيد عبدالسلام بالي، فهرس <em>الصارم البتار</em>، ص 6–9.</div></div>
+</article>
+<article class="library-topic" data-book="sarim" data-search="إبطال السحر علاج المسحور سحر التفريق">
+<span class="topic-number">04</span><div><span class="source-badge">الصارم البتار</span><h3>إبطال السحر وعلاج المسحور</h3>
+<p>يتناول المؤلف في فصل مستقل صورًا من السحر، ومنها سحر التفريق، ويعرض الأعراض التي يذكرها ثم خطوات العلاج وفق منهجه.</p>
+<div class="topic-source"><b>المصدر:</b> <em>الصارم البتار</em>، فصل إبطال السحر وما بعده.</div></div>
+</article>
+<article class="library-topic" data-book="khalid" data-search="تخصيص الآيات التجربة الرقية فتاوى العلماء">
+<span class="topic-number">05</span><div><span class="source-badge">تخصيص الآيات في الرقية</span><h3>ضوابط اختيار آيات بعينها</h3>
+<p>يجمع المؤلف أقوالًا وفتاوى حول تخصيص آيات للرقية، ويفرق في فهرسه بين التخصيص المسنون، والتخصيص المبني على تجربة مباحة، والتخصيص المحرم.</p>
+<div class="topic-source"><b>المصدر:</b> الشيخ خالد الحبيش، <em>تخصيص الآيات في الرقية من الأمراض</em>، قسم الأسئلة والأجوبة، ص 141–150.</div></div>
+</article>
+<article class="library-topic" data-book="ayat" data-search="العين الحسد الفاتحة البقرة آية الكرسي المعوذات">
+<span class="topic-number">06</span><div><span class="source-badge">آيات العين والحسد</span><h3>الآيات مرتبة حسب المصحف</h3>
+<p>يبدأ المرجع بالفاتحة، ثم آيات من البقرة، ومنها آية الكرسي وخواتيم السورة، ويستمر عبر سور القرآن حتى المعوذتين. قسم الرقية في التطبيق يعرض هذه المراجع كآيات قابلة للقراءة.</p>
+<div class="topic-source"><b>المصدر:</b> <em>آيات العين والحسد</em>، الموقع الرسمي للشيخ خالد الحبيش، ص 1–34.</div></div>
+</article>
+<article class="library-topic library-originals" data-book="all" data-search="النسخ الأصلية الكتب pdf">
+<span class="topic-number">↗</span><div><span class="source-badge">النسخ الأصلية</span><h3>فتح الكتاب للمراجعة</h3>
+<p>تستخدم هذه الروابط لمراجعة الصفحة الأصلية عند الحاجة، بينما تبقى واجهة التطبيق هي طريقة القراءة الأساسية.</p>
+<div class="original-links"><a href="#" onclick="event.preventDefault();window.navTo?.('library')" rel="noreferrer noopener" target="_blank">وقاية الإنسان</a><a href="#" onclick="event.preventDefault();window.navTo?.('library')" rel="noreferrer noopener" target="_blank">الصارم البتار</a><a href="#" onclick="event.preventDefault();window.navTo?.('library')" rel="noreferrer noopener" target="_blank">تخصيص الآيات</a><a href="#" onclick="event.preventDefault();window.navTo?.('library')" rel="noreferrer noopener" target="_blank">آيات العين والحسد</a></div></div>
+</article>
+</div>
+</div>
+</div><div class="combined-panel hidden" data-combined-panel="sources" data-combined-panel-group="library" id="librarySecondaryPanel">
+<div class="legal-v30-shell">
+<header class="legal-v30-header">
+<button class="legal-v30-back" onclick="navTo('home')">← العودة للرئيسية</button>
+<span class="legal-v30-kicker">الشفافية والمصادر</span>
+<h1>سياسة المحتوى وحقوق النشر</h1>
+<p>نوضح هنا بصورة مختصرة كيف نوثّق المحتوى، وكيف نحافظ على حقوق العلماء والمؤلفين والناشرين.</p>
+</header>
+<section class="legal-v30-summary">
+<div class="legal-v30-mark">ن</div>
+<div>
+<h2>نور الذكر تطبيق مستقل</h2>
+<p>ليس تطبيقًا رسميًا للشيخ خالد الحبيش أو الشيخ وحيد عبدالسلام بالي، ولا يمثل أيًّا منهما أو أي جهة نشر ما لم يُذكر اعتماد رسمي مكتوب.</p>
+</div>
+</section>
+<div class="legal-v30-list">
+<article>
+<span>01</span>
+<div>
+<h3>نسبة المحتوى إلى مصدره</h3>
+<p>كل مادة مستفادة من عالم أو كتاب تُذكر بصيغة واضحة، مثل: «ملخص مستفاد من الشيخ خالد الحبيش — اسم المرجع أو المقال».</p>
+</div>
+</article>
+<article>
+<span>02</span>
+<div>
+<h3>عدم إعادة نشر الكتب</h3>
+<p>لا تُنشر الكتب أو الفصول الطويلة كاملة داخل التطبيق. نستخدم تلخيصات أصلية وإحالات مرجعية مع المحافظة على حقوق المؤلف والناشر.</p>
+</div>
+</article>
+<article>
+<span>03</span>
+<div>
+<h3>توثيق القرآن والسنة</h3>
+<p>تُذكر السورة ورقم الآية في النصوص القرآنية، ويُذكر مصدر الحديث ورقمه ودرجته عند الحاجة.</p>
+</div>
+</article>
+<article>
+<span>04</span>
+<div>
+<h3>الاستقلال وعدم الإيهام بالاعتماد</h3>
+<p>ذكر اسم شيخ أو كتاب لا يعني وجود شراكة أو اعتماد رسمي. لا نستخدم اسم أي عالم في التسويق على أنه مؤيد للتطبيق دون إذن صريح.</p>
+</div>
+</article>
+<article>
+<span>05</span>
+<div>
+<h3>التصحيح وحقوق أصحاب المحتوى</h3>
+<p>أي ملاحظة موثقة من صاحب حق تُراجع، ويُصحح الخطأ أو تُحذف المادة عند ثبوت الاعتراض.</p>
+</div>
+</article>
+</div>
+<footer class="legal-v30-footer">
+<div>
+<b>صيغة النسب المعتمدة داخل التطبيق</b>
+<p>ملخص مستفاد من: الشيخ خالد بن إبراهيم الحبيش — اسم المرجع — الموضع أو الصفحة عند توفرها.</p>
+</div>
+<button class="btn primary" onclick="navTo('library')">فتح دليل المصادر</button>
+</footer>
+</div>
+</div></section>
+<section class="page" id="qibla"><div class="qibla-pro-shell">
+<div class="section-title"><div><h2>اتجاه القبلة</h2><p class="muted">احسب الاتجاه من موقع الجهاز أو من المدينة المختارة، بدون الاعتماد على خدمة خارجية.</p></div></div>
+<div class="qibla-location-card">
+<div class="field"><label for="qiblaCountry">الدولة</label><select id="qiblaCountry"></select></div>
+<div class="field"><label for="qiblaCity">المدينة</label><select id="qiblaCity"></select></div>
+<div class="qibla-actions">
+<button class="btn primary" id="qiblaFromCity" type="button">حساب القبلة من المدينة</button>
+<button class="btn gold" id="findQibla" type="button">استخدام موقع الجهاز</button>
+<button class="btn" id="startQiblaCompass" type="button">تشغيل بوصلة الهاتف</button>
+</div>
+</div>
+<div class="card qibla-card qibla-pro-card">
+<span class="qibla-live-badge hidden" id="qiblaLive">● اتجاه حي</span>
+<div class="compass"><div class="compass-label n">ش</div><div class="compass-label e">ق</div><div class="compass-label s">ج</div><div class="compass-label w">غ</div><div class="qibla-needle" id="qiblaNeedle">➤</div><div class="kaaba">🕋</div></div>
+<div class="qibla-result-line"><strong id="qiblaDegrees">—</strong><span id="qiblaDirection">حدد موقعك أو مدينتك</span></div>
+<p class="qibla-status-box" id="qiblaStatus">يتم تجهيز اتجاه القبلة…</p>
+<div class="notice">أبعد الهاتف عن المعادن والأجهزة الكهربائية، وحرّكه على شكل رقم 8 لمعايرة البوصلة. الحساب من المدينة يعطي اتجاهًا تقريبيًا من مركز المدينة.</div>
+</div>
+</div></section>
+<section class="page khatma-page" id="khatma">
+<div class="khatma-hero"><div class="khatma-icon">📖</div><div><span>رحلتك مع القرآن</span><h2>خطة الختمة</h2><p>ضع هدفًا واضحًا، وتابع وردك اليومي خطوة بخطوة حتى إتمام 604 صفحات.</p></div></div>
+<div class="khatma-layout">
+<div class="card khatma-form-card"><div class="card-heading"><span>1</span><div><h3>إعداد الخطة</h3><p>اختر الصفحة التي وصلت إليها وموعد الإتمام.</p></div></div><form class="khatma-form" id="khatmaForm"><div class="field"><label for="khatmaName">اسم الختمة</label><input aria-label="مثال: ختمة رمضان" id="khatmaName" placeholder="مثال: ختمة رمضان" value="ختمة القرآن"/></div><div class="field"><label for="khatmaPage">الصفحة الحالية من 604</label><input id="khatmaPage" max="604" min="1" type="number" value="1"/></div><div class="field"><label for="khatmaEnd">تاريخ الانتهاء</label><input id="khatmaEnd" required="" type="date"/></div><button class="btn primary khatma-submit" type="submit">إنشاء / تحديث الخطة</button></form></div>
+<div class="card khatma-dashboard" id="khatmaStatus"></div>
+</div>
+</section>
+<section class="page" id="favorites"><div class="section-title"><div><h2>المفضلة</h2><p class="muted">الأذكار والآيات التي حفظتها للرجوع إليها سريعًا.</p></div></div><div class="adhkar-list" id="favoritesList"></div></section>
+<section class="page" id="tasbeeh"><div class="card" style="text-align:center;max-width:520px;margin:auto"><h2>المسبحة الإلكترونية</h2><div class="stat" id="tasCount" style="font-size:70px">0</div><button class="counter" id="tasBtn" style="width:150px;height:150px">سبّح</button><div style="margin-top:15px"><button class="btn" id="tasReset">تصفير</button></div></div></section>
+<section class="page private-chat-page" id="privateChat">
+<div class="private-chat-intro"><span aria-hidden="true">🔒</span><div><h2>محادثة خاصة مع المالك</h2><p class="muted">هذه المحادثة مرتبطة بحسابك فقط. لا يستطيع أي مستخدم آخر قراءة رسائلك أو ردود المالك.</p></div></div>
+<article class="private-chat-shell">
+<div class="private-chat-toolbar"><div class="private-chat-state muted" id="privateChatState">جاري تجهيز المحادثة…</div><button class="btn" id="privateChatRefresh" type="button">تحديث</button></div>
+<div aria-live="polite" class="private-chat-messages" id="privateChatMessages"><div class="private-chat-empty"><span>💬</span><strong>جاري تحميل المحادثة</strong></div></div>
+<form class="private-chat-compose" id="privateChatForm">
+<label for="privateChatInput"><strong>اكتب رسالتك للمالك</strong></label>
+<textarea id="privateChatInput" maxlength="4000" placeholder="اكتب رسالتك هنا…" required="" rows="4"></textarea>
+<div class="private-chat-compose-footer"><small id="privateChatCounter">0 / 4000</small><button class="btn primary" id="privateChatSend" type="submit">إرسال للمالك</button></div>
+</form>
+</article>
+<div class="notice" style="margin-top:14px"><strong>الخصوصية:</strong> الحماية مطبقة داخل قاعدة البيانات؛ كل حساب يستطيع قراءة صفوف محادثته وحدها، والمالك وحده يستطيع الرد على جميع الحسابات.</div>
+</section>
+<section class="page" id="support"><div aria-label="أقسام الصفحة" class="combined-page-tabs">
+<button class="active" data-combined-group="support" data-combined-target="support" type="button">الدعم والاقتراحات</button>
+<button data-combined-group="support" data-combined-target="privacy" type="button">الخصوصية</button>
+</div><div class="combined-panel" data-combined-panel="support" data-combined-panel-group="support" id="supportPrimaryPanel">
+<div class="section-title">
+<div><h2>الدعم والاقتراحات</h2><p class="muted">ساعدنا في تحسين نور الذكر. يمكنك الإبلاغ عن مشكلة أو اقتراح إضافة أو تعديل ذكر.</p></div>
+</div>
+<div class="support-tabs">
+<button class="btn primary active" data-support-tab="issue">الإبلاغ عن مشكلة</button>
+<button class="btn" data-support-tab="add">اقتراح إضافة ذكر</button>
+<button class="btn" data-support-tab="edit">اقتراح تعديل ذكر</button>
+<button class="btn" data-support-tab="my">طلباتي</button>
+</div>
+<div class="support-panel card" id="supportIssue">
+<h3>الإبلاغ عن مشكلة</h3>
+<form class="grid support-form" id="issueForm">
+<div class="field"><label for="issueType">نوع المشكلة</label><select id="issueType" required="">
+<option value="content_error">خطأ في نص ذكر أو مصدره</option>
+<option value="duplicate">ذكر مكرر</option>
+<option value="missing">ذكر ناقص أو غير ظاهر</option>
+<option value="counter">مشكلة في العداد</option>
+<option value="login">مشكلة تسجيل الدخول</option>
+<option value="prayer">مشكلة مواقيت الصلاة</option>
+<option value="quran">مشكلة القرآن</option>
+<option value="design">مشكلة في العرض أو التصميم</option>
+<option value="privacy_request">طلب خصوصية أو حذف بيانات</option><option value="other">مشكلة أخرى</option>
+</select></div>
+<div class="field"><label for="issuePriority">الأولوية</label><select id="issuePriority"><option value="normal">عادية</option><option value="high">مهمة</option><option value="critical">عاجلة</option></select></div>
+<div class="field" style="grid-column:1/-1"><label for="issueSubject">عنوان مختصر</label><input aria-label="مثال: ذكر مكرر في قسم الأذكار العامة" id="issueSubject" maxlength="120" placeholder="مثال: ذكر مكرر في قسم الأذكار العامة" required=""/></div>
+<div class="field" style="grid-column:1/-1"><label for="issueDetails">تفاصيل المشكلة</label><textarea aria-label="ما الذي حدث؟ وما الذي كنت تتوقع حدوثه؟" id="issueDetails" maxlength="3000" minlength="10" placeholder="ما الذي حدث؟ وما الذي كنت تتوقع حدوثه؟" required="" rows="5"></textarea></div>
+<input id="issueDhikrId" type="hidden"/><input id="issueDhikrTitle" type="hidden"/>
+<div class="linked-dhikr hidden" id="linkedDhikrIssue" style="grid-column:1/-1"></div>
+<label class="check-row" for="includeDeviceInfo" style="grid-column:1/-1"><input checked="" id="includeDeviceInfo" type="checkbox"/> إرفاق معلومات تقنية عامة عن المتصفح والجهاز لتسهيل حل المشكلة، دون بيانات حساسة.</label>
+<div style="grid-column:1/-1"><button class="btn primary" type="submit">إرسال البلاغ</button></div>
+</form>
+</div>
+<div class="support-panel card hidden" id="supportAdd">
+<h3>اقتراح إضافة ذكر</h3>
+<form class="grid support-form" id="addSuggestionForm">
+<div class="field"><label for="suggestTitle">عنوان الذكر</label><input id="suggestTitle" maxlength="160" required=""/></div>
+<div class="field"><label for="suggestCategory">القسم المقترح</label><select id="suggestCategory">
+<option value="morning">الصباح</option><option value="evening">المساء</option><option value="sleep">النوم</option>
+<option value="wake">الاستيقاظ</option><option value="after_prayer">بعد الصلاة</option><option value="home">المنزل</option>
+<option value="mosque">المسجد</option><option value="food">الطعام</option><option value="travel">السفر</option>
+<option value="distress">الهم والكرب</option><option value="ruqyah">الرقية الشرعية</option><option value="virtue">فضل الذكر</option><option value="general">أذكار عامة</option>
+</select></div>
+<div class="field"><label for="suggestRepeat">عدد التكرار المقترح</label><input id="suggestRepeat" max="10000" min="1" type="number" value="1"/></div>
+<div class="field"><label for="suggestSource">المصدر</label><input aria-label="اسم الكتاب أو الحديث أو السورة والآية" id="suggestSource" maxlength="300" placeholder="اسم الكتاب أو الحديث أو السورة والآية"/></div>
+<div class="field" style="grid-column:1/-1"><label for="suggestText">نص الذكر كاملًا</label><textarea id="suggestText" maxlength="5000" minlength="3" required="" rows="6"></textarea></div>
+<div class="field" style="grid-column:1/-1"><label for="suggestReason">ملاحظة أو سبب الإضافة</label><textarea id="suggestReason" maxlength="2000" rows="3"></textarea></div>
+<label class="check-row" for="suggestConfirm" style="grid-column:1/-1"><input id="suggestConfirm" required="" type="checkbox"/> راجعت النص قبل الإرسال، وأفهم أن الاقتراح لن يُنشر قبل مراجعته.</label>
+<div style="grid-column:1/-1"><button class="btn primary" type="submit">إرسال اقتراح الإضافة</button></div>
+</form>
+</div>
+<div class="support-panel card hidden" id="supportEdit">
+<h3>اقتراح تعديل ذكر</h3>
+<form class="grid support-form" id="editSuggestionForm">
+<input id="editDhikrId" type="hidden"/>
+<div class="field" style="grid-column:1/-1"><label for="editDhikrTitle">الذكر المراد تعديله</label><input aria-label="اختر «اقتراح تعديل» من بطاقة الذكر، أو اكتب العنوان" id="editDhikrTitle" placeholder="اختر «اقتراح تعديل» من بطاقة الذكر، أو اكتب العنوان" required=""/></div>
+<div class="linked-dhikr hidden" id="linkedDhikrEdit" style="grid-column:1/-1"></div>
+<div class="field"><label for="editType">نوع التعديل</label><select id="editType"><option value="text">تصحيح النص</option><option value="source">تصحيح المصدر</option><option value="repeat">تصحيح التكرار</option><option value="category">تصحيح القسم</option><option value="other">تعديل آخر</option></select></div>
+<div class="field"><label for="editSource">المصدر الداعم للتعديل</label><input id="editSource" maxlength="300"/></div>
+<div class="field" style="grid-column:1/-1"><label for="editProposed">النص أو القيمة الصحيحة المقترحة</label><textarea id="editProposed" maxlength="5000" minlength="3" required="" rows="5"></textarea></div>
+<div class="field" style="grid-column:1/-1"><label for="editReason">سبب التعديل</label><textarea id="editReason" maxlength="2000" required="" rows="3"></textarea></div>
+<div style="grid-column:1/-1"><button class="btn primary" type="submit">إرسال اقتراح التعديل</button></div>
+</form>
+</div>
+<div class="support-panel card hidden" id="supportMy">
+<div class="row between"><h3>طلباتي وبلاغاتي</h3><button class="btn" id="refreshMyReports">تحديث</button></div>
+<p class="muted">يظهر سجل الطلبات المرسلة من حسابك وحالتها.</p>
+<div class="request-list" id="myReportsList"></div>
+</div>
+<div class="notice" style="margin-top:14px">
+    لا تُنشر اقتراحات الأذكار تلقائيًا. تتم مراجعة النص والمصدر أولًا من إدارة المحتوى.
+  </div>
+</div><div class="combined-panel hidden" data-combined-panel="privacy" data-combined-panel-group="support" id="supportSecondaryPanel">
+<div class="section-title"><div><h2>سياسة الخصوصية</h2><p class="muted">كيف يتعامل نور الذكر مع بياناتك.</p></div></div>
+<div class="card privacy-card">
+<h3>البيانات التي يستخدمها التطبيق</h3>
+<p>يستخدم التطبيق موقع الجهاز فقط عند طلب مواقيت الصلاة أو اتجاه القبلة، وبعد منح الإذن من المستخدم. لا يتم تشغيل الموقع في الخلفية.</p>
+<h3>التخزين على الجهاز</h3>
+<p>تُحفظ العدادات والمفضلة وخطة الختمة والسور التي فتحتها في التخزين المحلي على جهازك لتعمل بعض المزايا دون إنترنت.</p>
+<h3>الحسابات والمحادثات والبلاغات</h3>
+<p>تُحفظ بيانات الحساب والبريد والبلاغات والمحادثة الخاصة في Supabase لتقديم الخدمة. كل مستخدم يرى محادثته فقط بفضل سياسات قاعدة البيانات، بينما يستطيع المالك إدارة المحادثات. لا تُباع بيانات المستخدمين.</p>
+<h3>نصوص الأعراض والأحلام</h3>
+<p>عند استخدام المساعد الذكي، يرسل النص بعد موافقتك إلى Supabase Edge Function ثم إلى مزود الذكاء الاصطناعي لمعالجة الطلب. تجنب كتابة الاسم أو الهاتف أو أي معلومة تعريفية. يطلب التطبيق من المزود عدم تخزين الاستجابة لأغراض التدريب عبر إعداد <code>store:false</code>.</p>
+<h3>حقوقك في البيانات</h3>
+<p>يمكنك طلب الوصول أو التصحيح أو الحصول على نسخة أو حذف بياناتك أو سحب الموافقة من خلال قسم الدعم أو المحادثة الخاصة. تتم مراجعة الطلب والتحقق من الحساب قبل التنفيذ.</p>
+<h3>خدمات خارجية</h3>
+<p>قد يتصل التطبيق بخدمة القرآن ومواقيت الصلاة لتحميل البيانات المطلوبة. تخضع هذه الخدمات لسياساتها الخاصة.</p>
+<h3>تنبيه صحي</h3>
+<p>الرقية الشرعية سبب مشروع، لكنها لا تغني عن مراجعة الطبيب أو تلقي العلاج الطبي عند الحاجة.</p>
+<h3>التحكم في بياناتك</h3>
+<p>يمكنك حذف البيانات المحلية من إعدادات المتصفح أو حذف بيانات التطبيق المثبت.</p>
+<div class="notice v4013-ad-privacy"><b>الإعلانات والكوكيز:</b> مساحات الإعلانات معطلة افتراضيًا. عند تفعيل شبكة إعلانية قد تستخدم الشبكة ملفات تعريف الارتباط أو التخزين المحلي وفق إعدادات الموافقة وسياسة المزود. يمكن إدارة الموافقة من رسالة الخصوصية الخاصة بمزود الإعلانات.</div></div>
+</div></section>
+</main>
+<footer class="footer">نور الذكر V43.0 · أكاديمية العقيدة والفقه والسيرة والحديث واختبارات شاملة</footer><div class="toast" id="toast"></div>
+<div class="auth-gate" id="authGate"><form class="auth-card auth-card-v4012" id="authForm">
+<h2>مرحبًا بك في نور الذكر</h2>
+<p class="muted">أنشئ حسابًا في أول مرة، وسيتم تسجيل دخولك مباشرة. البريد يُستخدم فقط للدخول واستعادة كلمة المرور.</p>
+<div aria-label="نوع العملية" class="auth-mode-switch" role="group">
+<button class="auth-mode-btn active" data-auth-mode="signin" type="button">تسجيل الدخول</button>
+<button class="auth-mode-btn" data-auth-mode="signup" type="button">إنشاء حساب جديد</button>
+</div>
+<select aria-hidden="true" aria-label="وضع الحساب" class="hidden" id="authMode"><option value="signin">تسجيل الدخول</option><option value="signup">إنشاء حساب</option></select>
+<div class="field hidden" id="authNameField"><label for="authDisplayName">الاسم الظاهر</label><input aria-label="اكتب اسمك" autocomplete="name" id="authDisplayName" maxlength="60" placeholder="اكتب اسمك"/></div>
+<div class="field"><label for="authEmail">البريد الإلكتروني</label><input autocomplete="email" id="authEmail" required="" type="email"/></div>
+<div class="field"><label for="authPassword">كلمة المرور</label><input autocomplete="current-password" id="authPassword" minlength="8" required="" type="password"/></div>
+<button class="btn primary" id="authSubmit" style="width:100%" type="submit">تسجيل الدخول</button>
+<button class="btn" id="forgotPassword" style="width:100%;margin-top:8px" type="button">نسيت كلمة المرور</button><div class="auth-instant-note">لا نطلب تأكيد البريد عند إنشاء الحساب. رسالة البريد تُستخدم فقط إذا نسيت كلمة المرور.</div>
+<div class="auth-result hidden" id="authResult" role="status"></div>
+<p class="error" id="authError"></p>
+</form></div>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer="" src="assets/js/config.js?v=81.2"></script><script defer="" src="assets/js/common.js?v=40.18"></script><script defer="" src="assets/js/auth.js?v=40.14"></script><script defer="" src="assets/js/v40-12-public.js?v=40.12"></script><script defer="" src="assets/js/v40-21-private-chat.js?v=40.21"></script>
+<script defer="" src="assets/js/adhkar.js?v=40.20"></script><script defer="" src="assets/js/features.js"></script><script defer="" src="assets/js/support.js"></script><script defer="" src="assets/js/prayer.js?v=39.3"></script><script defer="" src="assets/js/quran.js?v=40.5"></script><script defer="" src="assets/js/memorization.js"></script><script defer="" src="assets/js/v25-ui.js?v=40.20"></script><script defer="" src="assets/js/v26-ruqyah.js?v=40.20"></script><script defer="" src="assets/js/v28-assessment.js"></script><script defer="" src="assets/js/v29-legal.js"></script><script defer="" src="assets/js/v30-page-isolation.js"></script><script defer="" src="assets/js/v31-features.js"></script><script defer="" src="assets/js/v33-expanded-ruqyah.js"></script><script defer="" src="assets/js/v34-dreams.js"></script><script defer="" src="assets/js/focused-ui.js"></script><script defer="" src="assets/js/v36-professional.js"></script><script defer="" src="assets/js/bootstrap.js?v=40.19"></script><script defer="" src="assets/js/phase3-home.js"></script><script defer="" src="assets/js/phase4-search.js"></script><script defer="" src="assets/js/phase5-ruqyah-encyclopedia.js"></script><script defer="" src="assets/js/phase6-eye-encyclopedia.js"></script><script defer="" src="assets/js/phase7-hasad-encyclopedia.js"></script><script defer="" src="assets/js/phase8-magic-encyclopedia.js"></script><script defer="" src="assets/js/phase9-mas-complete-ruqyah.js"></script><script defer="" src="assets/js/phase10-knowledge-bank.js"></script><script defer="" src="assets/js/v38-major-rebuild.js"></script><script defer="" src="assets/js/v39-3-location-selects.js?v=39.3"></script><script defer="" src="assets/js/v40-2-quran.js?v=40.2"></script><script defer="" src="assets/js/v40-3-professional.js?v=40.3"></script><script defer="" src="assets/js/v40-4-final.js?v=40.9"></script><script defer="True" src="assets/js/v40-10-navigation-qibla.js?v=40.10"></script><script defer="" src="assets/js/ads.js?v=40.13"></script><script defer="" src="assets/js/v40-13-mobile-quran-assessment.js?v=40.13"></script><script defer="" src="assets/js/v40-17-scholar-ai-assessment.js?v=40.17"></script><script defer="" src="assets/js/v40-18-cms-core.js?v=68.0"></script><script defer="" src="assets/js/v40-18-cms-public.js?v=67.0"></script><script defer="" src="assets/js/v40-19-experience.js?v=40.19"></script><script defer="" src="assets/js/v40-22-spiritual-assessment.js?v=40.22"></script><script defer="" src="assets/js/v40-23-islamic-library.js?v=40.25"></script><script defer="" src="assets/js/v40-23-legal-privacy.js?v=40.25"></script><script defer="" src="assets/js/v40-24-islamic-academy.js?v=45.0"></script><script defer src="assets/js/v48-student-dashboard.js?v=48.0"></script>
+<script defer="" src="assets/js/v40-27-global-pro.js?v=40.27"></script>
+<script defer="" src="assets/js/v40-28-ruqyah-pro.js?v=40.28"></script>
+<script defer="" src="assets/js/v40-28-mushaf-khatma.js?v=40.28"></script>
+<a href="portal.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;padding:8px 11px;border-radius:10px;background:#176b52;color:#fff;text-decoration:none;font-size:12px">بوابة المالك</a><script defer src="assets/js/v66-direct-quran.js?v=66.0"></script><script defer src="assets/js/v81-runtime.js?v=81.0"></script><script defer src="assets/js/v66-ai-assistant.js?v=81.0"></script><script defer src="assets/js/v80-user-security.js?v=80.0"></script>
+</body></html>

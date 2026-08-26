@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /portal
+Disallow: /portal.html
+Disallow: /test-v4022.html
+Disallow: /supabase/
