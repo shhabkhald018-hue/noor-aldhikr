@@ -1,0 +1,70 @@
+/* نور الذكر V40.5 — إصلاح تكرار البسملة ووضوح الاختبارات */
+
+/* لا تُعرض علامة ۞ داخل صفحة المصحف حتى لو بقي عنصر قديم من الكاش. */
+.v39-ornament{display:none!important}
+
+/* وضوح اختيار الأجزاء في الوضع الليلي: نص داكن فوق البطاقة العاجية. */
+body.dark .quiz-page .juz-chip span,
+html[data-theme="dark"] .quiz-page .juz-chip span{
+  background:#f6edda!important;
+  color:#173a35!important;
+  border-color:#cdbd96!important;
+  opacity:1!important;
+  font-weight:800;
+}
+body.dark .quiz-page .juz-chip input:checked+span,
+html[data-theme="dark"] .quiz-page .juz-chip input:checked+span{
+  background:linear-gradient(135deg,#178262,#0d624c)!important;
+  color:#fffaf0!important;
+  border-color:#d6b66e!important;
+  box-shadow:0 7px 18px rgba(9,88,65,.28)!important;
+}
+body.dark .quiz-page .juz-chip span:hover,
+html[data-theme="dark"] .quiz-page .juz-chip span:hover{
+  border-color:#178262!important;
+  box-shadow:0 5px 14px rgba(9,88,65,.16);
+}
+
+/* بقية عناصر الاختبار في الوضع الليلي. */
+body.dark .quiz-page .quiz-settings:before,
+html[data-theme="dark"] .quiz-page .quiz-settings:before{
+  color:#f7efdf!important;
+}
+body.dark .quiz-page .field label,
+html[data-theme="dark"] .quiz-page .field label{
+  color:#f7efdf!important;
+}
+body.dark .quiz-page select,
+html[data-theme="dark"] .quiz-page select{
+  background:#f6edda!important;
+  color:#173a35!important;
+  border-color:#cdbd96!important;
+}
+body.dark .quiz-page .history-list>div,
+html[data-theme="dark"] .quiz-page .history-list>div{
+  background:#f6edda!important;
+  color:#173a35!important;
+  border:1px solid #d9c9a5;
+}
+body.dark .quiz-page .history-list span,
+body.dark .quiz-page .history-list small,
+html[data-theme="dark"] .quiz-page .history-list span,
+html[data-theme="dark"] .quiz-page .history-list small{
+  color:#456056!important;
+  opacity:1!important;
+}
+
+/* إبقاء أوقات الصلاة واضحة فوق البطاقات العاجية في الوضع الليلي. */
+body.dark #prayerGrid .prayer:not(.next),
+html[data-theme="dark"] #prayerGrid .prayer:not(.next){
+  color:#173a35!important;
+}
+body.dark #prayerGrid .prayer:not(.next) span,
+body.dark #prayerGrid .prayer:not(.next) strong,
+body.dark #prayerGrid .prayer:not(.next) small,
+html[data-theme="dark"] #prayerGrid .prayer:not(.next) span,
+html[data-theme="dark"] #prayerGrid .prayer:not(.next) strong,
+html[data-theme="dark"] #prayerGrid .prayer:not(.next) small{
+  color:#173a35!important;
+  opacity:1!important;
+}
