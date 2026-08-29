@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head><meta name="description" content="المصحف الشريف للقراءة والتلاوة والتفسير والحفظ ومتابعة آخر قراءة.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2f735e">
+<meta name="robots" content="index,follow">
+<title>المصحف الشريف | نور الذكر</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="assets/css/mushaf-v54-final.css?v=83.0">
+<link rel="stylesheet" href="assets/css/v66-ai-assistant.css?v=83.0"><link rel="canonical" href="https://shhabkhald018-hue.github.io/noor-aldhikr/mushaf.html"><meta property="og:locale" content="ar_AR"><meta property="og:type" content="website"><meta property="og:title" content="المصحف الشريف | نور الذكر"><meta property="og:description" content="المصحف الشريف للقراءة والتلاوة والتفسير والحفظ ومتابعة آخر قراءة."></head>
+<body class="mushaf-page">
+<header class="m54-top">
+  <a href="index.html" class="m54-brand m54-back-home" aria-label="الرجوع إلى الموقع"><span>←</span><b>رجوع</b></a>
+  <div class="m54-center">
+    <strong id="m54SurahName">المصحف الشريف</strong>
+    <div class="m54-meta"><span id="m54PageMeta">صفحة 1</span><span id="m54JuzMeta">الجزء —</span><span id="m54HizbMeta">الحزب —</span></div>
+  </div>
+  <div class="m54-top-actions">
+    <button id="m54Theme" class="m54-circle" aria-label="تبديل الوضع الليلي">☾</button>
+    <button id="m54Settings" class="m54-settings-label" aria-label="إعدادات القراءة والتلاوة"><span>⚙</span><b>إعدادات القراءة والتلاوة</b></button>
+  </div>
+</header>
+
+<div class="m54-progress"><i id="m54ProgressBar"></i></div>
+
+<main class="m54-main">
+  <aside class="m54-side m54-side-right" aria-label="التنقل السريع">
+    <button id="m54PrevPageSide" aria-label="الصفحة السابقة">‹</button>
+    <span id="m54SidePage">1</span>
+    <button id="m54NextPageSide" aria-label="الصفحة التالية">›</button>
+  </aside>
+
+  <section id="m54Reader" class="m54-reader" aria-live="polite">
+    <div class="m54-loading"><span></span><p>جاري تحميل صفحة المصحف…</p></div>
+  </section>
+
+  <aside class="m54-side m54-side-left" aria-label="أدوات القراءة">
+    <button id="m54FontDown" aria-label="تصغير الخط">أ−</button>
+    <button id="m54FontUp" aria-label="تكبير الخط">أ+</button>
+    <button id="m54Focus" aria-label="وضع التركيز">◉</button>
+  </aside>
+</main>
+
+<div class="m54-mini-player" id="m54MiniPlayer" hidden>
+  <div><small>التلاوة</small><strong id="m54NowPlaying">—</strong></div>
+  <div class="m54-mini-actions">
+    <button id="m54PrevAudio">⏮</button>
+    <button id="m54PauseAudio">⏯</button>
+    <button id="m54NextAudio">⏭</button>
+    <button id="m54StopAudio">■</button>
+  </div>
+</div>
+
+<nav class="m54-bottom" aria-label="أدوات المصحف">
+  <button id="m54Prev"><b>‹</b><span>السابق</span></button>
+  <button id="m54Play"><b>▶</b><span>تلاوة</span></button>
+  <button id="m54TafsirBtn"><b>ت</b><span>تفسير</span></button>
+  <button id="m54Save"><b>☆</b><span>حفظ</span></button>
+  <button id="m54Next"><b>›</b><span>التالي</span></button>
+</nav>
+
+<aside class="m54-sheet" id="m54SettingsSheet" hidden>
+  <div class="m54-sheet-card">
+    <div class="m54-sheet-head"><div><small>إعدادات المصحف</small><h2>القراءة والتلاوة</h2></div><button data-close="m54SettingsSheet">×</button></div>
+    <div class="m54-settings-grid">
+      <label><span>رقم الصفحة</span><div class="m54-inline"><input id="m54PageInput" type="number" min="1" max="604" value="1"><button id="m54GoPage" class="primary">انتقال</button></div></label>
+      <label><span>الجزء</span><select id="m54JuzSelect"></select></label>
+      <label><span>الحزب</span><select id="m54HizbSelect"></select></label>
+      <label><span>السورة</span><select id="m54SurahSelect"></select></label>
+      <label><span>حجم الخط</span><input id="m54Font" type="range" min="82" max="145" step="3" value="100"></label>
+      <label><span>القارئ</span><select id="m54Reciter"><option value="ar.alafasy">مشاري راشد العفاسي</option><option value="ar.husary">محمود خليل الحصري</option><option value="ar.minshawi">محمد صديق المنشاوي</option><option value="ar.abdulbasitmurattal">عبد الباسط عبد الصمد</option></select></label>
+      <label><span>تكرار الآية</span><select id="m54Repeat"><option value="1">مرة واحدة</option><option value="2">مرتان</option><option value="3">3 مرات</option><option value="5">5 مرات</option><option value="10">10 مرات</option></select></label>
+      <label class="m54-switch"><input id="m54KeepAwake" type="checkbox"><span>إبقاء الشاشة مستيقظة</span></label>
+    </div>
+    <div class="m54-settings-actions"><button id="m54Continue" class="primary">متابعة آخر قراءة</button><button id="m54SavedList">الآيات المحفوظة</button></div>
+  </div>
+</aside>
+
+<section class="m54-sheet" id="m54TafsirSheet" hidden>
+  <div class="m54-sheet-card">
+    <div class="m54-sheet-head"><div><small>التفسير الميسر</small><h2 id="m54TafsirTitle">اختر آية</h2></div><button data-close="m54TafsirSheet">×</button></div>
+    <div class="m54-tafsir-body" id="m54TafsirText">اضغط على آية ثم اختر «تفسير».</div>
+    <small class="m54-source" id="m54TafsirSource"></small>
+  </div>
+</section>
+
+<section class="m54-sheet" id="m54SavedSheet" hidden>
+  <div class="m54-sheet-card">
+    <div class="m54-sheet-head"><div><small>المحفوظات</small><h2>الآيات المحفوظة</h2></div><button data-close="m54SavedSheet">×</button></div>
+    <div id="m54SavedBody"></div>
+  </div>
+</section>
+
+
+<script defer src="assets/js/mushaf-v54-final.js?v=83.0"></script>
+<script src="config.js?v=83.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>if(!window.supabase){document.write('<script src="https://unpkg.com/@supabase/supabase-js@2"><\/script>')}</script>
+<script defer src="assets/js/v66-ai-assistant.js?v=83.0"></script></body>
+</html>

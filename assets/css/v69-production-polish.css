@@ -1,0 +1,7 @@
+
+/* V69 production polish */
+.exam60-top{background:color-mix(in srgb,var(--noor-surface) 95%,transparent)!important;border-color:var(--noor-border)!important;color:var(--noor-text)!important}
+.exam60-top a{color:var(--noor-green)!important}.exam60-note{background:var(--noor-surface-2)!important;border-color:var(--noor-border)!important;color:var(--noor-text-2)!important}
+.gate{background:radial-gradient(circle at top right,color-mix(in srgb,var(--noor-green) 7%,transparent),transparent 42%),var(--noor-bg)!important}
+.login{background:var(--noor-surface)!important;border-color:var(--noor-border)!important;color:var(--noor-text)!important;box-shadow:var(--cms-card-shadow)!important}
+.logo{color:var(--noor-green)!important}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <title>تشخيص Supabase | نور الذكر V83</title>
+  <link rel="stylesheet" href="assets/css/app.css?v=83.0">
+  <link rel="stylesheet" href="assets/css/v67-balanced-theme.css?v=83.0">
+  <style>
+    body{background:#f5f8f7}.diag{max-width:820px;margin:50px auto;padding:22px}.diag-card{background:#fff;border:1px solid #dbe8e3;border-radius:18px;padding:20px;margin:12px 0}.good{color:#176b52}.bad{color:#a21b3c}.wait{color:#6b7d77}.warn{color:#8a5d08}code{direction:ltr;display:inline-block;word-break:break-all}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-block;text-decoration:none}
+  </style>
+</head>
+<body>
+<main class="diag">
+  <h1>تشخيص اتصال Supabase — V83.0</h1>
+  <p>الصفحة لا تعدّل قاعدة البيانات ولا تسجل دخولًا. تفصل بين مشكلة الملفات، DNS/الشبكة، ومشكلة Supabase API.</p>
+  <div class="diag-card"><b>الإصدار الفعلي من config.js</b><div id="version">—</div></div>
+  <div class="diag-card"><b>المشروع المستخدم</b><div id="project">—</div></div>
+  <div class="diag-card"><b>إعدادات config.js</b><div id="config" class="wait">جاري الفحص…</div></div>
+  <div class="diag-card"><b>مكتبة Supabase JS</b><div id="library" class="wait">جاري التحميل…</div></div>
+  <div class="diag-card"><b>DNS / الوصول إلى النطاق</b><div id="network" class="wait">جاري الفحص…</div></div>
+  <div class="diag-card"><b>Supabase API + Publishable Key</b><div id="api" class="wait">في انتظار اختبار الشبكة…</div></div>
+  <div class="diag-card actions"><button class="btn" id="rerun" type="button">إعادة الفحص</button><a class="btn" href="portal.html?v=83.0">العودة إلى لوحة المالك</a></div>
+</main>
+<script src="config.js?v=83.0"></script>
+<script>
+'use strict';
+(() => {
+  const $=id=>document.getElementById(id);
+  const cfg=window.NOOR_CONFIG||{};
+  const set=(id,text,cls='wait')=>{const el=$(id);if(!el)return;el.textContent=text;el.className=cls};
+  const valid=()=>{try{const u=new URL(cfg.supabaseUrl||'');return u.protocol==='https:'&&u.hostname.endsWith('.supabase.co')&&/^sb_publishable_/.test(cfg.publishableKey||'')}catch{return false}};
+  const load=(src,ms=12000)=>new Promise((resolve,reject)=>{const s=document.createElement('script');const t=setTimeout(()=>reject(new Error('timeout')),ms);s.onload=()=>{clearTimeout(t);resolve()};s.onerror=()=>{clearTimeout(t);reject(new Error('load'))};s.src=src;document.head.appendChild(s)});
+  async function ensureLib(){if(window.supabase?.createClient)return true;for(const src of ['https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2','https://unpkg.com/@supabase/supabase-js@2']){try{await load(src);if(window.supabase?.createClient)return true}catch{}}return false}
+  async function networkProbe(){const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),9000);try{await fetch(cfg.supabaseUrl.replace(/\/$/,'')+'/auth/v1/health',{method:'GET',mode:'no-cors',cache:'no-store',signal:ctrl.signal});clearTimeout(timer);return {ok:true}}catch(error){clearTimeout(timer);return {ok:false,error}}}
+  async function apiProbe(){try{const client=window.supabase.createClient(cfg.supabaseUrl,cfg.publishableKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});const timeout=new Promise((_,reject)=>setTimeout(()=>reject(new Error('API_TIMEOUT')),12000));const request=client.from('site_modules').select('module_key').limit(1);const {data,error}=await Promise.race([request,timeout]);if(error)return {ok:false,error};return {ok:true,data}}catch(error){return {ok:false,error}}}
+  async function run(){
+    set('version',cfg.appVersion||'غير معروف',cfg.appVersion?.startsWith('82.')?'good':'warn');
+    let host='غير صالح';try{host=new URL(cfg.supabaseUrl||'').hostname}catch{}
+    set('project',host,host!=='غير صالح'?'good':'bad');
+    const isValid=valid();set('config',isValid?'✓ رابط Supabase وPublishable Key موجودان بصيغة صحيحة.':'✗ config.js ناقص أو غير صالح.',''+(isValid?'good':'bad'));
+    if(!isValid){set('library','لم يبدأ الاختبار.','bad');set('network','لم يبدأ الاختبار.','bad');set('api','لم يبدأ الاختبار.','bad');return}
+    set('library','جاري تحميل مكتبة Supabase…','wait');const lib=await ensureLib();set('library',lib?'✓ مكتبة Supabase JS جاهزة.':'✗ فشل تحميل مكتبة Supabase JS من المصدرين.',''+(lib?'good':'bad'));
+    set('network','جاري اختبار DNS/الشبكة…','wait');const net=await networkProbe();
+    if(!net.ok){
+      const netMsg=net.error?.name==='AbortError'?'✗ انتهت المهلة في فحص health. سنختبر API الحقيقي بشكل مستقل.':'✗ فحص health لم يصل إلى النطاق. سنختبر API الحقيقي بشكل مستقل.';
+      set('network',netMsg,'bad');
+    }else set('network','✓ تم الوصول إلى نطاق Supabase على مستوى الشبكة.','good');
+    if(!lib){set('api','لا يمكن اختبار API بدون مكتبة Supabase JS.','bad');return}
+    set('api','جاري اختبار API والمفتاح بشكل مستقل…','wait');const api=await apiProbe();
+    if(api.ok){
+      set('api',net.ok?'✓ Supabase API وPublishable Key يعملان. نتيجة is_owner بدون جلسة = '+String(api.data):'✓ Supabase API يعمل فعليًا رغم فشل فحص health. نتيجة is_owner بدون جلسة = '+String(api.data),'good');
+      return
+    }
+    const raw=String(api.error?.message||api.error||'');
+    if(/Invalid API key|apikey|JWT/i.test(raw))set('api','✗ النطاق متاح لكن Publishable Key مرفوض أو لا يخص المشروع.','bad');
+    else if(/PGRST|schema|function.*is_owner|Could not find/i.test(raw))set('api','✗ الاتصال والمفتاح يعملان، لكن مخطط قاعدة البيانات/RPC غير مكتمل: '+raw,'bad');
+    else if(/Failed to fetch|NetworkError|API_TIMEOUT/i.test(raw))set('api','✗ اختبار API فشل على مستوى الشبكة/المهلة: '+raw,'bad');
+    else set('api','✗ Supabase API أعاد خطأ: '+raw,'bad');
+  }
+  $('rerun').addEventListener('click',run);run();
+})();
+</script>
+</body>
+</html>

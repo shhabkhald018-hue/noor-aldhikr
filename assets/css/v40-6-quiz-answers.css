@@ -1,0 +1,73 @@
+/* نور الذكر V40.6 — إصلاح وضوح إجابات اختبار الحفظ */
+
+/* بطاقات الإجابة يجب أن تبقى عاجية والنص داكنًا في كل الأوضاع. */
+#memorization .quiz-option,
+.quiz-page .quiz-option,
+html[data-theme="dark"] #memorization .quiz-option,
+html[data-theme="dark"] .quiz-page .quiz-option,
+body.dark #memorization .quiz-option,
+body.dark .quiz-page .quiz-option{
+  background:#fffaf0!important;
+  color:#173a35!important;
+  border:1px solid #cdbd96!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  -webkit-text-fill-color:#173a35!important;
+  font-weight:750!important;
+}
+
+/* أي عناصر داخل الزر ترث اللون الداكن ولا تختفي بسبب قواعد عامة للوضع الليلي. */
+#memorization .quiz-option *,
+.quiz-page .quiz-option *,
+html[data-theme="dark"] #memorization .quiz-option *,
+html[data-theme="dark"] .quiz-page .quiz-option *,
+body.dark #memorization .quiz-option *,
+body.dark .quiz-page .quiz-option *{
+  color:inherit!important;
+  opacity:1!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+
+/* رقم الاختيار واضح داخل مربع أخضر فاتح. */
+#memorization .quiz-option > span,
+.quiz-page .quiz-option > span{
+  background:#e2eee7!important;
+  color:#0d624c!important;
+  border:1px solid #b8d0c3!important;
+  font-weight:900!important;
+}
+
+/* لا نخفّض شفافية الاختيارات بعد الإجابة. */
+#memorization .quiz-option:disabled,
+.quiz-page .quiz-option:disabled{
+  opacity:1!important;
+  cursor:default;
+}
+
+/* تمييز الإجابة الصحيحة والخاطئة مع بقاء النص مقروءًا. */
+#memorization .quiz-option.correct,
+.quiz-page .quiz-option.correct,
+html[data-theme="dark"] #memorization .quiz-option.correct,
+html[data-theme="dark"] .quiz-page .quiz-option.correct{
+  background:#e4f5e9!important;
+  color:#0d5b3a!important;
+  border-color:#2f9d64!important;
+  box-shadow:inset 0 0 0 2px rgba(47,157,100,.14)!important;
+}
+
+#memorization .quiz-option.wrong,
+.quiz-page .quiz-option.wrong,
+html[data-theme="dark"] #memorization .quiz-option.wrong,
+html[data-theme="dark"] .quiz-page .quiz-option.wrong{
+  background:#fff0ee!important;
+  color:#8d2525!important;
+  border-color:#cf5b54!important;
+  box-shadow:inset 0 0 0 2px rgba(207,91,84,.12)!important;
+}
+
+#memorization .quiz-option:hover,
+.quiz-page .quiz-option:hover{
+  color:#0b4f3d!important;
+  border-color:#178262!important;
+  box-shadow:0 8px 22px rgba(11,79,61,.14)!important;
+}

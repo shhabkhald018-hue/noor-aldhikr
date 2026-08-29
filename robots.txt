@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /noor-aldhikr/
+Disallow: /noor-aldhikr/portal.html
+Disallow: /noor-aldhikr/reset-password.html
+Disallow: /noor-aldhikr/supabase-check.html
