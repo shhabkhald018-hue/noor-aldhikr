@@ -11,7 +11,7 @@
   if('caches' in window){const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith('noor-')).map(k=>caches.delete(k)));}
   localStorage.removeItem('noor-sw-reload');
   m.innerHTML='<b>تم تنظيف الكاش.</b><br>سيتم فتح لوحة المالك الآن.';
-  setTimeout(()=>location.replace('portal.html?v=81.3&t='+Date.now()),700);
- }catch(e){m.textContent='تعذر تنظيف الكاش تلقائيًا. افتح portal.html?v=81.3 يدويًا.';}
+  setTimeout(()=>location.replace('portal.html?v=81.7&t='+Date.now()),700);
+ }catch(e){m.textContent='تعذر تنظيف الكاش تلقائيًا. افتح portal.html?v=81.7 يدويًا.';}
 })();
 </script></body></html>

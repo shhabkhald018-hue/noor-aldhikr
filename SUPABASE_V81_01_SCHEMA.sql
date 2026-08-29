@@ -314,69 +314,106 @@ alter table public.academy_questions enable row level security;
 alter table public.reports enable row level security;
 alter table public.security_audit enable row level security;
 
+drop policy if exists profiles_select on public.profiles;
 create policy profiles_select on public.profiles for select to authenticated
 using(id=auth.uid() or public.is_owner());
+drop policy if exists profiles_insert on public.profiles;
 create policy profiles_insert on public.profiles for insert to authenticated
 with check(id=auth.uid() or public.is_owner());
+drop policy if exists profiles_update on public.profiles;
 create policy profiles_update on public.profiles for update to authenticated
 using(id=auth.uid() or public.is_owner())
 with check(id=auth.uid() or public.is_owner());
 
+drop policy if exists adhkar_public_read on public.adhkar_content;
 create policy adhkar_public_read on public.adhkar_content for select to anon,authenticated
 using(active=true or public.is_owner());
+drop policy if exists adhkar_owner_insert on public.adhkar_content;
 create policy adhkar_owner_insert on public.adhkar_content for insert to authenticated with check(public.is_owner());
+drop policy if exists adhkar_owner_update on public.adhkar_content;
 create policy adhkar_owner_update on public.adhkar_content for update to authenticated using(public.is_owner()) with check(public.is_owner());
+drop policy if exists adhkar_owner_delete on public.adhkar_content;
 create policy adhkar_owner_delete on public.adhkar_content for delete to authenticated using(public.is_owner());
 
+drop policy if exists announcements_public_read on public.announcements;
 create policy announcements_public_read on public.announcements for select to anon,authenticated
 using((active=true and (starts_at is null or starts_at<=now()) and (ends_at is null or ends_at>=now())) or public.is_owner());
+drop policy if exists announcements_owner_insert on public.announcements;
 create policy announcements_owner_insert on public.announcements for insert to authenticated with check(public.is_owner());
+drop policy if exists announcements_owner_update on public.announcements;
 create policy announcements_owner_update on public.announcements for update to authenticated using(public.is_owner()) with check(public.is_owner());
+drop policy if exists announcements_owner_delete on public.announcements;
 create policy announcements_owner_delete on public.announcements for delete to authenticated using(public.is_owner());
 
+drop policy if exists settings_public_read on public.app_settings;
 create policy settings_public_read on public.app_settings for select to anon,authenticated
 using(public=true or public.is_owner());
+drop policy if exists settings_owner_insert on public.app_settings;
 create policy settings_owner_insert on public.app_settings for insert to authenticated with check(public.is_owner());
+drop policy if exists settings_owner_update on public.app_settings;
 create policy settings_owner_update on public.app_settings for update to authenticated using(public.is_owner()) with check(public.is_owner());
+drop policy if exists settings_owner_delete on public.app_settings;
 create policy settings_owner_delete on public.app_settings for delete to authenticated using(public.is_owner());
 
+drop policy if exists private_messages_read on public.private_messages;
 create policy private_messages_read on public.private_messages for select to authenticated
 using(user_id=auth.uid() or public.is_owner());
 
+drop policy if exists learning_progress_select on public.learning_progress;
 create policy learning_progress_select on public.learning_progress for select to authenticated
 using(user_id=auth.uid() or public.is_owner());
+drop policy if exists learning_progress_insert on public.learning_progress;
 create policy learning_progress_insert on public.learning_progress for insert to authenticated
 with check(user_id=auth.uid());
+drop policy if exists learning_progress_update on public.learning_progress;
 create policy learning_progress_update on public.learning_progress for update to authenticated
 using(user_id=auth.uid()) with check(user_id=auth.uid());
+drop policy if exists learning_progress_delete on public.learning_progress;
 create policy learning_progress_delete on public.learning_progress for delete to authenticated
 using(user_id=auth.uid() or public.is_owner());
 
+drop policy if exists exam_attempts_select on public.exam_attempts;
 create policy exam_attempts_select on public.exam_attempts for select to authenticated
 using(user_id=auth.uid() or public.is_owner());
+drop policy if exists exam_attempts_insert on public.exam_attempts;
 create policy exam_attempts_insert on public.exam_attempts for insert to authenticated
 with check(user_id=auth.uid());
+drop policy if exists exam_attempts_delete on public.exam_attempts;
 create policy exam_attempts_delete on public.exam_attempts for delete to authenticated
 using(user_id=auth.uid() or public.is_owner());
 
+drop policy if exists academy_lessons_public on public.academy_lessons;
 create policy academy_lessons_public on public.academy_lessons for select to anon,authenticated
 using((active=true and review_status='published'::public.review_state) or public.is_owner());
+drop policy if exists academy_lessons_owner_insert on public.academy_lessons;
 create policy academy_lessons_owner_insert on public.academy_lessons for insert to authenticated with check(public.is_owner());
+drop policy if exists academy_lessons_owner_update on public.academy_lessons;
 create policy academy_lessons_owner_update on public.academy_lessons for update to authenticated using(public.is_owner()) with check(public.is_owner());
+drop policy if exists academy_lessons_owner_delete on public.academy_lessons;
 create policy academy_lessons_owner_delete on public.academy_lessons for delete to authenticated using(public.is_owner());
 
+drop policy if exists academy_questions_public on public.academy_questions;
 create policy academy_questions_public on public.academy_questions for select to anon,authenticated
 using((active=true and review_status='published'::public.review_state) or public.is_owner());
+drop policy if exists academy_questions_owner_insert on public.academy_questions;
 create policy academy_questions_owner_insert on public.academy_questions for insert to authenticated with check(public.is_owner());
+drop policy if exists academy_questions_owner_update on public.academy_questions;
 create policy academy_questions_owner_update on public.academy_questions for update to authenticated using(public.is_owner()) with check(public.is_owner());
+drop policy if exists academy_questions_owner_delete on public.academy_questions;
 create policy academy_questions_owner_delete on public.academy_questions for delete to authenticated using(public.is_owner());
 
+drop policy if exists reports_anon_insert on public.reports;
 create policy reports_anon_insert on public.reports for insert to anon with check(user_id is null);
+drop policy if exists reports_user_insert on public.reports;
 create policy reports_user_insert on public.reports for insert to authenticated with check(user_id=auth.uid() or user_id is null);
+drop policy if exists reports_user_read on public.reports;
 create policy reports_user_read on public.reports for select to authenticated using(user_id=auth.uid() or public.is_owner());
+drop policy if exists reports_owner_update on public.reports;
 create policy reports_owner_update on public.reports for update to authenticated using(public.is_owner()) with check(public.is_owner());
+drop policy if exists reports_owner_delete on public.reports;
 create policy reports_owner_delete on public.reports for delete to authenticated using(public.is_owner());
 
+drop policy if exists security_audit_owner_read on public.security_audit;
 create policy security_audit_owner_read on public.security_audit for select to authenticated using(public.is_owner());
 
 -- =========================================================
@@ -656,28 +693,38 @@ alter table public.custom_blocks enable row level security;
 alter table public.ai_settings enable row level security;
 alter table public.ui_settings enable row level security;
 
+drop policy if exists site_modules_public_read on public.site_modules;
 create policy site_modules_public_read on public.site_modules for select to anon,authenticated
 using(true);
+drop policy if exists site_modules_owner_all on public.site_modules;
 create policy site_modules_owner_all on public.site_modules for all to authenticated
 using(public.is_owner()) with check(public.is_owner());
 
+drop policy if exists site_texts_public_read on public.site_texts;
 create policy site_texts_public_read on public.site_texts for select to anon,authenticated
 using(public=true or public.is_owner());
+drop policy if exists site_texts_owner_all on public.site_texts;
 create policy site_texts_owner_all on public.site_texts for all to authenticated
 using(public.is_owner()) with check(public.is_owner());
 
+drop policy if exists custom_blocks_public_read on public.custom_blocks;
 create policy custom_blocks_public_read on public.custom_blocks for select to anon,authenticated
 using(active=true or public.is_owner());
+drop policy if exists custom_blocks_owner_all on public.custom_blocks;
 create policy custom_blocks_owner_all on public.custom_blocks for all to authenticated
 using(public.is_owner()) with check(public.is_owner());
 
+drop policy if exists ai_settings_public_read on public.ai_settings;
 create policy ai_settings_public_read on public.ai_settings for select to anon,authenticated
 using(true);
+drop policy if exists ai_settings_owner_all on public.ai_settings;
 create policy ai_settings_owner_all on public.ai_settings for all to authenticated
 using(public.is_owner()) with check(public.is_owner());
 
+drop policy if exists ui_settings_public_read on public.ui_settings;
 create policy ui_settings_public_read on public.ui_settings for select to anon,authenticated
 using(true);
+drop policy if exists ui_settings_owner_all on public.ui_settings;
 create policy ui_settings_owner_all on public.ui_settings for all to authenticated
 using(public.is_owner()) with check(public.is_owner());
 
@@ -729,10 +776,16 @@ on conflict(text_key) do nothing;
 insert into public.ai_settings(id) values(true) on conflict(id) do nothing;
 insert into public.ui_settings(id) values(true) on conflict(id) do nothing;
 
+-- V81.7: الصلاحيات النهائية تُنفّذ بعد إنشاء كل جداول V81.
+grant usage on schema public to service_role;
+grant all privileges on all tables in schema public to service_role;
+grant usage,select on all sequences in schema public to service_role;
+
+
 
 commit;
 
 select
-  'V81 SCHEMA READY' as status,
+  'V81.7 SCHEMA READY' as status,
   (select count(*) from public.profiles) as profiles,
   (select count(*) from public.security_audit) as audit_rows;

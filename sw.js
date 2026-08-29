@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME='noor-v81-3-core';
+const CACHE_NAME='noor-v81-7-owner-stable';
 const CORE_ASSETS=[
   './',
   './index.html',
@@ -17,7 +17,8 @@ const CORE_ASSETS=[
   './assets/css/v69-production-polish.css',
   './assets/css/v80-security.css',
   './assets/css/v81-owner-studio.css',
-  './assets/js/v81-runtime.js'
+  './assets/js/v81-runtime.js',
+  './assets/js/v66-ai-assistant.js'
 ];
 
 self.addEventListener('install',event=>{

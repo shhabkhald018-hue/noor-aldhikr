@@ -1,14 +1,14 @@
 {
-  "name": "نور الذكر V69 — القرآن والأذكار والرقية الشرعية",
+  "name": "نور الذكر V81.7 — القرآن والأذكار والعلوم الشرعية",
   "short_name": "نور الذكر",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f3f2ee",
   "theme_color": "#2f735e",
   "lang": "ar",
   "dir": "rtl",
-  "id": "/",
-  "scope": "/",
+  "id": "./",
+  "scope": "./",
   "orientation": "any",
   "description": "نور الذكر — القرآن الكريم والأذكار والرقية الشرعية والعلوم الشرعية والاختبارات في تطبيق عربي.",
   "categories": [
@@ -40,7 +40,7 @@
     {
       "name": "القرآن الكريم",
       "short_name": "القرآن",
-      "url": "/mushaf.html",
+      "url": "./mushaf.html",
       "icons": [
         {
           "src": "icon-192.png",
@@ -52,7 +52,7 @@
     {
       "name": "الأذكار",
       "short_name": "الأذكار",
-      "url": "/#adhkar",
+      "url": "./#adhkar",
       "icons": [
         {
           "src": "icon-192.png",
@@ -64,7 +64,7 @@
     {
       "name": "الرقية الشرعية",
       "short_name": "الرقية",
-      "url": "/#ruqyah",
+      "url": "./#ruqyah",
       "icons": [
         {
           "src": "icon-192.png",
@@ -76,7 +76,7 @@
     {
       "name": "المصحف المستقل",
       "short_name": "المصحف",
-      "url": "/mushaf.html",
+      "url": "./mushaf.html",
       "icons": [
         {
           "src": "icon-192.png",
@@ -88,7 +88,7 @@
     {
       "name": "الاختبارات الشرعية",
       "short_name": "الاختبارات",
-      "url": "/exams.html",
+      "url": "./exams.html",
       "icons": [
         {
           "src": "icon-192.png",
