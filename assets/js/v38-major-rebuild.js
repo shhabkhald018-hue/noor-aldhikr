@@ -5,8 +5,6 @@
  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function fixRuqyahCards(){
-  const burn=$('[data-rq-open="burningDua"] h3'); if(burn) burn.textContent='دعاء حرق الجن';
-  const burnP=$('[data-rq-open="burningDua"] p'); if(burnP) burnP.textContent='النص الكامل داخل التطبيق مع تنبيه واضح أنه ليس حديثًا نبويًا ولا دعاءً مأثورًا.';
   const grid=$('#ruqyahHub .ruqyah-program-grid');
   if(grid && !$('[data-rq-open="basicReading"]')){
    const b=document.createElement('button'); b.className='ruqyah-program-card basic-reading-feature'; b.dataset.rqOpen='basicReading';
@@ -15,11 +13,30 @@
   }
  }
  function installBasicReading(){
-  document.addEventListener('click',e=>{const b=e.target.closest('[data-rq-open="basicReading"]'); if(!b)return; e.preventDefault();
+  document.addEventListener('click',async e=>{const b=e.target.closest('[data-rq-open="basicReading"]'); if(!b)return; e.preventDefault();
    $('#ruqyahHub')?.classList.add('hidden'); const r=$('#ruqyahReader'); r?.classList.remove('hidden');
-   $('#rqReaderTitle').textContent='القراءة الأساسية المحفوظة'; $('#rqReaderDescription').textContent='ورد مختصر من القرآن والأذكار الثابتة.';
-   $('#rqReaderContent').innerHTML=`<article class="rq-static-section"><h3>الفاتحة</h3><p class="mushaf-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ</p></article><article class="rq-static-section"><h3>آية الكرسي</h3><p class="mushaf-text">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ</p></article><article class="rq-static-section"><h3>خواتيم البقرة</h3><p class="mushaf-text">آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ... رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا... أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ</p></article><article class="rq-static-section"><h3>الإخلاص والفلق والناس</h3><p class="mushaf-text">قُلْ هُوَ اللَّهُ أَحَدٌ... ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ... ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ...</p><small>تُقرأ السور كاملة من قسم القرآن.</small></article>`;
+   $('#rqReaderTitle').textContent='القراءة الأساسية المحفوظة'; $('#rqReaderDescription').textContent='آيات كاملة من نسخة حفص المحلية الموثقة.';
+   const root=$('#rqReaderContent'); root.replaceChildren();
+   const loading=document.createElement('div'); loading.className='notice'; loading.textContent='جاري تحميل الآيات من النسخة المحلية…'; root.append(loading);
    r?.scrollIntoView({behavior:'smooth'});
+   try{
+    const api=window.NOOR_QURAN_DATA;if(!api?.surah)throw new Error('Quran data unavailable');
+    const [fatiha,baqara,ikhlas,falaq,nas]=await Promise.all([api.surah(1),api.surah(2),api.surah(112),api.surah(113),api.surah(114)]);
+    const addSection=(title,ayahs)=>{
+     const article=document.createElement('article');article.className='rq-static-section';
+     const heading=document.createElement('h3');heading.textContent=title;
+     const text=document.createElement('p');text.className='mushaf-text';
+     text.textContent=ayahs.map(a=>`${a.text} ﴿${a.numberInSurah}﴾`).join(' ');
+     article.append(heading,text);root.append(article);
+    };
+    root.replaceChildren();
+    addSection('سورة الفاتحة',fatiha.ayahs);
+    addSection('آية الكرسي',baqara.ayahs.filter(a=>a.numberInSurah===255));
+    addSection('خواتيم سورة البقرة',baqara.ayahs.filter(a=>a.numberInSurah>=285));
+    addSection('سورة الإخلاص',ikhlas.ayahs);
+    addSection('سورة الفلق',falaq.ayahs);
+    addSection('سورة الناس',nas.ayahs);
+   }catch(error){console.error('[Noor Quran] Basic reading failed:',error);loading.textContent='تعذر تحميل الآيات المحلية. افتح قسم القرآن وحاول مرة أخرى.'}
   });
  }
  function installKnowledge(){

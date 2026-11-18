@@ -1,0 +1,332 @@
+/* Noor AlDhikr V92.0 Single Theme Engine — one visual authority. */
+@font-face{
+  font-family:"Hafs 20";
+  src:url("../fonts/Hafs_20.woff2") format("woff2");
+  font-display:swap;
+  font-style:normal;
+  font-weight:400;
+}
+:root{
+  color-scheme:light;
+  --theme-bg:#F5F8F4;
+  --theme-surface:#FFFFFF;
+  --theme-surface-soft:#EDF4EF;
+  --theme-text:#17251F;
+  --theme-muted:#586A61;
+  --theme-border:#82988A;
+  --theme-accent:#176B52;
+  --theme-accent-strong:#0F513D;
+  --theme-action-start:#0F513D;
+  --theme-action-end:#176B52;
+  --theme-accent-soft:#E2F1E8;
+  --theme-gold:#9B6B1F;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --theme-bg:#08130F;
+  --theme-surface:#102019;
+  --theme-surface-soft:#172A22;
+  --theme-text:#F4F8F5;
+  --theme-muted:#B0C2B7;
+  --theme-border:#4E705F;
+  --theme-accent:#74D3A7;
+  --theme-accent-strong:#216E54;
+  --theme-action-start:#216E54;
+  --theme-action-end:#2D7A5D;
+  --theme-accent-soft:#18382B;
+  --theme-gold:#E2BE70;
+}
+html,body{background:var(--theme-bg)!important;color:var(--theme-text)!important}
+body{font-weight:500!important}
+::selection{background:var(--theme-accent)!important;color:#fff!important}
+html[data-theme="dark"] ::selection{background:var(--theme-accent)!important;color:#08130F!important}
+:focus-visible{outline:3px solid var(--theme-accent)!important;outline-offset:3px!important}
+h1,h2,h3,h4,h5,h6,strong,b{color:var(--theme-text)!important;opacity:1!important}
+p,li,label,td,th,.description,.subtitle{color:var(--theme-text)!important;opacity:1!important}
+.muted,small,.eyebrow,.help,.hint,.sub,.meta{color:var(--theme-muted)!important;opacity:1!important}
+a:not(.btn):not(.nav-direct-link){color:var(--theme-accent)!important}
+
+/* Header and general application chrome */
+.topbar,header,.global-inner-bar,.top{
+  background:color-mix(in srgb,var(--theme-surface) 92%,var(--theme-accent-soft) 8%)!important;
+  color:var(--theme-text)!important;
+  border-color:var(--theme-border)!important;
+}
+.brand .mark,.topbar .mark{background:var(--theme-accent-strong)!important;color:#fff!important;box-shadow:0 8px 22px color-mix(in srgb,var(--theme-accent) 24%,transparent)!important}
+.hero-card,.quick-search-launcher,.v87-nav-group,.v38-home-hero,.v38-today-card,.v38-start-section,.v38-journey-card,.v38-source-card,.v38-home-cta,
+.card,.cardx,.notice,.premium-panel,.source-card,.student-card,.quiz-card,.favorite-card,.adhkar-category-card,.cms-content-card,.stat,.side,.messages,.chat,.users,.login,
+.library-topic,.dhikr,.assessment-warning,.ruqyah-reader,.ruqyah-program-card,.smart-ai-shell,.ai-shell,.ai-panel,.research-panel{
+  background:var(--theme-surface)!important;
+  color:var(--theme-text)!important;
+  border-color:var(--theme-border)!important;
+}
+.hero-card,.v38-home-hero{background:linear-gradient(135deg,var(--theme-surface) 52%,var(--theme-accent-soft))!important}
+.hero-card h1,.v38-home-hero h1,.v38-home-hero h2,.v38-home-copy h1{color:var(--theme-text)!important;text-shadow:none!important}
+.hero-card p,.v38-home-hero p,.v38-home-copy p{color:var(--theme-muted)!important}
+.v38-home-copy em,.quick-search-icon,.v38-feature-icon,.v38-live-dot{color:var(--theme-accent)!important}
+.v38-source-badge,.v38-home-kicker{color:var(--theme-gold)!important}
+.next-prayer,.v38-next-prayer-home{background:color-mix(in srgb,var(--theme-surface) 74%,var(--theme-accent-soft))!important;color:var(--theme-text)!important;border:1px solid color-mix(in srgb,var(--theme-accent) 25%,var(--theme-border))!important}
+.next-prayer strong,.v38-next-prayer-home strong{color:var(--theme-text)!important}
+
+/* Forms and search */
+input,select,textarea,.quick-search-launcher input{
+  background:var(--theme-surface)!important;
+  color:var(--theme-text)!important;
+  border-color:var(--theme-border)!important;
+  box-shadow:none!important;
+}
+input::placeholder,textarea::placeholder,.quick-search-launcher input::placeholder{color:var(--theme-muted)!important;opacity:1!important}
+input:focus,select:focus,textarea:focus{border-color:var(--theme-accent)!important;outline-color:var(--theme-accent)!important}
+.quick-search-launcher{background:var(--theme-surface)!important;border:1px solid var(--theme-border)!important}
+.quick-search-launcher .quick-search-icon{background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;color:#fff!important;border-color:var(--theme-action-start)!important}
+
+/* Navigation: neutral by default; identity color only for active state. */
+.v87-nav-group{background:var(--theme-surface)!important;border:1px solid var(--theme-border)!important;box-shadow:none!important}
+.v87-nav-label{
+  position:static!important;
+  display:block!important;
+  grid-column:1/-1!important;
+  margin:0 4px 2px!important;
+  color:var(--theme-accent-strong)!important;
+}
+html[data-theme="dark"] .v87-nav-label{color:var(--theme-accent)!important}
+.nav button,.nav a.nav-direct-link{
+  background:var(--theme-surface-soft)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+  box-shadow:none!important;
+}
+.nav button:hover,.nav a.nav-direct-link:hover{background:var(--theme-accent-soft)!important;border-color:var(--theme-accent)!important}
+.nav button.active,.nav a.nav-direct-link[aria-current="page"]{
+  background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;
+  color:#fff!important;
+  border-color:var(--theme-accent-strong)!important;
+}
+
+/* Buttons */
+.btn.primary,.v38-action-primary,.premium-primary,.primary:not(input):not(select):not(textarea){
+  background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;color:#fff!important;border-color:var(--theme-action-start)!important;box-shadow:0 8px 20px color-mix(in srgb,var(--theme-accent) 20%,transparent)!important
+}
+.btn.gold,.premium-secondary,.v38-action-secondary,.v38-action-light,.ghost{
+  background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important
+}
+.btn.gold,.premium-secondary{border-color:var(--theme-gold)!important;color:var(--theme-gold)!important}
+
+/* Home and content cards */
+.v38-feature-card,.v38-journey-list button,.home-bottom-services article,.v38-source-pills span,.v38-home-assurances span{
+  background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important;box-shadow:none!important
+}
+.v38-source-pills span,.v38-home-assurances span{background:var(--theme-surface-soft)!important;color:var(--theme-muted)!important}
+.v38-feature-card:hover,.v38-journey-list button:hover{border-color:var(--theme-accent)!important;background:var(--theme-surface-soft)!important}
+.v38-feature-primary{border-color:var(--theme-accent)!important;box-shadow:inset 0 3px 0 color-mix(in srgb,var(--theme-gold) 72%,transparent)!important}
+
+/* Prayer times — same neutral surface family in light and dark modes. */
+#prayer > .card,#prayer .notice{background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important}
+#prayer .field label{color:var(--theme-text)!important}
+#prayer select,#prayer input{background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important}
+#prayer #prayerStatus{color:var(--theme-muted)!important}
+#prayerGrid .prayer{
+  background:var(--theme-surface)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+#prayerGrid .prayer:before{background:var(--theme-border)!important;width:3px!important}
+#prayerGrid .prayer span{color:var(--theme-text)!important}
+#prayerGrid .prayer strong{color:var(--theme-accent)!important}
+#prayerGrid .prayer small{color:var(--theme-muted)!important}
+#prayerGrid .prayer.next{
+  background:var(--theme-surface)!important;
+  border:2px solid var(--theme-accent)!important;
+  box-shadow:none!important;
+}
+#prayerGrid .prayer.next:before{background:var(--theme-accent)!important}
+
+/* Owner OS uses the same authority; no separate owner palette. */
+.owner-shell,.owner-shell body,.portal,.gate{background:var(--theme-bg)!important;color:var(--theme-text)!important}
+.owner-shell .top,.owner-shell .stat,.owner-shell .side,.owner-shell .cardx,.owner-shell .messages,.owner-shell .chat,.owner-shell .users,.owner-shell .login,.owner-shell .hero,
+.portal .top,.portal .stat,.portal .side,.portal .cardx,.portal .messages,.portal .chat,.portal .users,.portal .login,.portal .hero{
+  background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important
+}
+.owner-shell .side button,.portal .side button{background:transparent!important;color:var(--theme-muted)!important}
+.owner-shell .side button.active,.portal .side button.active{background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;color:#fff!important}
+.owner-shell input,.owner-shell select,.owner-shell textarea,.portal input,.portal select,.portal textarea{background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important}
+
+/* Common AI/research surfaces stay readable and neutral. */
+.ai-message,.ai-card,.ai-source,.research-card,.research-source,.assistant-card,.dream-card,.evidence-card{
+  background:var(--theme-surface)!important;color:var(--theme-text)!important;border-color:var(--theme-border)!important
+}
+.ai-message p,.ai-card p,.research-card p,.assistant-card p,.dream-card p{color:var(--theme-text)!important}
+.ai-source,.research-source,.evidence-card small{color:var(--theme-muted)!important}
+
+
+/* V92.0 final reading hierarchy — legacy green text can never override content. */
+.page-intro-card{
+  background:var(--theme-surface)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+  box-shadow:none!important;
+}
+.page-intro-card .eyebrow{color:var(--theme-muted)!important}
+.page-intro-card h2{color:var(--theme-text)!important;text-shadow:none!important}
+.page-intro-card p{color:var(--theme-muted)!important;opacity:1!important}
+
+.adhkar-category-card{
+  background:var(--theme-surface)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+  box-shadow:none!important;
+}
+.adhkar-category-card:hover,.adhkar-category-card:focus-visible{
+  background:var(--theme-surface-soft)!important;
+  border-color:var(--theme-accent)!important;
+  box-shadow:none!important;
+}
+.adhkar-category-card h3{color:var(--theme-text)!important}
+.adhkar-category-card p{color:var(--theme-muted)!important;opacity:1!important}
+.adhkar-category-card small{
+  background:var(--theme-surface-soft)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+}
+.category-icon{
+  background:var(--theme-accent-soft)!important;
+  color:var(--theme-text)!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 38%,var(--theme-border))!important;
+  box-shadow:none!important;
+}
+.category-arrow{color:var(--theme-muted)!important}
+
+html[data-theme="dark"] .page-intro-card,
+html[data-theme="dark"] .adhkar-category-card{
+  background:var(--theme-surface)!important;
+  color:var(--theme-text)!important;
+  border-color:var(--theme-border)!important;
+}
+html[data-theme="dark"] .page-intro-card h2,
+html[data-theme="dark"] .adhkar-category-card h3{color:var(--theme-text)!important}
+html[data-theme="dark"] .page-intro-card p,
+html[data-theme="dark"] .adhkar-category-card p{color:var(--theme-muted)!important;opacity:1!important}
+html[data-theme="dark"] .adhkar-category-card small{
+  background:var(--theme-surface-soft)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+}
+html[data-theme="dark"] .category-icon{
+  background:var(--theme-surface-soft)!important;
+  color:var(--theme-text)!important;
+  border:1px solid var(--theme-border)!important;
+}
+html[data-theme="dark"] .category-arrow{color:var(--theme-muted)!important}
+html[data-theme="dark"] .hero-card,html[data-theme="dark"] .v38-home-hero{background:linear-gradient(135deg,var(--theme-surface) 58%,var(--theme-accent-soft))!important}
+
+/* Dark-mode specificity guard: legacy bundles contain highly specific rules. */
+html[data-theme="dark"] body h1,
+html[data-theme="dark"] body h2,
+html[data-theme="dark"] body h3,
+html[data-theme="dark"] body h4,
+html[data-theme="dark"] body h5,
+html[data-theme="dark"] body h6,
+html[data-theme="dark"] body strong,
+html[data-theme="dark"] body b{color:var(--theme-text)!important}
+html[data-theme="dark"] body p,
+html[data-theme="dark"] body li,
+html[data-theme="dark"] body label,
+html[data-theme="dark"] body td,
+html[data-theme="dark"] body th,
+html[data-theme="dark"] body .description,
+html[data-theme="dark"] body .subtitle{color:var(--theme-text)!important}
+html[data-theme="dark"] body .muted,
+html[data-theme="dark"] body small,
+html[data-theme="dark"] body .eyebrow,
+html[data-theme="dark"] body .help,
+html[data-theme="dark"] body .hint,
+html[data-theme="dark"] body .sub,
+html[data-theme="dark"] body .meta{color:var(--theme-muted)!important}
+html[data-theme="dark"] body .hero-card p,
+html[data-theme="dark"] body .v38-home-hero p,
+html[data-theme="dark"] body .v38-home-copy p{color:var(--theme-muted)!important}
+html[data-theme="dark"] body .next-prayer,
+html[data-theme="dark"] body .v38-next-prayer-home{
+  background:color-mix(in srgb,var(--theme-surface) 74%,var(--theme-accent-soft))!important;
+  color:var(--theme-text)!important;
+  border-color:var(--theme-border)!important;
+}
+html[data-theme="dark"] body .next-prayer strong,
+html[data-theme="dark"] body .v38-next-prayer-home strong{color:var(--theme-text)!important}
+html[data-theme="dark"] body .nav button.active,
+html[data-theme="dark"] body .nav a.nav-direct-link[aria-current="page"],
+html[data-theme="dark"] body .btn.primary,
+html[data-theme="dark"] body .v38-action-primary,
+html[data-theme="dark"] body .premium-primary,
+html[data-theme="dark"] body .primary:not(input):not(select):not(textarea),
+html[data-theme="dark"] body .owner-shell .side button.active,
+html[data-theme="dark"] body .portal .side button.active,
+html[data-theme="dark"] body .noor-ai-fab{
+  background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;
+  color:#fff!important;
+  border-color:var(--theme-action-start)!important;
+}
+html[data-theme="dark"] body .topbar .icon-btn,
+html[data-theme="dark"] body header .icon-btn{
+  background:var(--theme-surface-soft)!important;
+  color:var(--theme-text)!important;
+  border-color:var(--theme-border)!important;
+}
+html[data-theme="dark"] body .premium-secondary,
+html[data-theme="dark"] body .ruqyah-reader .btn,
+html[data-theme="dark"] body .v4019-assessment-callout button{
+  background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;
+  color:#fff!important;
+  border-color:var(--theme-action-start)!important;
+}
+html[data-theme="dark"] body .btn.premium-secondary:not(.primary):not(.danger):not(.gold),
+html[data-theme="dark"] body #ruqyah #ruqyahReader .btn:not(.primary):not(.danger):not(.gold){
+  background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;
+  color:#fff!important;
+  border-color:var(--theme-action-start)!important;
+}
+html[data-theme="dark"] body .source-disclosure-v30 button{
+  color:var(--theme-accent)!important;
+}
+html[data-theme="dark"] body .source-disclosure-v30>span,
+html[data-theme="dark"] body .v4019-smart-intro>div>span,
+html[data-theme="dark"] body .v4019-dream-hero span,
+html[data-theme="dark"] body .v4019-assessment-hero span,
+html[data-theme="dark"] body .v4019-library-head span,
+html[data-theme="dark"] body .v4019-assessment-callout span{
+  color:var(--theme-accent)!important;
+}
+html[data-theme="dark"] body .v4019-smart-icon{
+  background:var(--theme-accent)!important;
+  color:var(--theme-bg)!important;
+}
+html[data-theme="dark"] body .v4019-search-actions button{
+  background:var(--theme-accent)!important;
+  color:var(--theme-bg)!important;
+  border-color:var(--theme-accent)!important;
+}
+.noor-ai-fab{background:linear-gradient(135deg,var(--theme-action-start),var(--theme-action-end))!important;color:#fff!important;border-color:var(--theme-action-start)!important}
+.noor-ai-fab b,.noor-ai-fab span{color:inherit!important}
+
+/* QuranEnc Hafs_20 text must be rendered with its matching KFGQPC font. */
+.v39-ayah-text,.v39-basmala,.m54-flow,.m54-basmala,.m87-selected-ayah,.quran-text,.ayah-text{
+  font-family:"Hafs 20","Amiri Quran","Traditional Arabic",serif!important;
+  font-weight:400!important;
+  font-feature-settings:"liga" 1,"calt" 1;
+  text-rendering:optimizeLegibility;
+}
+
+@media(max-width:480px){
+  .topbar .container{gap:8px!important;padding-inline:4px!important}
+  .brand{gap:6px!important;font-size:17px!important;white-space:nowrap!important}
+  .brand .mark,.topbar .mark{width:36px!important;height:36px!important;border-radius:12px!important;flex:0 0 36px!important}
+  #onlineState{width:9px!important;min-width:9px!important;height:9px!important;padding:0!important;border:0!important;border-radius:50%!important;background:var(--theme-accent)!important;font-size:0!important;overflow:hidden!important}
+  .actions{gap:5px!important}
+  .actions .icon-btn{min-width:auto!important;padding:8px 9px!important}
+  #themeBtn{min-width:auto!important}
+  .v382-build-badge{display:none!important}
+  .noor-ai-fab{width:54px!important;height:54px!important;padding:0!important;justify-content:center!important}
+  .noor-ai-fab b{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+}

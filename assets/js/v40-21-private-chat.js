@@ -27,7 +27,7 @@
   const explainError = (error) => {
     const raw = String(error?.message || error || '');
     if (/private_messages|PGRST205|42P01|send_my_private_message|PGRST202/i.test(raw)) {
-      return 'المحادثة الخاصة لم تُفعّل في قاعدة البيانات بعد. شغّل ملف SUPABASE_V40_21_PRIVATE_CHAT.sql مرة واحدة.';
+      return 'المحادثة الخاصة غير جاهزة في قاعدة البيانات حاليًا. افتح تشخيص الموقع أو تواصل مع المالك لمراجعة إعدادات Supabase.';
     }
     if (/AUTH_REQUIRED|JWT|not authenticated/i.test(raw)) return 'سجّل الدخول أولًا لفتح محادثتك الخاصة.';
     if (/INVALID_MESSAGE_LENGTH/i.test(raw)) return 'اكتب رسالة من حرف واحد إلى 4000 حرف.';

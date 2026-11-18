@@ -1,16 +1,16 @@
 {
-  "name": "نور الذكر V83.0 — القرآن والأذكار والعلوم الشرعية",
+  "name": "نور الذكر V92.0.2 PRO FREE AI",
   "short_name": "نور الذكر",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f3f2ee",
-  "theme_color": "#2f735e",
+  "background_color": "#F5F8F4",
+  "theme_color": "#176B52",
   "lang": "ar",
   "dir": "rtl",
   "id": "./",
   "scope": "./",
   "orientation": "any",
-  "description": "نور الذكر — القرآن الكريم والأذكار والرقية الشرعية والعلوم الشرعية والاختبارات في تطبيق عربي.",
+  "description": "نور الذكر V92.0.2 — القرآن والأذكار والعلوم الشرعية ومساعد معرفي مجاني بمصادر موثوقة.",
   "categories": [
     "religion",
     "education",
@@ -38,8 +38,8 @@
   ],
   "shortcuts": [
     {
-      "name": "القرآن الكريم",
-      "short_name": "القرآن",
+      "name": "المصحف الشريف",
+      "short_name": "المصحف",
       "url": "./mushaf.html",
       "icons": [
         {
@@ -65,18 +65,6 @@
       "name": "الرقية الشرعية",
       "short_name": "الرقية",
       "url": "./#ruqyah",
-      "icons": [
-        {
-          "src": "icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "المصحف المستقل",
-      "short_name": "المصحف",
-      "url": "./mushaf.html",
       "icons": [
         {
           "src": "icon-192.png",

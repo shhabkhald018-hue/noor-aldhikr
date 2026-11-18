@@ -14,14 +14,14 @@ html[data-theme="dark"] .quiz-page .juz-chip span{
 }
 body.dark .quiz-page .juz-chip input:checked+span,
 html[data-theme="dark"] .quiz-page .juz-chip input:checked+span{
-  background:linear-gradient(135deg,#178262,#0d624c)!important;
+  background:linear-gradient(135deg,var(--noor-primary),#0d624c)!important;
   color:#fffaf0!important;
   border-color:#d6b66e!important;
   box-shadow:0 7px 18px rgba(9,88,65,.28)!important;
 }
 body.dark .quiz-page .juz-chip span:hover,
 html[data-theme="dark"] .quiz-page .juz-chip span:hover{
-  border-color:#178262!important;
+  border-color:var(--noor-primary)!important;
   box-shadow:0 5px 14px rgba(9,88,65,.16);
 }
 

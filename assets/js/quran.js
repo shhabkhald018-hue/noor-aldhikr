@@ -32,8 +32,15 @@ async function getTafsir(n,force=false){
 }
 async function getQuran(n,force=false){
  let data=!force&&load('surah_v37_'+n);if(data&&q37check(data,n).ok)return data;
- const j=await q37fetch(`${CFG.quranApiBase}/surah/${n}/quran-uthmani`),d=j.data,m=Q37_META[n-1];
- data={number:n,name:d.name||m.name,englishName:d.englishName||m.englishName,numberOfAyahs:m.numberOfAyahs,source:'quran-uthmani عبر AlQuran.Cloud',ayahs:(d.ayahs||[]).map((x,i)=>({number:Number(x.number||0),numberInSurah:Number(x.numberInSurah||i+1),text:String(x.text||'').trim(),page:x.page,juz:x.juz,hizbQuarter:x.hizbQuarter,manzil:x.manzil,ruku:x.ruku,sajda:x.sajda}))};
+ const m=Q37_META[n-1];
+ try{
+  const local=await window.NOOR_QURAN_DATA.surah(n);
+  data={number:n,name:local.name||m.name,englishName:local.englishName||m.englishName,numberOfAyahs:m.numberOfAyahs,source:'QuranEnc Hafs_20 — مجمع الملك فهد (نسخة محلية موثقة)',ayahs:(local.ayahs||[]).map((x,i)=>({number:Number(x.number||0),numberInSurah:Number(x.numberInSurah||i+1),text:String(x.text||'').trim(),page:x.page,juz:x.juz,hizbQuarter:x.hizbQuarter,manzil:x.manzil,ruku:x.ruku,sajda:x.sajda}))};
+ }catch(localError){
+  console.warn('تعذر تحميل نسخة القرآن المحلية؛ سيتم استخدام المصدر الاحتياطي.',localError);
+  const j=await q37fetch(`${CFG.quranApiBase}/surah/${n}/quran-uthmani`),d=j.data;
+  data={number:n,name:d.name||m.name,englishName:d.englishName||m.englishName,numberOfAyahs:m.numberOfAyahs,source:'نسخة احتياطية quran-uthmani عبر AlQuran.Cloud',ayahs:(d.ayahs||[]).map((x,i)=>({number:Number(x.number||0),numberInSurah:Number(x.numberInSurah||i+1),text:String(x.text||'').trim(),page:x.page,juz:x.juz,hizbQuarter:x.hizbQuarter,manzil:x.manzil,ruku:x.ruku,sajda:x.sajda}))};
+ }
  const c=q37check(data,n);if(!c.ok)throw new Error(`فشل التحقق البنيوي: ${c.errors[0]}`);store('surah_v37_'+n,data);return data;
 }
 window.openSurah=async n=>{currentSurah=n;renderSurahList();qs('#quranReader').innerHTML='<div class="card">جاري تحميل السورة والتفسير والتحقق...</div>';try{const [data,tafsir]=await Promise.all([getQuran(n),getTafsir(n)]);renderSurah(data,tafsir);store('last_surah',n);q37stats()}catch(e){qs('#quranReader').innerHTML=`<div class="notice"><b>تعذر التحميل أو فشل التحقق.</b><br>${q37esc(e.message)}</div>`}};
@@ -134,4 +141,4 @@ window.shareAyah=async(s,a)=>{const data=load('surah_v37_'+s),ayah=data?.ayahs.f
 function q37panel(){const section=qs('#quran'),layout=section?.querySelector('.quran-layout');if(!layout||qs('#q37Audit'))return;const x=document.createElement('div');x.id='q37Audit';x.className='card q37-audit';x.innerHTML=`<div class="row between"><div><small>الإصدار v37</small><h3>سلامة مصادر القرآن والتفسير</h3></div><span id="q37Stats" class="q37-badge">فهرس 114 سورة</span></div><p>فهرس السور وأعداد الآيات محفوظ داخل التطبيق. يتم فحص عدد الآيات وتسلسلها وعدم فراغ النص والتفسير عند التحميل.</p><div class="q37-actions"><button class="btn" id="q37AuditBtn">فحص السور المحفوظة</button></div><div id="q37Result"></div><details><summary>حدود الاعتماد</summary><p>التحقق الحالي بنيوي ومصدري. لا تُستخدم عبارة «مطابقة حرفيًا لمصحف المدينة» إلا بعد تضمين حزمة مجمع الملك فهد الأصلية والتحقق من بصمتها الرسمية.</p></details>`;layout.before(x);qs('#q37AuditBtn').onclick=q37audit;q37stats()}
 function q37stats(){let q=0,t=0;Q37_META.forEach(m=>{if(q37check(load('surah_v37_'+m.number),m.number).ok)q++;if(q37check(load('tafsir_muyassar_v37_'+m.number),m.number,'tafsir').ok)t++});const e=qs('#q37Stats');if(e)e.textContent=`محفوظ: ${q}/114 قرآن · ${t}/114 تفسير`}
 function q37audit(){let q=0,t=0,qa=0,ta=0,issues=[];Q37_META.forEach(m=>{const s=load('surah_v37_'+m.number),f=load('tafsir_muyassar_v37_'+m.number),sc=q37check(s,m.number),fc=q37check(f,m.number,'tafsir');if(sc.ok){q++;qa+=s.ayahs.length}else if(s)issues.push(`س${m.number}: ${sc.errors[0]}`);if(fc.ok){t++;ta+=f.ayahs.length}else if(f)issues.push(`ت${m.number}: ${fc.errors[0]}`)});const complete=q===114&&t===114&&qa===Q37_TOTAL&&ta===Q37_TOTAL;qs('#q37Result').innerHTML=`<div class="${complete?'q37-success':'notice'}"><b>${complete?'نجح الفحص البنيوي الكامل':'الفحص الحالي جزئي'}</b><br>القرآن: ${q}/114 سورة، ${qa}/${Q37_TOTAL} آية · التفسير: ${t}/114 سورة، ${ta}/${Q37_TOTAL} مادة.${issues.length?`<br><small>${q37esc(issues.slice(0,8).join(' | '))}</small>`:''}</div>`}
-qs('#surahSearch')?.addEventListener('input',renderSurahList);getSurahs().then(()=>{q37panel();openSurah(load('last_surah',1))});
+qs('#surahSearch')?.addEventListener('input',renderSurahList);if(qs('#quranReader'))getSurahs().then(()=>{q37panel();openSurah(load('last_surah',1))});

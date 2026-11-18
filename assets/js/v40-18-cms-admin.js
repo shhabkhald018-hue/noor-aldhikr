@@ -31,9 +31,9 @@
       <section class="card owner-section cms-admin-shell" id="cmsAdminSection">
         <div class="cms-admin-hero">
           <div>
-            <span class="cms-kicker">مركز إدارة الموقع</span>
-            <h2>محرر صفحة المستخدم الكامل</h2>
-            <p>عدّل الهوية والصفحة الرئيسية، أخفِ أو أظهر الأقسام، غيّر ترتيب القائمة، وأنشئ صفحات ومحتوى جديدًا دون تعديل ملفات GitHub.</p>
+            <span class="cms-kicker">Owner OS V92 Builder</span>
+            <h2>منشئ الموقع والصفحات</h2>
+            <p>عدّل الهوية والرئيسية والأقسام والترتيب، وأنشئ صفحات ومحتوى جديدًا، ثم عاين وانشر من لوحة المالك دون تعديل ملفات GitHub.</p>
           </div>
           <div class="cms-admin-actions">
           <button class="btn" id="cmsOpenPreview" type="button">فتح الموقع للمعاينة</button>
@@ -66,15 +66,6 @@
             <div class="field"><label>اللون الذهبي/الثانوي</label><input id="cmsAccent2" type="color"></div>
             <div class="field"><label>خلفية الوضع الفاتح</label><input id="cmsLightBg" type="color"></div>
             <div class="field"><label>خلفية الوضع الداكن</label><input id="cmsDarkBg" type="color"></div>
-            <div class="field cms-form-wide">
-              <label>ألوان جاهزة</label>
-              <div class="cms-owner-presets">
-                <button class="btn" type="button" data-theme-preset="balanced">متوازن</button>
-                <button class="btn" type="button" data-theme-preset="green">أخضر هادئ</button>
-                <button class="btn" type="button" data-theme-preset="gold">ذهبي دافئ</button>
-                <button class="btn" type="button" data-theme-preset="charcoal">فحمي أنيق</button>
-              </div>
-            </div>
             <div class="cms-form-group cms-form-wide"><h3>شكل الموقع</h3><p class="muted">تحكم في الزوايا وحجم الخط وأعمدة القائمة والظل، مع CSS مخصص عند الحاجة.</p></div>
             <div class="field"><label>استدارة البطاقات</label><input id="cmsRadius" type="number" min="6" max="32"></div>
             <div class="field"><label>حجم الخط %</label><input id="cmsFontScale" type="number" min="85" max="120"></div>
@@ -119,6 +110,7 @@
               <div class="field"><label>الرمز</label><input id="cmsSectionIcon" maxlength="12"></div>
               <div class="field"><label>الوصف المختصر</label><textarea id="cmsSectionSummary" rows="3" maxlength="500"></textarea></div>
               <div class="field"><label>ترتيب القسم</label><input id="cmsSectionOrder" type="number" step="1"></div>
+              <div class="field"><label>مجموعة القائمة</label><select id="cmsSectionNavGroup"><option value="primary">الأساسي</option><option value="sciences">العلوم الشرعية</option><option value="tools">الأدوات</option><option value="account">الحساب والدعم</option><option value="custom">صفحات إضافية</option></select></div>
               <div class="field"><label>عنوان بديل داخل القسم الأصلي (اختياري)</label><input id="cmsSectionTitleOverride" maxlength="140"></div>
               <div class="field"><label>وصف بديل داخل القسم الأصلي (اختياري)</label><textarea id="cmsSectionSummaryOverride" rows="2" maxlength="500"></textarea></div>
               <label class="check-line"><input id="cmsSectionActive" type="checkbox"> القسم مفعّل</label>
@@ -189,7 +181,6 @@
     $('#cmsBlockForm')?.addEventListener('submit', saveBlockForm);
     $('#cmsCancelBlock')?.addEventListener('click', resetBlockForm);
     $('#cmsPublish')?.addEventListener('click', publishState);
-    $$('.cms-owner-presets [data-theme-preset]').forEach(b=>b.addEventListener('click',()=>applyThemePreset(b.dataset.themePreset)));
     $('#cmsOpenPreview')?.addEventListener('click',()=>window.open('index.html?ownerPreview=1','_blank'));
     $('#cmsHomeFirst')?.addEventListener('click',forceHomeFirst);
     $('#cmsPreviewDraft')?.addEventListener('click', () => { switchTab('preview'); sendPreview(); });
@@ -339,6 +330,7 @@
     $('#cmsSectionIcon').value = section.icon;
     $('#cmsSectionSummary').value = section.summary;
     $('#cmsSectionOrder').value = section.sortOrder;
+    $('#cmsSectionNavGroup').value = section.navGroup || (section.type === 'custom' ? 'custom' : 'primary');
     $('#cmsSectionTitleOverride').value = section.titleOverride || '';
     $('#cmsSectionSummaryOverride').value = section.summaryOverride || '';
     $('#cmsSectionActive').checked = section.active;
@@ -361,6 +353,7 @@
     section.icon = $('#cmsSectionIcon').value.trim() || '◆';
     section.summary = $('#cmsSectionSummary').value.trim();
     section.sortOrder = Number($('#cmsSectionOrder').value) || 0;
+    section.navGroup = $('#cmsSectionNavGroup').value;
     section.titleOverride = $('#cmsSectionTitleOverride').value.trim();
     section.summaryOverride = $('#cmsSectionSummaryOverride').value.trim();
     section.active = $('#cmsSectionActive').checked;
@@ -375,7 +368,7 @@
   function createSectionDraft() {
     const id = window.NOOR_CMS.uid('page');
     const maxOrder = Math.max(...state.sections.map(section => Number(section.sortOrder) || 0), 0);
-    state.sections.push({id,type:'custom',navLabel:'قسم جديد',title:'قسم جديد',summary:'اكتب وصف القسم',icon:'◆',active:true,navVisible:true,homeVisible:true,sortOrder:maxOrder + 10,blocks:[]});
+    state.sections.push({id,type:'custom',navGroup:'custom',navLabel:'قسم جديد',title:'قسم جديد',summary:'اكتب وصف القسم',icon:'◆',active:true,navVisible:true,homeVisible:true,sortOrder:maxOrder + 10,blocks:[]});
     state = window.NOOR_CMS.normalizeState(state);
     selectedSectionId = id;
     renderAll();
@@ -613,21 +606,6 @@
       renderAll();
       setSaveState('تعذر تحميل محرر الموقع: ' + (error?.message || error), 'error');
     }
-  }
-
-
-  function applyThemePreset(name){
-    const presets={
-      balanced:{accent:'#2f735e',accent2:'#b89a5a',light:'#f3f2ee',dark:'#0f1211'},
-      green:{accent:'#2f735e',accent2:'#c1a35d',light:'#f2f5f2',dark:'#0d1512'},
-      gold:{accent:'#58705f',accent2:'#b7924c',light:'#f5f1e8',dark:'#15130f'},
-      charcoal:{accent:'#4d7466',accent2:'#b9a06a',light:'#f1f2f1',dark:'#111312'}
-    };
-    const p=presets[name]; if(!p)return;
-    $('#cmsAccent').value=p.accent;$('#cmsAccent2').value=p.accent2;
-    $('#cmsLightBg').value=p.light;$('#cmsDarkBg').value=p.dark;
-    readIdentityForm(); markDraft(); renderIdentityForm(); sendPreview();
-    notify('تم تطبيق مجموعة الألوان على المسودة');
   }
   function forceHomeFirst(){
     const home=state?.sections?.find(x=>x.id==='home'); if(!home)return;

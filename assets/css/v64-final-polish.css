@@ -1,11 +1,11 @@
 
 :root{
-  --noor-green:#176b52;
+  --noor-green:var(--noor-primary);
   --noor-green-2:#0f5d47;
   --noor-green-soft:#eaf4ef;
-  --noor-gold:#c6a45e;
+  --noor-gold:var(--noor-gold);
   --noor-cream:#f7f4ec;
-  --noor-ink:#173128;
+  --noor-ink:var(--noor-text);
   --noor-muted:#66756f;
   --noor-border:rgba(23,107,82,.18);
 }

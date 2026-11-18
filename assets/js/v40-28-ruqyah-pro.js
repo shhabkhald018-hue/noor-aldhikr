@@ -26,40 +26,14 @@
    ['بوابة الأحلام','لا تبنِ اتهامًا أو قرارًا على حلم. الرؤيا لا تثبت عينًا ولا سحرًا ولا حكمًا شرعيًا.'],
    ['بوابة المحتوى المخيف','قلل المقاطع والقصص التي تزيد الرعب. الخوف المستمر يضعف القلب ويزيد الأعراض.']
   ]},
-  specialVerses:{title:'آيات الحرق كاملة',kicker:'آيات قرآنية فقط',description:'مجموعة موسعة من الآيات التي يقرأها بعض الرقاة ضمن الرقية العامة باسم آيات الحرق. التسمية اجتهادية، والقراءة تكون من القرآن دون اعتقاد عدد خاص ثابت.',items:[
-   ['البقرة 24','فَاتَّقُوا النَّارَ الَّتِي وَقُودُهَا النَّاسُ وَالْحِجَارَةُ أُعِدَّتْ لِلْكَافِرِينَ.'],
-   ['البقرة 81','بَلَىٰ مَن كَسَبَ سَيِّئَةً وَأَحَاطَتْ بِهِ خَطِيئَتُهُ فَأُولَٰئِكَ أَصْحَابُ النَّارِ هُمْ فِيهَا خَالِدُونَ.'],
-   ['آل عمران 10','إِنَّ الَّذِينَ كَفَرُوا لَن تُغْنِيَ عَنْهُمْ أَمْوَالُهُمْ وَلَا أَوْلَادُهُم مِّنَ اللَّهِ شَيْئًا وَأُولَٰئِكَ هُمْ وَقُودُ النَّارِ.'],
-   ['النساء 56','إِنَّ الَّذِينَ كَفَرُوا بِآيَاتِنَا سَوْفَ نُصْلِيهِمْ نَارًا كُلَّمَا نَضِجَتْ جُلُودُهُم بَدَّلْنَاهُمْ جُلُودًا غَيْرَهَا لِيَذُوقُوا الْعَذَابَ.'],
-   ['المائدة 10','وَالَّذِينَ كَفَرُوا وَكَذَّبُوا بِآيَاتِنَا أُولَٰئِكَ أَصْحَابُ الْجَحِيمِ.'],
-   ['الأعراف 36','وَالَّذِينَ كَذَّبُوا بِآيَاتِنَا وَاسْتَكْبَرُوا عَنْهَا أُولَٰئِكَ أَصْحَابُ النَّارِ هُمْ فِيهَا خَالِدُونَ.'],
-   ['الأعراف 38-41','ادْخُلُوا فِي أُمَمٍ قَدْ خَلَتْ مِن قَبْلِكُم مِّنَ الْجِنِّ وَالْإِنسِ فِي النَّارِ... لَهُم مِّن جَهَنَّمَ مِهَادٌ وَمِن فَوْقِهِمْ غَوَاشٍ.'],
-   ['الأنفال 50','وَلَوْ تَرَىٰ إِذْ يَتَوَفَّى الَّذِينَ كَفَرُوا الْمَلَائِكَةُ يَضْرِبُونَ وُجُوهَهُمْ وَأَدْبَارَهُمْ وَذُوقُوا عَذَابَ الْحَرِيقِ.'],
-   ['التوبة 35','يَوْمَ يُحْمَىٰ عَلَيْهَا فِي نَارِ جَهَنَّمَ فَتُكْوَىٰ بِهَا جِبَاهُهُمْ وَجُنُوبُهُمْ وَظُهُورُهُمْ.'],
-   ['الكهف 29','إِنَّا أَعْتَدْنَا لِلظَّالِمِينَ نَارًا أَحَاطَ بِهِمْ سُرَادِقُهَا... وَسَاءَتْ مُرْتَفَقًا.'],
-   ['الحج 19-22','فَالَّذِينَ كَفَرُوا قُطِّعَتْ لَهُمْ ثِيَابٌ مِّن نَّارٍ يُصَبُّ مِن فَوْقِ رُءُوسِهِمُ الْحَمِيمُ...'],
-   ['المؤمنون 103-104','وَمَنْ خَفَّتْ مَوَازِينُهُ فَأُولَٰئِكَ الَّذِينَ خَسِرُوا أَنفُسَهُمْ فِي جَهَنَّمَ خَالِدُونَ. تَلْفَحُ وُجُوهَهُمُ النَّارُ.'],
-   ['الفرقان 11-14','وَأَعْتَدْنَا لِمَن كَذَّبَ بِالسَّاعَةِ سَعِيرًا... لَا تَدْعُوا الْيَوْمَ ثُبُورًا وَاحِدًا.'],
-   ['الأحزاب 64-66','إِنَّ اللَّهَ لَعَنَ الْكَافِرِينَ وَأَعَدَّ لَهُمْ سَعِيرًا. خَالِدِينَ فِيهَا أَبَدًا...'],
-   ['سبأ 42','وَنَقُولُ لِلَّذِينَ ظَلَمُوا ذُوقُوا عَذَابَ النَّارِ الَّتِي كُنتُم بِهَا تُكَذِّبُونَ.'],
-   ['فاطر 36-37','وَالَّذِينَ كَفَرُوا لَهُمْ نَارُ جَهَنَّمَ لَا يُقْضَىٰ عَلَيْهِمْ فَيَمُوتُوا...'],
-   ['الصافات 63-68','إِنَّا جَعَلْنَاهَا فِتْنَةً لِّلظَّالِمِينَ... ثُمَّ إِنَّ مَرْجِعَهُمْ لَإِلَى الْجَحِيمِ.'],
-   ['ص 55-64','هَٰذَا وَإِنَّ لِلطَّاغِينَ لَشَرَّ مَآبٍ. جَهَنَّمَ يَصْلَوْنَهَا فَبِئْسَ الْمِهَادُ...'],
-   ['غافر 70-72','الَّذِينَ كَذَّبُوا بِالْكِتَابِ... إِذِ الْأَغْلَالُ فِي أَعْنَاقِهِمْ وَالسَّلَاسِلُ يُسْحَبُونَ فِي الْحَمِيمِ ثُمَّ فِي النَّارِ يُسْجَرُونَ.'],
-   ['فصلت 19-20','وَيَوْمَ يُحْشَرُ أَعْدَاءُ اللَّهِ إِلَى النَّارِ فَهُمْ يُوزَعُونَ... شَهِدَ عَلَيْهِمْ سَمْعُهُمْ وَأَبْصَارُهُمْ.'],
-   ['البروج 10','إِنَّ الَّذِينَ فَتَنُوا الْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ ثُمَّ لَمْ يَتُوبُوا فَلَهُمْ عَذَابُ جَهَنَّمَ وَلَهُمْ عَذَابُ الْحَرِيقِ.'],
-   ['الغاشية 2-7','وُجُوهٌ يَوْمَئِذٍ خَاشِعَةٌ. عَامِلَةٌ نَّاصِبَةٌ. تَصْلَىٰ نَارًا حَامِيَةً...'],
-   ['المسد 3','سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ.']
-  ]}
  };
  function removeOld(){
   $$('.burning-dua-feature,.protection-feature,[data-rq-open="burningDua"],[data-rq-open="protection"]').forEach(x=>x.remove());
-  const sp=$('[data-rq-open="specialVerses"]'); if(sp){sp.querySelector('h3')&&(sp.querySelector('h3').textContent='آيات الحرق كاملة'); sp.querySelector('p')&&(sp.querySelector('p').textContent='آيات قرآنية موسعة داخل القسم بدل صفحة فاضية.');}
   const tr=$('[data-rq-open="treatments"] p'); if(tr)tr.textContent='برامج علاجية مفصلة للعين والحسد والسحر والمس والتحصين والأسرة والأطفال.';
   const wr=$('[data-rq-open="warnings"] p'); if(wr)wr.textContent='تحذيرات موسعة وبوابات الضعف وعلامات الدجل والخطر.';
  }
- function card(item,i,type){const cls=type==='specialVerses'?' v4028-verse-card':'';return `<article class="v4028-ruqyah-rich-card${cls}"><small>${String(i+1).padStart(2,'0')}</small><h3>${esc(item[0])}</h3><p class="${type==='specialVerses'?'v4028-verse-text':''}">${esc(item[1])}</p></article>`}
- function render(type){const d=DATA[type],hub=$('#ruqyahHub'),reader=$('#ruqyahReader'); if(!d||!reader)return; hub?.classList.add('hidden'); reader.classList.remove('hidden'); $('#rqReaderTitle')&&( $('#rqReaderTitle').textContent=d.title ); $('#rqReaderKicker')&&( $('#rqReaderKicker').textContent=d.kicker ); $('#rqReaderDescription')&&( $('#rqReaderDescription').textContent=d.description ); $('#rqLoadState')?.classList.add('hidden'); $('#rqReaderContent').innerHTML=`<div class="notice" style="margin-bottom:14px">تنبيه: هذا المحتوى للرقية الشرعية والقراءة والدعاء، ولا يثبت تشخيصًا ولا يبرر إيذاء الجسد أو ترك العلاج.</div><div class="v4028-ruqyah-rich-grid">${d.items.map((x,i)=>card(x,i,type)).join('')}</div><div class="v4028-source-note">المصدر العام: القرآن الكريم والسنة الصحيحة، مع تلخيص توعوي من مراجع الرقية الموجودة في مكتبة التطبيق. تسمية آيات الحرق اجتهادية وليست وردًا نبويًا محدد العدد.</div>`; window.scrollTo({top:0,behavior:'smooth'});}
+ function card(item,i){return `<article class="v4028-ruqyah-rich-card"><small>${String(i+1).padStart(2,'0')}</small><h3>${esc(item[0])}</h3><p>${esc(item[1])}</p></article>`}
+ function render(type){const d=DATA[type],hub=$('#ruqyahHub'),reader=$('#ruqyahReader'); if(!d||!reader)return; hub?.classList.add('hidden'); reader.classList.remove('hidden'); $('#rqReaderTitle')&&( $('#rqReaderTitle').textContent=d.title ); $('#rqReaderKicker')&&( $('#rqReaderKicker').textContent=d.kicker ); $('#rqReaderDescription')&&( $('#rqReaderDescription').textContent=d.description ); $('#rqLoadState')?.classList.add('hidden'); $('#rqReaderContent').innerHTML=`<div class="notice" style="margin-bottom:14px">تنبيه: هذا المحتوى للرقية الشرعية والقراءة والدعاء، ولا يثبت تشخيصًا ولا يبرر إيذاء الجسد أو ترك العلاج.</div><div class="v4028-ruqyah-rich-grid">${d.items.map((x,i)=>card(x,i)).join('')}</div><div class="v4028-source-note">المصدر العام: القرآن الكريم والسنة الصحيحة، مع تلخيص توعوي من مراجع الرقية الموجودة في مكتبة التطبيق.</div>`; window.scrollTo({top:0,behavior:'smooth'});}
  document.addEventListener('click',e=>{const b=e.target.closest('[data-rq-open]'); if(!b)return; const type=b.dataset.rqOpen; if(!DATA[type])return; e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); render(type);},true);
  function boot(){removeOld();setTimeout(removeOld,400);setTimeout(removeOld,1200)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();

@@ -1,0 +1,19 @@
+Noor AlDhikr V92 Quran dataset provenance
+==========================================
+
+Uthmanic Hafs text and matching web font:
+QuranEnc Hafs_20 package, sourced from the King Fahd Glorious Quran Printing Complex.
+https://quranenc.com/downloads/assets/Hafs_20.zip
+
+The official package contains 6236 ayat in Quran_text.csv and the matching Hafs_20.woff2 font.
+
+Page, juz, hizb-quarter, sajda and global ayah metadata:
+AlQuran.Cloud quran-uthmani full dataset.
+https://api.alquran.cloud/v1/quran/quran-uthmani
+
+Build date: 2026-11-17
+Expected counts: 114 surahs, 6236 ayat, 604 pages, 30 juz, 240 hizb quarters.
+Runtime file: assets/data/quran-uthmani-hafs-v20.json
+Font file: assets/fonts/Hafs_20.woff2
+Runtime SHA-256: F8824D985C4BE2E116847AA387E30D2AC0231F9A9BEAEB167DE6688058828609
+Font SHA-256: 678895D64D7633016AB299E3F59EA0DF52270B160AA6BF1211DD1AC6B32B5337

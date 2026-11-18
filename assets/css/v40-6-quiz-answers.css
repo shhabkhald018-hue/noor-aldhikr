@@ -68,6 +68,6 @@ html[data-theme="dark"] .quiz-page .quiz-option.wrong{
 #memorization .quiz-option:hover,
 .quiz-page .quiz-option:hover{
   color:#0b4f3d!important;
-  border-color:#178262!important;
+  border-color:var(--noor-primary)!important;
   box-shadow:0 8px 22px rgba(11,79,61,.14)!important;
 }

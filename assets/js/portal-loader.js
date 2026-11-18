@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const VERSION = window.NOOR_CONFIG?.appVersion || '83.0.0-clean-release';
+  const ASSET_VERSION = window.NOOR_VERSION?.assetVersion || '92.0.2';
   const status = (text, type = 'muted') => {
     const el = document.getElementById('portalDiag');
     if (!el) return;
@@ -37,8 +37,8 @@
   async function ensureSupabaseLibrary() {
     if (window.supabase?.createClient) return;
     const sources = [
-      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2',
-      'https://unpkg.com/@supabase/supabase-js@2'
+      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4',
+      'https://unpkg.com/@supabase/supabase-js@2.112.4'
     ];
     let lastError = null;
     for (const src of sources) {
@@ -62,12 +62,25 @@
     // حمّل كل وحدات لوحة المالك أولًا، ثم شغّل auth/boot أخيرًا.
     // هذا يمنع ضياع حدث noor:admin-ready عند وجود جلسة محفوظة مسبقًا.
     const localScripts = [
-      `assets/js/v40-18-cms-core.js?v=${encodeURIComponent(VERSION)}`,
-      `assets/js/v40-18-cms-admin.js?v=${encodeURIComponent(VERSION)}`,
-      `assets/js/v68-owner-studio.js?v=${encodeURIComponent(VERSION)}`,
-      `assets/js/v80-owner-security.js?v=${encodeURIComponent(VERSION)}`,
-      `assets/js/v81-owner-studio.js?v=${encodeURIComponent(VERSION)}`,
-      `assets/js/v43-owner-portal.js?v=${encodeURIComponent(VERSION)}`
+      `assets/js/error-handler.js?v=${ASSET_VERSION}`,
+      `assets/js/common.js?v=${ASSET_VERSION}`,
+      `assets/js/v40-18-cms-core.js?v=${ASSET_VERSION}`,
+      `assets/js/v40-18-cms-admin.js?v=${ASSET_VERSION}`,
+      `assets/js/v80-owner-security.js?v=${ASSET_VERSION}`,
+      `assets/js/v81-owner-studio.js?v=${ASSET_VERSION}`,
+      `assets/js/v86-owner-control.js?v=${ASSET_VERSION}`,
+      `assets/js/v88-owner-os.js?v=${ASSET_VERSION}`,
+      `assets/js/v883-owner-ai-health.js?v=${ASSET_VERSION}`,
+      `assets/js/v883-ai-core.js?v=${ASSET_VERSION}`,
+      `assets/js/v89-local-llm.js?v=${ASSET_VERSION}`,
+      `assets/js/v89-retriever.js?v=${ASSET_VERSION}`,
+      `assets/js/v89-rag-orchestrator.js?v=${ASSET_VERSION}`,
+      `assets/js/v90-evidence.js?v=${ASSET_VERSION}`,
+      `assets/js/v90-model-router.js?v=${ASSET_VERSION}`,
+      `assets/js/v90-rag-orchestrator.js?v=${ASSET_VERSION}`,
+      `assets/js/v89-owner-os.js?v=${ASSET_VERSION}`,
+      `assets/js/v92-owner-admin.js?v=${ASSET_VERSION}`,
+      `assets/js/v43-owner-portal.js?v=${ASSET_VERSION}`
     ];
     for (const src of localScripts) await loadScript(src, 12000);
   }

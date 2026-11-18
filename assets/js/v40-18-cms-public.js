@@ -32,15 +32,8 @@
     }
     description.content = brand.metaDescription;
 
-    const root = document.documentElement;
-    root.style.setProperty('--accent', brand.accent);
-    root.style.setProperty('--accent2', brand.accent2);
-    root.style.setProperty('--cms-accent', brand.accent);
-    root.style.setProperty('--cms-accent-2', brand.accent2);
-    root.style.setProperty('--cms-light-bg', brand.lightBackground);
-    root.style.setProperty('--cms-dark-bg', brand.darkBackground);
-    root.style.setProperty('--v40-green', brand.accent);
-    root.style.setProperty('--v40-gold', brand.accent2);root.style.setProperty('--noor-green',brand.accent);root.style.setProperty('--noor-gold',brand.accent2);
+    // V91.3: theme colors are applied exclusively by v913-theme-engine.
+    // CMS keeps brand metadata/content only so loading a page cannot overwrite day/night palette.
 
     const brandBox = $('.topbar .brand');
     if (brandBox) {
@@ -218,7 +211,37 @@
     $$('a.nav-direct-link',nav).forEach(link=>{const href=(link.getAttribute('href')||'').split('?')[0].split('#')[0];const id=href.endsWith('mushaf.html')?'quran':href.endsWith('exams.html')?'academyExams':'';if(id){link.dataset.cmsSection=id;if(!navButtonRegistry.has(id))navButtonRegistry.set(id,link)}});
     $('.nav-utility-divider', nav)?.remove();
 
-    state.sections.forEach(section => {
+    const groupMeta = {
+      primary: ['الأساسي','v87-nav-primary'],
+      sciences: ['العلوم الشرعية','v87-nav-sciences'],
+      tools: ['الأدوات','v87-nav-tools'],
+      account: ['الحساب والدعم','v87-nav-account'],
+      custom: ['صفحات إضافية','v91-nav-custom']
+    };
+    const ensureGroup = key => {
+      const safeKey = Object.hasOwn(groupMeta, key) ? key : 'custom';
+      let group = $(`[data-nav-group="${safeKey}"]`, nav);
+      if (!group) {
+        group = document.createElement('div');
+        group.className = `v87-nav-group ${groupMeta[safeKey][1]}`;
+        group.dataset.navGroup = safeKey;
+        const label = document.createElement('span');
+        label.className = 'v87-nav-label';
+        label.textContent = groupMeta[safeKey][0];
+        group.append(label);
+        nav.append(group);
+      }
+      return group;
+    };
+    const setNavLabel = (button, label) => {
+      const badge = button.querySelector?.('.private-chat-unread');
+      if (!badge) { button.textContent = label; return; }
+      const textNode = [...button.childNodes].find(node => node.nodeType === Node.TEXT_NODE);
+      if (textNode) textNode.nodeValue = `${label} `;
+    };
+
+    const ordered = [...state.sections].sort((a,b) => a.sortOrder - b.sortOrder);
+    ordered.forEach(section => {
       let button = navButtonRegistry.get(section.id);
       if (!button && section.type === 'custom') {
         button = document.createElement('button');
@@ -227,28 +250,18 @@
         button.className = 'cms-nav-button';
         navButtonRegistry.set(section.id, button);
       }
-      if (button) {
-        button.textContent = section.navLabel;
-        button.hidden = !(section.active && section.navVisible);
-        if(button.tagName==='BUTTON')button.onclick = () => window.navTo?.(section.id);
-      }
+      if (!button) return;
+      setNavLabel(button, section.navLabel);
+      button.hidden = !(section.active && section.navVisible);
+      if(button.tagName==='BUTTON') button.onclick = () => window.navTo?.(section.id);
+      ensureGroup(section.navGroup).append(button);
     });
 
-    [...nav.querySelectorAll('button[data-page],a[data-cms-section]')].forEach(button => button.remove());
-    const visible = state.sections
-      .filter(section => section.active && section.navVisible)
-      .sort((a,b) => a.sortOrder - b.sortOrder);
-    let dividerAdded = false;
-    visible.forEach(section => {
-      if (section.utility && !dividerAdded) {
-        const divider = document.createElement('span');
-        divider.className = 'nav-utility-divider';
-        divider.setAttribute('aria-hidden','true');
-        nav.append(divider);
-        dividerAdded = true;
-      }
-      const button = navButtonRegistry.get(section.id);
-      if (button) nav.append(button);
+    Object.keys(groupMeta).forEach(key => {
+      const group = $(`[data-nav-group="${key}"]`, nav);
+      if (!group) return;
+      const hasVisible = $$('button[data-page],a[data-cms-section]', group).some(item => !item.hidden);
+      group.hidden = !hasVisible;
     });
 
     const active = $('.page.active');

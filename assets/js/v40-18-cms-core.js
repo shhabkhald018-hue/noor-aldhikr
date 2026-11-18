@@ -2,25 +2,27 @@
 
 (() => {
   const BUILTIN_SECTIONS = [
-    {id:'home',type:'builtin',navLabel:'الرئيسية',title:'الرئيسية',summary:'الصفحة الرئيسية',icon:'🏠',active:true,navVisible:true,homeVisible:false,sortOrder:0},
-    {id:'adhkar',type:'builtin',navLabel:'الأذكار',title:'الأذكار',summary:'أذكار الصباح والمساء وسائر الأذكار',icon:'✨',active:true,navVisible:true,homeVisible:true,sortOrder:10},
-    {id:'ruqyah',type:'builtin',navLabel:'الرقية الشرعية',title:'الرقية الشرعية',summary:'الرقية والموسوعات والمساعد الذكي',icon:'🤲',active:true,navVisible:true,homeVisible:true,sortOrder:20},
-    {id:'assessment',type:'builtin',navLabel:'تقييم الأعراض',title:'تقييم الأعراض',summary:'موسوعة أسئلة وتقييم توعوي',icon:'🩺',active:true,navVisible:true,homeVisible:true,sortOrder:30},
-    {id:'dreams',type:'builtin',navLabel:'تفسير الأحلام',title:'تفسير الأحلام',summary:'تعبير الرؤى من كتب أشهر علماء التعبير',icon:'🌙',active:true,navVisible:true,homeVisible:true,sortOrder:40},
-    {id:'quran',type:'builtin',navLabel:'القرآن والتفسير',title:'القرآن والتفسير',summary:'المصحف والفهرس والتفسير',icon:'📖',active:true,navVisible:true,homeVisible:true,sortOrder:50},
-    {id:'creed',type:'builtin',navLabel:'العقيدة',title:'مكتبة العقيدة',summary:'أصول الإيمان والتوحيد بمنهج تعليمي موثق',icon:'☝️',active:true,navVisible:true,homeVisible:true,sortOrder:52},
-    {id:'fiqh',type:'builtin',navLabel:'الفقه',title:'مكتبة الفقه',summary:'العبادات والمعاملات والأسرة بملخصات تعليمية',icon:'⚖️',active:true,navVisible:true,homeVisible:true,sortOrder:54},
-    {id:'seerah',type:'builtin',navLabel:'السيرة النبوية',title:'السيرة النبوية',summary:'خط زمني لأهم مراحل السيرة والدروس',icon:'🕌',active:true,navVisible:true,homeVisible:true,sortOrder:56},
-    {id:'hadith',type:'builtin',navLabel:'الحديث',title:'مكتبة الحديث',summary:'أحاديث صحيحة وحسنة والتنبيه على الضعيف والمكذوب',icon:'📜',active:true,navVisible:true,homeVisible:true,sortOrder:58},
-    {id:'academyExams',type:'builtin',navLabel:'الاختبارات الشرعية',title:'الاختبارات الشرعية',summary:'اختبارات العقيدة والفقه والسيرة والحديث والاختبار الشامل',icon:'📝',active:true,navVisible:true,homeVisible:true,sortOrder:59},
-    {id:'memorization',type:'builtin',navLabel:'اختبارات الحفظ',title:'اختبارات الحفظ',summary:'اختبارات مرنة لمراجعة الحفظ',icon:'🧠',active:true,navVisible:true,homeVisible:true,sortOrder:60},
-    {id:'prayer',type:'builtin',navLabel:'الصلاة',title:'مواقيت الصلاة',summary:'المواقيت حسب الدولة والمدينة',icon:'🕌',active:true,navVisible:true,homeVisible:true,sortOrder:70},
-    {id:'qibla',type:'builtin',navLabel:'القبلة',title:'اتجاه القبلة',summary:'تحديد اتجاه القبلة',icon:'🕋',active:true,navVisible:true,homeVisible:true,sortOrder:80},
-    {id:'tasbeeh',type:'builtin',navLabel:'المسبحة',title:'المسبحة',summary:'عداد تسبيح يحفظ تقدمك',icon:'◉',active:true,navVisible:true,homeVisible:true,sortOrder:90},
-    {id:'khatma',type:'builtin',navLabel:'الختمات',title:'الختمات',summary:'خطط ختم القرآن ومتابعة التقدم',icon:'✅',active:true,navVisible:false,homeVisible:false,sortOrder:100},
-    {id:'favorites',type:'builtin',navLabel:'المفضلة',title:'المفضلة',summary:'المحتوى الذي حفظه المستخدم',icon:'★',active:true,navVisible:true,homeVisible:false,sortOrder:110},
-    {id:'library',type:'builtin',navLabel:'المراجع والمصادر',title:'المراجع وسياسة المصادر',summary:'الكتب والمراجع ومنهج التوثيق',icon:'📚',active:true,navVisible:true,homeVisible:false,sortOrder:900,utility:true},
-    {id:'support',type:'builtin',navLabel:'الدعم والخصوصية',title:'الدعم والخصوصية',summary:'البلاغات والاقتراحات وسياسة الخصوصية',icon:'🛡️',active:true,navVisible:true,homeVisible:false,sortOrder:910,utility:true}
+    {id:'home',type:'builtin',navGroup:'primary',navLabel:'الرئيسية',title:'الرئيسية',summary:'الصفحة الرئيسية',icon:'🏠',active:true,navVisible:true,homeVisible:false,sortOrder:0},
+    {id:'adhkar',type:'builtin',navGroup:'primary',navLabel:'الأذكار',title:'الأذكار',summary:'أذكار الصباح والمساء وسائر الأذكار',icon:'✨',active:true,navVisible:true,homeVisible:true,sortOrder:10},
+    {id:'ruqyah',type:'builtin',navGroup:'primary',navLabel:'الرقية الشرعية',title:'الرقية الشرعية',summary:'الرقية والموسوعات والمساعد الذكي',icon:'🤲',active:true,navVisible:true,homeVisible:true,sortOrder:20},
+    {id:'assessment',type:'builtin',navGroup:'tools',navLabel:'تقييم الأعراض',title:'تقييم الأعراض',summary:'موسوعة أسئلة وتقييم توعوي',icon:'🩺',active:true,navVisible:false,homeVisible:false,sortOrder:30},
+    {id:'dreams',type:'builtin',navGroup:'primary',navLabel:'تفسير الأحلام',title:'تفسير الأحلام',summary:'تعبير الرؤى من كتب أشهر علماء التعبير',icon:'🌙',active:true,navVisible:true,homeVisible:true,sortOrder:40},
+    {id:'quran',type:'builtin',navGroup:'primary',navLabel:'القرآن والتفسير',title:'القرآن والتفسير',summary:'المصحف والفهرس والتفسير',icon:'📖',active:true,navVisible:true,homeVisible:true,sortOrder:50},
+    {id:'creed',type:'builtin',navGroup:'sciences',navLabel:'العقيدة',title:'مكتبة العقيدة',summary:'أصول الإيمان والتوحيد بمنهج تعليمي موثق',icon:'☝️',active:true,navVisible:true,homeVisible:true,sortOrder:52},
+    {id:'fiqh',type:'builtin',navGroup:'sciences',navLabel:'الفقه',title:'مكتبة الفقه',summary:'العبادات والمعاملات والأسرة بملخصات تعليمية',icon:'⚖️',active:true,navVisible:true,homeVisible:true,sortOrder:54},
+    {id:'seerah',type:'builtin',navGroup:'sciences',navLabel:'السيرة النبوية',title:'السيرة النبوية',summary:'خط زمني لأهم مراحل السيرة والدروس',icon:'🕌',active:true,navVisible:true,homeVisible:true,sortOrder:56},
+    {id:'hadith',type:'builtin',navGroup:'sciences',navLabel:'الحديث',title:'مكتبة الحديث',summary:'أحاديث صحيحة وحسنة والتنبيه على الضعيف والمكذوب',icon:'📜',active:true,navVisible:true,homeVisible:true,sortOrder:58},
+    {id:'academyExams',type:'builtin',navGroup:'sciences',navLabel:'الاختبارات الشرعية',title:'الاختبارات الشرعية',summary:'اختبارات العقيدة والفقه والسيرة والحديث والاختبار الشامل',icon:'📝',active:true,navVisible:true,homeVisible:true,sortOrder:59},
+    {id:'memorization',type:'builtin',navGroup:'tools',navLabel:'اختبارات الحفظ',title:'اختبارات الحفظ',summary:'اختبارات مرنة لمراجعة الحفظ',icon:'🧠',active:true,navVisible:true,homeVisible:true,sortOrder:60},
+    {id:'prayer',type:'builtin',navGroup:'tools',navLabel:'الصلاة',title:'مواقيت الصلاة',summary:'المواقيت حسب الدولة والمدينة',icon:'🕌',active:true,navVisible:true,homeVisible:true,sortOrder:70},
+    {id:'qibla',type:'builtin',navGroup:'tools',navLabel:'القبلة',title:'اتجاه القبلة',summary:'تحديد اتجاه القبلة',icon:'🕋',active:true,navVisible:true,homeVisible:true,sortOrder:80},
+    {id:'tasbeeh',type:'builtin',navGroup:'tools',navLabel:'المسبحة',title:'المسبحة',summary:'عداد تسبيح يحفظ تقدمك',icon:'◉',active:true,navVisible:true,homeVisible:true,sortOrder:90},
+    {id:'khatma',type:'builtin',navGroup:'tools',navLabel:'الختمات',title:'الختمات',summary:'خطط ختم القرآن ومتابعة التقدم',icon:'✅',active:true,navVisible:false,homeVisible:false,sortOrder:100},
+    {id:'favorites',type:'builtin',navGroup:'tools',navLabel:'المفضلة',title:'المفضلة',summary:'المحتوى الذي حفظه المستخدم',icon:'★',active:true,navVisible:true,homeVisible:false,sortOrder:110},
+    {id:'studentDashboard',type:'builtin',navGroup:'account',navLabel:'لوحة الطالب',title:'لوحة الطالب',summary:'تقدم الطالب ونتائجه وشهاداته',icon:'🎓',active:true,navVisible:true,homeVisible:false,sortOrder:120,utility:true},
+    {id:'privateChat',type:'builtin',navGroup:'account',navLabel:'محادثة المالك',title:'محادثة المالك',summary:'قناة التواصل الخاصة بين المستخدم والمالك',icon:'✉',active:true,navVisible:true,homeVisible:false,sortOrder:130,utility:true},
+    {id:'library',type:'builtin',navGroup:'account',navLabel:'المراجع والمصادر',title:'المراجع وسياسة المصادر',summary:'الكتب والمراجع ومنهج التوثيق',icon:'📚',active:true,navVisible:true,homeVisible:false,sortOrder:900,utility:true},
+    {id:'support',type:'builtin',navGroup:'account',navLabel:'الدعم والخصوصية',title:'الدعم والخصوصية',summary:'البلاغات والاقتراحات وسياسة الخصوصية',icon:'🛡️',active:true,navVisible:true,homeVisible:false,sortOrder:910,utility:true}
   ];
 
   const DEFAULT_STATE = {
@@ -34,10 +36,10 @@
       browserTitle: 'نور الذكر | القرآن والأذكار والرقية الشرعية',
       metaDescription: 'نور الذكر: القرآن الكريم والتفسير والأذكار والرقية الشرعية ومواقيت الصلاة في تطبيق عربي.',
       footerText: 'نور الذكر · القرآن والأذكار والرقية الشرعية',
-      accent: '#2f735e',
-      accent2: '#b89a5a',
-      lightBackground: '#f3f2ee',
-      darkBackground: '#0f1211'
+      accent: '#466A80',
+      accent2: '#E1E5EA',
+      lightBackground: '#F6F7F9',
+      darkBackground: '#0F1318'
     },
     home: {
       kicker: 'السلام عليكم ورحمة الله',
@@ -82,6 +84,7 @@
     return {
       id: validPageId(id) ? id : uid('page'),
       type,
+      navGroup: ['primary','sciences','tools','account','custom'].includes(section?.navGroup) ? section.navGroup : (['primary','sciences','tools','account','custom'].includes(fallback.navGroup) ? fallback.navGroup : (type === 'custom' ? 'custom' : 'primary')),
       navLabel: safeText(section?.navLabel || fallback.navLabel || section?.title || 'قسم', 80),
       title: safeText(section?.title || fallback.title || section?.navLabel || 'قسم', 140),
       summary: safeText(section?.summary || fallback.summary || '', 500),

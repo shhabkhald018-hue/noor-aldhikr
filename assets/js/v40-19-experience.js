@@ -28,20 +28,28 @@
   }
 
   async function invokeAI(mode,text){
+    if(mode==='dream'){
+      if(!window.NOOR_V902_DREAM_ENGINE?.analyze)throw new Error('محرك تفسير الرؤى المحلي لم يكتمل تحميله بعد. أعد تحميل الصفحة.');
+      const out=window.NOOR_V902_DREAM_ENGINE.analyze(text,{dictionary:dreamDictionary()});
+      if(!out?.answer)throw new Error('تعذر تحليل الرؤيا محليًا.');
+      return {...out,sources:(out.sources||[]).map(s=>({title:s.title||'مصدر',source:s.source||'',url:''})),model:'V92 Local Dream Engine',researchMode:'local-knowledge-only',disclaimer:'التحليل المحلي استئناسي وغير قطعي، ولا يتنبأ بالمستقبل ولا يثبت سببًا غيبيًا.'};
+    }
     if(typeof window.NOOR_FREE_AI_ASK!=='function') throw new Error('المساعد المعرفي المجاني لم يكتمل تحميله بعد. أعد تحميل الصفحة.');
-    const ctx=mode==='dream'?{page:'dreams',title:'الأحلام والرؤى'}:{page:'ruqyah',title:'الرقية الشرعية'};
+    const ctx={page:'ruqyah',title:'الرقية الشرعية'};
     const out=await window.NOOR_FREE_AI_ASK(text,ctx);
     if(!out?.answer) throw new Error('لم أجد إجابة مناسبة في قاعدة المعرفة الحالية.');
-    return {answer:out.answer,sources:[],model:'V83.0 FREE',disclaimer:out.note||'إجابة من قاعدة المعرفة المجانية ولا تمثل تشخيصًا أو حكمًا قطعيًا.'};
+    const sources=Array.isArray(out.sources)?out.sources.map(s=>({title:s.title||s.source||'مصدر موثوق',url:s.url||''})):(out.source?[{title:out.source,url:''}]:[]);
+    return {answer:out.answer,sources,model:'V92.0 Grounded Islamic AI',disclaimer:out.note||'إجابة من الأدلة المسترجعة ولا تمثل تشخيصًا أو حكمًا قطعيًا.'};
   }
 
   function renderAIAnswer(data,mode){
     const sources=Array.isArray(data.sources)?data.sources:[];
-    const sourceTitle=mode==='dream'?'المراجع التي بُني عليها التفسير':'المراجع التي بُنيت عليها الإجابة';
-    return `<article class="v4019-ai-answer">
-      <header><div><span>إجابة من قاعدة المعرفة المجانية</span><h3>${mode==='dream'?'إرشاد عام حول الرؤيا':'إجابة معرفية عن الرقية'}</h3></div><b>FREE</b></header>
-      <div class="v4019-ai-copy">${markdownToHtml(data.answer)}</div>
-      ${sources.length?`<details class="v4019-result-sources"><summary>${sourceTitle} · ${sources.length}</summary><div>${sources.map((s,i)=>`<a href="${esc(s.url)}" target="_blank" rel="noopener"><i>${i+1}</i><span>${esc(s.title||s.url)}</span></a>`).join('')}</div></details>`:''}
+    const sourceTitle='المراجع المرفقة مع الإجابة';
+    const structured=mode==='dream'&&Array.isArray(data.sections)&&data.sections.length?`<div class="v902-dream-sections">${data.sections.map(s=>`<section class="v902-dream-section" data-section="${esc(s.id||'section')}"><h4>${esc(s.title||'')}</h4><div>${markdownToHtml(s.text||'')}</div></section>`).join('')}</div>`:`<div class="v4019-ai-copy">${markdownToHtml(data.answer)}</div>`;
+    return `<article class="v4019-ai-answer v902-result-card">
+      <header><div><span>${mode==='dream'?'تحليل محلي من القاموس والمراجع الموثقة':'إجابة من عدة أدلة مرتبة'}</span><h3>${mode==='dream'?'قراءة استئناسية محلية للرؤيا':'إجابة معرفية عن الرقية'}</h3></div><b>${mode==='dream'?'LOCAL':'V92'}</b></header>
+      ${structured}
+      ${sources.length?`<details class="v4019-result-sources"><summary>${sourceTitle} · ${sources.length}</summary><div>${sources.map((s,i)=>s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener"><i>${i+1}</i><span>${esc(s.title||s.url)}</span></a>`:`<div class="v4019-source-text"><i>${i+1}</i><span>${esc(s.title||'مصدر')} ${s.source?`<small>${esc(s.source)}</small>`:''}</span></div>`).join('')}</div></details>`:''}
       <p class="v4019-disclaimer">${esc(data.disclaimer||'الإجابة إرشادية وليست حكمًا قطعيًا.')}</p>
     </article>`;
   }
@@ -53,14 +61,14 @@
       const text=input.value.trim();
       if(text.length<20){
         result.classList.remove('hidden');
-        result.innerHTML='<div class="v4019-ai-error"><b>اكتب تفاصيل أكثر</b><p>اكتب وصفًا واضحًا لا يقل عن 20 حرفًا حتى يستطيع المساعد البحث في المصادر.</p></div>';
+        result.innerHTML='<div class="v4019-ai-error"><b>اكتب تفاصيل أكثر</b><p>اكتب وصفًا واضحًا لا يقل عن 20 حرفًا حتى يستطيع المساعد البحث في قاعدة المعرفة.</p></div>';
         return;
       }
       const original=button.innerHTML;
       button.disabled=true;
-      button.innerHTML='<span class="v4019-spinner"></span><span>جاري البحث في المصادر…</span>';
+      button.innerHTML='<span class="v4019-spinner"></span><span>جاري البحث في المصادر الموثوقة…</span>';
       result.classList.remove('hidden');
-      result.innerHTML='<div class="v4019-ai-loading"><span class="v4019-spinner"></span><div><b>يتم البحث الآن</b><p>يبحث المساعد في قاعدة المعرفة المجانية ومحتوى نور الذكر دون API مدفوع.</p></div></div>';
+      result.innerHTML='<div class="v4019-ai-loading"><span class="v4019-spinner"></span><div><b>يتم البحث الآن</b><p>يبحث المساعد في المصادر الموثوقة على الويب، ثم يعود للمحرك المحلي إذا تعذر البحث الحي.</p></div></div>';
       try{
         const data=await invokeAI(mode,text);
         result.innerHTML=renderAIAnswer(data,mode);
@@ -185,8 +193,8 @@
     const cats=['الكل',...new Set(rows.map(x=>x.category).filter(Boolean))];
     sec.className='page v4019-dream-page';
     sec.innerHTML=`<div class="v4019-dream-shell">
-      <header class="v4019-dream-hero"><button type="button" onclick="navTo('home')">← الرئيسية</button><div><span>تفسير الأحلام بالذكاء الاصطناعي</span><h1>اكتب حلمك واحصل على تفسير من ابن سيرين وأشهر علماء التعبير</h1><p>يجمع المساعد المعاني من الكتاب المشهور المنسوب إلى ابن سيرين، وكتب النابلسي وابن شاهين، ويقدم تفسيرًا طبيعيًا مرتبطًا بسياق الحلم دون ربطه بالحسد أو السحر أو المس.</p></div></header>
-      <section class="v4019-smart-search v4019-dream-ai" id="dreamSmartAssistant"><div class="v4019-smart-intro"><div class="v4019-smart-icon">☾</div><div><span>مفسّر الأحلام الموثّق</span><h2>احكِ الحلم كاملًا كما رأيته</h2><p>اذكر ترتيب الأحداث والمكان والأشخاص وشعورك أثناء الحلم. سيعرض الذكاء مواضع الاتفاق والاختلاف بين كتب التعبير.</p></div></div><div class="v4019-search-box"><label for="dreamAiInput">نص الحلم</label><textarea id="dreamAiInput" maxlength="5000" placeholder="مثال: رأيت أنني أمشي في طريق طويل ثم وجدت بابًا ومفتاحًا، وكان شعوري بالراحة…"></textarea><div class="v4019-search-actions"><small>التفسير اجتهادي، ولا تظهر النتيجة إلا مع مصادر يمكن مراجعتها.</small><button id="dreamAiAnalyze" type="button"><span>تفسير الحلم من كتب العلماء</span><b>←</b></button></div></div><div class="smart-ai-result hidden" id="dreamAiResult" aria-live="polite"></div></section>
+      <header class="v4019-dream-hero"><button type="button" onclick="navTo('home')">← الرئيسية</button><div><span>مساعد معرفي لتعبير الرؤى</span><h1>اكتب حلمك واحصل على إرشاد معرفي غير قطعي</h1><p>يبحث المساعد أولًا في المصادر الموثوقة وآراء أهل العلم، ثم يعرض المراجع بوضوح. وإذا تعذر البحث الحي يستخدم قاعدة نور الذكر المحلية. لا يجزم بالغيب ولا يربط الرؤيا بالحسد أو السحر أو المس.</p></div></header>
+      <section class="v4019-smart-search v4019-dream-ai" id="dreamSmartAssistant"><div class="v4019-smart-intro"><div class="v4019-smart-icon">☾</div><div><span>مساعد الرؤى المعرفي</span><h2>احكِ الحلم كاملًا كما رأيته</h2><p>اذكر ترتيب الأحداث والمكان والأشخاص وشعورك أثناء الحلم. سيجري بحثًا حيًا في المصادر الموثوقة ويعرض آراء أهل العلم والمراجع، مع نتيجة إرشادية قابلة للمراجعة.</p></div></div><div class="v4019-search-box"><label for="dreamAiInput">نص الحلم</label><textarea id="dreamAiInput" maxlength="5000" placeholder="مثال: رأيت أنني أمشي في طريق طويل ثم وجدت بابًا ومفتاحًا، وكان شعوري بالراحة…"></textarea><div class="v4019-search-actions"><small>النتيجة إرشادية وليست حكمًا أو تنبؤًا، والمراجع التراثية بالأسفل للقراءة المستقلة.</small><button id="dreamAiAnalyze" type="button"><span>ابحث عن إرشاد حول الرؤيا</span><b>←</b></button></div></div><div class="smart-ai-result hidden" id="dreamAiResult" aria-live="polite"></div></section>
       <section class="v4019-dream-scholars"><article><i>01</i><div><b>محمد بن سيرين</b><p>الكتاب المتداول باسمه يُعرض مع التنبيه إلى أن نسبته غير ثابتة.</p></div></article><article><i>02</i><div><b>عبد الغني النابلسي</b><p>صاحب «تعطير الأنام في تعبير المنام».</p></div></article><article><i>03</i><div><b>خليل بن شاهين الظاهري</b><p>صاحب «الإشارات في علم العبارات».</p></div></article></section>
       <details class="v4019-symbol-details"><summary><span>موسوعة الرموز التقليدية</span><b>${rows.length} رمزًا</b></summary><div class="v4019-symbol-tools"><input id="v4019DreamSearch" type="search" placeholder="ابحث في الرموز…"><div id="v4019DreamCats">${cats.map((c,i)=>`<button class="${i===0?'active':''}" data-v4019-dream-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div></div><div class="v4019-dream-symbols" id="v4019DreamList"></div></details>
     </div>`;

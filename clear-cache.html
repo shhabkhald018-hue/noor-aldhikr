@@ -1,17 +1,25 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تحديث نور الذكر</title>
-<style>body{font-family:Tahoma,Arial,sans-serif;background:#f5f7f6;color:#13211c;display:grid;place-items:center;min-height:100vh;margin:0}.box{max-width:560px;padding:28px;text-align:center;background:white;border:1px solid #dfe9e5;border-radius:20px}b{color:#176b52}</style></head>
+<head><script>try{document.documentElement.dataset.theme=localStorage.getItem('noor_theme_mode_v882')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تحديث نور الذكر V92.0.2</title>
+<style>body{display:grid;place-items:center;min-height:100vh;margin:0;background:var(--noor-bg);color:var(--noor-text)}.box{width:min(560px,calc(100% - 28px));padding:30px;text-align:center;background:var(--noor-surface);border:1px solid var(--noor-border);border-radius:var(--noor-radius-xl);box-shadow:var(--noor-shadow-md)}.box h1{color:var(--noor-primary-strong)}.box b{color:var(--noor-primary)}</style>
+<link rel="stylesheet" href="assets/css/v87-components.css?v=92.0.2">
+<script src="assets/js/version.js?v=92.0.2"></script>
+<script src="config.js?v=92.0.2"></script>
+<link rel="stylesheet" href="assets/css/v88-tokens.css?v=92.0.2">
+<link rel="stylesheet" href="assets/css/v88-core.css?v=92.0.2">
+<link rel="stylesheet" href="assets/css/v913-theme.css?v=92.0.2">
+</head>
 <body><div class="box"><h1>تحديث ملفات نور الذكر</h1><p id="m">جاري حذف النسخ القديمة من المتصفح…</p></div>
 <script>
 (async()=>{
  const m=document.getElementById('m');
+ const release=window.NOOR_VERSION||{assetVersion:'92.0.2',cachePrefix:'noor-aldhikr-'};
  try{
-  if('serviceWorker' in navigator){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));}
-  if('caches' in window){const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith('noor-')).map(k=>caches.delete(k)));}
+  if('serviceWorker' in navigator){const scope=new URL('./',location.href).href;const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.filter(r=>r.scope===scope).map(r=>r.unregister()));}
+  if('caches' in window){const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith(release.cachePrefix)).map(k=>caches.delete(k)));}
   localStorage.removeItem('noor-sw-reload');
-  m.innerHTML='<b>تم تنظيف الكاش.</b><br>سيتم فتح لوحة المالك الآن.';
-  setTimeout(()=>location.replace('portal.html?v=83.0&t='+Date.now()),700);
- }catch(e){m.textContent='تعذر تنظيف الكاش تلقائيًا. افتح portal.html?v=83.0 يدويًا.';}
+  m.textContent='تم تنظيف الكاش. سيتم فتح لوحة المالك الآن.';
+  setTimeout(()=>location.replace('portal.html?v='+encodeURIComponent(release.assetVersion)+'&t='+Date.now()),700);
+ }catch(e){m.textContent='تعذر تنظيف كاش نور الذكر تلقائيًا. افتح portal.html?v='+release.assetVersion+' يدويًا.';}
 })();
-</script></body></html>
+</script><script defer src="assets/js/v913-theme-engine.js?v=92.0.2"></script></body></html>

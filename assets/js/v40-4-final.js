@@ -1,12 +1,14 @@
 'use strict';
 (()=>{
  const VERSION='40.4';
- const REQUIRED_IDS=['home','quran','prayer','khatma','memorization','adhkar','ruqyah','assessment','dreams','library','ruqyahEncyclopedia','eyeEncyclopedia','hasadEncyclopedia','magicEncyclopedia','knowledgeBank'];
+ const REQUIRED_IDS=['home','prayer','khatma','memorization','adhkar','ruqyah','assessment','dreams','library','ruqyahEncyclopedia','eyeEncyclopedia','hasadEncyclopedia','magicEncyclopedia','knowledgeBank'];
  const REQUIRED_RUQYAH=['موسوعة الرقية الشرعية','موسوعة العين','موسوعة الحسد','موسوعة السحر','موسوعة المس','برامج التحصين','بنك المعرفة الإسلامي'];
  function audit(){
   const missing=REQUIRED_IDS.filter(id=>!document.getElementById(id));
   const text=document.body.innerText||'';
-  const missingCards=REQUIRED_RUQYAH.filter(t=>!text.includes(t));
+  const ruqyah=document.getElementById('ruqyah');
+  const ruqyahActive=!!ruqyah?.classList.contains('active');
+  const missingCards=ruqyahActive?REQUIRED_RUQYAH.filter(t=>!text.includes(t)):[];
   const duplicateIds=[...document.querySelectorAll('[id]')].map(x=>x.id).filter((x,i,a)=>a.indexOf(x)!==i);
   const result={version:VERSION,missing,missingCards,duplicateIds:[...new Set(duplicateIds)],checkedAt:new Date().toISOString()};
   window.NOOR_V40_4_AUDIT=result;

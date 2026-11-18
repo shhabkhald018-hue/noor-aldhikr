@@ -1,0 +1,187 @@
+/* Noor AlDhikr V92 bootstrap tokens — green and gold identity before runtime. */
+:root{
+  color-scheme:light;
+  --v88-bg:#F5F8F4;
+  --v88-bg-alt:#EDF4EF;
+  --v88-surface:#FFFFFF;
+  --v88-surface-soft:#EDF4EF;
+  --v88-surface-warm:#FFFFFF;
+  --v88-text:#17251F;
+  --v88-text-soft:#40564B;
+  --v88-muted:#586A61;
+  --v88-line:#D4E1D8;
+  --v88-line-strong:#B8CCBF;
+  --v88-primary:#176B52;
+  --v88-primary-strong:#0F513D;
+  --v88-primary-soft:#E2F1E8;
+  --v88-primary-softer:#F1F7F3;
+  --v88-gold:#9B6B1F;
+  --v88-gold-strong:#795116;
+  --v88-gold-soft:#F7EEDB;
+  --v88-danger:#a84851;
+  --v88-danger-soft:#fbefef;
+  --v88-warning:#9a6b22;
+  --v88-warning-soft:#fbf3e4;
+  --v88-success:#2d7a5d;
+  --v88-success-soft:#eaf4ef;
+  --v88-info:#46708f;
+  --v88-info-soft:#edf3f7;
+  --v88-radius-sm:10px;
+  --v88-radius-md:15px;
+  --v88-radius-lg:22px;
+  --v88-radius-xl:30px;
+  --v88-button-radius:13px;
+  --v88-content:1240px;
+  --v88-font-scale:1;
+  --v88-shadow-xs:0 1px 2px rgba(17,23,20,.035);
+  --v88-shadow-sm:0 8px 24px rgba(17,23,20,.06);
+  --v88-shadow-md:0 18px 46px rgba(17,23,20,.08);
+  --v88-shadow-lg:0 32px 80px rgba(17,23,20,.11);
+  --v88-focus:0 0 0 3px color-mix(in srgb,var(--v88-primary) 20%,transparent);
+  --v88-transition:160ms ease;
+
+  /* Compatibility aliases for legacy feature modules. V88 owns their values. */
+  --noor-bg:var(--v88-bg);
+  --noor-bg-alt:var(--v88-bg-alt);
+  --noor-surface:var(--v88-surface);
+  --noor-surface-muted:var(--v88-surface-soft);
+  --noor-surface-raised:var(--v88-surface);
+  --noor-surface-2:var(--v88-surface-soft);
+  --noor-primary:var(--v88-primary);
+  --noor-primary-strong:var(--v88-primary-strong);
+  --noor-primary-soft:var(--v88-primary-soft);
+  --noor-green:var(--v88-primary);
+  --noor-green-2:var(--v88-primary-strong);
+  --noor-green-3:var(--v88-primary);
+  --noor-green-soft:var(--v88-primary-soft);
+  --noor-gold:var(--v88-gold);
+  --noor-gold-strong:var(--v88-gold-strong);
+  --noor-gold-soft:var(--v88-gold-soft);
+  --noor-gold-2:var(--v88-gold-strong);
+  --noor-text:var(--v88-text);
+  --noor-ink:var(--v88-text);
+  --noor-text-soft:var(--v88-text-soft);
+  --noor-text-2:var(--v88-text-soft);
+  --noor-muted:var(--v88-muted);
+  --noor-border:var(--v88-line);
+  --noor-line:var(--v88-line);
+  --noor-border-strong:var(--v88-line-strong);
+  --noor-danger:var(--v88-danger);
+  --noor-warning:var(--v88-warning);
+  --noor-success:var(--v88-success);
+  --noor-info:var(--v88-info);
+  --noor-radius-sm:var(--v88-radius-sm);
+  --noor-radius-md:var(--v88-radius-md);
+  --noor-radius-lg:var(--v88-radius-lg);
+  --noor-radius-xl:var(--v88-radius-xl);
+  --noor-button-radius:var(--v88-button-radius);
+  --noor-content:var(--v88-content);
+  --noor-font-scale:var(--v88-font-scale);
+  --noor-shadow-xs:var(--v88-shadow-xs);
+  --noor-shadow-sm:var(--v88-shadow-sm);
+  --noor-shadow-md:var(--v88-shadow-md);
+  --noor-shadow-lg:var(--v88-shadow-lg);
+  --noor-shadow:var(--v88-shadow-md);
+  --noor-soft-shadow:var(--v88-shadow-sm);
+  --noor-transition:var(--v88-transition);
+
+  --bg:var(--v88-bg);
+  --card:var(--v88-surface);
+  --ink:var(--v88-text);
+  --text:var(--v88-text);
+  --text-soft:var(--v88-text-soft);
+  --muted:var(--v88-muted);
+  --line:var(--v88-line);
+  --border:var(--v88-line);
+  --surface:var(--v88-surface);
+  --surface-2:var(--v88-surface-soft);
+  --primary:var(--v88-primary);
+  --accent:var(--v88-primary);
+  --accent-strong:var(--v88-primary-strong);
+  --accent2:var(--v88-gold);
+  --danger:var(--v88-danger);
+  --shadow:var(--v88-shadow-md);
+
+  /* Old phase-specific aliases that used to repaint the whole app. */
+  --pbg:var(--v88-bg);
+  --pink:var(--v88-text);
+  --pmuted:var(--v88-muted);
+  --pgreen:var(--v88-primary);
+  --pgreen2:var(--v88-primary-strong);
+  --pline:var(--v88-line);
+  --app-bg:var(--v88-bg);
+  --v40-bg:var(--v88-bg);
+  --v40-surface:var(--v88-surface);
+  --v40-surface-2:var(--v88-surface-soft);
+  --v40-ink:var(--v88-text);
+  --v40-muted:var(--v88-muted);
+  --v40-green:var(--v88-primary);
+  --v40-green-2:var(--v88-primary-strong);
+  --v40-gold:var(--v88-gold);
+  --v40-line:var(--v88-line);
+  --site-bg:var(--v88-bg);
+  --site-surface:var(--v88-surface);
+  --site-surface-2:var(--v88-surface-soft);
+  --site-ink:var(--v88-text);
+  --site-muted:var(--v88-muted);
+  --site-line:var(--v88-line);
+  --site-accent:var(--v88-primary);
+  --site-accent-2:var(--v88-gold);
+  --academy-accent:var(--v88-primary);
+  --academy-border:var(--v88-line);
+  --academy-ink:var(--v88-text);
+  --academy-soft:var(--v88-primary-soft);
+  --academy-soft-2:var(--v88-surface-soft);
+
+  --cms-accent:var(--v88-primary);
+  --cms-accent-2:var(--v88-gold);
+  --cms-light-bg:var(--v88-bg);
+  --cms-dark-bg:#08130F;
+  --cms-radius:var(--v88-radius-md);
+  --cms-font-scale:var(--v88-font-scale);
+  --cms-card-shadow:var(--v88-shadow-sm);
+}
+
+html[data-theme="dark"],body.dark,[data-theme="dark"] body{
+  color-scheme:dark;
+  --v88-bg:#08130F;
+  --v88-bg-alt:#0C1A14;
+  --v88-surface:#102019;
+  --v88-surface-soft:#172A22;
+  --v88-surface-warm:#172A22;
+  --v88-text:#F4F8F5;
+  --v88-text-soft:#D2DED6;
+  --v88-muted:#B0C2B7;
+  --v88-line:#2A4438;
+  --v88-line-strong:#3A5B4C;
+  --v88-primary:#74D3A7;
+  --v88-primary-strong:#216E54;
+  --v88-primary-soft:#18382B;
+  --v88-primary-softer:#122C22;
+  --v88-gold:#E2BE70;
+  --v88-gold-strong:#F0D28E;
+  --v88-gold-soft:#302819;
+  --v88-danger:#ef8f96;
+  --v88-danger-soft:#3a2226;
+  --v88-warning:#e2b66f;
+  --v88-warning-soft:#382f1f;
+  --v88-success:#69b58e;
+  --v88-success-soft:#20362c;
+  --v88-info:#86abc9;
+  --v88-info-soft:#20303f;
+  --v88-shadow-xs:0 1px 2px rgba(0,0,0,.18);
+  --v88-shadow-sm:0 8px 24px rgba(0,0,0,.20);
+  --v88-shadow-md:0 18px 48px rgba(0,0,0,.27);
+  --v88-shadow-lg:0 34px 88px rgba(0,0,0,.34);
+
+  --noor-bg:var(--v88-bg);--noor-bg-alt:var(--v88-bg-alt);--noor-surface:var(--v88-surface);--noor-surface-muted:var(--v88-surface-soft);--noor-surface-raised:var(--v88-surface);
+  --noor-primary:var(--v88-primary);--noor-primary-strong:var(--v88-primary-strong);--noor-primary-soft:var(--v88-primary-soft);--noor-green:var(--v88-primary);--noor-green-2:var(--v88-primary-strong);--noor-green-3:var(--v88-primary);--noor-green-soft:var(--v88-primary-soft);
+  --noor-gold:var(--v88-gold);--noor-gold-strong:var(--v88-gold-strong);--noor-gold-soft:var(--v88-gold-soft);--noor-text:var(--v88-text);--noor-ink:var(--v88-text);--noor-text-soft:var(--v88-text-soft);--noor-muted:var(--v88-muted);--noor-border:var(--v88-line);--noor-line:var(--v88-line);--noor-border-strong:var(--v88-line-strong);
+  --bg:var(--v88-bg);--card:var(--v88-surface);--ink:var(--v88-text);--text:var(--v88-text);--text-soft:var(--v88-text-soft);--muted:var(--v88-muted);--line:var(--v88-line);--border:var(--v88-line);--surface:var(--v88-surface);--surface-2:var(--v88-surface-soft);--primary:var(--v88-primary);--accent:var(--v88-primary);--accent2:var(--v88-gold);
+  --pbg:var(--v88-bg);--pink:var(--v88-text);--app-bg:var(--v88-bg);--v40-bg:var(--v88-bg);--v40-surface:var(--v88-surface);--v40-surface-2:var(--v88-surface-soft);--v40-ink:var(--v88-text);--v40-muted:var(--v88-muted);--v40-line:var(--v88-line);--site-bg:var(--v88-bg);--site-surface:var(--v88-surface);--site-surface-2:var(--v88-surface-soft);--site-ink:var(--v88-text);--site-muted:var(--v88-muted);--site-line:var(--v88-line);
+}
+
+/* Quran paper is intentionally separate from the application chrome. */
+[data-reading-theme="light"]{--quran-shell:#eee9df;--quran-page:#fffdf5;--quran-page-inner:#fbf6e8;--quran-ink:#252a2e;--quran-muted:#77746f;--quran-ornament:#b38b45;--quran-line:#dbcdaa}
+[data-reading-theme="sepia"]{--quran-shell:#ddd0b7;--quran-page:#f6ebcf;--quran-page-inner:#f0e1bd;--quran-ink:#352d23;--quran-muted:#766950;--quran-ornament:#92703a;--quran-line:#cbb688}
+[data-reading-theme="dark"]{--quran-shell:#0f151b;--quran-page:#151c22;--quran-page-inner:#192128;--quran-ink:#ece9e0;--quran-muted:#afa99d;--quran-ornament:#d1b16b;--quran-line:#3c4650}

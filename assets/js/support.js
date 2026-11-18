@@ -25,7 +25,7 @@ function supportDeviceInfo(){
     platform:navigator.userAgentData?.platform||navigator.platform||'',
     viewport:`${innerWidth}x${innerHeight}`,
     online:navigator.onLine,
-    app_version:window.ADHKAR_VERSION||'16.0.0',
+    app_version:window.NOOR_CONFIG?.appVersion||window.ADHKAR_VERSION||'87.0.0-unified-quran-owner-os',
     page:location.pathname,
     recorded_at:new Date().toISOString()
   };

@@ -28,34 +28,27 @@ function installThemeSystem(){
  if(!old)return;
  old.setAttribute('aria-label','تغيير المظهر');
  old.setAttribute('title','تغيير المظهر');
- old.innerHTML='<span class="theme-icon">◐</span><span class="theme-label">المظهر</span>';
-
+ old.innerHTML='<span class="theme-icon">☀</span><span class="theme-label">فاتح</span>';
  const apply=(mode)=>{
-   const resolved=mode==='system'
-     ? (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')
-     : mode;
-   document.documentElement.dataset.theme=resolved;
+   mode=mode==='dark'?'dark':'light';
+   document.documentElement.dataset.theme=mode;
    document.documentElement.dataset.themeMode=mode;
-   safeStore('theme_mode',mode);
-   const label=mode==='dark'?'ليلي':mode==='light'?'فاتح':'تلقائي';
-   old.querySelector('.theme-icon').textContent=mode==='dark'?'☾':mode==='light'?'☀':'◐';
-   old.querySelector('.theme-label').textContent=label;
-   old.setAttribute('aria-pressed',resolved==='dark'?'true':'false');
+   document.documentElement.style.colorScheme=mode;
+   try{localStorage.setItem('noor_theme_mode_v882',mode)}catch(e){}
+   old.querySelector('.theme-icon').textContent=mode==='dark'?'☾':'☀';
+   old.querySelector('.theme-label').textContent=mode==='dark'?'ليلي':'فاتح';
+   old.setAttribute('aria-pressed',mode==='dark'?'true':'false');
    const meta=$('meta[name="theme-color"]');
-   if(meta)meta.content=resolved==='dark'?'#0b1712':'#176b52';
+   if(meta)meta.content=mode==='dark'?'#08130F':'#176B52';
  };
- let mode=safeLoad('theme_mode',safeLoad('theme','light'));
- if(!['light','dark','system'].includes(mode))mode='light';
+ let mode='light';
+ try{mode=localStorage.getItem('noor_theme_mode_v882')==='dark'?'dark':'light'}catch(e){}
  apply(mode);
  old.onclick=()=>{
-   const current=document.documentElement.dataset.themeMode||'light';
-   const next=current==='light'?'dark':current==='dark'?'system':'light';
+   const next=(document.documentElement.dataset.theme||'light')==='dark'?'light':'dark';
    apply(next);
-   if(window.toast)toast(next==='dark'?'تم تشغيل الوضع الليلي':next==='system'?'المظهر حسب الجهاز':'تم تشغيل الوضع الفاتح');
+   if(window.toast)toast(next==='dark'?'تم تشغيل الوضع الليلي':'تم تشغيل الوضع الفاتح');
  };
- matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{
-   if((document.documentElement.dataset.themeMode||'')==='system')apply('system');
- });
 }
 
 function createGlobalBackBar(){
@@ -209,7 +202,7 @@ function showAdhkarCategories(){
 window.showAdhkarCategories=showAdhkarCategories;
 
 function accessibilityAndPolish(){
- document.documentElement.style.colorScheme='light dark';
+ document.documentElement.style.colorScheme=document.documentElement.dataset.theme==='dark'?'dark':'light';
  $$('button').forEach(b=>{if(!b.getAttribute('type'))b.setAttribute('type','button')});
  const skip=document.createElement('a');
  skip.href='#mainContent';skip.className='skip-link';skip.textContent='تخطي إلى المحتوى';

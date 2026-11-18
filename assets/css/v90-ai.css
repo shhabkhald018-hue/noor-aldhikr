@@ -1,0 +1,65 @@
+.noor-ai-card{max-width:860px}.v90-actions{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid color-mix(in srgb,currentColor 10%,transparent);border-bottom:1px solid color-mix(in srgb,currentColor 10%,transparent)}.v90-actions button{border:1px solid rgba(85,100,72,.18);background:rgba(255,255,255,.72);border-radius:999px;padding:8px 12px;font:inherit;cursor:pointer}.v90-actions button:last-child{margin-inline-start:auto}.v90-msg{line-height:1.85}.v90-answer.streaming::after{content:'▋';animation:v90blink .8s infinite}.v90-grounded{display:inline-block;margin-bottom:8px;font-weight:800;color:#3c6e5a}.v90-sources{margin-top:14px;padding:12px;border-radius:14px;background:rgba(85,100,72,.06)}.v90-sources>b{display:block;margin-bottom:8px}.v90-sources ol{margin:0;padding-inline-start:22px;display:grid;gap:8px}.v90-sources li span{font-weight:800;display:block}.v90-sources li small{display:block;opacity:.8}.v90-sources li em{font-size:.75rem;opacity:.65;font-style:normal}@keyframes v90blink{50%{opacity:.15}}@media(max-width:640px){.noor-ai-card{width:96vw}.v90-actions button{flex:1 1 auto}.v90-actions button:last-child{margin-inline-start:0}}
+
+.v90-modelbar{display:grid;grid-template-columns:minmax(180px,1fr) auto auto auto;gap:8px;align-items:center;padding:10px 16px;background:rgba(85,100,72,.045);border-bottom:1px solid rgba(85,100,72,.1)}.v90-modelbar>div{display:grid}.v90-modelbar small{opacity:.7}.v90-modelbar select,.v90-modelbar button{font:inherit;border:1px solid rgba(85,100,72,.18);border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.75);color:inherit}.v90-modelbar button{cursor:pointer;font-weight:800}@media(max-width:720px){.v90-modelbar{grid-template-columns:1fr 1fr}.v90-modelbar>div{grid-column:1/-1}.v90-modelbar select{grid-column:1/-1}}
+
+/* V90.0.1 — assistant conversation viewport/scroll fix */
+.noor-ai-card{
+  position:relative;
+  height:min(88dvh,820px);
+  max-height:calc(100dvh - 24px);
+  grid-template-rows:auto auto minmax(0,1fr) auto auto auto;
+  min-height:0;
+}
+.noor-ai-conversation{
+  position:relative;
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.noor-ai-conversation .noor-ai-messages{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable;
+  scroll-behavior:auto;
+}
+.noor-ai-conversation .noor-ai-quick{flex:0 0 auto}
+.noor-ai-form{position:relative;z-index:3;flex:0 0 auto}
+.noor-ai-status{position:relative;z-index:3;flex:0 0 auto}
+.v90-jump-latest{
+  position:absolute;
+  inset-inline-start:16px;
+  top:12px;
+  z-index:8;
+  border:1px solid rgba(85,100,72,.18);
+  background:color-mix(in srgb,var(--noor-surface,#fff) 94%,transparent);
+  color:var(--noor-primary,#6E7F72);
+  border-radius:999px;
+  padding:8px 12px;
+  font:inherit;
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  cursor:pointer;
+}
+.v90-jump-latest[hidden]{display:none!important}
+body.v90-ai-open{overflow:hidden!important;touch-action:none}
+body.v90-ai-open .noor-ai-modal{overscroll-behavior:contain;touch-action:auto}
+@media(max-width:640px){
+  .noor-ai-modal{padding:0;place-items:stretch}
+  .noor-ai-card{
+    width:100vw;
+    max-width:none;
+    height:100dvh;
+    max-height:100dvh;
+    border-radius:0;
+    border-inline:0;
+    grid-template-rows:auto auto minmax(0,1fr) auto auto auto;
+  }
+  .noor-ai-conversation .noor-ai-messages{padding:14px 12px 18px}
+  .v90-jump-latest{top:10px;inset-inline-start:10px}
+}

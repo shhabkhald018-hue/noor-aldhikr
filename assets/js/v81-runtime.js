@@ -1,14 +1,16 @@
 
 'use strict';
 (()=>{
-  const CFG=window.NOOR_CONFIG||{};
   const clean=s=>String(s??'').trim();
-  const state=window.NOOR_RUNTIME={modules:{},texts:{},blocks:[],ai:null,ui:null,loaded:false};
+  const state=window.NOOR_RUNTIME={modules:{},texts:{},blocks:[],ai:null,ui:null,settings:{},loaded:false,cloudAvailable:false};
 
   function client(){
-    if(window.supabaseClient) return window.supabaseClient;
-    if(!window.supabase?.createClient || !CFG.supabaseUrl || !CFG.publishableKey || /PASTE_NEW_/.test(CFG.supabaseUrl+CFG.publishableKey)) return null;
-    return window.supabase.createClient(CFG.supabaseUrl,CFG.publishableKey);
+    return window.NOOR_GET_SUPABASE_CLIENT?.() || window.supabaseClient || null;
+  }
+  function timed(promise,ms=12000){
+    if(window.noorWithTimeout)return window.noorWithTimeout(promise,ms);
+    let timer;
+    return Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('NOOR_TIMEOUT')),ms)})]).finally(()=>clearTimeout(timer));
   }
   function safeUrl(v){
     v=clean(v); if(!v)return '';
@@ -20,15 +22,10 @@
   }
   function applyUi(){
     const u=state.ui||{};
-    const r=document.documentElement.style;
-    if(/^#[0-9a-f]{6}$/i.test(u.accent||''))r.setProperty('--noor-green',u.accent);
-    if(/^#[0-9a-f]{6}$/i.test(u.accent2||''))r.setProperty('--noor-gold',u.accent2);
-    if(/^#[0-9a-f]{6}$/i.test(u.light_bg||''))r.setProperty('--noor-light-bg',u.light_bg);
-    if(/^#[0-9a-f]{6}$/i.test(u.dark_bg||''))r.setProperty('--noor-dark-bg',u.dark_bg);
-    if(Number.isFinite(+u.radius))r.setProperty('--noor-owner-radius',`${u.radius}px`);
+    // V88.3 owns all visual theme values through v88-theme-runtime.js.
+    // This legacy runtime only keeps non-visual behavior such as maintenance state.
     document.documentElement.classList.toggle('noor-compact',!!u.compact);
-
-    if(u.maintenance_mode && !new URLSearchParams(location.search).has('ownerPreview')){
+    if(u.maintenance_mode && window.NOOR_V86_OWNER_PREVIEW!==true){
       let m=document.getElementById('v81Maintenance');
       if(!m){
         m=document.createElement('div');m.id='v81Maintenance';m.className='v81-maintenance';
@@ -36,9 +33,12 @@
         document.body.appendChild(m);
       }
       m.querySelector('p').textContent=u.maintenance_message||'الموقع تحت التحديث.';
-    }
+    }else document.getElementById('v81Maintenance')?.remove();
   }
   function applyTexts(){
+    const homeMessage=state.settings.home_message||'';
+    let msg=document.getElementById('v86HomeMessage');
+    if(homeMessage){if(!msg){msg=document.createElement('div');msg.id='v86HomeMessage';msg.className='v86-home-message';const home=document.getElementById('home');(home||document.body).prepend(msg)}msg.textContent=homeMessage}else{msg?.remove()}
     const map={
       'hero.title':'.hero-card h1',
       'hero.subtitle':'.hero-card p',
@@ -54,7 +54,7 @@
     for(const [key,m] of Object.entries(state.modules)){
       const page=document.getElementById(key);
       if(page) page.hidden=!m.enabled;
-      document.querySelectorAll(`[data-page="${CSS.escape(key)}"]`).forEach(el=>{
+      document.querySelectorAll(`[data-page="${CSS.escape(key)}"],[data-module-key="${CSS.escape(key)}"]`).forEach(el=>{
         el.hidden=!m.enabled || !m.nav_visible;
         if(m.label) el.textContent=m.label;
       });
@@ -66,7 +66,7 @@
       }
     }
     const ai=state.modules.aiAssistant;
-    window.NOOR_AI_ENABLED=!!(ai?.enabled && state.ai?.enabled);
+    if(ai||state.ai)window.NOOR_AI_ENABLED=(ai?.enabled!==false)&&(state.ai?.enabled!==false);
   }
   function injectBlocks(){
     document.querySelectorAll('[data-v81-custom-block]').forEach(x=>x.remove());
@@ -90,7 +90,7 @@
     }
   }
   function announce(){
-    const v=state.texts['global.announcement'];
+    const v=state.texts['global.announcement']||state.settings.announcement;
     let bar=document.getElementById('v81Announcement');
     if(!v){bar?.remove();return}
     if(!bar){bar=document.createElement('div');bar.id='v81Announcement';bar.className='v81-announcement';document.body.prepend(bar)}
@@ -98,21 +98,38 @@
   }
 
   async function load(){
-    const sb=client(); if(!sb)return;
-    try{
-      const [mods,texts,blocks,ai,ui]=await Promise.all([
-        sb.from('site_modules').select('*').order('sort_order'),
-        sb.from('site_texts').select('text_key,value').eq('public',true),
-        sb.from('custom_blocks').select('*').eq('active',true).order('sort_order'),
-        sb.from('ai_settings').select('*').eq('id',true).maybeSingle(),
-        sb.from('ui_settings').select('*').eq('id',true).maybeSingle()
-      ]);
-      (mods.data||[]).forEach(x=>state.modules[x.module_key]=x);
-      (texts.data||[]).forEach(x=>state.texts[x.text_key]=x.value);
-      state.blocks=blocks.data||[];state.ai=ai.data||null;state.ui=ui.data||null;state.loaded=true;
-      applyUi();applyTexts();applyModules();injectBlocks();announce();
+    const sb=client();
+    if(!sb){
+      state.loaded=true;state.cloudAvailable=false;
       window.dispatchEvent(new CustomEvent('noor:runtime-ready',{detail:state}));
-    }catch(e){console.warn('V81 runtime:',e)}
+      return;
+    }
+    const tasks=[
+      timed(sb.from('site_modules').select('*').order('sort_order')),
+      timed(sb.from('site_texts').select('text_key,value').eq('public',true)),
+      timed(sb.from('custom_blocks').select('*').eq('active',true).order('sort_order')),
+      timed(sb.from('ai_settings').select('*').eq('id',true).maybeSingle()),
+      timed(sb.from('ui_settings').select('*').eq('id',true).maybeSingle()),
+      timed(sb.from('app_settings').select('key,value').in('key',['home_message','announcement','design_button_radius','design_content_width','design_font_scale','design_shadow']))
+    ];
+    const results=await Promise.allSettled(tasks);
+    const value=index=>{
+      const result=results[index];
+      if(result.status==='rejected'){console.warn('V81 cloud request:',result.reason);return null}
+      if(result.value?.error){console.warn('V81 cloud response:',result.value.error.message);return null}
+      return result.value;
+    };
+    const mods=value(0),texts=value(1),blocks=value(2),ai=value(3),ui=value(4),settings=value(5);
+    state.modules={};state.texts={};
+    (mods?.data||[]).forEach(x=>state.modules[x.module_key]=x);
+    (texts?.data||[]).forEach(x=>state.texts[x.text_key]=x.value);
+    if(blocks)state.blocks=blocks.data||[];
+    if(ai)state.ai=ai.data||null;
+    if(ui)state.ui=ui.data||null;
+    if(settings)state.settings=Object.fromEntries((settings.data||[]).map(x=>[x.key,x.value]));
+    state.loaded=true;state.cloudAvailable=!!(mods||texts||blocks||ai||ui||settings);
+    applyUi();applyTexts();applyModules();injectBlocks();announce();
+    window.dispatchEvent(new CustomEvent('noor:runtime-ready',{detail:state}));
   }
   window.NOOR_RUNTIME_RELOAD=load;
   document.addEventListener('DOMContentLoaded',()=>setTimeout(load,180));

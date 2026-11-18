@@ -1,0 +1,2180 @@
+{
+  "creed": [
+    {
+      "subject": "creed",
+      "title": "مدخل العقيدة",
+      "summary": "معنى العقيدة ومصادر التلقي وأهمية الدليل",
+      "reference_text": "القرآن والسنة الصحيحة",
+      "sort_order": 0
+    },
+    {
+      "subject": "creed",
+      "title": "أركان الإسلام",
+      "summary": "الشهادتان والصلاة والزكاة والصيام والحج",
+      "reference_text": "حديث ابن عمر — الصحيحان",
+      "sort_order": 1
+    },
+    {
+      "subject": "creed",
+      "title": "أركان الإيمان",
+      "summary": "الإيمان بالله وملائكته وكتبه ورسله واليوم الآخر والقدر",
+      "reference_text": "حديث جبريل — صحيح مسلم",
+      "sort_order": 2
+    },
+    {
+      "subject": "creed",
+      "title": "توحيد الربوبية",
+      "summary": "إفراد الله بالخلق والملك والتدبير",
+      "reference_text": "يونس 31",
+      "sort_order": 3
+    },
+    {
+      "subject": "creed",
+      "title": "توحيد الألوهية",
+      "summary": "إفراد الله بجميع أنواع العبادة",
+      "reference_text": "الفاتحة 5، الأنعام 162",
+      "sort_order": 4
+    },
+    {
+      "subject": "creed",
+      "title": "الأسماء والصفات",
+      "summary": "إثبات ما ثبت بلا تمثيل ولا تحريف",
+      "reference_text": "الشورى 11، الأعراف 180",
+      "sort_order": 5
+    },
+    {
+      "subject": "creed",
+      "title": "الإخلاص",
+      "summary": "إرادة وجه الله بالعمل",
+      "reference_text": "الكهف 110",
+      "sort_order": 6
+    },
+    {
+      "subject": "creed",
+      "title": "الشرك الأكبر والأصغر",
+      "summary": "الفروق والآثار والتحذير من الحكم على الأعيان",
+      "reference_text": "لقمان 13، صحيح مسلم",
+      "sort_order": 7
+    },
+    {
+      "subject": "creed",
+      "title": "العبادة",
+      "summary": "معناها وشروط قبولها",
+      "reference_text": "الذاريات 56، الكهف 110",
+      "sort_order": 8
+    },
+    {
+      "subject": "creed",
+      "title": "الدعاء والتوكل",
+      "summary": "الدعاء عبادة والتوكل مع الأخذ بالأسباب",
+      "reference_text": "غافر 60، آل عمران 159",
+      "sort_order": 9
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان بالملائكة",
+      "summary": "وظائفهم وما ثبت في النصوص",
+      "reference_text": "التحريم 6، الانفطار 10–12",
+      "sort_order": 10
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان بالكتب",
+      "summary": "الكتب المنزلة ومكانة القرآن",
+      "reference_text": "المائدة 48، الحجر 9",
+      "sort_order": 11
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان بالرسل",
+      "summary": "وحدة دعوتهم وخاتمية النبوة",
+      "reference_text": "البقرة 285، الأحزاب 40",
+      "sort_order": 12
+    },
+    {
+      "subject": "creed",
+      "title": "مكانة السنة",
+      "summary": "السنة الصحيحة بيان للقرآن",
+      "reference_text": "النحل 44، الحشر 7",
+      "sort_order": 13
+    },
+    {
+      "subject": "creed",
+      "title": "محبة النبي ﷺ",
+      "summary": "المحبة بالاتباع دون غلو",
+      "reference_text": "آل عمران 31",
+      "sort_order": 14
+    },
+    {
+      "subject": "creed",
+      "title": "اليوم الآخر",
+      "summary": "الموت والبعث والحساب والجنة والنار",
+      "reference_text": "الحج 7، الزلزلة 6–8",
+      "sort_order": 15
+    },
+    {
+      "subject": "creed",
+      "title": "البرزخ",
+      "summary": "الإيمان بما ثبت وترك الغيب بلا دليل",
+      "reference_text": "المؤمنون 99–100",
+      "sort_order": 16
+    },
+    {
+      "subject": "creed",
+      "title": "القضاء والقدر",
+      "summary": "مراتب القدر ومسؤولية الإنسان",
+      "reference_text": "القمر 49، الإنسان 29–30",
+      "sort_order": 17
+    },
+    {
+      "subject": "creed",
+      "title": "العمل والتوكل",
+      "summary": "بذل السبب ثم الرضا بقضاء الله",
+      "reference_text": "صحيح مسلم: احرص على ما ينفعك",
+      "sort_order": 18
+    },
+    {
+      "subject": "creed",
+      "title": "الصحابة وآل البيت",
+      "summary": "المحبة والعدل وترك الغلو والجفاء",
+      "reference_text": "التوبة 100، الشورى 23",
+      "sort_order": 19
+    },
+    {
+      "subject": "creed",
+      "title": "البدعة والاتباع",
+      "summary": "ضوابط السنة والابتداع",
+      "reference_text": "صحيح مسلم: من أحدث في أمرنا",
+      "sort_order": 20
+    },
+    {
+      "subject": "creed",
+      "title": "الولاء للمؤمنين",
+      "summary": "الأخوة والعدل وحفظ الحقوق",
+      "reference_text": "الحجرات 10",
+      "sort_order": 21
+    },
+    {
+      "subject": "creed",
+      "title": "النفاق",
+      "summary": "الفرق بين النفاق الاعتقادي والعملي",
+      "reference_text": "البقرة 8–20، الصحيحان",
+      "sort_order": 22
+    },
+    {
+      "subject": "creed",
+      "title": "الكبائر والتوبة",
+      "summary": "لا يخرج المسلم من الدين بكل ذنب والتوبة مفتوحة",
+      "reference_text": "الزمر 53",
+      "sort_order": 23
+    },
+    {
+      "subject": "creed",
+      "title": "التكفير وضوابطه",
+      "summary": "ليس للعامة أو التطبيقات والحكم للأهل المختصين",
+      "reference_text": "النحل 43، الإسراء 36",
+      "sort_order": 24
+    },
+    {
+      "subject": "creed",
+      "title": "الرقية والعقيدة",
+      "summary": "الرقية بالقرآن والدعاء دون طلاسم أو تعلق بغير الله",
+      "reference_text": "صحيح مسلم: اعرضوا علي رقاكم",
+      "sort_order": 25
+    },
+    {
+      "subject": "creed",
+      "title": "الأحلام والعقيدة",
+      "summary": "الرؤى لا تبني حكمًا شرعيًا ولا عقيدة",
+      "reference_text": "الصحيحان في الرؤيا",
+      "sort_order": 26
+    },
+    {
+      "subject": "creed",
+      "title": "الشبهات",
+      "summary": "التثبت وسؤال أهل العلم وعدم أخذ الدين من المقاطع المجهولة",
+      "reference_text": "النحل 43",
+      "sort_order": 27
+    },
+    {
+      "subject": "creed",
+      "title": "منهج طلب العلم",
+      "summary": "التدرج والجمع بين النصوص ومعرفة مراتب المسائل",
+      "reference_text": "الزمر 9",
+      "sort_order": 28
+    },
+    {
+      "subject": "creed",
+      "title": "مراجعة العقيدة",
+      "summary": "خريطة جامعة للأبواب السابقة",
+      "reference_text": "مراجعة تعليمية",
+      "sort_order": 29
+    },
+    {
+      "subject": "creed",
+      "title": "مراتب الدين",
+      "summary": "الإسلام والإيمان والإحسان وعلاقة الظاهر بالباطن",
+      "reference_text": "حديث جبريل — صحيح مسلم",
+      "sort_order": 30
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان يزيد وينقص",
+      "summary": "يزيد بالطاعة وينقص بالمعصية دون إخراج المسلم من الدين بالذنب المجرد",
+      "reference_text": "أصول اعتقاد أهل السنة",
+      "sort_order": 31
+    },
+    {
+      "subject": "creed",
+      "title": "القرآن كلام الله",
+      "summary": "مكانة القرآن وأنه أصل الهداية والتلقي",
+      "reference_text": "الشورى 52، الحجر 9",
+      "sort_order": 32
+    },
+    {
+      "subject": "creed",
+      "title": "الشفاعة",
+      "summary": "إثبات الشفاعة بضوابط النصوص ونفي الغلو",
+      "reference_text": "البقرة 255، صحيح مسلم",
+      "sort_order": 33
+    },
+    {
+      "subject": "creed",
+      "title": "الحوض والميزان والصراط",
+      "summary": "الإيمان بما ثبت في اليوم الآخر بلا خوض في الكيفية",
+      "reference_text": "كتب السنة والصحاح",
+      "sort_order": 34
+    },
+    {
+      "subject": "creed",
+      "title": "رؤية المؤمنين ربهم",
+      "summary": "إثبات ما ثبت في النصوص مع تنزيه الله عن المماثلة",
+      "reference_text": "القيامة 22–23، صحيح البخاري",
+      "sort_order": 35
+    },
+    {
+      "subject": "creed",
+      "title": "التمائم والتعلق بالأسباب",
+      "summary": "ترك التعلق بغير الله مع استعمال السبب المشروع",
+      "reference_text": "سنن الترمذي ومسند أحمد",
+      "sort_order": 36
+    },
+    {
+      "subject": "creed",
+      "title": "السحر والكهانة",
+      "summary": "التحذير من السحرة والكهنة والطلاسم والادعاء الغيبي",
+      "reference_text": "البقرة 102، صحيح مسلم",
+      "sort_order": 37
+    },
+    {
+      "subject": "creed",
+      "title": "ضوابط الرقية في العقيدة",
+      "summary": "أن تكون بكلام مفهوم مشروع وخالية من الشرك والتعلق بالمخلوق",
+      "reference_text": "صحيح مسلم: لا بأس بالرقى ما لم تكن شركًا",
+      "sort_order": 38
+    },
+    {
+      "subject": "creed",
+      "title": "الوسوسة ودفعها",
+      "summary": "الإعراض عن الوساوس والاستعاذة وعدم الاسترسال",
+      "reference_text": "الناس، صحيح مسلم",
+      "sort_order": 39
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان بالغيب",
+      "summary": "قبول ما صح به الوحي وترك الجزم بما لا دليل عليه",
+      "reference_text": "البقرة 3",
+      "sort_order": 40
+    },
+    {
+      "subject": "creed",
+      "title": "الفرق بين المعصية والكفر",
+      "summary": "التحذير من التساهل في الحكم على الأشخاص",
+      "reference_text": "النحل 43، الإسراء 36",
+      "sort_order": 41
+    },
+    {
+      "subject": "creed",
+      "title": "أدب الخلاف العقدي",
+      "summary": "العدل والرحمة والتثبت والرجوع لأهل العلم",
+      "reference_text": "الحجرات 6، النحل 43",
+      "sort_order": 42
+    },
+    {
+      "subject": "creed",
+      "title": "مقاصد العقيدة",
+      "summary": "تعظيم الله وتزكية القلب وصلاح العمل",
+      "reference_text": "طه 14، الذاريات 56",
+      "sort_order": 43
+    },
+    {
+      "subject": "creed",
+      "title": "خطة مراجعة العقيدة",
+      "summary": "مراجعة الأصول ثم الشبهات ثم التطبيقات اليومية",
+      "reference_text": "منهج تعليمي",
+      "sort_order": 44
+    },
+    {
+      "subject": "creed",
+      "title": "مصادر العقيدة ومنهج الاستدلال",
+      "summary": "الاعتماد على القرآن والسنة الصحيحة وفهم السلف، ومعرفة الفرق بين القطعي والاجتهادي",
+      "reference_text": "القرآن، السنة، كتب الاعتقاد المعتمدة",
+      "sort_order": 45
+    },
+    {
+      "subject": "creed",
+      "title": "أسماء الله الحسنى عمليًا",
+      "summary": "أثر الإيمان بالأسماء الحسنى في الخوف والرجاء والمحبة والدعاء",
+      "reference_text": "الأعراف 180، شرح الأسماء الحسنى",
+      "sort_order": 46
+    },
+    {
+      "subject": "creed",
+      "title": "الرياء والشرك الخفي",
+      "summary": "تنقية النية ومراقبة القلب دون وسواس أو سوء ظن بالناس",
+      "reference_text": "الكهف 110، كتب تزكية النفس",
+      "sort_order": 47
+    },
+    {
+      "subject": "creed",
+      "title": "النواقض بضوابط العلم",
+      "summary": "عرض الباب للتحذير لا للحكم على الأعيان، مع بيان الشروط والموانع وخطر التسرع",
+      "reference_text": "كتب الاعتقاد والفتوى",
+      "sort_order": 48
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان بالجن والشياطين",
+      "summary": "إثبات ما جاء به الوحي دون تهويل أو نسبة كل عرض إلى الجن",
+      "reference_text": "سورة الناس، البقرة 102",
+      "sort_order": 49
+    },
+    {
+      "subject": "creed",
+      "title": "الأمن من مكر الله والقنوط",
+      "summary": "التوازن بين الخوف والرجاء وحسن الظن بالله والعمل",
+      "reference_text": "الأعراف 99، الزمر 53",
+      "sort_order": 50
+    },
+    {
+      "subject": "creed",
+      "title": "مراجع العقيدة الأساسية",
+      "summary": "العقيدة الطحاوية، لمعة الاعتقاد، الواسطية، شروح حديث جبريل، مع الرجوع لشروح العلماء الموثوقين",
+      "reference_text": "قائمة مراجعة ومصادر",
+      "sort_order": 51
+    },
+    {
+      "subject": "creed",
+      "title": "معنى لا إله إلا الله",
+      "summary": "النفي والإثبات وأثر الشهادة في العبادة والسلوك",
+      "reference_text": "محمد 19",
+      "sort_order": 52
+    },
+    {
+      "subject": "creed",
+      "title": "معنى شهادة أن محمدًا رسول الله",
+      "summary": "تصديقه وطاعته واتباع سنته وترك الغلو",
+      "reference_text": "النساء 80، الحشر 7",
+      "sort_order": 53
+    },
+    {
+      "subject": "creed",
+      "title": "محبة الله وخشيته ورجاؤه",
+      "summary": "توازن أعمال القلوب وأثرها في الاستقامة",
+      "reference_text": "البقرة 165، الزمر 53",
+      "sort_order": 54
+    },
+    {
+      "subject": "creed",
+      "title": "التوبة والاستغفار",
+      "summary": "شروط التوبة والرجوع إلى الله ورد الحقوق",
+      "reference_text": "التحريم 8، الزمر 53",
+      "sort_order": 55
+    },
+    {
+      "subject": "creed",
+      "title": "الإحسان ومراقبة الله",
+      "summary": "أن تعبد الله كأنك تراه وأثر المراقبة",
+      "reference_text": "حديث جبريل — صحيح مسلم",
+      "sort_order": 56
+    },
+    {
+      "subject": "creed",
+      "title": "الاستعانة والاستعاذة",
+      "summary": "صرف العبادة لله والأخذ بالأسباب المشروعة",
+      "reference_text": "الفاتحة 5، النحل 98",
+      "sort_order": 57
+    },
+    {
+      "subject": "creed",
+      "title": "الخوف من غير الله",
+      "summary": "التمييز بين الخوف الطبيعي وخوف العبادة",
+      "reference_text": "آل عمران 175",
+      "sort_order": 58
+    },
+    {
+      "subject": "creed",
+      "title": "التبرك المشروع والممنوع",
+      "summary": "الوقوف عند ما ثبت وعدم اختراع أسباب للبركة",
+      "reference_text": "أصول الاعتقاد",
+      "sort_order": 59
+    },
+    {
+      "subject": "creed",
+      "title": "الإيمان بالعرش والكرسي",
+      "summary": "إثبات ما جاء في الوحي بلا تكييف أو تمثيل",
+      "reference_text": "البقرة 255، الحاقة 17",
+      "sort_order": 60
+    },
+    {
+      "subject": "creed",
+      "title": "فتنة القبر",
+      "summary": "الإيمان بالسؤال والنعيم والعذاب بما ثبت",
+      "reference_text": "الصحيحان",
+      "sort_order": 61
+    },
+    {
+      "subject": "creed",
+      "title": "علامات الساعة",
+      "summary": "الإيمان بما صح دون تحديد مواعيد أو إسقاط متكلف",
+      "reference_text": "صحيح مسلم وكتب الفتن",
+      "sort_order": 62
+    },
+    {
+      "subject": "creed",
+      "title": "الجنة والنار",
+      "summary": "الإيمان بحقيقتهما والعمل بأسباب النجاة",
+      "reference_text": "آل عمران 133، التحريم 6",
+      "sort_order": 63
+    },
+    {
+      "subject": "creed",
+      "title": "حقوق النبي ﷺ",
+      "summary": "الإيمان والنصرة والاتباع والصلاة والسلام عليه",
+      "reference_text": "الأحزاب 56",
+      "sort_order": 64
+    },
+    {
+      "subject": "creed",
+      "title": "الوسطية بين الغلو والجفاء",
+      "summary": "الالتزام بالنص والعدل في الأشخاص والمسائل",
+      "reference_text": "البقرة 143",
+      "sort_order": 65
+    },
+    {
+      "subject": "creed",
+      "title": "التثبت في مسائل الاعتقاد",
+      "summary": "رد المتشابه للمحكم وترك القول بلا علم",
+      "reference_text": "آل عمران 7، الإسراء 36",
+      "sort_order": 66
+    }
+  ],
+  "fiqh": [
+    {
+      "subject": "fiqh",
+      "title": "مدخل الفقه",
+      "summary": "معنى الفقه وأدب الخلاف والرجوع للمفتي في النوازل",
+      "reference_text": "النحل 43",
+      "sort_order": 0
+    },
+    {
+      "subject": "fiqh",
+      "title": "أحكام المياه",
+      "summary": "الطهور والنجاسة والتغير",
+      "reference_text": "المائدة 6",
+      "sort_order": 1
+    },
+    {
+      "subject": "fiqh",
+      "title": "إزالة النجاسة",
+      "summary": "قواعد إزالة النجاسة والعفو عن اليسير عند أهل العلم",
+      "reference_text": "أبواب الطهارة",
+      "sort_order": 2
+    },
+    {
+      "subject": "fiqh",
+      "title": "الوضوء",
+      "summary": "الصفة والفرائض والسنن",
+      "reference_text": "المائدة 6، الصحيحان",
+      "sort_order": 3
+    },
+    {
+      "subject": "fiqh",
+      "title": "نواقض الوضوء",
+      "summary": "المتفق عليه وأشهر مواضع الخلاف",
+      "reference_text": "أبواب الطهارة",
+      "sort_order": 4
+    },
+    {
+      "subject": "fiqh",
+      "title": "المسح على الخفين",
+      "summary": "الشروط والمدة للمقيم والمسافر",
+      "reference_text": "صحيح مسلم",
+      "sort_order": 5
+    },
+    {
+      "subject": "fiqh",
+      "title": "الغسل",
+      "summary": "موجباته وصفته",
+      "reference_text": "النساء 43",
+      "sort_order": 6
+    },
+    {
+      "subject": "fiqh",
+      "title": "التيمم",
+      "summary": "متى يشرع وكيفيته",
+      "reference_text": "المائدة 6",
+      "sort_order": 7
+    },
+    {
+      "subject": "fiqh",
+      "title": "الحيض والنفاس",
+      "summary": "أحكام العبادة مع ضرورة السؤال في الحالات الملتبسة",
+      "reference_text": "البقرة 222",
+      "sort_order": 8
+    },
+    {
+      "subject": "fiqh",
+      "title": "شروط الصلاة",
+      "summary": "الوقت والطهارة والقبلة والستر والنية",
+      "reference_text": "أبواب الصلاة",
+      "sort_order": 9
+    },
+    {
+      "subject": "fiqh",
+      "title": "أركان الصلاة",
+      "summary": "القيام والفاتحة والركوع والسجود والطمأنينة",
+      "reference_text": "حديث المسيء صلاته",
+      "sort_order": 10
+    },
+    {
+      "subject": "fiqh",
+      "title": "واجبات وسنن الصلاة",
+      "summary": "الفرق وأثر الترك",
+      "reference_text": "أبواب الصلاة",
+      "sort_order": 11
+    },
+    {
+      "subject": "fiqh",
+      "title": "مبطلات الصلاة",
+      "summary": "الأكل والكلام والحركة الكثيرة وغيرها",
+      "reference_text": "أبواب الصلاة",
+      "sort_order": 12
+    },
+    {
+      "subject": "fiqh",
+      "title": "سجود السهو",
+      "summary": "الزيادة والنقص والشك",
+      "reference_text": "الصحيحان",
+      "sort_order": 13
+    },
+    {
+      "subject": "fiqh",
+      "title": "صلاة الجماعة",
+      "summary": "فضلها وأحكام الاقتداء",
+      "reference_text": "الصحيحان",
+      "sort_order": 14
+    },
+    {
+      "subject": "fiqh",
+      "title": "الجمعة",
+      "summary": "الشروط والسنن والأعذار",
+      "reference_text": "الجمعة 9",
+      "sort_order": 15
+    },
+    {
+      "subject": "fiqh",
+      "title": "صلاة المسافر",
+      "summary": "القصر والجمع وأحكام السفر",
+      "reference_text": "النساء 101",
+      "sort_order": 16
+    },
+    {
+      "subject": "fiqh",
+      "title": "صلاة المريض",
+      "summary": "الصلاة حسب الاستطاعة",
+      "reference_text": "صحيح البخاري",
+      "sort_order": 17
+    },
+    {
+      "subject": "fiqh",
+      "title": "الجنائز",
+      "summary": "الغسل والتكفين والصلاة والدفن",
+      "reference_text": "أبواب الجنائز",
+      "sort_order": 18
+    },
+    {
+      "subject": "fiqh",
+      "title": "الزكاة",
+      "summary": "النصاب والحول والمصارف",
+      "reference_text": "التوبة 60",
+      "sort_order": 19
+    },
+    {
+      "subject": "fiqh",
+      "title": "زكاة الفطر",
+      "summary": "حكمها ووقتها ومصرفها",
+      "reference_text": "الصحيحان",
+      "sort_order": 20
+    },
+    {
+      "subject": "fiqh",
+      "title": "الصيام",
+      "summary": "النية والمفطرات والرخص",
+      "reference_text": "البقرة 183–185",
+      "sort_order": 21
+    },
+    {
+      "subject": "fiqh",
+      "title": "قضاء الصيام والفدية",
+      "summary": "أحكام المريض والمسافر وكبير السن",
+      "reference_text": "البقرة 184–185",
+      "sort_order": 22
+    },
+    {
+      "subject": "fiqh",
+      "title": "صيام التطوع",
+      "summary": "عرفة وعاشوراء وست شوال والاثنين والخميس",
+      "reference_text": "صحيح مسلم",
+      "sort_order": 23
+    },
+    {
+      "subject": "fiqh",
+      "title": "الحج والعمرة",
+      "summary": "الأركان والواجبات والمحظورات",
+      "reference_text": "آل عمران 97",
+      "sort_order": 24
+    },
+    {
+      "subject": "fiqh",
+      "title": "الأيمان والنذور",
+      "summary": "الكفارة وخطر النذر في المعصية",
+      "reference_text": "المائدة 89",
+      "sort_order": 25
+    },
+    {
+      "subject": "fiqh",
+      "title": "قواعد المعاملات",
+      "summary": "الأصل الإباحة والرضا ورفع الغرر",
+      "reference_text": "النساء 29",
+      "sort_order": 26
+    },
+    {
+      "subject": "fiqh",
+      "title": "البيع الصحيح",
+      "summary": "التراضي والعلم بالثمن والمبيع",
+      "reference_text": "البقرة 275",
+      "sort_order": 27
+    },
+    {
+      "subject": "fiqh",
+      "title": "الربا",
+      "summary": "ربا الديون والبيوع والتحذير من الحيل",
+      "reference_text": "البقرة 275–279",
+      "sort_order": 28
+    },
+    {
+      "subject": "fiqh",
+      "title": "الديون",
+      "summary": "الكتابة والأجل والإنظار",
+      "reference_text": "البقرة 282",
+      "sort_order": 29
+    },
+    {
+      "subject": "fiqh",
+      "title": "الإجارة والعمل",
+      "summary": "العقد الواضح والأجر والأمانة",
+      "reference_text": "المائدة 1",
+      "sort_order": 30
+    },
+    {
+      "subject": "fiqh",
+      "title": "الشركات والعمولات",
+      "summary": "الشفافية ومنع العمولة الخفية",
+      "reference_text": "النساء 58",
+      "sort_order": 31
+    },
+    {
+      "subject": "fiqh",
+      "title": "التجارة الإلكترونية",
+      "summary": "الوصف والاسترجاع وحماية البيانات",
+      "reference_text": "قواعد المعاملات والأنظمة",
+      "sort_order": 32
+    },
+    {
+      "subject": "fiqh",
+      "title": "الوقف والهبة",
+      "summary": "الفرق بينهما وأحكام الرجوع",
+      "reference_text": "أبواب التبرعات",
+      "sort_order": 33
+    },
+    {
+      "subject": "fiqh",
+      "title": "الزواج",
+      "summary": "الأركان والحقوق والمودة",
+      "reference_text": "الروم 21",
+      "sort_order": 34
+    },
+    {
+      "subject": "fiqh",
+      "title": "النفقة والعشرة",
+      "summary": "المعروف ورفع الضرر",
+      "reference_text": "النساء 19",
+      "sort_order": 35
+    },
+    {
+      "subject": "fiqh",
+      "title": "الطلاق والخلع",
+      "summary": "أحكام دقيقة تحتاج إفتاء وقضاء",
+      "reference_text": "الطلاق 1",
+      "sort_order": 36
+    },
+    {
+      "subject": "fiqh",
+      "title": "الحضانة والنسب",
+      "summary": "حفظ حق الطفل ومنع التلاعب",
+      "reference_text": "أحكام الأسرة",
+      "sort_order": 37
+    },
+    {
+      "subject": "fiqh",
+      "title": "الميراث",
+      "summary": "الحقوق قبل القسمة وأنصبة الورثة",
+      "reference_text": "النساء 11–12",
+      "sort_order": 38
+    },
+    {
+      "subject": "fiqh",
+      "title": "الوصية",
+      "summary": "حدودها وترتيبها مع الديون",
+      "reference_text": "البقرة 180",
+      "sort_order": 39
+    },
+    {
+      "subject": "fiqh",
+      "title": "الأطعمة والذبائح",
+      "summary": "الأصل الحل والمحرمات المنصوصة",
+      "reference_text": "المائدة 3",
+      "sort_order": 40
+    },
+    {
+      "subject": "fiqh",
+      "title": "اللباس والزينة",
+      "summary": "الستر والنظافة وترك الإسراف",
+      "reference_text": "الأعراف 31",
+      "sort_order": 41
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه المرض والدواء",
+      "summary": "لا ضرر ولا تعطيل للعلاج",
+      "reference_text": "لا ضرر ولا ضرار",
+      "sort_order": 42
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه النوازل",
+      "summary": "سؤال المختص وعدم إصدار فتوى من التطبيق",
+      "reference_text": "النحل 43",
+      "sort_order": 43
+    },
+    {
+      "subject": "fiqh",
+      "title": "مراجعة الفقه",
+      "summary": "خريطة الأبواب الكبرى",
+      "reference_text": "مراجعة تعليمية",
+      "sort_order": 44
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه النية",
+      "summary": "تمييز العبادات والعادات ومحل النية في القلب",
+      "reference_text": "حديث إنما الأعمال بالنيات",
+      "sort_order": 45
+    },
+    {
+      "subject": "fiqh",
+      "title": "سنن الفطرة",
+      "summary": "الطهارة الظاهرة وآداب الجسد",
+      "reference_text": "الصحيحان",
+      "sort_order": 46
+    },
+    {
+      "subject": "fiqh",
+      "title": "الأذان والإقامة",
+      "summary": "أحكامهما وآدابهما وأجوبة المؤذن",
+      "reference_text": "أبواب الصلاة",
+      "sort_order": 47
+    },
+    {
+      "subject": "fiqh",
+      "title": "صفة صلاة النبي ﷺ",
+      "summary": "القيام والركوع والسجود والطمأنينة والذكر",
+      "reference_text": "حديث المسيء صلاته",
+      "sort_order": 48
+    },
+    {
+      "subject": "fiqh",
+      "title": "صلاة التطوع",
+      "summary": "الرواتب والوتر والضحى وقيام الليل",
+      "reference_text": "صحيح مسلم وأبواب النوافل",
+      "sort_order": 49
+    },
+    {
+      "subject": "fiqh",
+      "title": "زكاة المال المعاصر",
+      "summary": "النقود والرواتب والمدخرات والأسهم بضوابط الفتوى",
+      "reference_text": "فتاوى المجامع الفقهية",
+      "sort_order": 50
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه الصيام المعاصر",
+      "summary": "البخاخ والحقن والفحوص الطبية وما يحتاج سؤال المفتي",
+      "reference_text": "قرارات فقهية معاصرة",
+      "sort_order": 51
+    },
+    {
+      "subject": "fiqh",
+      "title": "الاعتكاف وليلة القدر",
+      "summary": "آداب الاعتكاف وتحري العشر الأواخر",
+      "reference_text": "الصحيحان",
+      "sort_order": 52
+    },
+    {
+      "subject": "fiqh",
+      "title": "محظورات الإحرام",
+      "summary": "ما يمنع على المحرم وما تجب فيه الفدية",
+      "reference_text": "أبواب الحج",
+      "sort_order": 53
+    },
+    {
+      "subject": "fiqh",
+      "title": "الوكالة والضمان",
+      "summary": "أحكام النيابة وتحمل الالتزام",
+      "reference_text": "المائدة 1",
+      "sort_order": 54
+    },
+    {
+      "subject": "fiqh",
+      "title": "الجعالة والسمسرة",
+      "summary": "العمولة المعلومة ومنع الخداع والتغرير",
+      "reference_text": "قواعد المعاملات",
+      "sort_order": 55
+    },
+    {
+      "subject": "fiqh",
+      "title": "الربا في التطبيقات المعاصرة",
+      "summary": "بطاقات الائتمان والقروض والفوائد والبدائل المشروعة",
+      "reference_text": "قرارات المجامع الفقهية",
+      "sort_order": 56
+    },
+    {
+      "subject": "fiqh",
+      "title": "التأمين والمعاملات الحديثة",
+      "summary": "تمييز التجاري والتعاوني وسؤال أهل الاختصاص",
+      "reference_text": "فقه النوازل",
+      "sort_order": 57
+    },
+    {
+      "subject": "fiqh",
+      "title": "حقوق الجار والضيف",
+      "summary": "أحكام العشرة والآداب الواجبة والمستحبة",
+      "reference_text": "الصحيحان",
+      "sort_order": 58
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه الأسرة العملي",
+      "summary": "الخطبة والعقد والحقوق والنفقة وحل النزاع",
+      "reference_text": "الروم 21، النساء 19",
+      "sort_order": 59
+    },
+    {
+      "subject": "fiqh",
+      "title": "العدة والرجعة",
+      "summary": "أحكام دقيقة تحتاج معرفة الحالة وسؤال المفتي",
+      "reference_text": "الطلاق 1–4",
+      "sort_order": 60
+    },
+    {
+      "subject": "fiqh",
+      "title": "القضاء والشهادة",
+      "summary": "العدل والبينة وخطر شهادة الزور",
+      "reference_text": "النساء 135",
+      "sort_order": 61
+    },
+    {
+      "subject": "fiqh",
+      "title": "الحدود والجنايات",
+      "summary": "باب قضائي لا يطبقه الأفراد ولا التطبيقات",
+      "reference_text": "المائدة، كتب الفقه",
+      "sort_order": 62
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه الأقليات والسفر",
+      "summary": "الرخص والضرورات وتقدير الحاجة",
+      "reference_text": "قواعد المشقة والتيسير",
+      "sort_order": 63
+    },
+    {
+      "subject": "fiqh",
+      "title": "خطة مراجعة الفقه",
+      "summary": "عبادات ثم معاملات ثم أسرة ثم نوازل",
+      "reference_text": "منهج تعليمي",
+      "sort_order": 64
+    },
+    {
+      "subject": "fiqh",
+      "title": "أصول الفقه للمبتدئ",
+      "summary": "الأمر والنهي والعام والخاص والقياس والمصلحة لفهم سبب اختلاف الفقهاء",
+      "reference_text": "الورقات ومداخل أصول الفقه",
+      "sort_order": 65
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه الطهارة للمرأة",
+      "summary": "الحيض والاستحاضة والنفاس وأثرها على الصلاة والصيام مع ضرورة السؤال في الحالات الخاصة",
+      "reference_text": "أبواب الطهارة",
+      "sort_order": 66
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه صلاة الجماعة والإمامة",
+      "summary": "أحكام الاقتداء والمسبوق وسجود السهو وأعذار التخلف",
+      "reference_text": "كتب الصلاة",
+      "sort_order": 67
+    },
+    {
+      "subject": "fiqh",
+      "title": "زكاة الذهب والتجارة والرواتب",
+      "summary": "ضبط النصاب والحول وعروض التجارة والمدخرات، مع سؤال المختص في الحالات المركبة",
+      "reference_text": "أبواب الزكاة",
+      "sort_order": 68
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه البيوع الحديثة",
+      "summary": "البيع الإلكتروني، الشروط، الاسترجاع، الغرر، وحماية المشتري والبيانات",
+      "reference_text": "قواعد المعاملات",
+      "sort_order": 69
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه الضرورة والحاجة",
+      "summary": "متى تقدر الضرورة بقدرها وكيف لا تتحول الرخص إلى تساهل دائم",
+      "reference_text": "القواعد الفقهية",
+      "sort_order": 70
+    },
+    {
+      "subject": "fiqh",
+      "title": "مراجع الفقه الأساسية",
+      "summary": "منهاج المسلم، فقه السنة، الملخص الفقهي، بداية المجتهد للمقارنة، وقرارات المجامع الفقهية للنوازل",
+      "reference_text": "قائمة مراجعة ومصادر",
+      "sort_order": 71
+    },
+    {
+      "subject": "fiqh",
+      "title": "الاستنجاء والاستجمار",
+      "summary": "أحكام قضاء الحاجة والتنزه من النجاسة والآداب",
+      "reference_text": "أبواب الطهارة",
+      "sort_order": 72
+    },
+    {
+      "subject": "fiqh",
+      "title": "أوقات الصلاة",
+      "summary": "بداية كل وقت ونهايته وأحكام الجمع عند الحاجة",
+      "reference_text": "النساء 103، أبواب المواقيت",
+      "sort_order": 73
+    },
+    {
+      "subject": "fiqh",
+      "title": "ستر العورة",
+      "summary": "ضوابط الستر في الصلاة وخارجها",
+      "reference_text": "الأعراف 31",
+      "sort_order": 74
+    },
+    {
+      "subject": "fiqh",
+      "title": "القبلة والاجتهاد",
+      "summary": "استقبال القبلة وحكم العاجز والمخطئ بعد التحري",
+      "reference_text": "البقرة 144",
+      "sort_order": 75
+    },
+    {
+      "subject": "fiqh",
+      "title": "صلاة الاستخارة",
+      "summary": "صفتها ومعنى الدعاء دون انتظار حلم",
+      "reference_text": "صحيح البخاري",
+      "sort_order": 76
+    },
+    {
+      "subject": "fiqh",
+      "title": "صلاة الاستسقاء والكسوف",
+      "summary": "الأحكام الأساسية والسنن الواردة",
+      "reference_text": "الصحيحان",
+      "sort_order": 77
+    },
+    {
+      "subject": "fiqh",
+      "title": "أحكام المساجد",
+      "summary": "التحية والنظافة وآداب المكث والمرور",
+      "reference_text": "الصحيحان",
+      "sort_order": 78
+    },
+    {
+      "subject": "fiqh",
+      "title": "أحكام الجمعة للمسافر والمرأة",
+      "summary": "بيان الأصل والرخص ومواضع الخلاف المعتبر",
+      "reference_text": "أبواب الجمعة",
+      "sort_order": 79
+    },
+    {
+      "subject": "fiqh",
+      "title": "مفسدات الصيام المعاصرة",
+      "summary": "قاعدة دخول العين للجوف وما يحتاج لفتوى خاصة",
+      "reference_text": "قرارات المجامع الفقهية",
+      "sort_order": 80
+    },
+    {
+      "subject": "fiqh",
+      "title": "الزكاة على الديون",
+      "summary": "أثر الدين في الزكاة وحالات الدين المرجو وغير المرجو",
+      "reference_text": "أبواب الزكاة",
+      "sort_order": 81
+    },
+    {
+      "subject": "fiqh",
+      "title": "الأضحية والعقيقة",
+      "summary": "الوقت والسن والصفة وأحكام الاشتراك",
+      "reference_text": "أبواب الأضاحي",
+      "sort_order": 82
+    },
+    {
+      "subject": "fiqh",
+      "title": "اللقطة والأمانات",
+      "summary": "حفظ أموال الناس والتعريف ورد الأمانة",
+      "reference_text": "النساء 58",
+      "sort_order": 83
+    },
+    {
+      "subject": "fiqh",
+      "title": "الشراء بالتقسيط",
+      "summary": "جواز الثمن المؤجل المعلوم ومنع غرامة التأخير الربوية",
+      "reference_text": "قواعد البيوع",
+      "sort_order": 84
+    },
+    {
+      "subject": "fiqh",
+      "title": "الخصومات والمسابقات",
+      "summary": "الجوائز والقرعة والميسر وضوابط المسابقات",
+      "reference_text": "المائدة 90",
+      "sort_order": 85
+    },
+    {
+      "subject": "fiqh",
+      "title": "فقه الخصوصية الرقمية",
+      "summary": "حرمة التجسس ونشر الأسرار والصور دون إذن",
+      "reference_text": "الحجرات 12",
+      "sort_order": 86
+    }
+  ],
+  "seerah": [
+    {
+      "subject": "seerah",
+      "title": "العرب قبل الإسلام",
+      "summary": "البيئة الدينية والاجتماعية والسياسية",
+      "reference_text": "مدخل تاريخي",
+      "sort_order": 0
+    },
+    {
+      "subject": "seerah",
+      "title": "نسب النبي ﷺ",
+      "summary": "نسبه الشريف وقريش وبنو هاشم",
+      "reference_text": "كتب السيرة",
+      "sort_order": 1
+    },
+    {
+      "subject": "seerah",
+      "title": "المولد",
+      "summary": "عام الفيل واختلاف تحديد اليوم",
+      "reference_text": "كتب السيرة",
+      "sort_order": 2
+    },
+    {
+      "subject": "seerah",
+      "title": "اليتم والنشأة",
+      "summary": "وفاة الوالدين وكفالة الجد والعم",
+      "reference_text": "كتب السيرة",
+      "sort_order": 3
+    },
+    {
+      "subject": "seerah",
+      "title": "حرب الفجار وحلف الفضول",
+      "summary": "مشاركته في نصرة المظلوم",
+      "reference_text": "كتب السيرة",
+      "sort_order": 4
+    },
+    {
+      "subject": "seerah",
+      "title": "العمل والزواج",
+      "summary": "الرعي والتجارة والزواج من خديجة",
+      "reference_text": "كتب السيرة",
+      "sort_order": 5
+    },
+    {
+      "subject": "seerah",
+      "title": "بناء الكعبة",
+      "summary": "حكمته في وضع الحجر الأسود",
+      "reference_text": "كتب السيرة",
+      "sort_order": 6
+    },
+    {
+      "subject": "seerah",
+      "title": "بدء الوحي",
+      "summary": "غار حراء وأول سورة العلق",
+      "reference_text": "العلق 1–5، الصحيحان",
+      "sort_order": 7
+    },
+    {
+      "subject": "seerah",
+      "title": "الدعوة السرية",
+      "summary": "السابقون الأولون ودار الأرقم",
+      "reference_text": "كتب السيرة",
+      "sort_order": 8
+    },
+    {
+      "subject": "seerah",
+      "title": "الدعوة الجهرية",
+      "summary": "الإنذار والصبر على الأذى",
+      "reference_text": "الشعراء 214",
+      "sort_order": 9
+    },
+    {
+      "subject": "seerah",
+      "title": "الهجرة إلى الحبشة",
+      "summary": "حماية الدين والعدل عند النجاشي",
+      "reference_text": "كتب السيرة",
+      "sort_order": 10
+    },
+    {
+      "subject": "seerah",
+      "title": "المقاطعة",
+      "summary": "صحيفة المقاطعة والثبات",
+      "reference_text": "كتب السيرة",
+      "sort_order": 11
+    },
+    {
+      "subject": "seerah",
+      "title": "عام الحزن",
+      "summary": "وفاة أبي طالب وخديجة",
+      "reference_text": "كتب السيرة",
+      "sort_order": 12
+    },
+    {
+      "subject": "seerah",
+      "title": "الطائف",
+      "summary": "الدعوة والصبر والعفو",
+      "reference_text": "كتب السيرة",
+      "sort_order": 13
+    },
+    {
+      "subject": "seerah",
+      "title": "الإسراء والمعراج",
+      "summary": "الرحلة وفرض الصلاة",
+      "reference_text": "الإسراء 1، الصحيحان",
+      "sort_order": 14
+    },
+    {
+      "subject": "seerah",
+      "title": "بيعتا العقبة",
+      "summary": "تهيئة المدينة للهجرة",
+      "reference_text": "كتب السيرة",
+      "sort_order": 15
+    },
+    {
+      "subject": "seerah",
+      "title": "الهجرة",
+      "summary": "التخطيط والغار وقباء",
+      "reference_text": "التوبة 40، صحيح البخاري",
+      "sort_order": 16
+    },
+    {
+      "subject": "seerah",
+      "title": "بناء المسجد",
+      "summary": "مركز العبادة والتعليم",
+      "reference_text": "كتب السيرة",
+      "sort_order": 17
+    },
+    {
+      "subject": "seerah",
+      "title": "المؤاخاة",
+      "summary": "بناء المجتمع والتكافل",
+      "reference_text": "كتب السيرة",
+      "sort_order": 18
+    },
+    {
+      "subject": "seerah",
+      "title": "وثيقة المدينة",
+      "summary": "تنظيم الحقوق والمسؤوليات",
+      "reference_text": "مصادر السيرة مع تنبيه الأسانيد",
+      "sort_order": 19
+    },
+    {
+      "subject": "seerah",
+      "title": "تحويل القبلة",
+      "summary": "الانتقال إلى الكعبة",
+      "reference_text": "البقرة 144",
+      "sort_order": 20
+    },
+    {
+      "subject": "seerah",
+      "title": "غزوة بدر",
+      "summary": "الأسباب والأحداث والدروس",
+      "reference_text": "الأنفال، آل عمران 123",
+      "sort_order": 21
+    },
+    {
+      "subject": "seerah",
+      "title": "غزوة أحد",
+      "summary": "الرماة والطاعة والثبات",
+      "reference_text": "آل عمران 121–180",
+      "sort_order": 22
+    },
+    {
+      "subject": "seerah",
+      "title": "بنو النضير",
+      "summary": "السياق والعهد",
+      "reference_text": "الحشر",
+      "sort_order": 23
+    },
+    {
+      "subject": "seerah",
+      "title": "غزوة الخندق",
+      "summary": "الشورى والصبر وإدارة الأزمة",
+      "reference_text": "الأحزاب 9–27",
+      "sort_order": 24
+    },
+    {
+      "subject": "seerah",
+      "title": "بنو قريظة",
+      "summary": "السياق القضائي والعسكري",
+      "reference_text": "الأحزاب 26–27",
+      "sort_order": 25
+    },
+    {
+      "subject": "seerah",
+      "title": "صلح الحديبية",
+      "summary": "فقه المآلات والوفاء",
+      "reference_text": "الفتح 1، صحيح البخاري",
+      "sort_order": 26
+    },
+    {
+      "subject": "seerah",
+      "title": "خيبر",
+      "summary": "أحداثها وأحكامها",
+      "reference_text": "كتب السيرة والصحيح",
+      "sort_order": 27
+    },
+    {
+      "subject": "seerah",
+      "title": "عمرة القضاء",
+      "summary": "الوفاء بالصلح",
+      "reference_text": "كتب السيرة",
+      "sort_order": 28
+    },
+    {
+      "subject": "seerah",
+      "title": "مؤتة",
+      "summary": "القيادة والثبات",
+      "reference_text": "كتب السيرة",
+      "sort_order": 29
+    },
+    {
+      "subject": "seerah",
+      "title": "فتح مكة",
+      "summary": "العفو والتواضع وتطهير الكعبة",
+      "reference_text": "كتب السيرة",
+      "sort_order": 30
+    },
+    {
+      "subject": "seerah",
+      "title": "حنين والطائف",
+      "summary": "عدم الاغترار بالكثرة",
+      "reference_text": "التوبة 25–27",
+      "sort_order": 31
+    },
+    {
+      "subject": "seerah",
+      "title": "تبوك",
+      "summary": "الاستعداد والصدق",
+      "reference_text": "التوبة",
+      "sort_order": 32
+    },
+    {
+      "subject": "seerah",
+      "title": "عام الوفود",
+      "summary": "انتشار الإسلام وتعليم القبائل",
+      "reference_text": "كتب السيرة",
+      "sort_order": 33
+    },
+    {
+      "subject": "seerah",
+      "title": "الرسائل إلى الملوك",
+      "summary": "عالمية الدعوة",
+      "reference_text": "كتب السيرة",
+      "sort_order": 34
+    },
+    {
+      "subject": "seerah",
+      "title": "حجة الوداع",
+      "summary": "المناسك والحقوق",
+      "reference_text": "صحيح مسلم — حديث جابر",
+      "sort_order": 35
+    },
+    {
+      "subject": "seerah",
+      "title": "مرضه ﷺ",
+      "summary": "أواخر حياته والوصايا",
+      "reference_text": "الصحيحان",
+      "sort_order": 36
+    },
+    {
+      "subject": "seerah",
+      "title": "وفاته ﷺ",
+      "summary": "ثبات الصحابة واستمرار الرسالة",
+      "reference_text": "آل عمران 144",
+      "sort_order": 37
+    },
+    {
+      "subject": "seerah",
+      "title": "أمهات المؤمنين",
+      "summary": "مكانتهن وحقوقهن",
+      "reference_text": "الأحزاب 6",
+      "sort_order": 38
+    },
+    {
+      "subject": "seerah",
+      "title": "أبناؤه وبناته",
+      "summary": "أسرته ومواقف تربوية",
+      "reference_text": "كتب السيرة",
+      "sort_order": 39
+    },
+    {
+      "subject": "seerah",
+      "title": "شمائله",
+      "summary": "الرحمة والتواضع والعدل",
+      "reference_text": "القلم 4، الأحزاب 21",
+      "sort_order": 40
+    },
+    {
+      "subject": "seerah",
+      "title": "عبادته",
+      "summary": "الصلاة والذكر والصيام",
+      "reference_text": "الصحيحان",
+      "sort_order": 41
+    },
+    {
+      "subject": "seerah",
+      "title": "قيادته",
+      "summary": "الشورى والعدل والوفاء",
+      "reference_text": "آل عمران 159",
+      "sort_order": 42
+    },
+    {
+      "subject": "seerah",
+      "title": "معاملته لأهله",
+      "summary": "الرحمة والخدمة وحسن العشرة",
+      "reference_text": "صحيح البخاري",
+      "sort_order": 43
+    },
+    {
+      "subject": "seerah",
+      "title": "دروس السيرة",
+      "summary": "تحويل الأحداث إلى قيم عملية",
+      "reference_text": "مراجعة تعليمية",
+      "sort_order": 44
+    },
+    {
+      "subject": "seerah",
+      "title": "دروس الهجرة",
+      "summary": "التخطيط والأخذ بالأسباب والتوكل",
+      "reference_text": "كتب السيرة، التوبة 40",
+      "sort_order": 45
+    },
+    {
+      "subject": "seerah",
+      "title": "غزوة حنين والطائف",
+      "summary": "عدم الاغترار بالكثرة وحسن القيادة",
+      "reference_text": "التوبة 25–26",
+      "sort_order": 46
+    },
+    {
+      "subject": "seerah",
+      "title": "الوفود والرسائل",
+      "summary": "عالمية الرسالة وحكمة الدعوة",
+      "reference_text": "كتب السيرة",
+      "sort_order": 47
+    },
+    {
+      "subject": "seerah",
+      "title": "مرض النبي ﷺ ووفاته",
+      "summary": "كمال البلاغ وثبات الصحابة",
+      "reference_text": "الصحيحان وكتب السيرة",
+      "sort_order": 48
+    },
+    {
+      "subject": "seerah",
+      "title": "شمائل النبي ﷺ",
+      "summary": "الرحمة والحياء والحلم والعدل",
+      "reference_text": "الشمائل المحمدية والصحيحان",
+      "sort_order": 49
+    },
+    {
+      "subject": "seerah",
+      "title": "بيته وأهله",
+      "summary": "هديه في الأسرة والرحمة والخدمة",
+      "reference_text": "الصحيحان",
+      "sort_order": 50
+    },
+    {
+      "subject": "seerah",
+      "title": "هديه في العبادة",
+      "summary": "التوازن بين العبادة والحقوق",
+      "reference_text": "الصحيحان",
+      "sort_order": 51
+    },
+    {
+      "subject": "seerah",
+      "title": "هديه في الدعوة",
+      "summary": "الرفق والتدرج ومخاطبة الناس بما يفهمون",
+      "reference_text": "النحل 125",
+      "sort_order": 52
+    },
+    {
+      "subject": "seerah",
+      "title": "هديه في التعامل مع المخالف",
+      "summary": "العدل والوفاء بالعهد ومنع الظلم",
+      "reference_text": "السيرة النبوية",
+      "sort_order": 53
+    },
+    {
+      "subject": "seerah",
+      "title": "خطة مراجعة السيرة",
+      "summary": "مكي ومدني وغزوات وشمائل ودروس عملية",
+      "reference_text": "منهج تعليمي",
+      "sort_order": 54
+    },
+    {
+      "subject": "seerah",
+      "title": "مصادر السيرة والتحقق",
+      "summary": "التمييز بين الصحيح والمرسل والضعيف في أخبار السيرة، وربط السيرة بالقرآن والحديث",
+      "reference_text": "كتب السيرة وشروح الحديث",
+      "sort_order": 55
+    },
+    {
+      "subject": "seerah",
+      "title": "بيعة العقبة",
+      "summary": "بداية بناء المجتمع المدني ومسؤولية النصرة والوفاء",
+      "reference_text": "كتب السيرة",
+      "sort_order": 56
+    },
+    {
+      "subject": "seerah",
+      "title": "المكي والمدني",
+      "summary": "خصائص الدعوة في مكة والمدينة وأثرها في التربية والتشريع",
+      "reference_text": "علوم القرآن والسيرة",
+      "sort_order": 57
+    },
+    {
+      "subject": "seerah",
+      "title": "غزوات النبي مرتبة زمنيًا",
+      "summary": "ربط بدر وأحد والخندق والحديبية وفتح مكة وتبوك بالخريطة الزمنية",
+      "reference_text": "كتب المغازي",
+      "sort_order": 58
+    },
+    {
+      "subject": "seerah",
+      "title": "مراجع السيرة الأساسية",
+      "summary": "الرحيق المختوم، صحيح السيرة النبوية، زاد المعاد، فقه السيرة، مع المقارنة بالمصادر الحديثية",
+      "reference_text": "قائمة مراجعة ومصادر",
+      "sort_order": 59
+    },
+    {
+      "subject": "seerah",
+      "title": "خديجة رضي الله عنها",
+      "summary": "دورها في تثبيت النبي ﷺ وبذلها ونصرتها",
+      "reference_text": "الصحيحان وكتب السيرة",
+      "sort_order": 60
+    },
+    {
+      "subject": "seerah",
+      "title": "أبو بكر في السيرة",
+      "summary": "السبق والصحبة والهجرة والبذل",
+      "reference_text": "التوبة 40، كتب السيرة",
+      "sort_order": 61
+    },
+    {
+      "subject": "seerah",
+      "title": "عمر وعثمان وعلي في العهد النبوي",
+      "summary": "مواقف ثابتة من الصحابة الأربعة دون مبالغات غير موثقة",
+      "reference_text": "الصحيحان وكتب السيرة",
+      "sort_order": 62
+    },
+    {
+      "subject": "seerah",
+      "title": "أبناء النبي ﷺ وبناته",
+      "summary": "التعريف بأهل بيته وما ثبت من أخبارهم",
+      "reference_text": "كتب السيرة الموثوقة",
+      "sort_order": 63
+    },
+    {
+      "subject": "seerah",
+      "title": "غزوة بني المصطلق",
+      "summary": "الأحداث والدروس وواقعة الإفك",
+      "reference_text": "النور 11–26",
+      "sort_order": 64
+    },
+    {
+      "subject": "seerah",
+      "title": "قصة الإفك",
+      "summary": "التثبت وحفظ الأعراض وخطر الشائعات",
+      "reference_text": "النور 11–26",
+      "sort_order": 65
+    },
+    {
+      "subject": "seerah",
+      "title": "رسائل النبي ﷺ للملوك",
+      "summary": "عالمية الرسالة وأدب المخاطبة",
+      "reference_text": "كتب السيرة والحديث",
+      "sort_order": 66
+    },
+    {
+      "subject": "seerah",
+      "title": "فتح خيبر",
+      "summary": "الأسباب والأحداث وما ثبت من الدروس",
+      "reference_text": "الصحيحان وكتب المغازي",
+      "sort_order": 67
+    },
+    {
+      "subject": "seerah",
+      "title": "آخر رمضان للنبي ﷺ",
+      "summary": "مدارسة القرآن والاعتكاف ومضاعفة الاجتهاد",
+      "reference_text": "الصحيحان",
+      "sort_order": 68
+    },
+    {
+      "subject": "seerah",
+      "title": "وصايا الأيام الأخيرة",
+      "summary": "الصلاة والحقوق والثبات على التوحيد",
+      "reference_text": "الصحيحان",
+      "sort_order": 69
+    },
+    {
+      "subject": "seerah",
+      "title": "كيف ندرس السيرة",
+      "summary": "تمييز الثابت من المشهور وربط الحدث بالهداية والعمل",
+      "reference_text": "منهج دراسة السيرة",
+      "sort_order": 70
+    }
+  ],
+  "hadith": [
+    {
+      "subject": "hadith",
+      "title": "مدخل علوم الحديث",
+      "summary": "السند والمتن وأهمية التثبت",
+      "reference_text": "الحجرات 6",
+      "sort_order": 0
+    },
+    {
+      "subject": "hadith",
+      "title": "الحديث الصحيح",
+      "summary": "اتصال السند وعدالة الرواة وضبطهم والسلامة من الشذوذ والعلة",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 1
+    },
+    {
+      "subject": "hadith",
+      "title": "الحديث الحسن",
+      "summary": "خف ضبط بعض رواته مع بقية شروط القبول",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 2
+    },
+    {
+      "subject": "hadith",
+      "title": "الحديث الضعيف",
+      "summary": "ما فقد شرطًا من شروط القبول",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 3
+    },
+    {
+      "subject": "hadith",
+      "title": "الحديث الموضوع",
+      "summary": "المختلق المنسوب للنبي ﷺ",
+      "reference_text": "الصحيحان: من كذب علي متعمدًا",
+      "sort_order": 4
+    },
+    {
+      "subject": "hadith",
+      "title": "المتواتر والآحاد",
+      "summary": "تقسيم الخبر بحسب طرق النقل",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 5
+    },
+    {
+      "subject": "hadith",
+      "title": "المرفوع والموقوف",
+      "summary": "ما نسب للنبي وما وقف على الصحابي",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 6
+    },
+    {
+      "subject": "hadith",
+      "title": "المرسل والمنقطع",
+      "summary": "صور السقط في الإسناد",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 7
+    },
+    {
+      "subject": "hadith",
+      "title": "الجرح والتعديل",
+      "summary": "دراسة حال الرواة بضوابط العلم",
+      "reference_text": "علوم الرجال",
+      "sort_order": 8
+    },
+    {
+      "subject": "hadith",
+      "title": "العلة والشذوذ",
+      "summary": "أسباب خفية تؤثر في الصحة",
+      "reference_text": "علل الحديث",
+      "sort_order": 9
+    },
+    {
+      "subject": "hadith",
+      "title": "التخريج",
+      "summary": "معرفة موضع الحديث وطرقه وأحكام العلماء",
+      "reference_text": "منهج التخريج",
+      "sort_order": 10
+    },
+    {
+      "subject": "hadith",
+      "title": "اختلاف المحدثين",
+      "summary": "قد تختلف الأحكام باختلاف الطرق والاجتهاد",
+      "reference_text": "منهج علمي",
+      "sort_order": 11
+    },
+    {
+      "subject": "hadith",
+      "title": "إنما الأعمال بالنيات",
+      "summary": "أصل النية",
+      "reference_text": "الصحيحان",
+      "sort_order": 12
+    },
+    {
+      "subject": "hadith",
+      "title": "بني الإسلام على خمس",
+      "summary": "أركان الإسلام",
+      "reference_text": "الصحيحان",
+      "sort_order": 13
+    },
+    {
+      "subject": "hadith",
+      "title": "الدين النصيحة",
+      "summary": "النصيحة بعلم ورفق",
+      "reference_text": "صحيح مسلم",
+      "sort_order": 14
+    },
+    {
+      "subject": "hadith",
+      "title": "الحلال بين والحرام بين",
+      "summary": "الورع عن الشبهات",
+      "reference_text": "الصحيحان",
+      "sort_order": 15
+    },
+    {
+      "subject": "hadith",
+      "title": "لا يؤمن أحدكم حتى يحب لأخيه",
+      "summary": "محبة الخير",
+      "reference_text": "الصحيحان",
+      "sort_order": 16
+    },
+    {
+      "subject": "hadith",
+      "title": "فليقل خيرًا أو ليصمت",
+      "summary": "ضبط اللسان",
+      "reference_text": "الصحيحان",
+      "sort_order": 17
+    },
+    {
+      "subject": "hadith",
+      "title": "من كان يؤمن بالله واليوم الآخر فليكرم ضيفه",
+      "summary": "الضيافة والخلق",
+      "reference_text": "الصحيحان",
+      "sort_order": 18
+    },
+    {
+      "subject": "hadith",
+      "title": "لا تغضب",
+      "summary": "ضبط النفس",
+      "reference_text": "صحيح البخاري",
+      "sort_order": 19
+    },
+    {
+      "subject": "hadith",
+      "title": "لا ضرر ولا ضرار",
+      "summary": "قاعدة رفع الضرر",
+      "reference_text": "ابن ماجه — حسن بمجموع طرقه",
+      "sort_order": 20
+    },
+    {
+      "subject": "hadith",
+      "title": "اتق الله حيثما كنت",
+      "summary": "التقوى وحسن الخلق",
+      "reference_text": "الترمذي — حسن",
+      "sort_order": 21
+    },
+    {
+      "subject": "hadith",
+      "title": "يسروا ولا تعسروا",
+      "summary": "التيسير المشروع",
+      "reference_text": "الصحيحان",
+      "sort_order": 22
+    },
+    {
+      "subject": "hadith",
+      "title": "من غشنا فليس منا",
+      "summary": "تحريم الغش",
+      "reference_text": "صحيح مسلم",
+      "sort_order": 23
+    },
+    {
+      "subject": "hadith",
+      "title": "خيركم من تعلم القرآن وعلمه",
+      "summary": "فضل القرآن",
+      "reference_text": "صحيح البخاري",
+      "sort_order": 24
+    },
+    {
+      "subject": "hadith",
+      "title": "أحب الأعمال أدومها",
+      "summary": "الاستمرار",
+      "reference_text": "الصحيحان",
+      "sort_order": 25
+    },
+    {
+      "subject": "hadith",
+      "title": "الكلمة الطيبة صدقة",
+      "summary": "فضل الكلام الحسن",
+      "reference_text": "الصحيحان",
+      "sort_order": 26
+    },
+    {
+      "subject": "hadith",
+      "title": "الطهور شطر الإيمان",
+      "summary": "فضل الطهارة",
+      "reference_text": "صحيح مسلم",
+      "sort_order": 27
+    },
+    {
+      "subject": "hadith",
+      "title": "من سلك طريقًا يلتمس فيه علمًا",
+      "summary": "طلب العلم",
+      "reference_text": "صحيح مسلم",
+      "sort_order": 28
+    },
+    {
+      "subject": "hadith",
+      "title": "ليس الشديد بالصرعة",
+      "summary": "القوة في ضبط الغضب",
+      "reference_text": "الصحيحان",
+      "sort_order": 29
+    },
+    {
+      "subject": "hadith",
+      "title": "صوموا تصحوا",
+      "summary": "حديث ضعيف لا يثبت",
+      "reference_text": "كتب التخريج",
+      "sort_order": 30
+    },
+    {
+      "subject": "hadith",
+      "title": "اطلبوا العلم ولو بالصين",
+      "summary": "ضعيف بطرقه المشهورة",
+      "reference_text": "كتب التخريج",
+      "sort_order": 31
+    },
+    {
+      "subject": "hadith",
+      "title": "اختلاف أمتي رحمة",
+      "summary": "لا يثبت حديثًا",
+      "reference_text": "كتب الموضوعات والتخريج",
+      "sort_order": 32
+    },
+    {
+      "subject": "hadith",
+      "title": "حب الوطن من الإيمان",
+      "summary": "ليس حديثًا",
+      "reference_text": "كتب التخريج",
+      "sort_order": 33
+    },
+    {
+      "subject": "hadith",
+      "title": "النظافة من الإيمان",
+      "summary": "ليس حديثًا بهذا اللفظ",
+      "reference_text": "الصحيح البديل: الطهور شطر الإيمان",
+      "sort_order": 34
+    },
+    {
+      "subject": "hadith",
+      "title": "الدين المعاملة",
+      "summary": "عبارة وليست حديثًا",
+      "reference_text": "لا تنسب للنبي ﷺ",
+      "sort_order": 35
+    },
+    {
+      "subject": "hadith",
+      "title": "اعمل لدنياك كأنك تعيش أبدًا",
+      "summary": "لا يثبت مرفوعًا",
+      "reference_text": "كتب التخريج",
+      "sort_order": 36
+    },
+    {
+      "subject": "hadith",
+      "title": "خير الأمور أوسطها",
+      "summary": "لا يثبت بهذا الإطلاق",
+      "reference_text": "كتب التخريج",
+      "sort_order": 37
+    },
+    {
+      "subject": "hadith",
+      "title": "من لم تنهه صلاته",
+      "summary": "لا يصح مرفوعًا باللفظ المشهور",
+      "reference_text": "كتب التخريج",
+      "sort_order": 38
+    },
+    {
+      "subject": "hadith",
+      "title": "أصحابي كالنجوم",
+      "summary": "لا يصح",
+      "reference_text": "كتب التخريج",
+      "sort_order": 39
+    },
+    {
+      "subject": "hadith",
+      "title": "من حج فلم يزرني فقد جفاني",
+      "summary": "لا يصح",
+      "reference_text": "كتب الموضوعات",
+      "sort_order": 40
+    },
+    {
+      "subject": "hadith",
+      "title": "التثبت قبل النشر",
+      "summary": "البحث عن اللفظ والمصدر والدرجة",
+      "reference_text": "الحجرات 6",
+      "sort_order": 41
+    },
+    {
+      "subject": "hadith",
+      "title": "أدب نقل الحديث",
+      "summary": "عدم الجزم عند الشك وذكر الدرجة",
+      "reference_text": "منهج علمي",
+      "sort_order": 42
+    },
+    {
+      "subject": "hadith",
+      "title": "فهم الحديث",
+      "summary": "جمع الروايات والرجوع للشروح",
+      "reference_text": "منهج المحدثين",
+      "sort_order": 43
+    },
+    {
+      "subject": "hadith",
+      "title": "مراجعة الحديث",
+      "summary": "خريطة الصحيح والحسن والضعيف والموضوع",
+      "reference_text": "مراجعة تعليمية",
+      "sort_order": 44
+    },
+    {
+      "subject": "hadith",
+      "title": "مصادر السنة",
+      "summary": "الصحيحان والسنن والمسانيد والمصنفات",
+      "reference_text": "مدخل علوم الحديث",
+      "sort_order": 45
+    },
+    {
+      "subject": "hadith",
+      "title": "الكتب الستة",
+      "summary": "مكانتها ومنهج التعامل معها دون ادعاء عصمة غير الصحيحين",
+      "reference_text": "علوم الحديث",
+      "sort_order": 46
+    },
+    {
+      "subject": "hadith",
+      "title": "الأربعون النووية",
+      "summary": "أحاديث جامعة في الدين والأخلاق والعبادة",
+      "reference_text": "الأربعون النووية",
+      "sort_order": 47
+    },
+    {
+      "subject": "hadith",
+      "title": "عمدة الأحكام",
+      "summary": "أحاديث الأحكام المتفق عليها غالبًا",
+      "reference_text": "عمدة الأحكام",
+      "sort_order": 48
+    },
+    {
+      "subject": "hadith",
+      "title": "بلوغ المرام",
+      "summary": "أحاديث الأحكام مع التخريج المختصر",
+      "reference_text": "بلوغ المرام",
+      "sort_order": 49
+    },
+    {
+      "subject": "hadith",
+      "title": "رياض الصالحين",
+      "summary": "أحاديث الترغيب والآداب والتزكية",
+      "reference_text": "رياض الصالحين",
+      "sort_order": 50
+    },
+    {
+      "subject": "hadith",
+      "title": "شرح الحديث",
+      "summary": "معرفة الغريب والسبب والجمع بين الروايات",
+      "reference_text": "فتح الباري وشرح مسلم",
+      "sort_order": 51
+    },
+    {
+      "subject": "hadith",
+      "title": "التخريج العملي",
+      "summary": "البحث عن اللفظ والمصدر والدرجة قبل النشر",
+      "reference_text": "منهج المحدثين",
+      "sort_order": 52
+    },
+    {
+      "subject": "hadith",
+      "title": "علل الحديث",
+      "summary": "قد يضعف الحديث مع ظاهر اتصال الإسناد لسبب خفي",
+      "reference_text": "كتب العلل",
+      "sort_order": 53
+    },
+    {
+      "subject": "hadith",
+      "title": "اختلاف ألفاظ الروايات",
+      "summary": "التعامل مع الروايات بالجمع والترجيح",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 54
+    },
+    {
+      "subject": "hadith",
+      "title": "العمل بالحديث الضعيف",
+      "summary": "مواضع الخلاف وضوابط أهل العلم",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 55
+    },
+    {
+      "subject": "hadith",
+      "title": "الأحاديث المشتهرة",
+      "summary": "لا يصحح الانتشار الحديث حتى يثبت مصدره",
+      "reference_text": "كتب التخريج",
+      "sort_order": 56
+    },
+    {
+      "subject": "hadith",
+      "title": "أحاديث الرقية",
+      "summary": "ما صح في الفاتحة والمعوذات والدعاء والرقية المشروعة",
+      "reference_text": "الصحيحان وصحيح مسلم",
+      "sort_order": 57
+    },
+    {
+      "subject": "hadith",
+      "title": "أحاديث الأحلام",
+      "summary": "الرؤيا الصالحة وآداب التعامل معها دون بناء أحكام",
+      "reference_text": "الصحيحان",
+      "sort_order": 58
+    },
+    {
+      "subject": "hadith",
+      "title": "أحاديث الفتن",
+      "summary": "الحذر من تنزيل النصوص على الواقع بلا علم",
+      "reference_text": "كتب الشروح",
+      "sort_order": 59
+    },
+    {
+      "subject": "hadith",
+      "title": "أدب طالب الحديث",
+      "summary": "الإخلاص والتثبت وترك العجلة في التصحيح والتضعيف",
+      "reference_text": "منهج المحدثين",
+      "sort_order": 60
+    },
+    {
+      "subject": "hadith",
+      "title": "حفظ الأحاديث",
+      "summary": "برنامج مختصر لحفظ الجوامع ثم أحاديث الأحكام",
+      "reference_text": "منهج تعليمي",
+      "sort_order": 61
+    },
+    {
+      "subject": "hadith",
+      "title": "خطة مراجعة الحديث",
+      "summary": "مصطلح ثم تخريج ثم شروح ثم تطبيقات",
+      "reference_text": "منهج تعليمي",
+      "sort_order": 62
+    },
+    {
+      "subject": "hadith",
+      "title": "منهج الصحيحين",
+      "summary": "التعرف على شرط البخاري ومسلم ومكانتهما دون تعميم الحكم على كل كتاب",
+      "reference_text": "علوم الحديث",
+      "sort_order": 63
+    },
+    {
+      "subject": "hadith",
+      "title": "مراتب الحكم على الحديث",
+      "summary": "صحيح لذاته، صحيح لغيره، حسن، ضعيف، موضوع، وأثر ذلك في العمل والنشر",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 64
+    },
+    {
+      "subject": "hadith",
+      "title": "الشواهد والمتابعات",
+      "summary": "كيف يقوى الحديث بطرقه ومتى لا تفيده كثرة الطرق",
+      "reference_text": "مصطلح الحديث وكتب التخريج",
+      "sort_order": 65
+    },
+    {
+      "subject": "hadith",
+      "title": "الأحاديث في الرقية والطب",
+      "summary": "ضرورة التثبت من الأحاديث العلاجية وعدم تحويل الضعيف إلى برنامج ملزم",
+      "reference_text": "الصحيحان وكتب التخريج",
+      "sort_order": 66
+    },
+    {
+      "subject": "hadith",
+      "title": "التعامل مع الحديث المنتشر",
+      "summary": "خطوات عملية: البحث عن اللفظ، المصدر، الدرجة، كلام أهل العلم، ثم النشر بصيغة دقيقة",
+      "reference_text": "منهج التخريج",
+      "sort_order": 67
+    },
+    {
+      "subject": "hadith",
+      "title": "كتب الشروح",
+      "summary": "فتح الباري، شرح النووي على مسلم، تحفة الأحوذي، عون المعبود، وشرح رياض الصالحين",
+      "reference_text": "مراجع الفهم والتطبيق",
+      "sort_order": 68
+    },
+    {
+      "subject": "hadith",
+      "title": "مراجع الحديث الأساسية",
+      "summary": "الأربعون النووية، عمدة الأحكام، بلوغ المرام، رياض الصالحين، نخبة الفكر وشروحها",
+      "reference_text": "قائمة مراجعة ومصادر",
+      "sort_order": 69
+    },
+    {
+      "subject": "hadith",
+      "title": "السند والمتن",
+      "summary": "معنى سلسلة الرواة ونص الحديث وأهمية فحصهما",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 70
+    },
+    {
+      "subject": "hadith",
+      "title": "العدالة والضبط",
+      "summary": "أهم صفات الراوي المقبول وأثرها في الحكم",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 71
+    },
+    {
+      "subject": "hadith",
+      "title": "الحديث المتواتر والآحاد",
+      "summary": "التعريف الإجمالي دون دخول في نزاعات تخصصية",
+      "reference_text": "أصول الحديث",
+      "sort_order": 72
+    },
+    {
+      "subject": "hadith",
+      "title": "المرفوع والموقوف والمقطوع",
+      "summary": "تمييز نسبة الخبر إلى النبي ﷺ أو الصحابي أو التابعي",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 73
+    },
+    {
+      "subject": "hadith",
+      "title": "المرسل والمنقطع والمعضل",
+      "summary": "صور الانقطاع وأثرها الإجمالي في الإسناد",
+      "reference_text": "مصطلح الحديث",
+      "sort_order": 74
+    },
+    {
+      "subject": "hadith",
+      "title": "الشاذ والمنكر",
+      "summary": "مخالفة الثقة ومنكر الرواية بصورة مبسطة",
+      "reference_text": "علوم الحديث",
+      "sort_order": 75
+    },
+    {
+      "subject": "hadith",
+      "title": "الموضوعات وعلاماتها",
+      "summary": "الحذر من الأخبار المختلقة ومراجعة كتب التخريج",
+      "reference_text": "كتب الموضوعات والتخريج",
+      "sort_order": 76
+    },
+    {
+      "subject": "hadith",
+      "title": "أسباب ورود الحديث",
+      "summary": "كيف يساعد السياق في فهم النص دون حصر المعنى بلا دليل",
+      "reference_text": "شروح الحديث",
+      "sort_order": 77
+    },
+    {
+      "subject": "hadith",
+      "title": "الجمع بين الأحاديث",
+      "summary": "رد النصوص بعضها إلى بعض قبل ادعاء التعارض",
+      "reference_text": "أصول الفقه وشروح الحديث",
+      "sort_order": 78
+    },
+    {
+      "subject": "hadith",
+      "title": "الناسخ والمنسوخ في السنة",
+      "summary": "معرفته بالتاريخ أو النص أو الإجماع عند أهل الاختصاص",
+      "reference_text": "علوم الحديث",
+      "sort_order": 79
+    },
+    {
+      "subject": "hadith",
+      "title": "غريب الحديث",
+      "summary": "فهم الألفاظ القديمة بالمعاجم وشروح العلماء",
+      "reference_text": "كتب غريب الحديث",
+      "sort_order": 80
+    },
+    {
+      "subject": "hadith",
+      "title": "آداب رواية الحديث",
+      "summary": "الدقة في اللفظ والنسبة والتثبت قبل النقل",
+      "reference_text": "مقدمة صحيح مسلم",
+      "sort_order": 81
+    },
+    {
+      "subject": "hadith",
+      "title": "الجوامع الحديثية الرقمية",
+      "summary": "استخدام البحث الإلكتروني وسيلة لا بديلًا عن حكم المحدثين",
+      "reference_text": "منهج التخريج",
+      "sort_order": 82
+    },
+    {
+      "subject": "hadith",
+      "title": "التخريج من الصحيحين",
+      "summary": "البحث باللفظ والراوي والموضوع وتوثيق الموضع",
+      "reference_text": "صحيح البخاري وصحيح مسلم",
+      "sort_order": 83
+    },
+    {
+      "subject": "hadith",
+      "title": "خطة طالب الحديث",
+      "summary": "حفظ الجوامع ثم المصطلح ثم التخريج والشروح تدريجيًا",
+      "reference_text": "منهج تعليمي",
+      "sort_order": 84
+    }
+  ]
+}

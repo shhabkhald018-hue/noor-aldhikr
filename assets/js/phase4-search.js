@@ -16,7 +16,7 @@
 
   function buildIndex(){
     const items=[];
-    SURAH_NAMES.forEach((name,i)=>items.push({id:`surah-${i+1}`,type:'quran',title:`سورة ${name}`,body:`القرآن الكريم السورة رقم ${i+1}`,meta:`القرآن الكريم · السورة ${i+1}`,open(){window.navTo?.('quran');setTimeout(()=>window.openSurah?.(i+1),80)}}));
+    SURAH_NAMES.forEach((name,i)=>items.push({id:`surah-${i+1}`,type:'quran',title:`سورة ${name}`,body:`القرآن الكريم السورة رقم ${i+1}`,meta:`القرآن الكريم · السورة ${i+1}`,open(){location.href=`mushaf.html?surah=${i+1}`}}));
     (Array.isArray(window.allAdhkar)?window.allAdhkar:[]).forEach(x=>items.push({id:`dhikr-${x.id}`,type:x.cat==='ruqyah'?'ruqyah':'adhkar',title:x.title,body:`${x.text||''} ${x.benefit||''}`,extra:x.source||'',meta:`${window.categoryLabels?.[x.cat]||x.cat||'الأذكار'}${x.source?' · '+x.source:''}`,open(){window.openSearchDhikr?.(x.id)}}));
     $$('.library-topic').forEach((n,i)=>items.push({id:`library-${i}`,type:'library',title:$('h3,h2,b',n)?.textContent?.trim()||'موضوع من المكتبة',body:n.textContent.trim(),extra:n.dataset.search||'',meta:'المكتبة الإسلامية',open(){window.navTo?.('library');setTimeout(()=>n.scrollIntoView({behavior:'smooth',block:'center'}),120)}}));
     $$('#ruqyah [data-rq-open]').forEach((n,i)=>items.push({id:`ruqyah-${i}`,type:'ruqyah',title:$('h2,h3,b',n)?.textContent?.trim()||'قسم الرقية',body:n.textContent.trim(),extra:n.dataset.rqOpen||'',meta:'الرقية الشرعية',open(){window.navTo?.('ruqyah');setTimeout(()=>n.click(),120)}}));
@@ -59,8 +59,8 @@
       const r=await fetch(`https://api.alquran.cloud/v1/search/${encodeURIComponent(q)}/all/ar`,{headers:{Accept:'application/json'}});if(!r.ok)throw Error();
       const data=await r.json(),matches=data?.data?.matches||[];if(count)count.textContent=`${matches.length} نتيجة قرآنية`;
       if(!matches.length)return empty('لا توجد آيات مطابقة.');
-      results.innerHTML=matches.slice(0,50).map(m=>`<button class="search-result search-result-v38 quran-online-result" type="button" data-surah="${Number(m.surah?.number||1)}"><span class="search-type-badge quran">القرآن</span><span class="search-result-copy"><b>${esc(m.surah?.name||'')} — الآية ${esc(m.numberInSurah||'')}</b><small>بحث مباشر في نص القرآن الكريم</small><p class="quran-search-text">${esc(m.text||'')}</p></span><span class="search-open-arrow">←</span></button>`).join('');
-      $$('.quran-online-result',results).forEach(b=>b.onclick=()=>{window.navTo?.('quran');setTimeout(()=>window.openSurah?.(+b.dataset.surah),100)});
+      results.innerHTML=matches.slice(0,50).map(m=>`<button class="search-result search-result-v38 quran-online-result" type="button" data-surah="${Number(m.surah?.number||1)}" data-ayah="${Number(m.numberInSurah||1)}"><span class="search-type-badge quran">القرآن</span><span class="search-result-copy"><b>${esc(m.surah?.name||'')} — الآية ${esc(m.numberInSurah||'')}</b><small>بحث مباشر في نص القرآن الكريم</small><p class="quran-search-text">${esc(m.text||'')}</p></span><span class="search-open-arrow">←</span></button>`).join('');
+      $$('.quran-online-result',results).forEach(b=>b.onclick=()=>{location.href=`mushaf.html?surah=${+b.dataset.surah||1}&ayah=${+b.dataset.ayah||1}`});
     }catch{results.innerHTML='<div class="search-empty"><span>⚠</span><p>تعذر الاتصال بخدمة البحث القرآني. البحث داخل محتوى التطبيق يعمل دون إنترنت.</p></div>'}
     finally{quranBtn.disabled=false;quranBtn.textContent='بحث داخل نص القرآن'}
   }

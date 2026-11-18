@@ -23,7 +23,7 @@
     card.id='v80OwnerSecurity';
     card.className='v80-security-card';
     card.innerHTML=`
-      <h2>مركز أمان المالك V80</h2>
+      <h2>مركز أمان المالك V92</h2>
       <div class="v80-security-grid">
         <div class="v80-security-item"><b>التحقق من المالك</b><small class="v80-secure-ok">RPC + RLS من قاعدة البيانات</small></div>
         <div class="v80-security-item"><b>جلسة الإدارة</b><small>إغلاق تلقائي بعد ${Math.round(idleMs()/60000)} دقيقة خمول</small></div>

@@ -1,0 +1,23 @@
+/* V88.2 Quran — app-like Quran reader without turning the Quran page into a green dashboard. */
+html,body.mushaf-page{background:var(--quran-shell)!important;color:var(--quran-ink)!important}
+body.mushaf-page{min-height:100vh!important}
+.m54-top,.m87-top{background:color-mix(in srgb,var(--v88-surface) 92%,transparent)!important;color:var(--v88-text)!important;border-bottom:1px solid var(--v88-line)!important;box-shadow:0 6px 22px rgba(24,50,74,.045)!important;backdrop-filter:blur(16px)}
+.m54-brand,.m54-center,.m54-meta{color:var(--v88-text)!important}.m54-meta{color:var(--v88-muted)!important}
+.m54-circle,.m87-theme-fab,.m54-settings-label{background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important}
+.m54-progress{background:color-mix(in srgb,var(--v88-line) 70%,transparent)!important}.m54-progress i{background:linear-gradient(90deg,var(--v88-primary),var(--v88-gold))!important}
+.m54-main,.m87-main{background:var(--quran-shell)!important}
+.m54-reader,.m87-reader{background:transparent!important}
+.m54-page{background:var(--quran-page)!important;color:var(--quran-ink)!important;border:1px solid var(--quran-line)!important;box-shadow:0 18px 50px rgba(47,40,26,.10)!important}
+.m54-page::before{border-color:color-mix(in srgb,var(--quran-ornament) 46%,transparent)!important}
+.m54-surah{background:linear-gradient(90deg,transparent,var(--quran-page-inner),transparent)!important;color:var(--quran-ink)!important;border-block:1px solid color-mix(in srgb,var(--quran-ornament) 32%,transparent)!important}
+.m54-surah h2,.m54-basmala{color:var(--quran-ink)!important}.m54-basmala{font-weight:700!important}
+.m54-flow,.m54-ayah{color:var(--quran-ink)!important}.m54-ayah-num,.m87-index-number{color:var(--quran-ornament)!important;border-color:var(--quran-ornament)!important;background:transparent!important}
+.m54-side button{background:color-mix(in srgb,var(--v88-surface) 90%,transparent)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:none!important}
+.m54-bottom,.m87-bottom{background:color-mix(in srgb,var(--v88-surface) 94%,transparent)!important;border-top:1px solid var(--v88-line)!important;box-shadow:0 -12px 32px rgba(24,50,74,.055)!important;backdrop-filter:blur(16px)}
+.m54-bottom button,.m87-bottom button{color:var(--v88-text)!important;background:transparent!important}.m54-bottom button:hover,.m87-bottom button:hover{background:var(--v88-primary-soft)!important;color:var(--v88-primary)!important}
+.m54-mini-player,.m87-mini-player{background:var(--v88-text)!important;color:#fff!important;border:0!important;box-shadow:var(--v88-shadow-lg)!important}.m54-mini-player button{color:#fff!important;background:#ffffff14!important;border-color:#ffffff20!important}
+.m54-sheet{background:rgba(16,24,32,.44)!important;backdrop-filter:blur(6px)}.m54-sheet-card{background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-lg)!important}
+.m87-search,.m87-index-tabs button,.m87-index-item{background:var(--v88-surface-soft)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}.m87-index-tabs button.active{background:var(--v88-primary)!important;color:#fff!important;border-color:var(--v88-primary)!important}.m87-index-item:hover{background:var(--v88-primary-soft)!important;border-color:color-mix(in srgb,var(--v88-primary) 32%,var(--v88-line))!important}
+.m87-selected-ayah{background:var(--v88-surface-warm)!important;color:var(--v88-text)!important;border:1px solid color-mix(in srgb,var(--v88-gold) 40%,var(--v88-line))!important}
+[data-reading-theme="dark"] .m54-page{box-shadow:0 22px 60px rgba(0,0,0,.28)!important}
+@media(max-width:640px){.m54-page{border-left:0!important;border-right:0!important;box-shadow:none!important}.m54-top,.m87-top{background:color-mix(in srgb,var(--v88-surface) 97%,transparent)!important}}

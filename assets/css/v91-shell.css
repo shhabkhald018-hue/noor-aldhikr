@@ -1,0 +1,5 @@
+/* V91 public shell: the global search launcher and grouped navigation belong to home only. */
+body.inner-view .quick-search-launcher{display:none!important}
+body.inner-view .nav.v87-nav{display:none!important}
+body:not(.inner-view) .quick-search-launcher{display:grid!important}
+body:not(.inner-view) .nav.v87-nav{display:grid!important}

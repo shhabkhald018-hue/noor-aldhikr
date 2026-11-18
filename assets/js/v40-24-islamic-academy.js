@@ -565,6 +565,6 @@
     const h=page.querySelector('h1,h2'); if(h) h.textContent='تواصل مع إدارة نور الذكر';
   }
 
-  function init(){Object.entries(A).forEach(([id,cfg])=>render(id,cfg));improveChat();window.NOOR_ACADEMY=A;}
+  function init(){const cloud=window.NOOR_V86_CLOUD_LESSONS;if(cloud){for(const id of Object.keys(cloud)){if(A[id]&&cloud[id]?.length)A[id].paths=cloud[id];}} Object.entries(A).forEach(([id,cfg])=>render(id,cfg));improveChat();window.NOOR_ACADEMY=A;}
   document.addEventListener('DOMContentLoaded',()=>setTimeout(init,80)); setTimeout(init,180);
 })();

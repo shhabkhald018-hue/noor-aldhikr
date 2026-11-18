@@ -1,5 +1,5 @@
 /* Noor AlDhikr V40.1 — unified calm emerald identity */
-:root{--v40-bg:#eef2ea;--v40-surface:#fbfaf4;--v40-surface-2:#f3efe2;--v40-ink:#173128;--v40-muted:#68776f;--v40-green:#0f6b52;--v40-green-2:#18856a;--v40-gold:#c6a45e;--v40-line:#d8dfd7;--v40-shadow:0 18px 55px rgba(25,57,45,.11)}
+:root{--v40-bg:#eef2ea;--v40-surface:#fbfaf4;--v40-surface-2:#f3efe2;--v40-ink:var(--noor-text);--v40-muted:#68776f;--v40-green:#0f6b52;--v40-green-2:#18856a;--v40-gold:var(--noor-gold);--v40-line:#d8dfd7;--v40-shadow:0 18px 55px rgba(25,57,45,.11)}
 html[data-theme="dark"]{--v40-bg:#07110d;--v40-surface:#102019;--v40-surface-2:#172b22;--v40-ink:#f5f1e6;--v40-muted:#b7c6be;--v40-green:#2aa57e;--v40-green-2:#51c29c;--v40-gold:#d5b76f;--v40-line:#29463a;--v40-shadow:0 22px 60px rgba(0,0,0,.34)}
 body{background:radial-gradient(circle at 90% 0%,rgba(37,124,92,.08),transparent 30%),var(--v40-bg)!important;color:var(--v40-ink)!important}
 .page>.section-title{padding:22px 26px;border:1px solid var(--v40-line);border-radius:24px;background:linear-gradient(135deg,var(--v40-surface),var(--v40-surface-2));box-shadow:var(--v40-shadow);margin-bottom:18px}

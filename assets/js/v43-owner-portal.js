@@ -1,18 +1,20 @@
 'use strict';
 (() => {
   const $=id=>document.getElementById(id); let sb=null,selectedUser=null,profileCache=[],ownerUserId='',connectionState='idle';
+  const onDomReady=fn=>document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn,{once:true}):fn();
   const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   const msg=(id,text,type='error')=>{const x=$(id);if(!x)return;x.textContent=text||'';x.className=type};
   function explain(error){
     const raw=error?.message||String(error||'خطأ غير معروف');
+    console.error('[Noor · owner-portal]',error);
     if(/NOOR_TIMEOUT|timed out|timeout|AbortError/i.test(raw)) return 'انتهت مهلة الاتصال بـ Supabase. جرّب إعادة الاختبار؛ وإذا تكرر ذلك افحص الشبكة أو DNS.';
-    if(/PGRST205|42P01|schema cache|does not exist/i.test(raw)) return 'قاعدة البيانات ينقصها جزء من مخطط V82. شغّل ملف SUPABASE_V82_03_OWNER_RECOVERY.sql ثم أعد الاختبار.';
+    if(/PGRST205|42P01|schema cache|does not exist/i.test(raw)) return 'قاعدة البيانات ينقصها جدول أو دالة مطلوبة. افتح تشخيص المالك وحدد اسم الجزء المفقود قبل أي تعديل.';
     if(/Invalid login credentials/i.test(raw)) return 'البريد أو كلمة المرور غير صحيحة، أو الحساب غير موجود في Supabase Auth.';
     if(/Email not confirmed/i.test(raw)) return 'يجب تأكيد البريد الإلكتروني أولًا من إعدادات Supabase Auth أو رسالة التأكيد.';
     if(/Invalid API key|apikey|JWT/i.test(raw)) return 'تم الوصول إلى Supabase لكن مفتاح Publishable Key غير صحيح أو لا يخص هذا المشروع.';
     if(/Failed to fetch|NetworkError|fetch/i.test(raw)) return 'تعذر الوصول إلى نطاق Supabase نفسه. هذا يشير غالبًا إلى DNS أو الشبكة أو حجب النطاق، وليس إلى role المالك.';
-    if(/permission|row-level|RLS|42501/i.test(raw)) return 'الاتصال ناجح لكن RLS/الصلاحيات تمنع العملية. شغّل SUPABASE_V82_03_OWNER_RECOVERY.sql وتأكد أن الحساب Owner ونشط.';
-    return raw;
+    if(/permission|row-level|RLS|42501/i.test(raw)) return 'الاتصال ناجح لكن RLS/الصلاحيات منعت العملية. شغّل تشخيص المالك وتأكد أن الجلسة الحالية Owner ونشطة.';
+    return window.NOOR_ERROR_HANDLER?.toArabic?.(error,'تعذر تنفيذ العملية الآن. راجع سجل المتصفح للتفاصيل التقنية ثم أعد المحاولة.')||'تعذر تنفيذ العملية الآن. راجع سجل المتصفح للتفاصيل التقنية ثم أعد المحاولة.';
   }
   function timeout(promise,ms=15000,label='NOOR_TIMEOUT'){
     let timer;
@@ -44,9 +46,8 @@
   function initClient(){
     if(!validPortalConfig()) throw new Error('إعدادات Supabase غير مكتملة أو غير صحيحة في config.js.');
     if(!window.supabase?.createClient) throw new Error('تعذر تحميل مكتبة Supabase JS من CDN. افحص الاتصال بـ jsDelivr أو unpkg.');
-    const cfg=window.NOOR_CONFIG;
-    sb=window.supabase.createClient(cfg.supabaseUrl,cfg.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:window.localStorage}});
-    window.supabaseClient=sb;
+    sb=window.NOOR_GET_SUPABASE_CLIENT?.()||window.supabaseClient;
+    if(!sb) throw new Error('تعذر إنشاء اتصال Supabase المشترك.');
   }
   async function getOwner(){
     const {data:{user},error:uerr}=await timeout(sb.auth.getUser(),15000);
@@ -66,7 +67,7 @@
       if(!o.ok){msg('loginMsg',o.reason);return;}
       $('ownerEmail').textContent=o.user.email||'';
       ownerUserId=o.user.id;window.NOOR_OWNER_ID=o.user.id;window.adminUser=o.user;
-      $('gate').hidden=true;$('app').hidden=false;
+      const gate=$('gate'),app=$('app');if(gate){gate.hidden=true;gate.style.setProperty('display','none','important');gate.setAttribute('aria-hidden','true')}if(app){app.hidden=false;app.style.removeProperty('display');app.removeAttribute('aria-hidden')}
       msg('loginMsg','');setDiag('✓ تم تسجيل دخول المالك والتحقق من الصلاحية.','ok');
       window.dispatchEvent(new CustomEvent('noor:admin-ready',{detail:{user:o.user,profile:o.profile}}));
       try{await timeout(refreshAll(o.warning),20000,'NOOR_TIMEOUT_REFRESH')}catch(err){
@@ -89,12 +90,12 @@
     const unread=await safe('unread',sb.rpc('get_owner_unread_private_count'),0);$('sUnread').textContent=unread.error?'!':String(unread.data||0);
     renderUsers();renderDhikr(d.data||[]);renderAds(a.data||[]);applySettings(set.data||[]);
     const errors=[...results,unread].filter(x=>x.error);
-    if(errors.length){$('health').className='error';$('health').innerHTML=`هناك ${errors.length} مشكلة في ربط قاعدة البيانات:<ul>${errors.map(x=>`<li><b>${esc(x.label)}:</b> ${esc(explain(x.error))}</li>`).join('')}</ul><p><b>الحل:</b> شغّل <code>SUPABASE_V82_03_OWNER_RECOVERY.sql</code> ثم أعد التشخيص. لا تُعِد تشغيل ملفات SQL القديمة.</p>`;}
+    if(errors.length){$('health').className='error';$('health').innerHTML=`هناك ${errors.length} مشكلة في ربط قاعدة البيانات:<ul>${errors.map(x=>`<li><b>${esc(x.label)}:</b> ${esc(explain(x.error))}</li>`).join('')}</ul><p><b>الخطوة التالية:</b> شغّل تشخيص المالك وحدد الجدول أو RPC الذي فشل. لا تشغّل ملفات SQL قديمة عشوائيًا.</p>`;}
     else{$('health').className='ok';$('health').textContent=initialWarning?`الدخول صحيح، مع تنبيه: ${initialWarning}`:'✓ Supabase Auth والجداول وRLS وRPC تعمل بشكل صحيح.';}
   }
   async function loadUsers(){const r=await safe('profiles',sb.from('profiles').select('id,email,display_name,role,active,created_at,last_seen_at').order('created_at',{ascending:false}));if(r.error){$('usersTable').textContent=explain(r.error);return}profileCache=r.data||[];renderUsers()}
   function renderUsers(){const h=$('usersTable');if(!h)return;h.innerHTML=profileCache.length?`<table class="tbl"><tr><th>البريد</th><th>الاسم</th><th>الدور</th><th>الحالة</th><th>آخر نشاط</th><th>حفظ</th></tr>${profileCache.map(x=>`<tr data-user-row="${x.id}"><td>${esc(x.email)}</td><td><input class="owner-user-name" value="${esc(x.display_name||'')}" maxlength="80"></td><td><select class="owner-user-role" ${x.id===ownerUserId?'disabled':''}><option value="user" ${x.role==='user'?'selected':''}>مستخدم</option><option value="owner" ${x.role==='owner'?'selected':''}>مالك</option></select></td><td><label><input class="owner-user-active" type="checkbox" ${x.active?'checked':''} ${x.id===ownerUserId?'disabled':''}> ${x.active?'نشط':'موقوف'}</label></td><td>${x.last_seen_at?new Date(x.last_seen_at).toLocaleString('ar-SA'):'—'}</td><td><button class="btn primary" data-user-save="${x.id}">حفظ</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد حسابات.</div>';h.querySelectorAll('[data-user-save]').forEach(b=>b.onclick=()=>saveUser(b.dataset.userSave))}
-  async function saveUser(id){const row=document.querySelector(`[data-user-row="${id}"]`),cur=profileCache.find(x=>x.id===id);if(!row||!cur)return;const update={display_name:row.querySelector('.owner-user-name').value.trim()};if(id!==ownerUserId){update.role=row.querySelector('.owner-user-role').value;update.active=row.querySelector('.owner-user-active').checked}const {error}=await sb.from('profiles').update(update).eq('id',id);if(error)return alert(explain(error));await loadUsers();alert('تم تحديث المستخدم')}
+  async function saveUser(id){const row=document.querySelector(`[data-user-row="${id}"]`),cur=profileCache.find(x=>x.id===id);if(!row||!cur)return;const role=id===ownerUserId?cur.role:row.querySelector('.owner-user-role').value,active=id===ownerUserId?cur.active:row.querySelector('.owner-user-active').checked;const {error}=await sb.rpc('owner_update_user',{p_user_id:id,p_display_name:row.querySelector('.owner-user-name').value.trim(),p_role:role,p_active:active});if(error)return alert(explain(error));await loadUsers();alert('تم تحديث المستخدم بأمان')}
   async function loadDhikr(){const r=await safe('adhkar',sb.from('adhkar_content').select('*').order('created_at',{ascending:false}));if(r.error){$('dhikrTable').textContent=explain(r.error);return}renderDhikr(r.data||[])}
   function renderDhikr(data){const h=$('dhikrTable');if(!h)return;h.innerHTML=data.length?`<table class="tbl"><tr><th>العنوان</th><th>القسم</th><th>مراجعة</th><th>الحالة</th><th>إجراءات</th></tr>${data.map(x=>`<tr><td>${esc(x.title)}</td><td>${esc(x.category)}</td><td>${x.reviewed?'تمت':'تحتاج مراجعة'}</td><td>${x.active?'نشط':'متوقف'}</td><td><button class="btn ghost" data-dhikr-edit="${x.id}">تعديل</button> <button class="btn ghost" data-dhikr-toggle="${x.id}" data-active="${x.active?'1':'0'}">${x.active?'إيقاف':'تفعيل'}</button> <button class="btn danger" data-dhikr-delete="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا يوجد محتوى سحابي بعد.</div>';h.querySelectorAll('[data-dhikr-edit]').forEach(b=>b.onclick=()=>editDhikr(b.dataset.dhikrEdit));h.querySelectorAll('[data-dhikr-toggle]').forEach(b=>b.onclick=()=>toggleDhikr(b.dataset.dhikrToggle,b.dataset.active==='1'));h.querySelectorAll('[data-dhikr-delete]').forEach(b=>b.onclick=()=>deleteDhikr(b.dataset.dhikrDelete))}
   async function editDhikr(id){const {data,error}=await sb.from('adhkar_content').select('*').eq('id',id).single();if(error)return alert(explain(error));const title=prompt('العنوان',data.title);if(title===null)return;const category=prompt('القسم',data.category);if(category===null)return;const text=prompt('النص',data.text);if(text===null)return;const source=prompt('المصدر',data.source||'');if(source===null)return;const {error:e}=await sb.from('adhkar_content').update({title:title.trim(),category:category.trim(),text:text.trim(),source:source.trim(),reviewed:true,updated_at:new Date().toISOString()}).eq('id',id);if(e)return alert(explain(e));await loadDhikr()}
@@ -182,20 +183,13 @@
     const r=await safe('exam_attempts',sb.from('exam_attempts').select('user_id,scope,score,total,percent,created_at').order('created_at',{ascending:false}).limit(50));
     $('learningTable').innerHTML=r.error?esc(explain(r.error)):(r.data?.length?'<table class="tbl"><tr><th>المستخدم</th><th>الاختبار</th><th>النتيجة</th><th>التاريخ</th></tr>'+r.data.map(a=>`<tr><td>${esc(profileCache.find(p=>p.id===a.user_id)?.email||a.user_id)}</td><td>${esc(a.scope)}</td><td>${a.score}/${a.total} · ${a.percent}%</td><td>${new Date(a.created_at).toLocaleString('ar-SA')}</td></tr>`).join('')+'</table>':'<div class="empty">لا توجد محاولات بعد.</div>');
   }
-  async function loadLegacyCms(){
-    if(!$('cmsLessons'))return;const r=await safe('academy_lessons',sb.from('academy_lessons').select('id,subject,title,active,created_at').order('created_at',{ascending:false}).limit(50));
-    $('cmsLessons').innerHTML=r.error?esc(explain(r.error)):(r.data?.length?'<table class="tbl"><tr><th>المادة</th><th>الدرس</th><th>الحالة</th><th></th></tr>'+r.data.map(a=>`<tr><td>${esc(a.subject)}</td><td>${esc(a.title)}</td><td>${a.active?'منشور':'موقوف'}</td><td><button class="btn danger cmsDel" data-id="${a.id}">حذف</button></td></tr>`).join('')+'</table>':'<div class="empty">لا توجد دروس CMS بعد.</div>');
-    $('cmsLessons').querySelectorAll('.cmsDel').forEach(b=>b.onclick=async()=>{if(!confirm('حذف الدرس؟'))return;const {error}=await sb.from('academy_lessons').delete().eq('id',b.dataset.id);if(error)alert(explain(error));else loadLegacyCms()});
-  }
-  document.addEventListener('DOMContentLoaded',()=>{
+  onDomReady(()=>{
     $('refreshLearning')?.addEventListener('click',loadLearning);
-    $('lessonCmsForm')?.addEventListener('submit',async ev=>{ev.preventDefault();const row={subject:$('cmsSubject').value,title:$('cmsTitle').value.trim(),summary:$('cmsSummary').value.trim(),body:$('cmsBody').value.trim(),reference_text:$('cmsRef').value.trim(),active:true};const {error}=await sb.from('academy_lessons').insert(row);msg('cmsMsg',error?explain(error):'تمت إضافة الدرس.',error?'error':'ok');if(!error){ev.target.reset();loadLegacyCms()}});
     document.querySelectorAll('[data-tab="learning"]').forEach(b=>b.addEventListener('click',loadLearning));
-    document.querySelectorAll('[data-tab="academyCms"]').forEach(b=>b.addEventListener('click',loadLegacyCms));
   });
 
-  const V82_SUBJECTS={creed:'العقيدة',fiqh:'الفقه',seerah:'السيرة النبوية',hadith:'الحديث'};
-  const V82_STATUS={draft:'مسودة',review:'قيد المراجعة',approved:'تمت المراجعة',published:'منشور'};
+  const SUBJECT_LABELS={creed:'العقيدة',fiqh:'الفقه',seerah:'السيرة النبوية',hadith:'الحديث'};
+  const REVIEW_LABELS={draft:'مسودة',review:'قيد المراجعة',approved:'تمت المراجعة',published:'منشور'};
   let v50Lessons=[],v50Questions=[];
 
   function v50ResetLesson(){
@@ -217,22 +211,22 @@
     v50Lessons=lr.data||[];v50Questions=qr.data||[];
     v50RenderLessons(lr.error);v50RenderQuestions(qr.error);v50FillLessonSelect();
   }
-  function v50StatusBadge(s){return `<span class="badge">${esc(V82_STATUS[s]||s||'—')}</span>`}
+  function v50StatusBadge(s){return `<span class="badge">${esc(REVIEW_LABELS[s]||s||'—')}</span>`}
   function v50RenderLessons(error){
     const h=$('v50LessonsTable');if(!h)return;if(error){h.textContent=explain(error);return}
-    h.innerHTML=v50Lessons.length?`<table class="tbl"><tr><th>المادة</th><th>الدرس</th><th>الحالة</th><th>الإجراءات</th></tr>${v50Lessons.map(x=>`<tr><td>${esc(V82_SUBJECTS[x.subject]||x.subject)}</td><td><b>${esc(x.title)}</b><br><small class="muted">${esc((x.summary||'').slice(0,90))}</small></td><td>${v50StatusBadge(x.review_status)}</td><td><button class="btn ghost v50EditLesson" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteLesson" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد دروس مضافة في قاعدة البيانات.</div>';
+    h.innerHTML=v50Lessons.length?`<table class="tbl"><tr><th>المادة</th><th>الدرس</th><th>الحالة</th><th>الإجراءات</th></tr>${v50Lessons.map(x=>`<tr><td>${esc(SUBJECT_LABELS[x.subject]||x.subject)}</td><td><b>${esc(x.title)}</b><br><small class="muted">${esc((x.summary||'').slice(0,90))}</small></td><td>${v50StatusBadge(x.review_status)}</td><td><button class="btn ghost v50EditLesson" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteLesson" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد دروس مضافة في قاعدة البيانات.</div>';
     h.querySelectorAll('.v50EditLesson').forEach(b=>b.onclick=()=>v50EditLesson(b.dataset.id));
     h.querySelectorAll('.v50DeleteLesson').forEach(b=>b.onclick=()=>v50DeleteLesson(b.dataset.id));
   }
   function v50RenderQuestions(error){
     const h=$('v50QuestionsTable');if(!h)return;if(error){h.textContent=explain(error);return}
-    h.innerHTML=v50Questions.length?`<table class="tbl"><tr><th>المادة</th><th>السؤال</th><th>المستوى</th><th>الحالة</th><th>الإجراءات</th></tr>${v50Questions.map(x=>`<tr><td>${esc(V82_SUBJECTS[x.subject]||x.subject)}</td><td><b>${esc(x.question)}</b></td><td>${esc(x.difficulty)}</td><td>${v50StatusBadge(x.review_status)}</td><td><button class="btn ghost v50EditQuestion" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteQuestion" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد أسئلة مضافة في قاعدة البيانات.</div>';
+    h.innerHTML=v50Questions.length?`<table class="tbl"><tr><th>المادة</th><th>السؤال</th><th>المستوى</th><th>الحالة</th><th>الإجراءات</th></tr>${v50Questions.map(x=>`<tr><td>${esc(SUBJECT_LABELS[x.subject]||x.subject)}</td><td><b>${esc(x.question)}</b></td><td>${esc(x.difficulty)}</td><td>${v50StatusBadge(x.review_status)}</td><td><button class="btn ghost v50EditQuestion" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteQuestion" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد أسئلة مضافة في قاعدة البيانات.</div>';
     h.querySelectorAll('.v50EditQuestion').forEach(b=>b.onclick=()=>v50EditQuestion(b.dataset.id));
     h.querySelectorAll('.v50DeleteQuestion').forEach(b=>b.onclick=()=>v50DeleteQuestion(b.dataset.id));
   }
   function v50FillLessonSelect(){
     const s=$('v50QuestionLesson');if(!s)return;const current=s.value;
-    s.innerHTML='<option value="">بدون ربط</option>'+v50Lessons.map(x=>`<option value="${x.id}">${esc(V82_SUBJECTS[x.subject]||x.subject)} — ${esc(x.title)}</option>`).join('');
+    s.innerHTML='<option value="">بدون ربط</option>'+v50Lessons.map(x=>`<option value="${x.id}">${esc(SUBJECT_LABELS[x.subject]||x.subject)} — ${esc(x.title)}</option>`).join('');
     if([...s.options].some(o=>o.value===current))s.value=current;
   }
   function v50EditLesson(id){
@@ -279,14 +273,14 @@
     }catch(error){msg('v50QuestionMsg',explain(error),'error')}
   }
   async function v50RlsCheck(){
-    const h=$('v50RlsResult');if(!h)return;h.className='muted';h.textContent='جاري تشغيل تشخيص V83.0…';
+    const h=$('v50RlsResult');if(!h)return;h.className='muted';h.textContent='جاري تشغيل تشخيص V92.0…';
     const primary=await safe('owner_portal_diagnostics',sb.rpc('owner_portal_diagnostics'),null);
-    if(!primary.error){h.className='ok';h.textContent='✓ تشخيص V83.0 ناجح: '+JSON.stringify(primary.data);return;}
+    if(!primary.error){h.className='ok';h.textContent='✓ تشخيص V92.0 ناجح: '+JSON.stringify(primary.data);return;}
     const fallback=await safe('owner_rls_diagnostics',sb.rpc('owner_rls_diagnostics'),null);
     if(fallback.error){h.className='error';h.textContent=explain(primary.error)+' | '+explain(fallback.error);return}
     h.className='ok';h.textContent='✓ تشخيص RLS القديم ناجح: '+JSON.stringify(fallback.data);
   }
-  document.addEventListener('DOMContentLoaded',()=>{
+  onDomReady(()=>{
     $('v50LessonForm')?.addEventListener('submit',v50SaveLesson);
     $('v50QuestionForm')?.addEventListener('submit',v50SaveQuestion);
     $('v50LessonCancel')?.addEventListener('click',v50ResetLesson);

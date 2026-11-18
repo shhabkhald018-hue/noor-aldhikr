@@ -5,6 +5,9 @@
   const LEVELS={easy:'سهل',medium:'متوسط',hard:'عالي'};
   const HISTORY='noor_exam_history_v58';
   const RECENT='noor_exam_recent_v58';
+  const CERTIFICATE_KEY='certificate_settings_v85';
+  const CERTIFICATE_DEFAULTS={enabled:true,passPercent:60,certificateTitle:'شهادة إتمام الاختبار',issuer:'إدارة منصة نور الذكر',closingText:'نسأل الله تعالى أن يجعل هذا العلم حجةً لك لا عليك، وأن ينفع بك الإسلام والمسلمين.'};
+  window.NOOR_CERTIFICATE_SETTINGS={...CERTIFICATE_DEFAULTS};
 
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const load=(k,d={})=>{try{return JSON.parse(localStorage.getItem(k)||'null')??d}catch{return d}};
@@ -26,7 +29,7 @@
       correct:+q[2]||0,
       why:String(q[3]||'راجع شرح الدرس والمصدر المعتمد.'),
       kind:'core'
-    })).filter(x=>x.q&&x.opts.length>=2);
+    })).filter(x=>x.q&&x.opts.length===4);
   }
 
   function lessonRows(A,id){
@@ -88,9 +91,9 @@
         c=choiceSet(x.title,titles.filter(t=>t!==other.title));
         out.push({
           id:`${id}-d-h2-${i}`,subject:id,subjectName:SUBJECTS[id],level:'hard',lesson:i,
-          q:`أي درس من الخيارات التالية يرتبط أكثر بهذه العبارة: «${x.summary}»؟`,
+          q:`أي درس يرتبط بالمرجع «${x.ref}» وبهذه الفكرة: «${x.summary}»؟`,
           opts:c.opts,correct:c.correct,
-          why:`العبارة مأخوذة من مضمون درس «${x.title}».`,
+          why:`الفكرة والمرجع مدرجان في المنهج ضمن درس «${x.title}».`,
           kind:'distinction'
         });
       }
@@ -105,35 +108,61 @@
     core.forEach(q=>buckets[q.level].push(q));
     derived.forEach(q=>buckets[q.level].push(q));
 
-    const selected={},globalSeen=new Set(),takenIds=new Set();
+    const selected={},globalSeen=new Set(),takenIds=new Set(),lessonCount=lessonRows(A,id).length;
+    const offsets={easy:0,medium:45,hard:90};
     for(const level of ['easy','medium','hard']){
       const arr=[];
-      for(const q of buckets[level]){
+      const add=q=>{
+        if(!q||arr.length>=50)return;
         const key=q.q.replace(/\s+/g,' ').trim();
-        if(!globalSeen.has(key)){
-          globalSeen.add(key);takenIds.add(q.id);arr.push(q);
+        if(globalSeen.has(key)||takenIds.has(q.id))return;
+        globalSeen.add(key);takenIds.add(q.id);arr.push(q);
+      };
+      // Keep a small set of hand-written core questions, then rotate through
+      // lesson-derived questions so every published lesson is represented.
+      buckets[level].filter(q=>q.lesson==null).slice(0,5).forEach(add);
+      const perLesson=new Map();
+      buckets[level].filter(q=>Number.isInteger(q.lesson)).forEach(q=>{
+        const current=perLesson.get(q.lesson);
+        // In the hard level prefer a concept-and-source distinction question;
+        // a generic source label must never become the fact being memorised.
+        if(!current||(level==='hard'&&current.kind==='lesson-reference'&&q.kind==='distinction'))perLesson.set(q.lesson,q);
+      });
+      for(let step=0;step<lessonCount&&arr.length<50;step++)add(perLesson.get((offsets[level]+step)%lessonCount));
+      for(const q of buckets[level]){add(q);if(arr.length>=50)break}
+      if(arr.length<50){
+        for(const q of [...derived,...core]){
+          if(arr.length>=50)break;
+          if(takenIds.has(q.id))continue;
+          add({...q,id:`${q.id}-${level}-borrow`,level});
         }
-        if(arr.length>=50)break;
       }
       selected[level]=arr;
-      if(selected[level].length<50){
-        for(const q of [...derived,...core]){
-          if(selected[level].length>=50)break;
-          const key=q.q.replace(/\s+/g,' ').trim();
-          if(!takenIds.has(q.id)&&!globalSeen.has(key)){
-            selected[level].push({...q,id:`${q.id}-${level}-borrow`,level});
-            takenIds.add(q.id);globalSeen.add(key);
-          }
-        }
-      }
     }
     const bank=[...selected.easy,...selected.medium,...selected.hard];
     return bank.slice(0,150);
   }
 
   function buildAll(A){
+    const cloud=window.NOOR_V86_CLOUD_BANK;
     const banks={};
-    Object.keys(SUBJECTS).forEach(id=>banks[id]=buildSubjectBank(A,id));
+    Object.keys(SUBJECTS).forEach(id=>{
+      const local=buildSubjectBank(A,id),remote=Array.isArray(cloud?.[id])?cloud[id]:[];
+      if(!remote.length){banks[id]=local;return}
+      const merged=[];
+      for(const level of ['easy','medium','hard']){
+        const seen=new Set(),out=[];
+        const add=q=>{const key=String(q?.q||'').replace(/\s+/g,' ').trim();if(!key||seen.has(key)||out.length>=50)return;seen.add(key);out.push(q)};
+        // Up to five owner-published questions per level, while keeping 45
+        // lesson-linked questions so the complete curriculum stays covered.
+        remote.filter(q=>q.level===level).slice(0,5).forEach(add);
+        local.filter(q=>q.level===level&&Number.isInteger(q.lesson)).forEach(add);
+        local.filter(q=>q.level===level).forEach(add);
+        remote.filter(q=>q.level===level).forEach(add);
+        merged.push(...out.slice(0,50));
+      }
+      banks[id]=merged;
+    });
     return banks;
   }
 
@@ -277,7 +306,25 @@
     return String(candidates[0]||'').replace(/^"|"$/g,'').trim();
   }
 
-  function certificateEligible(percent){return percent>=60}
+  async function loadCertificateSettings(){
+    const cfg=window.NOOR_CONFIG||{};
+    if(!window.supabase?.createClient||!cfg.supabaseUrl||!cfg.publishableKey)return window.NOOR_CERTIFICATE_SETTINGS;
+    try{
+      const client=window.NOOR_GET_SUPABASE_CLIENT?.()||window.supabaseClient||window.NOOR_V86_SECURITY?.client?.();
+      if(!client)return;
+      const {data,error}=await client.from('app_settings').select('value').eq('key',CERTIFICATE_KEY).maybeSingle();
+      if(error||!data?.value)return window.NOOR_CERTIFICATE_SETTINGS;
+      const raw=typeof data.value==='string'?JSON.parse(data.value):data.value;
+      const pass=Math.max(0,Math.min(100,Number(raw?.passPercent??CERTIFICATE_DEFAULTS.passPercent)));
+      window.NOOR_CERTIFICATE_SETTINGS={...CERTIFICATE_DEFAULTS,...raw,passPercent:Number.isFinite(pass)?pass:CERTIFICATE_DEFAULTS.passPercent};
+    }catch(error){console.warn('Certificate settings:',error)}
+    return window.NOOR_CERTIFICATE_SETTINGS;
+  }
+
+  function certificateEligible(percent){
+    const c=window.NOOR_CERTIFICATE_SETTINGS||CERTIFICATE_DEFAULTS;
+    return c.enabled!==false&&percent>=Number(c.passPercent??60);
+  }
 
   function certificateId(result){
     const d=new Date(result.date||Date.now());
@@ -301,6 +348,7 @@
   }
 
   function openCertificate(r){
+    const cert=window.NOOR_CERTIFICATE_SETTINGS||CERTIFICATE_DEFAULTS;
     const scopeName=r.scope==='final'?'الاختبار النهائي الشامل في العلوم الشرعية':`اختبار ${SUBJECTS[r.scope]||'العلوم الشرعية'}`;
     const levelName=LEVELS[r.level]||'كل المستويات';
     const date=new Date(r.date||Date.now()).toLocaleDateString('ar-SA',{year:'numeric',month:'2-digit',day:'2-digit'});
@@ -315,7 +363,7 @@
       <div class="corner c1"></div><div class="corner c2"></div>
       <div class="top">
         <div class="logo">☾</div><div class="brand">نور الذكر</div><div class="sub">منصة تعليم الإسلام</div>
-        <h1 class="title">شهادة إتمام الاختبار</h1>
+        <h1 class="title">${esc(cert.certificateTitle||CERTIFICATE_DEFAULTS.certificateTitle)}</h1>
         <div class="grant">تُمنح هذه الشهادة إلى</div>
         <div class="name">${esc(r.name)}</div>
         <div class="desc">تقديرًا لإتمام <span class="scope">${esc(scopeName)}</span><br>واجتياز الاختبار بمستوى <b>${esc(levelName)}</b></div>
@@ -326,11 +374,11 @@
           <div><small>المستوى</small><b style="font-size:22px">${esc(levelName)}</b><span>${r.scope==='final'?'شامل':'تخصصي'}</span></div>
         </div>
         ${breakdown?`<div class="breakdown">${breakdown}</div>`:''}
-        <div class="dua">نسأل الله تعالى أن يجعل هذا العلم حجةً لك لا عليك، وأن ينفع بك الإسلام والمسلمين.</div>
+        <div class="dua">${esc(cert.closingText||CERTIFICATE_DEFAULTS.closingText)}</div>
         <div class="foot">
           <div><b>التاريخ</b><p>${date}</p></div>
           <div><div class="seal">تم بحمد<br>الله</div><p class="id">${esc(r.certificateId||certificateId(r))}</p></div>
-          <div><b>إدارة منصة نور الذكر</b><p>شهادة إلكترونية صادرة من المنصة</p></div>
+          <div><b>${esc(cert.issuer||CERTIFICATE_DEFAULTS.issuer)}</b><p>شهادة إلكترونية صادرة من المنصة</p></div>
         </div>
       </div>
     </div>
@@ -376,6 +424,7 @@
       const percent=Math.round(score/qs.length*100);
       const result={score,total:qs.length,percent,scope:meta.scope,level:meta.level,date:new Date().toISOString(),per};
       save(HISTORY,result);
+      window.NOOR_V86_ACADEMY?.saveExam?.(result);
       const breakdown=Object.entries(per).map(([id,v])=>`<article><b>${esc(SUBJECTS[id])}</b><strong>${v.correct}/${v.total}</strong><span>${Math.round(v.correct/v.total*100)}%</span></article>`).join('');
       box.innerHTML=`<div class="combined-result v58-result">
         <span class="result-stars">${stars(percent)}</span>
@@ -403,6 +452,7 @@
   };
 
   function init(){
+    loadCertificateSettings();
     const host=document.getElementById('academyExams');
     if(host)host.innerHTML='<section class="exam-card"><h2>جاري تجهيز بنك 600 سؤال…</h2><p>150 سؤالًا لكل مادة.</p></section>';
     if(render())return;

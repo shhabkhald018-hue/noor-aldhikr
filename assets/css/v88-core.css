@@ -1,0 +1,167 @@
+/* Noor AlDhikr V88.2 Calm Islamic Premium — final public shell, loaded after all legacy layout styles. */
+html{background:var(--v88-bg)!important;font-size:calc(16px * var(--v88-font-scale));scroll-behavior:smooth}
+body{margin:0!important;min-height:100vh!important;background:var(--v88-bg)!important;color:var(--v88-text)!important;text-rendering:optimizeLegibility;accent-color:var(--v88-primary)}
+body::before,body::after{pointer-events:none}
+::selection{background:color-mix(in srgb,var(--v88-primary) 22%,transparent);color:var(--v88-text)}
+a{color:var(--v88-primary)}
+:focus-visible{outline:none;box-shadow:var(--v88-focus)!important}
+.container{width:min(var(--v88-content),94%)!important;margin-inline:auto!important}
+
+/* Top bar */
+.topbar{position:sticky!important;top:0!important;z-index:50!important;background:color-mix(in srgb,var(--v88-surface) 90%,transparent)!important;border-bottom:1px solid var(--v88-line)!important;backdrop-filter:blur(16px)}
+.brand{color:var(--v88-text)!important}.brand .mark{background:var(--v88-primary)!important;color:#fff!important;box-shadow:none!important}
+.icon-btn,.btn{background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:none!important;border-radius:var(--v88-button-radius)!important}
+.btn:hover,.icon-btn:hover{border-color:var(--v88-line-strong)!important;background:var(--v88-surface-soft)!important}
+.btn.primary,.premium-primary,.v38-action-primary{background:var(--v88-primary)!important;color:#fff!important;border-color:var(--v88-primary)!important;box-shadow:0 8px 22px color-mix(in srgb,var(--v88-primary) 18%,transparent)!important}
+.btn.gold{background:var(--v88-gold-soft)!important;color:var(--v88-gold-strong)!important;border-color:color-mix(in srgb,var(--v88-gold) 50%,var(--v88-line))!important}
+
+/* Hero becomes calm, not a green billboard. */
+.hero{padding:26px 0 14px!important}.hero-card,.v38-home-hero{
+  background:linear-gradient(135deg,var(--v88-surface) 0%,var(--v88-primary-softer) 64%,var(--v88-gold-soft) 140%)!important;
+  color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-sm)!important;border-radius:var(--v88-radius-xl)!important
+}
+.hero-card h1,.hero-card p,.v38-home-hero h1,.v38-home-hero p{color:inherit!important}
+.next-prayer,.v38-today-card{background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important}
+
+/* Search */
+.quick-search-launcher,.search-console-v38,.search-input-wrap-v38{
+  background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important
+}
+.quick-search-launcher{border-radius:20px!important;padding:10px 12px!important}
+.quick-search-launcher input,.search-input-wrap-v38 input{background:transparent!important;color:var(--v88-text)!important;border:0!important;-webkit-text-fill-color:var(--v88-text)!important}
+.quick-search-launcher input::placeholder,.search-input-wrap-v38 input::placeholder{color:var(--v88-muted)!important;opacity:1}
+
+/* Navigation: neutral cards with restrained accent. */
+.nav.v87-nav,.nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin:18px 0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+body.inner-view .nav{display:grid!important}
+body.inner-view .hero{display:none!important}
+.v87-nav-group{background:var(--v88-surface)!important;border:1px solid var(--v88-line)!important;border-radius:22px!important;padding:12px!important;box-shadow:var(--v88-shadow-xs)!important;min-width:0}
+.v87-nav-label{display:block!important;color:var(--v88-muted)!important;font-size:12px!important;font-weight:800!important;margin:0 4px 8px!important}
+.nav button,.nav a.nav-direct-link{background:var(--v88-surface-soft)!important;color:var(--v88-text)!important;border:1px solid transparent!important;border-radius:13px!important;min-height:48px!important;box-shadow:none!important;font-weight:800!important;text-decoration:none!important;transition:transform var(--v88-transition),background var(--v88-transition),border-color var(--v88-transition)!important}
+.nav button:hover,.nav a.nav-direct-link:hover{background:var(--v88-primary-soft)!important;border-color:color-mix(in srgb,var(--v88-primary) 22%,var(--v88-line))!important;transform:translateY(-1px)}
+.nav button.active{background:var(--v88-primary)!important;color:#fff!important;border-color:var(--v88-primary)!important}
+.nav a.nav-direct-link[data-module-key="quran"]{background:var(--v88-surface-warm)!important;border-color:color-mix(in srgb,var(--v88-gold) 45%,var(--v88-line))!important;color:var(--v88-text)!important}
+
+/* Page surfaces */
+.page{color:var(--v88-text)!important}.page.active{display:block}
+.card,.cardx,.dhikr,.adhkar-category-card,.reader-toolbar,.academy-card,.academy-shell,.quiz-settings,.quiz-history,.v38-feature-card,.v38-journey-card,.v38-source-card,.home-bottom-service-card,.ruqyah-program-card,.smart-ai-shell,.legal-card,.support-card,.qibla-card,.student-card{
+  background:var(--v88-surface)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important
+}
+.card,.cardx{border:1px solid var(--v88-line)!important;border-radius:var(--v88-radius-lg)!important}
+.v38-feature-card,.home-bottom-service-card,.ruqyah-program-card{border:1px solid var(--v88-line)!important}
+.v38-feature-card:hover,.home-bottom-service-card:hover,.ruqyah-program-card:hover{border-color:color-mix(in srgb,var(--v88-primary) 30%,var(--v88-line))!important;box-shadow:var(--v88-shadow-sm)!important;transform:translateY(-2px)}
+.v38-feature-primary,.ruqyah-program-card.featured{background:linear-gradient(135deg,var(--v88-primary-soft),var(--v88-surface))!important;color:var(--v88-text)!important;border-color:color-mix(in srgb,var(--v88-primary) 30%,var(--v88-line))!important}
+.v38-source-card{background:linear-gradient(135deg,var(--v88-surface-warm),var(--v88-surface))!important}
+.v38-home-cta{background:var(--v88-text)!important;color:#fff!important;border:0!important;box-shadow:var(--v88-shadow-sm)!important}
+.v38-home-cta h2,.v38-home-cta p,.v38-home-cta span{color:#fff!important}
+
+/* Ruqyah */
+.ruqyah-product-hero{background:linear-gradient(135deg,var(--v88-surface),var(--v88-primary-soft))!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-sm)!important}
+.source-disclosure-v30,.smart-ai-result,.rq-reference-links{background:var(--v88-surface-warm)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+
+/* Forms/tables */
+input,select,textarea{background:var(--v88-surface)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+input::placeholder,textarea::placeholder{color:var(--v88-muted)!important;opacity:1}
+.table,.tbl{background:var(--v88-surface)!important;color:var(--v88-text)!important}.table th,.table td,.tbl th,.tbl td{border-color:var(--v88-line)!important}.table th,.tbl th{background:var(--v88-surface-soft)!important}
+.notice{background:var(--v88-warning-soft)!important;color:var(--v88-text)!important;border-color:color-mix(in srgb,var(--v88-warning) 34%,var(--v88-line))!important}
+.error{color:var(--v88-danger)!important}.ok{color:var(--v88-success)!important}.muted{color:var(--v88-muted)!important}
+
+/* Inner bar remains usable while main navigation stays present. */
+.global-inner-bar{background:color-mix(in srgb,var(--v88-surface) 94%,transparent)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important;color:var(--v88-text)!important}
+.global-home-btn,.global-back-btn{background:var(--v88-surface-soft)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+
+/* Auth gate */
+.auth-gate{background:linear-gradient(150deg,var(--v88-bg),var(--v88-primary-soft))!important}.auth-card{background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-lg)!important}
+
+/* Dark mode stays charcoal, never solid green. */
+html[data-theme="dark"] body,body.dark{background:var(--v88-bg)!important;color:var(--v88-text)!important}
+html[data-theme="dark"] .hero-card,html[data-theme="dark"] .v38-home-hero,body.dark .hero-card,body.dark .v38-home-hero{background:linear-gradient(135deg,var(--v88-surface),var(--v88-primary-softer))!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+html[data-theme="dark"] .nav button,html[data-theme="dark"] .nav a.nav-direct-link,body.dark .nav button,body.dark .nav a.nav-direct-link{background:var(--v88-surface-soft)!important;color:var(--v88-text)!important;border-color:transparent!important}
+html[data-theme="dark"] .nav button.active,body.dark .nav button.active{background:var(--v88-primary)!important;color:var(--v88-bg)!important}
+html[data-theme="dark"] .card,html[data-theme="dark"] .cardx,html[data-theme="dark"] .dhikr,html[data-theme="dark"] .adhkar-category-card,html[data-theme="dark"] .reader-toolbar,body.dark .card,body.dark .cardx,body.dark .dhikr,body.dark .adhkar-category-card{background:var(--v88-surface)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+
+@media(max-width:1050px){.nav.v87-nav,.nav{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:680px){
+  .container{width:min(100% - 24px,var(--v88-content))!important}.hero{padding-top:16px!important}.hero-card,.v38-home-hero{border-radius:22px!important}
+  .nav.v87-nav,.nav{grid-template-columns:1fr!important;gap:9px!important}.v87-nav-group{border-radius:18px!important;padding:10px!important}.v87-nav-label{margin-bottom:6px!important}
+  .nav button,.nav a.nav-direct-link{min-height:44px!important}
+}
+
+
+/* V91.2.2 Eye Comfort — authoritative color and contrast layer. */
+html:not([data-theme="dark"]) body{background:var(--v88-bg)!important;color:var(--v88-text)!important}
+html:not([data-theme="dark"]) .topbar{background:color-mix(in srgb,var(--v88-surface) 94%,transparent)!important;border-bottom:1px solid var(--v88-line)!important}
+html:not([data-theme="dark"]) .hero-card,
+html:not([data-theme="dark"]) .v38-home-hero,
+html:not([data-theme="dark"]) .ruqyah-product-hero,
+html:not([data-theme="dark"]) .student-hero,
+html:not([data-theme="dark"]) .assessment-hero{
+  background:linear-gradient(135deg,var(--v88-surface) 0%,var(--v88-surface-soft) 100%)!important;
+  color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-sm)!important
+}
+html:not([data-theme="dark"]) .ruqyah-product-hero h1,
+html:not([data-theme="dark"]) .ruqyah-product-hero h2,
+html:not([data-theme="dark"]) .ruqyah-product-hero h3{color:var(--v88-primary)!important}
+html:not([data-theme="dark"]) .ruqyah-product-hero p,
+html:not([data-theme="dark"]) .ruqyah-product-hero small{color:var(--v88-text-soft)!important;opacity:1!important}
+html:not([data-theme="dark"]) .ruqyah-product-hero .eyebrow{color:var(--v88-gold-strong)!important}
+html:not([data-theme="dark"]) .ruqyah-product-hero .premium-primary{background:var(--v88-primary)!important;color:#fff!important;border-color:var(--v88-primary)!important}
+html:not([data-theme="dark"]) .ruqyah-product-hero .premium-secondary{background:var(--v88-surface)!important;color:var(--v88-primary)!important;border:1px solid var(--v88-gold)!important}
+html:not([data-theme="dark"]) .ruqyah-program-card,
+html:not([data-theme="dark"]) .ruqyah-program-card.featured,
+html:not([data-theme="dark"]) .ruqyah-detail-card,
+html:not([data-theme="dark"]) .smart-ai-shell,
+html:not([data-theme="dark"]) .ruqyah-smart-ai{
+  background:var(--v88-surface)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important
+}
+html:not([data-theme="dark"]) .ruqyah-program-card.featured{border-inline-start:4px solid var(--v88-gold)!important}
+html:not([data-theme="dark"]) .ruqyah-program-card.featured h2,
+html:not([data-theme="dark"]) .ruqyah-program-card.featured h3,
+html:not([data-theme="dark"]) .ruqyah-program-card.featured p,
+html:not([data-theme="dark"]) .ruqyah-program-card.featured small{color:inherit!important}
+html:not([data-theme="dark"]) .rq-card-icon,
+html:not([data-theme="dark"]) .smart-ai-badge{background:var(--v88-gold-soft)!important;color:var(--v88-gold-strong)!important}
+html:not([data-theme="dark"]) .smart-ai-head h2{color:var(--v88-primary)!important}
+html:not([data-theme="dark"]) .smart-ai-head p,
+html:not([data-theme="dark"]) .smart-ai-privacy{color:var(--v88-muted)!important;opacity:1!important}
+html:not([data-theme="dark"]) .smart-ai-result,
+html:not([data-theme="dark"]) .source-disclosure-v30,
+html:not([data-theme="dark"]) .rq-reference-links{background:var(--v88-surface-warm)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+html:not([data-theme="dark"]) .nav.v87-nav{gap:14px!important}
+html:not([data-theme="dark"]) .v87-nav-group{background:var(--v88-surface)!important;border:1px solid var(--v88-line)!important;box-shadow:var(--v88-shadow-xs)!important}
+html:not([data-theme="dark"]) .nav button,
+html:not([data-theme="dark"]) .nav a.nav-direct-link{background:var(--v88-surface-soft)!important;color:var(--v88-text)!important;border:1px solid var(--v88-line)!important}
+html:not([data-theme="dark"]) .nav button:hover,
+html:not([data-theme="dark"]) .nav a.nav-direct-link:hover{background:var(--v88-primary-soft)!important;border-color:var(--v88-line-strong)!important}
+html:not([data-theme="dark"]) .nav button.active{background:var(--v88-primary)!important;color:#fff!important;border-color:var(--v88-primary)!important;box-shadow:inset 0 -3px 0 var(--v88-gold)!important}
+html:not([data-theme="dark"]) .nav a.nav-direct-link[data-module-key="quran"]{background:var(--v88-surface-warm)!important;color:var(--v88-primary)!important;border-color:color-mix(in srgb,var(--v88-gold) 55%,var(--v88-line))!important}
+html:not([data-theme="dark"]) .btn.primary,
+html:not([data-theme="dark"]) .v38-action-primary{background:var(--v88-primary)!important;color:#fff!important;border-color:var(--v88-primary)!important}
+html:not([data-theme="dark"]) .btn.gold{background:var(--v88-gold-soft)!important;color:var(--v88-gold-strong)!important;border-color:color-mix(in srgb,var(--v88-gold) 55%,var(--v88-line))!important}
+html:not([data-theme="dark"]) .v38-feature-primary{background:var(--v88-surface-soft)!important;border-color:color-mix(in srgb,var(--v88-gold) 55%,var(--v88-line))!important}
+html:not([data-theme="dark"]) .v38-home-cta{background:var(--v88-primary)!important;color:#fff!important}
+html:not([data-theme="dark"]) .v38-home-cta .btn{background:var(--v88-surface)!important;color:var(--v88-primary)!important;border-color:var(--v88-surface)!important}
+html:not([data-theme="dark"]) .page h1,
+html:not([data-theme="dark"]) .page h2,
+html:not([data-theme="dark"]) .page h3{color:var(--v88-text)!important}
+html:not([data-theme="dark"]) .page p,
+html:not([data-theme="dark"]) .page li,
+html:not([data-theme="dark"]) .page small{color:var(--v88-text-soft)!important;opacity:1!important}
+html:not([data-theme="dark"]) .page b,
+html:not([data-theme="dark"]) .page strong{color:var(--v88-text)!important}
+html:not([data-theme="dark"]) .source-disclosure-v30 span,
+html:not([data-theme="dark"]) .source-disclosure-v30 button{color:var(--v88-gold-strong)!important}
+html:not([data-theme="dark"]) .floating-ai-button,
+html:not([data-theme="dark"]) .ai-floating-btn,
+html:not([data-theme="dark"]) [class*="assistant-float"]{background:var(--v88-primary)!important;color:#fff!important;border:1px solid var(--v88-primary)!important}
+
+/* Dark mode uses charcoal-sage surfaces and neutral readable text. */
+html[data-theme="dark"] .ruqyah-product-hero{background:var(--v88-surface)!important;color:var(--v88-text)!important;border-color:var(--v88-line)!important}
+html[data-theme="dark"] .ruqyah-product-hero h1,html[data-theme="dark"] .ruqyah-product-hero h2{color:var(--v88-text)!important}
+html[data-theme="dark"] .ruqyah-product-hero p{color:var(--v88-text-soft)!important}
+html[data-theme="dark"] .ruqyah-program-card.featured{background:var(--v88-surface)!important;border:1px solid var(--v88-line)!important;border-inline-start:4px solid var(--v88-gold)!important}
+/* Final V88.2 hierarchy correction: religious hero headings use the brand navy. */
+html:not([data-theme="dark"]) .page .ruqyah-product-hero h1,
+html:not([data-theme="dark"]) .page .ruqyah-product-hero h2,
+html:not([data-theme="dark"]) .page .student-hero h1,
+html:not([data-theme="dark"]) .page .assessment-hero h1{color:var(--v88-primary)!important}

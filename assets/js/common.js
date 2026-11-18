@@ -3,10 +3,18 @@ const CFG=window.NOOR_CONFIG||{};
 const qs=(s,p=document)=>p.querySelector(s), qsa=(s,p=document)=>[...p.querySelectorAll(s)];
 function toast(msg){const t=qs('#toast');t.textContent=msg;t.style.display='block';clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.style.display='none',2600)}
 function store(k,v){try{localStorage.setItem('noor_'+k,JSON.stringify(v))}catch(e){}}function load(k,d=null){try{return JSON.parse(localStorage.getItem('noor_'+k))??d}catch{return d}}
-function setTheme(t){document.documentElement.dataset.theme=t;store('theme',t)}setTheme(load('theme','light'));
-qs('#themeBtn')?.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
-window.addEventListener('online',()=>updateOnline());window.addEventListener('offline',()=>updateOnline());function updateOnline(){const e=qs('#onlineState');if(e)e.textContent=navigator.onLine?'متصل':'بدون إنترنت'}updateOnline();
-function validConfig(){return /^https:\/\/.+\.supabase\.co$/.test(CFG.supabaseUrl||'') && CFG.publishableKey && !CFG.publishableKey.includes('PASTE_')}
+function setTheme(t){t=t==='dark'?'dark':'light';document.documentElement.dataset.theme=t;try{localStorage.setItem('noor_theme_mode_v882',t)}catch(e){}}
+try{setTheme(localStorage.getItem('noor_theme_mode_v882')==='dark'?'dark':'light')}catch(e){setTheme('light')}
+// V88.3: theme button binding is owned exclusively by v25-ui.js to prevent double toggles.
+window.addEventListener('online',()=>updateOnline());window.addEventListener('offline',()=>updateOnline());function updateOnline(){const e=qs('#onlineState');if(e)e.textContent=navigator.onLine?'إنترنت متاح':'بدون إنترنت'}updateOnline();
+function validConfig(){
+  const url=String(CFG.supabaseUrl||'').trim();
+  const key=String(CFG.publishableKey||'').trim();
+  return /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(url)
+    && /^sb_publishable_[A-Za-z0-9_-]+$/.test(key)
+    && !/PASTE_/i.test(key);
+}
+window.NOOR_VALID_SUPABASE_CONFIG=validConfig;
 
 function noorWithTimeout(promise,ms=12000,label='NOOR_TIMEOUT'){
   let timer;
@@ -29,19 +37,33 @@ async function noorProbeSupabase(ms=8000){
 }
 window.noorProbeSupabase=noorProbeSupabase;
 
-let supabaseClient=null;
-if(validConfig()&&window.supabase){
+let supabaseClient=window.supabaseClient||null;
+function getSharedSupabaseClient(){
+  if(window.supabaseClient){
+    supabaseClient=window.supabaseClient;
+    return supabaseClient;
+  }
+  if(!validConfig()||!window.supabase?.createClient)return null;
   try{
-    supabaseClient=window.supabase.createClient(CFG.supabaseUrl,CFG.publishableKey,{
+    supabaseClient=window.supabase.createClient(String(CFG.supabaseUrl).replace(/\/$/,''),CFG.publishableKey,{
       auth:{
         persistSession:true,
         autoRefreshToken:true,
         detectSessionInUrl:true,
-        storage:window.localStorage
+        storage:window.localStorage,
+        storageKey:'noor-aldhikr-auth-v92'
       }
     });
-  }catch(e){console.error('تعذر إنشاء اتصال Supabase:',e)}
+    window.supabaseClient=supabaseClient;
+    window.dispatchEvent(new CustomEvent('noor:supabase-ready',{detail:{client:supabaseClient}}));
+    return supabaseClient;
+  }catch(error){
+    console.error('تعذر إنشاء اتصال Supabase:',error);
+    return null;
+  }
 }
+window.NOOR_GET_SUPABASE_CLIENT=getSharedSupabaseClient;
+getSharedSupabaseClient();
 function navTo(id){
   qsa('.page').forEach(x=>x.classList.toggle('active',x.id===id));
   qsa('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
@@ -53,4 +75,4 @@ function navTo(id){
 }
 window.navTo=navTo;
 document.body.classList.add('home-view');
-qsa('.nav button').forEach(b=>b.onclick=()=>navTo(b.dataset.page));
+qsa('.nav [data-page]').forEach(b=>b.onclick=()=>navTo(b.dataset.page));

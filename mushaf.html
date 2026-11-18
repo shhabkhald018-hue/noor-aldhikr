@@ -1,73 +1,95 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="light">
-<head><meta name="description" content="المصحف الشريف للقراءة والتلاوة والتفسير والحفظ ومتابعة آخر قراءة.">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#2f735e">
-<meta name="robots" content="index,follow">
-<title>المصحف الشريف | نور الذكر</title>
-<link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="assets/css/mushaf-v54-final.css?v=83.0">
-<link rel="stylesheet" href="assets/css/v66-ai-assistant.css?v=83.0"><link rel="canonical" href="https://shhabkhald018-hue.github.io/noor-aldhikr/mushaf.html"><meta property="og:locale" content="ar_AR"><meta property="og:type" content="website"><meta property="og:title" content="المصحف الشريف | نور الذكر"><meta property="og:description" content="المصحف الشريف للقراءة والتلاوة والتفسير والحفظ ومتابعة آخر قراءة."></head>
-<body class="mushaf-page">
-<header class="m54-top">
-  <a href="index.html" class="m54-brand m54-back-home" aria-label="الرجوع إلى الموقع"><span>←</span><b>رجوع</b></a>
-  <div class="m54-center">
+<html lang="ar" dir="rtl" data-theme="light" data-reading-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#176B52">
+  <meta name="description" content="المصحف الشريف للقراءة والتلاوة والتفسير والحفظ ومتابعة آخر قراءة.">
+  <meta name="robots" content="index,follow">
+  <title>المصحف الشريف | نور الذكر</title>
+  <link rel="icon" href="icon.svg">
+  <link rel="canonical" href="https://shhabkhald018-hue.github.io/noor-aldhikr/mushaf.html">
+  <link rel="stylesheet" href="assets/css/mushaf-v54-final.css?v=92.0.2">
+  <link rel="stylesheet" href="assets/css/v66-ai-assistant.css?v=92.0.2"><link rel="stylesheet" href="assets/css/v89-ai.css?v=92.0.2">
+  <link rel="stylesheet" href="assets/css/v87-components.css?v=92.0.2">
+  <link rel="stylesheet" href="assets/css/v87-mushaf.css?v=92.0.2">
+  <link rel="stylesheet" href="assets/css/v88-tokens.css?v=92.0.2">
+  <link rel="stylesheet" href="assets/css/v88-quran.css?v=92.0.2">
+<link rel="stylesheet" href="assets/css/v913-theme.css?v=92.0.2">
+</head>
+<body class="mushaf-page m87-shell">
+<header class="m54-top m87-top">
+  <a href="index.html" class="m54-brand m54-back-home" aria-label="الرجوع إلى نور الذكر"><span>⌂</span><b>نور الذكر</b></a>
+  <div class="m54-center m87-title-block">
     <strong id="m54SurahName">المصحف الشريف</strong>
     <div class="m54-meta"><span id="m54PageMeta">صفحة 1</span><span id="m54JuzMeta">الجزء —</span><span id="m54HizbMeta">الحزب —</span></div>
   </div>
-  <div class="m54-top-actions">
-    <button id="m54Theme" class="m54-circle" aria-label="تبديل الوضع الليلي">☾</button>
-    <button id="m54Settings" class="m54-settings-label" aria-label="إعدادات القراءة والتلاوة"><span>⚙</span><b>إعدادات القراءة والتلاوة</b></button>
+  <div class="m54-top-actions m87-top-actions">
+    <button id="m87OpenIndex" class="m54-circle" aria-label="قائمة السور والأجزاء">☰</button>
+    <button id="m87OpenSearch" class="m54-circle" aria-label="البحث في السور">⌕</button>
+    <button id="m54Settings" class="m54-circle" aria-label="إعدادات القراءة والتلاوة">⚙</button>
   </div>
 </header>
-
 <div class="m54-progress"><i id="m54ProgressBar"></i></div>
 
-<main class="m54-main">
+<main class="m54-main m87-main">
   <aside class="m54-side m54-side-right" aria-label="التنقل السريع">
-    <button id="m54PrevPageSide" aria-label="الصفحة السابقة">‹</button>
-    <span id="m54SidePage">1</span>
-    <button id="m54NextPageSide" aria-label="الصفحة التالية">›</button>
+    <button id="m54PrevPageSide" aria-label="الصفحة السابقة">‹</button><span id="m54SidePage">1</span><button id="m54NextPageSide" aria-label="الصفحة التالية">›</button>
   </aside>
-
-  <section id="m54Reader" class="m54-reader" aria-live="polite">
+  <section id="m54Reader" class="m54-reader m87-reader" aria-live="polite">
     <div class="m54-loading"><span></span><p>جاري تحميل صفحة المصحف…</p></div>
   </section>
-
   <aside class="m54-side m54-side-left" aria-label="أدوات القراءة">
-    <button id="m54FontDown" aria-label="تصغير الخط">أ−</button>
-    <button id="m54FontUp" aria-label="تكبير الخط">أ+</button>
-    <button id="m54Focus" aria-label="وضع التركيز">◉</button>
+    <button id="m54FontDown" aria-label="تصغير الخط">أ−</button><button id="m54FontUp" aria-label="تكبير الخط">أ+</button><button id="m54Focus" aria-label="وضع التركيز">◉</button>
   </aside>
 </main>
 
-<div class="m54-mini-player" id="m54MiniPlayer" hidden>
+<div class="m54-mini-player m87-mini-player" id="m54MiniPlayer" hidden>
   <div><small>التلاوة</small><strong id="m54NowPlaying">—</strong></div>
-  <div class="m54-mini-actions">
-    <button id="m54PrevAudio">⏮</button>
-    <button id="m54PauseAudio">⏯</button>
-    <button id="m54NextAudio">⏭</button>
-    <button id="m54StopAudio">■</button>
-  </div>
+  <div class="m54-mini-actions"><button id="m54PrevAudio" aria-label="الآية السابقة">⏮</button><button id="m54PauseAudio" aria-label="تشغيل أو إيقاف مؤقت">⏯</button><button id="m54NextAudio" aria-label="الآية التالية">⏭</button><button id="m54StopAudio" aria-label="إيقاف">■</button></div>
 </div>
 
-<nav class="m54-bottom" aria-label="أدوات المصحف">
-  <button id="m54Prev"><b>‹</b><span>السابق</span></button>
-  <button id="m54Play"><b>▶</b><span>تلاوة</span></button>
-  <button id="m54TafsirBtn"><b>ت</b><span>تفسير</span></button>
-  <button id="m54Save"><b>☆</b><span>حفظ</span></button>
-  <button id="m54Next"><b>›</b><span>التالي</span></button>
+<nav class="m54-bottom m87-bottom" aria-label="أدوات المصحف">
+  <button id="m87Surahs" type="button"><b>☷</b><span>السور</span></button>
+  <button id="m87Juz" type="button"><b>٣٠</b><span>الأجزاء</span></button>
+  <button id="m54Play" type="button"><b>▶</b><span>تلاوة</span></button>
+  <button id="m54TafsirBtn" type="button"><b>ت</b><span>تفسير</span></button>
+  <button id="m87Saved" type="button"><b>☆</b><span>المحفوظات</span></button>
 </nav>
+
+<!-- Quran index drawer -->
+<section class="m54-sheet m87-index-sheet" id="m87SurahDrawer" hidden>
+  <div class="m54-sheet-card m87-index-card">
+    <div class="m54-sheet-head"><div><small>التنقل داخل المصحف</small><h2>السور والأجزاء</h2></div><button data-close="m87SurahDrawer">×</button></div>
+    <div class="m87-search"><span>⌕</span><input id="m87QuranSearch" type="search" placeholder="ابحث باسم السورة أو رقمها" autocomplete="off"></div>
+    <div class="m87-index-tabs" role="tablist"><button class="active" data-index-tab="surahs" type="button">السور</button><button data-index-tab="juz" type="button">الأجزاء</button><button data-index-tab="pages" type="button">الصفحات</button><button data-index-tab="saved" type="button">المحفوظات</button></div>
+    <div class="m87-index-body" id="m87IndexBody"></div>
+  </div>
+</section>
+
+<!-- Ayah quick actions -->
+<section class="m54-sheet m87-ayah-sheet" id="m87AyahActions" hidden>
+  <div class="m54-sheet-card m87-ayah-actions-card">
+    <div class="m54-sheet-head"><div><small>الآية المحددة</small><h2 id="m87AyahActionTitle">اختر آية</h2></div><button data-close="m87AyahActions">×</button></div>
+    <p class="m87-selected-ayah" id="m87SelectedAyahText"></p>
+    <div class="m87-action-grid">
+      <button id="m87ActionPlay" type="button"><b>▶</b><span>تشغيل</span></button>
+      <button id="m87ActionTafsir" type="button"><b>ت</b><span>تفسير</span></button>
+      <button id="m54Save" type="button"><b>☆</b><span>حفظ الآية</span></button>
+      <button id="m87ActionCopy" type="button"><b>⧉</b><span>نسخ المرجع</span></button>
+    </div>
+  </div>
+</section>
 
 <aside class="m54-sheet" id="m54SettingsSheet" hidden>
   <div class="m54-sheet-card">
     <div class="m54-sheet-head"><div><small>إعدادات المصحف</small><h2>القراءة والتلاوة</h2></div><button data-close="m54SettingsSheet">×</button></div>
     <div class="m54-settings-grid">
       <label><span>رقم الصفحة</span><div class="m54-inline"><input id="m54PageInput" type="number" min="1" max="604" value="1"><button id="m54GoPage" class="primary">انتقال</button></div></label>
+      <label><span>السورة</span><select id="m54SurahSelect"></select></label>
       <label><span>الجزء</span><select id="m54JuzSelect"></select></label>
       <label><span>الحزب</span><select id="m54HizbSelect"></select></label>
-      <label><span>السورة</span><select id="m54SurahSelect"></select></label>
+      <label><span>نمط القراءة</span><select id="m87ReadingTheme"><option value="light">نهاري</option><option value="sepia">سيبيا</option><option value="dark">ليلي</option></select></label>
       <label><span>حجم الخط</span><input id="m54Font" type="range" min="82" max="145" step="3" value="100"></label>
       <label><span>القارئ</span><select id="m54Reciter"><option value="ar.alafasy">مشاري راشد العفاسي</option><option value="ar.husary">محمود خليل الحصري</option><option value="ar.minshawi">محمد صديق المنشاوي</option><option value="ar.abdulbasitmurattal">عبد الباسط عبد الصمد</option></select></label>
       <label><span>تكرار الآية</span><select id="m54Repeat"><option value="1">مرة واحدة</option><option value="2">مرتان</option><option value="3">3 مرات</option><option value="5">5 مرات</option><option value="10">10 مرات</option></select></label>
@@ -77,25 +99,19 @@
   </div>
 </aside>
 
-<section class="m54-sheet" id="m54TafsirSheet" hidden>
-  <div class="m54-sheet-card">
-    <div class="m54-sheet-head"><div><small>التفسير الميسر</small><h2 id="m54TafsirTitle">اختر آية</h2></div><button data-close="m54TafsirSheet">×</button></div>
-    <div class="m54-tafsir-body" id="m54TafsirText">اضغط على آية ثم اختر «تفسير».</div>
-    <small class="m54-source" id="m54TafsirSource"></small>
-  </div>
-</section>
+<section class="m54-sheet" id="m54TafsirSheet" hidden><div class="m54-sheet-card"><div class="m54-sheet-head"><div><small>التفسير الميسر</small><h2 id="m54TafsirTitle">اختر آية</h2></div><button data-close="m54TafsirSheet">×</button></div><div class="m54-tafsir-body" id="m54TafsirText">اضغط على آية ثم اختر «تفسير».</div><small class="m54-source" id="m54TafsirSource"></small></div></section>
+<section class="m54-sheet" id="m54SavedSheet" hidden><div class="m54-sheet-card"><div class="m54-sheet-head"><div><small>المحفوظات</small><h2>الآيات المحفوظة</h2></div><button data-close="m54SavedSheet">×</button></div><div id="m54SavedBody"></div></div></section>
 
-<section class="m54-sheet" id="m54SavedSheet" hidden>
-  <div class="m54-sheet-card">
-    <div class="m54-sheet-head"><div><small>المحفوظات</small><h2>الآيات المحفوظة</h2></div><button data-close="m54SavedSheet">×</button></div>
-    <div id="m54SavedBody"></div>
-  </div>
-</section>
+<button id="m54Theme" class="m87-theme-fab" aria-label="تغيير نمط القراءة">◐</button>
+<script defer src="assets/js/v86-quran-core.js?v=92.0.2"></script>
+<script defer src="assets/js/quran-data.js?v=92.0.2"></script>
+<script defer src="assets/js/mushaf-v54-final.js?v=92.0.2"></script>
+<script src="assets/js/version.js?v=92.0.2"></script>
+<script src="config.js?v=92.0.2"></script>
 
 
-<script defer src="assets/js/mushaf-v54-final.js?v=83.0"></script>
-<script src="config.js?v=83.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>if(!window.supabase){document.write('<script src="https://unpkg.com/@supabase/supabase-js@2"><\/script>')}</script>
-<script defer src="assets/js/v66-ai-assistant.js?v=83.0"></script></body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
+<script>if(!window.supabase){document.write('<script src="https://unpkg.com/@supabase/supabase-js@2.112.4"><\\/script>')}</script>
+<script defer src="assets/js/v883-ai-runtime.js?v=92.0.2"></script><script defer src="assets/js/v883-ai-core.js?v=92.0.2"></script>
+<script defer src="assets/js/v66-ai-assistant.js?v=92.0.2"></script><script defer src="assets/js/v89-local-llm.js?v=92.0.2"></script><script defer src="assets/js/v89-retriever.js?v=92.0.2"></script><script defer src="assets/js/v89-rag-orchestrator.js?v=92.0.2"></script><script defer src="assets/js/v89-ai-runtime.js?v=92.0.2"></script><script defer src="assets/js/v89-ai-ui.js?v=92.0.2"></script>
+<script defer src="assets/js/v913-theme-engine.js?v=92.0.2"></script></body></html>

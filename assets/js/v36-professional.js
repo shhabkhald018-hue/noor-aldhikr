@@ -5,15 +5,6 @@ const $$=(s,p=document)=>[...p.querySelectorAll(s)];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=v=>String(v||'').toLowerCase().normalize('NFKD').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[ًٌٍَُِّْـ]/g,'').replace(/[^\u0600-\u06ff\s]/g,' ').replace(/\s+/g,' ').trim();
 
-const OFFLINE_CORE=[
- {title:'سورة الفاتحة',text:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',source:'الفاتحة 1–7'},
- {title:'آية الكرسي',text:'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ',source:'البقرة 255'},
- {title:'آخر آيتين من سورة البقرة',text:'آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ۝ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',source:'البقرة 285–286'},
- {title:'سورة الإخلاص',text:'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ',source:'الإخلاص 1–4'},
- {title:'سورة الفلق',text:'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ',source:'الفلق 1–5'},
- {title:'سورة الناس',text:'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ',source:'الناس 1–6'}
-];
-
 function readHistory(){try{return JSON.parse(localStorage.getItem('noor_dreams_v36')||'[]')}catch(e){return []}}
 function writeHistory(rows){try{localStorage.setItem('noor_dreams_v36',JSON.stringify(rows.slice(0,30)))}catch(e){}}
 function saveHistory(type,text,result){const rows=readHistory();rows.unshift({type,text:text.slice(0,260),result,date:new Date().toLocaleString('ar-SA')});writeHistory(rows);renderHistory()}
@@ -100,17 +91,11 @@ function renderHistory(){
 
 function addOfflineRuqyah(){
  const grid=$('#ruqyahHub .ruqyah-main-grid');
- if(!grid||$('[data-v36-offline]'))return;
+ if(!grid||$('[data-rq-open="basicReading"]'))return;
  const card=document.createElement('button');
- card.className='ruqyah-program-card offline-core-feature'; card.dataset.v36Offline='1';
+ card.className='ruqyah-program-card offline-core-feature'; card.dataset.rqOpen='basicReading'; card.type='button';
  card.innerHTML='<span class="rq-card-icon">📥</span><div><small>يعمل دون اتصال</small><h3>القراءة الأساسية المحفوظة</h3><p>الفاتحة وآية الكرسي وآخر البقرة والمعوذات بنصوصها كاملة، مع بقاء البرنامج الجامع الموسع.</p></div><span class="rq-arrow">←</span>';
- grid.appendChild(card); card.addEventListener('click',openOfflineRuqyah);
-}
-function openOfflineRuqyah(){
- $('#ruqyahHub')?.classList.add('hidden'); $('#ruqyahReader')?.classList.remove('hidden');
- $('#rqReaderTitle').textContent='القراءة الأساسية المحفوظة'; $('#rqReaderKicker').textContent='متاحة دون اتصال'; $('#rqReaderDescription').textContent='قسم إضافي مختصر للنصوص الأساسية الكاملة. للبرنامج الموسع استخدم «الرقية الشرعية الجامعة».';
- $('#rqReaderContent').innerHTML=OFFLINE_CORE.map((row,i)=>`<article class="rq-reading-card"><div class="rq-card-heading"><h3>${esc(row.title)}</h3><span class="v36-verse-index">${String(i+1).padStart(2,'0')}</span></div><div class="rq-quran-text">${esc(row.text)}</div><div class="rq-source-line">المصدر: القرآن الكريم — ${esc(row.source)}.</div></article>`).join('');
- window.scrollTo({top:0,behavior:'smooth'});
+ grid.appendChild(card);
 }
 
 document.addEventListener('DOMContentLoaded',()=>{enhanceDreams();addOfflineRuqyah()});
