@@ -7,6 +7,14 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(defaultComposer){
   const NO_ANSWER='لم أجد إجابة موثوقة كافية لهذا السؤال حاليًا. يمكنك إعادة صياغة السؤال أو اختيار أحد الاقتراحات.';
   function sourceObj(h){return {title:h.title||h.category||'مصدر موثوق',source:h.source||h.source_text||'',source_type:h.source_type||'other',trust_tier:h.trust_tier||'verified',confidence:Number(h.confidence||0),evidenceScore:Number(h.evidenceScore||0),origin:h.origin||'retrieval'}}
+  function coherentEvidence(rows=[]){
+    if(!rows.length)return[];
+    const top=rows[0],topConfidence=Math.max(Number(top.confidence)||0,1),topCategory=String(top.category||'');
+    return [top,...rows.slice(1).filter(row=>{
+      if(top.knowledge_key&&row.knowledge_key===top.knowledge_key)return true;
+      return !!row.strongMatch&&Number(row.matchCoverage||0)>=.84&&String(row.category||'')===topCategory&&Number(row.confidence||0)>=topConfidence*.55;
+    })].slice(0,4);
+  }
   function buildContext(evidence,maxChars=6500){
     let used=0;const parts=[];
     for(const e of evidence){
@@ -32,7 +40,7 @@
     if(!evidence?.rankEvidence||!evidence?.guardAnswer)throw new Error('EVIDENCE_ENGINE_REQUIRED');
     async function ask(question,{settings={},ctx={},history=[]}={}){
       const ret=await retriever.ask(question,ctx);
-      const ranked=evidence.rankEvidence(ret?.hits||[],settings);
+      const ranked=coherentEvidence(evidence.rankEvidence(ret?.hits||[],settings));
       if(!ranked.length)return {mode:'knowledge-fallback',answer:NO_ANSWER,sources:[],evidence:[],related:ret?.related||[],found:false,confidence:0};
       const fallback=composer?.compose?composer.compose(question,ranked,settings):String(ret?.answer||ranked[0].answer||ranked[0].text||'').trim();
       const sources=ranked.map(sourceObj);
@@ -48,5 +56,5 @@
     }
     return {ask,buildPrompt,buildContext,buildHistory};
   }
-  return {create,buildPrompt,buildContext,buildHistory,NO_ANSWER};
+  return {create,buildPrompt,buildContext,buildHistory,coherentEvidence,NO_ANSWER};
 });

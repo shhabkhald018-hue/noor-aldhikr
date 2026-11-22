@@ -2,7 +2,7 @@
 (()=>{
   const OPTIN_KEY='noor-v89-local-ai-optin';
   const USAGE_KEY='noor-v89-ai-usage';
-  let settings={generationEnabled:true,localModelEnabled:true};
+  let settings={generationEnabled:false,localModelEnabled:true};
   let engine=null,retriever=null,rag=null,memoryUsage={};
   const listeners=new Set();
   function client(){try{return window.NOOR_GET_SUPABASE_CLIENT?.()||window.supabaseClient||null}catch(e){return null}}
@@ -12,7 +12,7 @@
   function emit(){const s=status();for(const fn of listeners){try{fn(s)}catch(_){}}try{window.dispatchEvent(new CustomEvent('noor:v89-ai-status',{detail:s}))}catch(_){}return s}
   function status(){return {assistantEnabled:window.NOOR_AI_ENABLED!==false,generationEnabled:settings.generationEnabled,localModelEnabled:settings.localModelEnabled,optIn:optIn(),llm:engine?.status?.()||{state:'idle',supported:!!window.navigator?.gpu},mode:(settings.generationEnabled&&settings.localModelEnabled&&optIn()&&engine?.isSupported?.())?'local-ai':'retrieval'}}
   function limit(){const lim=Math.max(1,Math.min(Number(window.NOOR_RUNTIME?.ai?.max_daily_per_user||200),500));const day=new Date().toISOString().slice(0,10);let obj={};try{obj=JSON.parse(localStorage.getItem(USAGE_KEY)||'{}')}catch{obj=memoryUsage||{}}if(obj.day!==day)obj={day,count:0};if(obj.count>=lim)return {ok:false,remaining:0};obj.count++;memoryUsage=obj;try{localStorage.setItem(USAGE_KEY,JSON.stringify(obj))}catch{}return {ok:true,remaining:Math.max(0,lim-obj.count)}}
-  async function loadSettings(){const sb=client();if(!sb)return settings;try{const request=sb.from('app_settings').select('key,value').in('key',['v89_generation_enabled','v89_local_model_enabled']);const {data,error}=await (window.noorWithTimeout?window.noorWithTimeout(request,12000):request);if(!error){for(const r of data||[]){if(r.key==='v89_generation_enabled')settings.generationEnabled=bool(r.value,true);if(r.key==='v89_local_model_enabled')settings.localModelEnabled=bool(r.value,true)}}}catch(_){}emit();return settings}
+  async function loadSettings(){const sb=client();if(!sb)return settings;try{const request=sb.from('app_settings').select('key,value').in('key',['v89_generation_enabled','v89_local_model_enabled']);const {data,error}=await (window.noorWithTimeout?window.noorWithTimeout(request,12000):request);if(!error){for(const r of data||[]){if(r.key==='v89_generation_enabled')settings.generationEnabled=bool(r.value,false);if(r.key==='v89_local_model_enabled')settings.localModelEnabled=bool(r.value,true)}}}catch(_){}emit();return settings}
   function ensure(){
     if(engine&&retriever&&rag)return;
     if(!window.NOOR_V89_LLM_FACTORY||!window.NOOR_V89_RETRIEVER_FACTORY||!window.NOOR_V89_RAG_FACTORY||!window.NOOR_AI_CORE)throw new Error('V89_ENGINE_NOT_READY');

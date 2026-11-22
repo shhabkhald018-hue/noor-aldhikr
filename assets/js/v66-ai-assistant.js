@@ -22,8 +22,10 @@
      if(!res.error&&Array.isArray(res.data))combined.push(...res.data);
    }catch(error){console.warn('[Noor AI] ai_knowledge unavailable:',error)}
    try{
-     const res=await sb.from('knowledge_base').select('id,question,answer,keywords,category,priority,active').eq('active',true).order('priority',{ascending:false}).limit(500);
-     if(!res.error&&Array.isArray(res.data))combined.push(...res.data.map(row=>({
+     const res=await sb.from('knowledge_base')
+       .select('id,question,answer,keywords,category,priority,active,source_text,source_type,source_label,trust_tier')
+       .eq('active',true).neq('trust_tier','review').order('priority',{ascending:false}).limit(500);
+     if(!res.error&&Array.isArray(res.data))combined.push(...res.data.filter(row=>String(row.source_text||'').trim()).map(row=>({
        id:row.id,
        knowledge_key:`knowledge-base-${row.id}`,
        question:row.question,
@@ -33,10 +35,10 @@
        category:row.category||'عام',
        priority:row.priority||100,
        active:true,
-       source_text:'قاعدة المعرفة المعتمدة في نور الذكر',
-       source_type:'owner',
-       source_label:'Knowledge Base',
-       trust_tier:'verified'
+       source_text:row.source_text,
+       source_type:row.source_type||'owner',
+       source_label:row.source_label||'قاعدة معرفة نور الذكر',
+       trust_tier:row.trust_tier||'verified'
      })));
    }catch(error){console.warn('[Noor AI] knowledge_base unavailable:',error)}
    return combined;
@@ -58,19 +60,17 @@
    m.innerHTML=`<div class="noor-ai-card" role="dialog" aria-modal="true" aria-labelledby="noorAiTitle"><div class="noor-ai-head"><div><h2 id="noorAiTitle">مساعد نور الذكر الذكي</h2><small id="noorAiContext">RAG شرعي موثّق + ذكاء محلي اختياري — مجاني 100%</small></div><button class="noor-ai-close" aria-label="إغلاق">×</button></div><div><div class="noor-ai-messages" id="noorAiMessages"><div class="noor-ai-msg note">يعتمد المساعد على معرفة موثقة ومحتوى نور الذكر. لا يقدّم تشخيصًا طبيًا، ولا يجزم بسبب غيبي، ولا يحوّل الرؤى إلى اتهامات أو يقين.</div></div><div class="noor-ai-quick"></div></div><form class="noor-ai-form" id="noorAiForm"><textarea id="noorAiInput" required maxlength="3000" placeholder="اكتب سؤالك بوضوح…"></textarea><button type="submit">إرسال</button></form><div class="noor-ai-status" id="noorAiStatus"></div></div>`;
    document.body.appendChild(m);fab.onclick=open;m.querySelector('.noor-ai-close').onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true};m.querySelector('#noorAiForm').onsubmit=submit;refreshAiShell();return m;
  }
- function safePrompts(){return ['كيف أرقي نفسي؟','هل الصداع وحده دليل على العين؟','متى أقرأ أذكار الصباح؟','الشك ينقض الوضوء؟','فاتتني الصلاة بسبب النوم، ماذا أفعل؟','ما أركان الإيمان؟','ماذا حدث في غزوة بدر؟','كيف أتعامل مع حلم مزعج؟']}
+ function safePrompts(){return ['كيف أرقي نفسي؟','هل العين حق؟','ما فضل آية الكرسي عند النوم؟','الشك ينقض الوضوء؟','فاتتني الصلاة بسبب النوم، ماذا أفعل؟','ما أركان الإيمان؟','ماذا حدث في غزوة بدر؟','كيف أتعامل مع حلم مزعج؟']}
  function refreshAiShell(){const m=document.getElementById('noorAiModal');if(!m)return;const a=aiCfg();const title=$('#noorAiTitle',m);if(title&&a.assistant_name)title.textContent=a.assistant_name;const input=$('#noorAiInput',m);if(input&&a.max_input_chars)input.maxLength=a.max_input_chars;const note=$('.noor-ai-msg.note',m);if(note&&a.safety_notice)note.textContent=a.safety_notice;const qbox=$('.noor-ai-quick',m);if(qbox){qbox.innerHTML='';const cloudPrompts=Array.isArray(a.quick_prompts)?a.quick_prompts:[];const risky=/تفسير.*رؤ|سؤال فقهي$/;const qs=cloudPrompts.filter(q=>!risky.test(String(q))).concat(safePrompts()).filter((q,i,a)=>q&&a.indexOf(q)===i).slice(0,8);qs.forEach(q=>{const b=document.createElement('button');b.type='button';b.textContent=q;b.onclick=()=>{input.value=q;input.focus()};qbox.appendChild(b)})}}
  function open(){if(window.NOOR_AI_ENABLED===false)return;const m=shell();refreshAiShell();const ctx=activeContext();m.hidden=false;m.querySelector('#noorAiContext').textContent=`أنت الآن في: ${ctx.title} — معرفة محلية ومراجع`;setTimeout(()=>m.querySelector('#noorAiInput').focus(),80)}
  function add(text,kind='ai'){const h=document.getElementById('noorAiMessages'),d=document.createElement('div');d.className=`noor-ai-msg ${kind}`;d.textContent=text;h.appendChild(d);h.scrollTop=h.scrollHeight;return d}
  function renderOut(node,out){node.textContent='';const body=document.createElement('div');body.className='noor-ai-answer-text';body.textContent=out.answer||'';node.appendChild(body);if(out.source){const src=document.createElement('div');src.className='noor-ai-source';const label=document.createElement('b'),value=document.createElement('span');label.textContent='المصدر / المرجع';value.textContent=out.source;src.append(label,value);node.appendChild(src)}if(Array.isArray(out.related)&&out.related.length){const rel=document.createElement('small');rel.className='noor-ai-related';rel.textContent=`موضوعات قريبة: ${out.related.join(' — ')}`;node.appendChild(rel)}}
  function localLimit(){const a=aiCfg(),lim=Math.max(1,Math.min(Number(a.max_daily_per_user||200),500)),day=new Date().toISOString().slice(0,10),key='noor-free-ai-usage';let obj={};try{obj=JSON.parse(localStorage.getItem(key)||'{}')}catch{obj=memoryUsage||{}}if(obj.day!==day)obj={day,count:0};if(obj.count>=lim)return {ok:false,remaining:0};obj.count++;memoryUsage=obj;try{localStorage.setItem(key,JSON.stringify(obj))}catch{}return {ok:true,remaining:Math.max(lim-obj.count,0)}}
- function pageExcerpt(q,ctx){if(['ruqyah','assessment','dreams','creed','fiqh','seerah','hadith'].includes(ctx.page))return null;const core=CORE(),host=document.getElementById(ctx.page)||document.querySelector('main');if(!core||!host)return null;const qt=core.tokens(q);if(qt.length<2)return null;let best=null,bestScore=0;for(const el of host.querySelectorAll('h2,h3,p,li')){const tx=(el.textContent||'').trim().replace(/\s+/g,' ');if(tx.length<35||tx.length>900)continue;const tt=core.tokens(tx);const set=new Set(tt);let s=0;for(const t of qt)if(set.has(t))s++;if(s>bestScore){bestScore=s;best=tx}}return bestScore>=3?best:null}
  async function answerQuestion(q,ctx){
    const usage=localLimit();if(!usage.ok)return {answer:'وصلت للحد اليومي الذي حدده مالك الموقع لهذا الجهاز. يمكنك المحاولة غدًا.',source:'',note:'المساعد مجاني — الحد تنظيمي فقط.',related:[]};
    const core=CORE();if(!core)return {answer:'تعذر تحميل محرك المعرفة. أعد تحميل الصفحة وحاول مرة أخرى.',source:'',note:'',related:[]};
-   const entries=await loadKnowledge();const hit=core.answer(q,ctx,entries,{threshold:4.2});
+   const entries=await loadKnowledge();const hit=core.answer(q,ctx,entries,{threshold:6.2});
    if(hit.found){return {...hit,note:`${hit.origin==='cloud'?'إجابة معتمدة من معرفة المالك':hit.origin==='academy'?'إجابة من منهج الأكاديمية':hit.origin==='local'?'إجابة من البنك المحلي الموثق':'إجابة من قاعدة السلامة'} • متبقي اليوم: ${usage.remaining}`}}
-   const excerpt=pageExcerpt(q,ctx);if(excerpt)return {answer:`وجدت في القسم المفتوح مقتطفًا قد يساعدك:\n${excerpt}\n\nهذا مقتطف سياقي وليس فتوى أو تشخيصًا.`,source:`محتوى قسم: ${ctx.title}`,note:'مطابقة سياقية داخل الصفحة — بدون API.',related:[]};
    return {answer:'لم أجد إجابة موثوقة كافية لهذا السؤال حاليًا. يمكنك إعادة صياغة السؤال أو اختيار أحد الاقتراحات.',source:'',note:'المعالجة محلية داخل الموقع، ولم يُرسل سؤالك إلى مزود ذكاء اصطناعي خارجي.',related:hit.related||[]};
  }
  async function submit(e){e.preventDefault();const input=document.getElementById('noorAiInput'),q=input.value.trim();if(!q)return;add(q,'user');input.value='';const status=document.getElementById('noorAiStatus');status.textContent='أبحث في المعرفة والمراجع…';const pending=add('…','ai');try{if(window.NOOR_AI_ENABLED===false)throw new Error('AI_DISABLED');const out=await answerQuestion(q,activeContext());renderOut(pending,out);status.textContent=out.note||''}catch(err){pending.textContent=err.message==='AI_DISABLED'?'المساعد متوقف حاليًا من لوحة المالك.':'تعذر تشغيل المساعد المحلي الآن. أعد تحميل الصفحة وحاول مرة أخرى.';status.textContent=''}}

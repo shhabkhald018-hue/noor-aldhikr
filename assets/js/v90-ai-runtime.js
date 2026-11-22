@@ -1,6 +1,6 @@
 'use strict';
 (()=>{
-  const DEFAULTS={memoryTurns:8,maxEvidence:5,answerStyle:'balanced',generationEnabled:true,modelPolicy:'auto',enabledModels:['8B','4B','1.7B','0.6B'],allowedSourceTypes:['quran','sunnah','scholar','book','owner','academy','other'],maxNewTokens:220};
+  const DEFAULTS={memoryTurns:8,maxEvidence:5,answerStyle:'balanced',generationEnabled:false,modelPolicy:'auto',enabledModels:['8B','4B','1.7B','0.6B'],allowedSourceTypes:['quran','sunnah','scholar','book','owner','academy','other'],maxNewTokens:220};
   const STORAGE='noor-v90-conversation';
   let settings={...DEFAULTS},memory=null,model=null,retriever=null,rag=null,route=null,currentAbort=null;
   function client(){return window.supabaseClient||null}

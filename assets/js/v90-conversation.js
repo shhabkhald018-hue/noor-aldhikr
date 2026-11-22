@@ -32,8 +32,8 @@
       if(!isFollow)return q;
       const topic=lastUserTopic();
       if(!topic)return q;
-      const prior=lastAssistant();
-      return `السؤال الأصلي: ${topic}\nسؤال المتابعة: ${q}${prior?`\nسياق الإجابة السابقة: ${prior.slice(0,800)}`:''}`;
+      // Retrieval must never index prior assistant wording; an incorrect answer could otherwise reinforce itself.
+      return `السؤال الأصلي: ${topic}\nسؤال المتابعة: ${q}`;
     }
     return {addTurn,history,clear,setMaxTurns,resolveQuestion,lastUserTopic};
   }

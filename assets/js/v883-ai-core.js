@@ -4,11 +4,19 @@
   if(typeof module==='object'&&module.exports) module.exports=api;
   if(root) root.NOOR_AI_CORE=api;
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
-  const STOP=new Set('في من على الى إلى عن ما ماذا هل هو هي هذا هذه ذلك التي الذي الذين مع عند بعد قبل ثم او أو و يا لو اذا إذا انا أنا انت أنت نحن لكم لك لي لنا كل اي أي كيف متى اين أين لماذا فقط جدا جداً قد تم يكون تكون كان كانت حكم سؤال اريد أريد'.split(/\s+/));
+  const STOP=new Set('في من على الى إلى عن ما ماذا هل هو هي هذا هذه ذلك التي الذي الذين مع عند بعد قبل ثم او أو و يا لو اذا إذا انا أنا انت أنت نحن لكم لك لي لنا كل اي أي كيف متى اين أين لماذا فقط جدا جداً قد تم يكون تكون كان كانت حكم سؤال اريد أريد يجوز يمكن ممكن كم مرة مرات شيء شي شيئا شيئًا اقول أقول افعل أفعل اعرف أعرف يعني شرح اشرح الدليل سبب بسبب'.split(/\s+/).map(norm));
   const WEAK=new Set('عدد اعداد أعداد مره مرة مرات شيء شي شيئا شيئًا موضوع طريقه طريقة'.split(/\s+/).map(norm));
   const SUBJECTS={creed:{label:'العقيدة',route:'creed'},fiqh:{label:'الفقه',route:'fiqh'},seerah:{label:'السيرة',route:'seerah'},hadith:{label:'الحديث',route:'hadith'}};
   function norm(v){return String(v??'').toLowerCase().normalize('NFKD').replace(/[\u064b-\u065f\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/ة/g,'ه').replace(/[^\u0600-\u06ff0-9a-z\s]/gi,' ').replace(/\s+/g,' ').trim()}
   function tokens(v){return norm(v).split(' ').filter(x=>x.length>1&&!STOP.has(x))}
+  function searchToken(v){
+    let t=norm(v);
+    if(t.length>5&&/^[وف]ال/.test(t))t=t.slice(1);
+    if(t.length>5&&/^[بك]ال/.test(t))t=t.slice(1);
+    if(t.length>4&&t.startsWith('ال'))t=t.slice(2);
+    return t;
+  }
+  function matchTokens(v){return [...new Set(tokens(v).map(searchToken).filter(x=>x.length>1&&!STOP.has(x)))]}
   function keywordArray(v){if(Array.isArray(v))return v.map(x=>String(x).trim()).filter(Boolean);return String(v||'').split(/[،,\n]/).map(x=>x.trim()).filter(Boolean)}
   function canonicalEntries(rows=[]){return rows.filter(x=>x&&x.active!==false&&x.answer).map((x,i)=>({
     id:x.knowledge_key||x.canonicalId||x.id||`local-${i}`,knowledge_key:x.knowledge_key||x.canonicalId||'',category:x.category||'عام',title:x.title||x.question||'',answer:x.answer||'',source_text:x.source_text||x.source||'',keywords:keywordArray(x.keywords),aliases:Array.isArray(x.aliases)?x.aliases:[],priority:Number(x.priority)||500,route:x.route||'',origin:'local',active:true
@@ -42,6 +50,29 @@
     for(const left of a){let best=0;for(const right of b)best=Math.max(best,fuzzySimilarity(left,right));if(best>=.66)total+=best}
     return total;
   }
+  function matchQuality(entry,question){
+    const nq=norm(question),title=norm(entry?.title),qTokens=matchTokens(question),titleTokens=matchTokens(entry?.title);
+    const phrases=[...(entry?.keywords||[]),...(entry?.aliases||[])].map(norm).filter(Boolean);
+    const candidateTokens=matchTokens(`${entry?.title||''} ${phrases.join(' ')}`);
+    const exactTitle=!!nq&&title===nq;
+    const exactKeyword=phrases.some(p=>p===nq);
+    const phraseMatch=qTokens.length>=2&&phrases.concat(title).some(p=>matchTokens(p).length>=2&&p.length>=4&&(p.includes(nq)||nq.includes(p)));
+    let matched=0;
+    for(const qt of qTokens){
+      let best=0;
+      for(const ct of candidateTokens){
+        if(qt===ct){best=1;break}
+        best=Math.max(best,fuzzySimilarity(qt,ct));
+      }
+      if(best>=.72)matched++;
+    }
+    const coverage=qTokens.length?matched/qTokens.length:0;
+    const singleTitle=qTokens.length===1&&titleTokens.length===1&&qTokens[0]===titleTokens[0];
+    const singleKeyword=qTokens.length===1&&phrases.some(p=>matchTokens(p).length===1&&matchTokens(p)[0]===qTokens[0]);
+    const strong=exactTitle||exactKeyword||phraseMatch||singleTitle||singleKeyword||(matched>=2&&coverage>=.84);
+    const ok=qTokens.length===1?(singleTitle||singleKeyword||exactTitle||exactKeyword):(qTokens.length>=2&&(strong||(matched>=2&&coverage>=.67)));
+    return {ok,strong,coverage:+coverage.toFixed(3),matched,total:qTokens.length,exactTitle,exactKeyword,phraseMatch};
+  }
   function score(entry,question,ctx={}){
     const nq=norm(question),qt=tokens(question),title=norm(entry.title),ans=norm(entry.answer),cat=norm(entry.category),route=norm(entry.route),ctxText=norm(`${ctx.page||''} ${ctx.title||''}`);
     let s=phraseScore(title,nq,24,11);
@@ -58,17 +89,20 @@
   function sameTopic(a,b){const ak=String(a.knowledge_key||''),bk=String(b.knowledge_key||'');if(ak&&bk&&ak===bk)return true;const at=norm(a.title),bt=norm(b.title);return !!at&&at===bt}
   function answer(question,ctx={},entries=[],options={}){
     const q=String(question||'').trim();if(!q)return {found:false,answer:'',source:'',title:'',category:'',origin:'none',confidence:0,related:[]};
-    const threshold=Number.isFinite(options.threshold)?options.threshold:4.2;
-    const scored=entries.map(row=>({row,score:score(row,q,ctx)})).sort((a,b)=>b.score-a.score);
-    const top=scored[0];if(!top||top.score<threshold){const related=scored.filter(x=>x.score>0).slice(0,3).map(x=>String(x.row.title||'').trim()).filter(Boolean);return {found:false,answer:'',source:'',title:'',category:'',origin:'none',confidence:top?.score||0,related};}
+    const threshold=Number.isFinite(options.threshold)?options.threshold:6.2;
+    const scored=entries.map(row=>({row,score:score(row,q,ctx),quality:matchQuality(row,q)})).sort((a,b)=>b.score-a.score);
+    const qualified=scored.filter(x=>x.quality.ok&&x.score>=threshold);
+    const top=qualified[0],second=qualified[1];
+    const ambiguous=!!(top&&!top.quality.strong&&second&&!sameTopic(top.row,second.row)&&(top.score-second.score)<1.5);
+    if(!top||ambiguous){const related=scored.filter(x=>x.quality.ok&&x.score>=Math.max(2.5,threshold*.55)).slice(0,3).map(x=>String(x.row.title||'').trim()).filter(Boolean);return {found:false,answer:'',source:'',title:'',category:'',origin:'none',confidence:top?.score||scored[0]?.score||0,related,ambiguous};}
     // If a local result wins, allow a sufficiently matching cloud override for the same topic/title.
     let best=top;
     if(best.row.origin!=='cloud'){
-      const cloud=scored.find(x=>x.row.origin==='cloud'&&x.score>=threshold&&sameTopic(x.row,best.row));
+      const cloud=qualified.find(x=>x.row.origin==='cloud'&&sameTopic(x.row,best.row));
       if(cloud)best=cloud;
     }
-    const bestCat=norm(best.row.category),relatedMin=Math.max(threshold+1,best.score*.35);const related=scored.filter(x=>x.row!==best.row&&norm(x.row.category)===bestCat&&x.score>=relatedMin&&!sameTopic(x.row,best.row)).slice(0,3).map(x=>x.row.title).filter(Boolean);
+    const bestCat=norm(best.row.category),relatedMin=Math.max(threshold+1,best.score*.35);const related=qualified.filter(x=>x.row!==best.row&&norm(x.row.category)===bestCat&&x.score>=relatedMin&&!sameTopic(x.row,best.row)).slice(0,3).map(x=>x.row.title).filter(Boolean);
     return {found:true,answer:String(best.row.answer||'').trim(),source:String(best.row.source_text||'').trim(),title:String(best.row.title||'').trim(),category:String(best.row.category||'').trim(),origin:best.row.origin||'unknown',confidence:+best.score.toFixed(2),related};
   }
-  return {norm,tokens,buildEntries,canonicalEntries,cloudEntries,academyEntries,score,answer,editDistance,fuzzySimilarity,fuzzyTokenOverlap};
+  return {norm,tokens,matchTokens,matchQuality,buildEntries,canonicalEntries,cloudEntries,academyEntries,score,answer,editDistance,fuzzySimilarity,fuzzyTokenOverlap};
 });

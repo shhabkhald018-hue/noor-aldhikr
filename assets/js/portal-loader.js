@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const ASSET_VERSION = window.NOOR_VERSION?.assetVersion || '92.0.2';
+  const ASSET_VERSION = window.NOOR_VERSION?.assetVersion || '92.0.3';
   const status = (text, type = 'muted') => {
     const el = document.getElementById('portalDiag');
     if (!el) return;

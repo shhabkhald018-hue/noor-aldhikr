@@ -8,7 +8,7 @@
   let dataPromise=null;
 
   function assetUrl(){
-    const version=window.NOOR_VERSION?.assetVersion||window.NOOR_VERSION?.semver||'92.0.2';
+    const version=window.NOOR_VERSION?.assetVersion||window.NOOR_VERSION?.semver||'92.0.3';
     return `${DATA_URL}?v=${encodeURIComponent(version)}`;
   }
 

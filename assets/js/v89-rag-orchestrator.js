@@ -12,6 +12,14 @@
     return [];
   }
   function sourceOf(h){return String(h.source||h.source_text||'').trim()}
+  function coherentHits(rows=[]){
+    if(!rows.length)return[];
+    const top=rows[0],topConfidence=Math.max(Number(top.confidence)||0,1),topCategory=String(top.category||'');
+    return [top,...rows.slice(1).filter(row=>{
+      if(top.knowledge_key&&row.knowledge_key===top.knowledge_key)return true;
+      return !!row.strongMatch&&Number(row.matchCoverage||0)>=.84&&String(row.category||'')===topCategory&&Number(row.confidence||0)>=topConfidence*.55;
+    })].slice(0,4);
+  }
   function buildContext(hits,maxChars=5200){
     let used=0;const chunks=[];
     for(let i=0;i<hits.length&&chunks.length<5;i++){
@@ -45,12 +53,12 @@
     for(const n of nums)if(!new RegExp(`(?:الآية|اية|آية|،)\s*${n}(?:\D|$)`).test(src))claims.push(`UNSUPPORTED_AYAH_${n}`);
     return {ok:claims.length===0,claims};
   }
-  function create({retriever,llm,enabled=()=>true,generationEnabled=()=>true}={}){
+  function create({retriever,llm,enabled=()=>true,generationEnabled=()=>false}={}){
     if(!retriever?.ask)throw new Error('RETRIEVER_REQUIRED');
     async function ask(question,ctx={}){
       if(!enabled())throw new Error('AI_DISABLED');
       const ret=await retriever.ask(question,ctx);
-      const hits=asHits(ret).filter(h=>sourceOf(h));
+      const hits=coherentHits(asHits(ret).filter(h=>sourceOf(h)));
       if(!hits.length)return {mode:'knowledge-fallback',answer:NO_ANSWER,source:'',sources:[],related:ret?.related||[],found:false,confidence:Number(ret?.confidence)||0};
       const sources=uniq(hits.map(sourceOf));
       const fallbackAnswer=String(ret?.answer||hits[0]?.answer||'').trim();
@@ -65,5 +73,5 @@
     }
     return {ask,buildGroundedPrompt};
   }
-  return {create,buildGroundedPrompt,buildContext,safetyFor,guardGenerated,NO_ANSWER};
+  return {create,buildGroundedPrompt,buildContext,safetyFor,guardGenerated,coherentHits,NO_ANSWER};
 });

@@ -110,6 +110,11 @@ create table if not exists public.knowledge_base (
  priority integer not null default 100, active boolean not null default true,
  created_at timestamptz not null default now(), updated_at timestamptz not null default now()
 );
+alter table public.knowledge_base add column if not exists source_text text not null default '';
+alter table public.knowledge_base add column if not exists source_type text not null default 'owner';
+alter table public.knowledge_base add column if not exists source_label text not null default '';
+alter table public.knowledge_base add column if not exists trust_tier text not null default 'review';
+alter table public.knowledge_base add column if not exists updated_by uuid references auth.users(id) on delete set null;
 create table if not exists public.academy_lessons (
  id uuid primary key default gen_random_uuid(), subject text not null, title text not null,
  summary text not null default '', body text not null, reference_text text not null default '',
@@ -255,6 +260,7 @@ create index if not exists academy_lessons_updated_by_idx on public.academy_less
 create index if not exists academy_questions_updated_by_idx on public.academy_questions (updated_by);
 create index if not exists activity_logs_actor_idx on public.activity_logs (actor_id);
 create index if not exists ai_knowledge_updated_by_idx on public.ai_knowledge (updated_by);
+create index if not exists knowledge_base_updated_by_idx on public.knowledge_base (updated_by);
 create index if not exists ai_research_settings_updated_by_idx on public.ai_research_settings (updated_by);
 create index if not exists ai_settings_updated_by_idx on public.ai_settings (updated_by);
 create index if not exists ai_trusted_sources_updated_by_idx on public.ai_trusted_sources (updated_by);
@@ -732,7 +738,7 @@ begin
     'profiles', (select count(*) from public.profiles),
     'knowledge', (select count(*) from public.ai_knowledge),
     'modules', (select count(*) from public.site_modules),
-    'version', '92.0.2'
+    'version', '92.0.3'
   );
 end;
 $$;
@@ -745,8 +751,8 @@ security definer
 set search_path = public, pg_temp
 as $$
   select case when public.is_owner()
-    then jsonb_build_object('owner', true, 'rls', true, 'version', '92.0.2')
-    else jsonb_build_object('owner', false, 'rls', true, 'version', '92.0.2')
+    then jsonb_build_object('owner', true, 'rls', true, 'version', '92.0.3')
+    else jsonb_build_object('owner', false, 'rls', true, 'version', '92.0.3')
   end;
 $$;
 
@@ -1286,25 +1292,26 @@ values
   ('site_description','القرآن والأذكار والعلوم الشرعية في تجربة عربية موثقة.',true),
   ('home_message','',true),
   ('announcement','',true),
-  ('current_version','92.0.2',true),
+  ('current_version','92.0.3',true),
   ('ai_mode','local-free-knowledge-base',true),
-  ('v89_generation_enabled','true',true),
+  ('v89_generation_enabled','false',true),
   ('v89_local_model_enabled','true',true),
-  ('cache_version','noor-aldhikr-v92-0-2',true)
+  ('v90_generation_enabled','false',true),
+  ('cache_version','noor-aldhikr-v92-0-3',true)
 on conflict (key) do update
 set value = excluded.value,
     public = excluded.public,
     updated_at = now()
-where excluded.key in ('current_version', 'cache_version');
+where excluded.key in ('current_version', 'cache_version', 'v89_generation_enabled', 'v90_generation_enabled');
 
 insert into public.app_versions(version, label, notes, active)
-values ('92.0.2', 'V92.0.2 PRO FREE AI', 'إصدار أمان واستقرار ومساعد معرفي مجاني دون API مدفوع.', true)
+values ('92.0.3', 'V92.0.3 PRO FREE AI', 'إصدار أمان واستقرار ومساعد معرفي مجاني دون API مدفوع.', true)
 on conflict (version) do update
 set label = excluded.label, notes = excluded.notes, active = true;
 
 update public.app_versions
 set active = false
-where version <> '92.0.2' and active = true;
+where version <> '92.0.3' and active = true;
 
 insert into public.navigation_items(item_key, label, href, sort_order, visible)
 values
@@ -1364,8 +1371,17 @@ values
   )
 on conflict (knowledge_key) do nothing;
 
-insert into public.knowledge_base(question, answer, keywords, category, priority, active)
-select question, answer, keywords, category, priority, active
+-- Legacy generic starter rows stay available for owner review but are not trusted by the public assistant.
+update public.ai_knowledge
+set trust_tier = 'review', active = false, updated_at = now()
+where knowledge_key in ('v92-how-to-ruqyah','v92-morning-adhkar','v92-no-diagnosis');
+
+insert into public.knowledge_base(
+  question, answer, keywords, category, priority, active,
+  source_text, source_type, source_label, trust_tier
+)
+select question, answer, keywords, category, priority, false,
+       source_text, source_type, source_label, 'review'
 from public.ai_knowledge
 where knowledge_key in ('v92-how-to-ruqyah','v92-morning-adhkar','v92-no-diagnosis')
   and not exists (
