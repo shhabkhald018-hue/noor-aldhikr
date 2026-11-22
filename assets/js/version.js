@@ -5,8 +5,8 @@
   target.NOOR_VERSION = Object.freeze({
     label: 'V92.0.3 PRO FREE AI',
     semver: '92.0.3',
-    assetVersion: '92.0.3',
+    assetVersion: '92.0.3-security1',
     cachePrefix: 'noor-aldhikr-',
-    cacheName: 'noor-aldhikr-v92-0-3'
+    cacheName: 'noor-aldhikr-v92-0-3-security1'
   });
 })();

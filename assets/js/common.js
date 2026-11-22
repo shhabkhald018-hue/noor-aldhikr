@@ -50,6 +50,7 @@ function getSharedSupabaseClient(){
         persistSession:true,
         autoRefreshToken:true,
         detectSessionInUrl:true,
+        flowType:'pkce',
         storage:window.localStorage,
         storageKey:'noor-aldhikr-auth-v92'
       }

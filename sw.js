@@ -1,7 +1,7 @@
 'use strict';
 importScripts('./assets/js/version.js');
 
-const RELEASE=self.NOOR_VERSION||{semver:'92.0.3',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-0-3'};
+const RELEASE=self.NOOR_VERSION||{semver:'92.0.3',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-0-3-security1'};
 const CACHE_PREFIX=RELEASE.cachePrefix;
 const CACHE_NAME=RELEASE.cacheName;
 const OFFLINE_URL='./offline.html';
@@ -22,6 +22,7 @@ const CORE_ASSETS=[
  './assets/js/ads-config.js',
  './assets/js/version.js',
  './assets/js/error-handler.js',
+ './assets/js/password-policy.js',
  './assets/js/common.js',
  './assets/js/v86-security.js',
  './assets/js/auth.js',

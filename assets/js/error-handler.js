@@ -19,6 +19,7 @@
     if(/failed to fetch|fetch failed|network|load failed|offline|dns|econn/.test(text))return 'تعذر الاتصال بالخدمة. تحقق من الإنترنت ثم أعد المحاولة.';
     if(/invalid login|invalid credentials|email or password|wrong password/.test(text))return 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
     if(/email.*not confirmed|confirm.*email/.test(text))return 'يرجى تأكيد البريد الإلكتروني قبل تسجيل الدخول.';
+    if(/weakpassword|weak password|password should|password.*characters|password.*contain/.test(text))return 'كلمة المرور لا تحقق متطلبات الأمان. استخدم 10 أحرف على الأقل تتضمن حرفًا ورقمًا ورمزًا.';
     if(/expired|invalid.*token|otp|recovery.*invalid/.test(text))return 'انتهت صلاحية الرابط أو أصبح غير صالح. اطلب رابطًا جديدًا.';
     if(/rate|too many|429/.test(text))return 'تم إرسال طلبات كثيرة. انتظر قليلًا ثم أعد المحاولة.';
     if(/duplicate|already exists|unique|23505/.test(text))return 'هذه البيانات مسجلة مسبقًا.';

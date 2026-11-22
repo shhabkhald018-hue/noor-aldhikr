@@ -15,7 +15,7 @@
     if(client)return client;
     if(!window.supabase?.createClient||!valid())return null;
     client=window.supabase.createClient(String(cfg().supabaseUrl).replace(/\/$/,''),cfg().publishableKey,{
-      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:window.localStorage,storageKey:'noor-aldhikr-auth-v92'}
+      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storage:window.localStorage,storageKey:'noor-aldhikr-auth-v92'}
     });
     window.supabaseClient=client;
     return client;

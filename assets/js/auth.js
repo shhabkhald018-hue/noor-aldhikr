@@ -3,6 +3,7 @@
 let currentUser = null;
 window.currentUser = null;
 let authSubscription = null;
+const SIGNUP_PRIVACY_MESSAGE = 'إذا كان البريد مؤهلًا لإنشاء حساب فستصلك رسالة التأكيد. إن كان لديك حساب بالفعل فاستخدم تسجيل الدخول أو استعادة كلمة المرور.';
 
 function setAuthGate(isVisible){
   const gate = qs('#authGate');
@@ -50,8 +51,8 @@ function authErrorArabic(error){
   const low = raw.toLowerCase();
   if(low.includes('invalid login credentials')) return 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
   if(low.includes('email not confirmed')) return 'تم إنشاء الحساب، لكن البريد يحتاج إلى تأكيد. افتح رسالة التأكيد في بريدك ثم ارجع وسجّل الدخول.';
-  if(low.includes('user already registered') || low.includes('already registered')) return 'هذا البريد مسجل بالفعل. اختر تسجيل الدخول بدل إنشاء حساب.';
-  if(low.includes('password should be at least')) return 'كلمة المرور يجب ألا تقل عن 8 أحرف.';
+  if(low.includes('user already registered') || low.includes('already registered')) return SIGNUP_PRIVACY_MESSAGE;
+  if(low.includes('weakpassword') || low.includes('weak password') || low.includes('password should') || low.includes('password must')) return 'كلمة المرور لا تحقق متطلبات الأمان. استخدم 10 أحرف على الأقل تتضمن حرفًا ورقمًا ورمزًا.';
   if(low.includes('signup is disabled')) return 'إنشاء الحسابات متوقف حاليًا من إعدادات المشروع.';
   if(low.includes('rate limit')) return 'تمت محاولات كثيرة خلال وقت قصير. انتظر قليلًا ثم أعد المحاولة.';
   if(low.includes('network') || low.includes('fetch') || low.includes('noor_timeout')) return 'تعذر الوصول إلى Supabase أو انتهت مهلة الاتصال. افحص الشبكة أو DNS ثم أعد المحاولة.';
@@ -68,7 +69,19 @@ function setAuthMode(mode){
   qs('#authNameField')?.classList.toggle('hidden', mode !== 'signup');
   qs('#forgotPassword')?.classList.toggle('hidden', mode === 'signup');
   const password = qs('#authPassword');
-  if(password) password.autocomplete = mode === 'signup' ? 'new-password' : 'current-password';
+  const passwordHint = qs('#authPasswordHint');
+  if(password){
+    const policy=window.NOOR_PASSWORD_POLICY;
+    password.autocomplete = mode === 'signup' ? 'new-password' : 'current-password';
+    password.minLength = mode === 'signup' ? (policy?.minLength || 10) : 1;
+    password.maxLength = policy?.maxLength || 128;
+    if(mode === 'signup') password.setAttribute('aria-describedby','authPasswordHint');
+    else password.removeAttribute('aria-describedby');
+  }
+  if(passwordHint){
+    passwordHint.textContent=window.NOOR_PASSWORD_POLICY?.description || '10 أحرف على الأقل، وتتضمن حرفًا ورقمًا ورمزًا.';
+    passwordHint.classList.toggle('hidden', mode !== 'signup');
+  }
   const submit = qs('#authSubmit');
   if(submit) submit.textContent = mode === 'signup' ? 'إنشاء الحساب' : 'تسجيل الدخول';
   clearAuthMessages();
@@ -168,9 +181,12 @@ qs('#authForm')?.addEventListener('submit',async event=>{
     if(errorBox) errorBox.textContent='اكتب البريد الإلكتروني وكلمة المرور.';
     return;
   }
-  if(password.length<8){
-    if(errorBox) errorBox.textContent='كلمة المرور يجب ألا تقل عن 8 أحرف.';
-    return;
+  if(mode==='signup'){
+    const passwordCheck=window.NOOR_PASSWORD_POLICY?.validate?.(password) || {ok:password.length>=10,message:'كلمة المرور يجب ألا تقل عن 10 أحرف.'};
+    if(!passwordCheck.ok){
+      if(errorBox) errorBox.textContent=passwordCheck.message;
+      return;
+    }
   }
 
   try{
@@ -181,13 +197,11 @@ qs('#authForm')?.addEventListener('submit',async event=>{
       const request=client.auth.signUp({email,password,options:{emailRedirectTo,data:{display_name:displayName}}});
       const result=await (window.noorWithTimeout?window.noorWithTimeout(request,18000):request);
       if(result.error) throw result.error;
-      const noIdentity=Array.isArray(result.data?.user?.identities) && result.data.user.identities.length===0;
-      if(noIdentity){showAuthResult('هذا البريد مسجل بالفعل. اختر تسجيل الدخول أو استخدم نسيت كلمة المرور.','warning');return;}
       if(result.data?.session){await applySession(result.data.session);toast('تم إنشاء الحساب وتسجيل الدخول مباشرة');return;}
       const passwordInput=qs('#authPassword');
       if(passwordInput)passwordInput.value='';
       setAuthMode('signin');
-      showAuthResult('تم إنشاء الحساب. أرسلنا رابط التأكيد إلى بريدك؛ افتحه ثم عد وسجّل الدخول.','success');
+      showAuthResult(SIGNUP_PRIVACY_MESSAGE,'success');
       setAuthGate(true);
       return;
     }
