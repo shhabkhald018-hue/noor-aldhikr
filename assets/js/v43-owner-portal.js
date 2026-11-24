@@ -275,9 +275,9 @@
     }catch(error){msg('v50QuestionMsg',explain(error),'error')}
   }
   async function v50RlsCheck(){
-    const h=$('v50RlsResult');if(!h)return;h.className='muted';h.textContent='جاري تشغيل تشخيص V92.1…';
+    const h=$('v50RlsResult');if(!h)return;h.className='muted';h.textContent='جاري تشغيل تشخيص V92.1.1…';
     const primary=await safe('owner_portal_diagnostics',sb.rpc('owner_portal_diagnostics'),null);
-    if(!primary.error){h.className='ok';h.textContent='✓ تشخيص V92.1 ناجح: '+JSON.stringify(primary.data);return;}
+    if(!primary.error){h.className='ok';h.textContent='✓ تشخيص V92.1.1 ناجح: '+JSON.stringify(primary.data);return;}
     const fallback=await safe('owner_rls_diagnostics',sb.rpc('owner_rls_diagnostics'),null);
     if(fallback.error){h.className='error';h.textContent=explain(primary.error)+' | '+explain(fallback.error);return}
     h.className='ok';h.textContent='✓ تشخيص RLS القديم ناجح: '+JSON.stringify(fallback.data);

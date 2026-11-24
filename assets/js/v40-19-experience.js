@@ -39,7 +39,7 @@
     const out=await window.NOOR_FREE_AI_ASK(text,ctx);
     if(!out?.answer) throw new Error('لم أجد إجابة مناسبة في قاعدة المعرفة الحالية.');
     const sources=Array.isArray(out.sources)?out.sources.map(s=>({title:s.title||s.source||'مصدر موثوق',url:s.url||''})):(out.source?[{title:out.source,url:''}]:[]);
-    return {answer:out.answer,sources,model:'V92.1 Trusted Islamic AI',disclaimer:out.note||'إجابة من الأدلة المسترجعة ولا تمثل تشخيصًا أو حكمًا قطعيًا.'};
+    return {answer:out.answer,sources,model:'V92.1.1 Trusted Islamic AI',disclaimer:out.note||'إجابة من الأدلة المسترجعة ولا تمثل تشخيصًا أو حكمًا قطعيًا.'};
   }
 
   function renderAIAnswer(data,mode){

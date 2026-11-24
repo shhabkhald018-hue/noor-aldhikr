@@ -25,7 +25,7 @@ function supportDeviceInfo(){
     platform:navigator.userAgentData?.platform||navigator.platform||'',
     viewport:`${innerWidth}x${innerHeight}`,
     online:navigator.onLine,
-    app_version:window.NOOR_CONFIG?.appVersion||window.NOOR_VERSION?.semver||window.ADHKAR_VERSION||'92.1.0',
+    app_version:window.NOOR_CONFIG?.appVersion||window.NOOR_VERSION?.semver||window.ADHKAR_VERSION||'92.1.1',
     page:location.pathname,
     recorded_at:new Date().toISOString()
   };

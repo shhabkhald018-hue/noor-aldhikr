@@ -235,7 +235,7 @@
                 <select data-count="${id}">${countOptions()}</select>
               </label>
             </div>
-            <button class="btn primary v58-start-subject" data-subject="${id}">ابدأ اختبار ${esc(name)}</button>
+            <button class="btn primary v58-start-subject" data-subject="${id}" data-ready-label="ابدأ اختبار ${esc(name)}" disabled aria-busy="true">جاري تجهيز الاختبار…</button>
           </article>`;
         }).join('')}
       </section>
@@ -257,7 +257,7 @@
           <label>عدد الأسئلة
             <select id="v58FinalCount">${countOptions(50)}</select>
           </label>
-          <button class="btn primary" id="v58FinalStart">ابدأ الاختبار النهائي</button>
+          <button class="btn primary" id="v58FinalStart" data-ready-label="ابدأ الاختبار النهائي" disabled aria-busy="true">جاري تجهيز الاختبار…</button>
         </div>
       </section>
 
@@ -284,6 +284,13 @@
       const available=level==='all'?150:150; // across 4 subjects there are >150 in any level
       startExam(pickFinal(banks,level,Math.min(count,available)),{scope:'final',level,banks});
     };
+    host.querySelectorAll('.v58-start-subject,#v58FinalStart').forEach(button=>{
+      button.disabled=false;
+      button.setAttribute('aria-busy','false');
+      button.textContent=button.dataset.readyLabel||button.textContent;
+    });
+    host.dataset.examReady='true';
+    window.dispatchEvent(new CustomEvent('noor:v58-exams-ready'));
     if(location.hash==='#final')setTimeout(()=>document.querySelector('.v58-final')?.scrollIntoView({behavior:'smooth',block:'start'}),150);
     return true;
   }
@@ -451,12 +458,24 @@
     return true;
   };
 
+  let initStarted=false,initFinished=false;
   function init(){
+    if(initStarted||initFinished)return;
+    initStarted=true;
     loadCertificateSettings();
     const host=document.getElementById('academyExams');
-    if(host)host.innerHTML='<section class="exam-card"><h2>جاري تجهيز بنك 600 سؤال…</h2><p>150 سؤالًا لكل مادة.</p></section>';
-    if(render())return;
-    let n=0,t=setInterval(()=>{if(render()||++n>200)clearInterval(t)},100);
+    if(host)host.innerHTML='<section class="exam-card" role="status" aria-live="polite"><h2>جاري تجهيز بنك 600 سؤال…</h2><p>150 سؤالًا لكل مادة.</p></section>';
+    if(render()){initFinished=true;initStarted=false;return}
+    let n=0,t=setInterval(()=>{
+      if(render()){
+        initFinished=true;initStarted=false;clearInterval(t);return;
+      }
+      if(++n>200){
+        clearInterval(t);initStarted=false;
+        if(host)host.innerHTML='<section class="exam-card" role="alert"><h2>تعذر تجهيز الاختبارات الآن</h2><p>تحقق من الاتصال ثم أعد تحميل الصفحة.</p><button class="btn primary" type="button" id="v58RetryLoad">إعادة المحاولة</button></section>';
+        host?.querySelector('#v58RetryLoad')?.addEventListener('click',init);
+      }
+    },100);
   }
   document.addEventListener('DOMContentLoaded',init);
   setTimeout(init,350);

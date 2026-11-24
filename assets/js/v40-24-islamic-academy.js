@@ -505,8 +505,26 @@
   const state = JSON.parse(localStorage.getItem('noor_academy_progress') || '{}');
   const save = () => localStorage.setItem('noor_academy_progress', JSON.stringify(state));
 
+  const hasDetailedReference = value => {
+    const reference=String(value||'').trim();
+    /* A named book or a quoted phrase is not a precise locator by itself. */
+    return /\d/u.test(reference);
+  };
+  const reviewInfo = item => {
+    const published=item?.sourceState==='published';
+    const detailed=hasDetailedReference(item?.r);
+    return {
+      published,
+      statusLabel:published?'محتوى منشور بعد المراجعة':'ملخص تعليمي قيد المراجعة',
+      statusClass:published?'is-reviewed':'is-draft',
+      referenceLabel:detailed?'مرجع محدد':'مرجع عام',
+      referenceNote:detailed?'ذُكر مرجع محدد؛ تحقّق من نصه وسياقه قبل الاستدلال.':'المرجع عام ويحتاج استكمال بيانات الموضع قبل الاعتماد العلمي.'
+    };
+  };
+
   function fullLesson(x,id,i){
     const title=esc(x.t), summary=esc(x.d), ref=esc(x.r||'القرآن والسنة الصحيحة ومراجع أهل العلم');
+    const info=reviewInfo(x);
     const subject={creed:'العقيدة',fiqh:'الفقه',seerah:'السيرة النبوية',hadith:'الحديث'}[id]||'العلم الشرعي';
     const guides={
       creed:{intro:'هذا الدرس جزء من بناء التصور الإيماني للمسلم. المقصود ليس حفظ المصطلح وحده، بل فهم معناه ودليله وأثره في العبادة والسلوك، مع الوقوف عند حدود النص وعدم الخوض في الغيب بغير علم.',method:'يُفهم باب العقيدة بجمع النصوص الصحيحة، ورد المتشابه إلى المحكم، والتفريق بين أصل المسألة وبين الحكم على الأشخاص. وما كان من الغيب فلا يثبت إلا بوحي صحيح.',practice:'حوّل معنى الدرس إلى عبادة قلبية أو سلوك ظاهر: راقب أثره في الدعاء والخوف والرجاء والتوكل والاتباع، وراجع أي معلومة عقدية لا تعرف مصدرها قبل نشرها.',mistakes:'من الأخطاء الشائعة: بناء الاعتقاد على قصة أو رؤيا، اقتطاع نص من سياقه، التسرع في التبديع أو التكفير، أو جعل الخلاف الجزئي أصلًا يُمتحن به الناس.'},
@@ -515,11 +533,11 @@
       hadith:{intro:'دراسة الحديث تجمع بين فهم النص والتثبت من نسبته إلى النبي ﷺ. الهدف أن يعرف المتعلم معنى الحديث ومصدره ودرجته الإجمالية وكيفية التعامل معه قبل الاستدلال أو النشر.',method:'نبدأ بتحديد اللفظ والمصدر، ثم ننظر في الحكم على الحديث عند أهل الاختصاص، ونجمع الروايات والشروح المعتبرة عند الحاجة. صحة المعنى وحدها لا تكفي لنسبة كلام إلى النبي ﷺ.',practice:'تدرّب على ألا تشارك حديثًا قبل معرفة مصدره ودرجته، وافصل بين نص الحديث وشرح العالم واستنباطك الشخصي. إذا وجدت ألفاظًا غريبة فارجع إلى شرح موثوق.',mistakes:'من الأخطاء الشائعة: اعتبار كل حديث متداول صحيحًا، الحكم على الحديث من معناه فقط، الخلط بين المتن والشرح، أو نقل جزء يغيّر دلالة النص.'}
     };
     const g=guides[id]||guides.hadith;
-    return `<article class="lesson-reader"><div class="lesson-reader-head"><button class="btn secondary lesson-back">← العودة للدروس</button><div><small>${esc(subject)} • الدرس ${i+1}</small><h2>${title}</h2><div class="lesson-badges"><span>درس كامل</span><span>قراءة 8–12 دقيقة</span><span>مراجعة وتطبيق</span></div></div></div><div class="lesson-reader-body">
+    return `<article class="lesson-reader"><div class="lesson-reader-head"><button class="btn secondary lesson-back">← العودة للدروس</button><div><small>${esc(subject)} • الدرس ${i+1}</small><h2>${title}</h2><div class="lesson-badges"><span>درس كامل</span><span>قراءة 8–12 دقيقة</span><span class="${info.statusClass}">${esc(info.statusLabel)}</span></div></div></div><aside class="academy-review-notice ${info.statusClass}" role="note"><strong>${esc(info.statusLabel)}</strong><span>${info.published?'هذه المادة منشورة من قاعدة المحتوى المراجَع، ومع ذلك لا تُعد فتوى لحالة شخصية.':'هذا درس محلي أولي للمراجعة والتعليم، ولا يُعد فتوى ولا مادة محققة نهائيًا.'}</span></aside><div class="lesson-reader-body">
       <section class="lesson-block lesson-lead"><h3>تمهيد</h3><p>${g.intro}</p><p><strong>موضوع هذا الدرس:</strong> ${summary}.</p></section>
       <section class="lesson-block"><h3>أهداف الدرس</h3><ul><li>أن تشرح معنى «${title}» بأسلوبك دون الاكتفاء بحفظ العنوان.</li><li>أن تربط المسألة بأصلها الشرعي المذكور في المراجع.</li><li>أن تميّز بين الحكم أو المعلومة العامة وبين الحالات التي تحتاج تفصيلًا.</li><li>أن تتعرف على أكثر الأخطاء شيوعًا في فهم هذا الباب.</li><li>أن تستطيع الإجابة عن أسئلة تطبيقية بعد الانتهاء من القراءة.</li></ul></section>
       <section class="lesson-block"><h3>الشرح الأساسي</h3><p>${summary}. وهذه الفكرة هي محور الدرس، لكنها لا تُفهم منفصلة عن بقية أبواب ${esc(subject)}. المطلوب هو معرفة التعريف، ثم الدليل، ثم الضابط، ثم الأثر العملي.</p><p>${g.method}</p><p>عند قراءة النصوص المتعلقة بـ«${title}» ينبغي مراعاة السياق ودلالة الألفاظ، وعدم بناء نتيجة كبيرة على عبارة منفردة. التعليم هنا يقدّم خريطة للفهم والمراجعة، ولا يحل محل الفتوى الشخصية أو التحقيق العلمي المتخصص.</p></section>
-      <section class="lesson-block lesson-evidence"><h3>الأدلة والمراجع</h3><p><strong>المرجع الأساس للدرس:</strong> ${ref}</p><p>يُرجع إلى نص الآية في المصحف وتفسير موثوق، وإلى مصدر الحديث وحكم أهل الحديث عليه عند الاستدلال بالسنة. وعند وجود مسألة فقهية أو عقدية دقيقة تُراجع الموسوعات العلمية المحكّمة وفتاوى أهل الاختصاص.</p><p class="lesson-ref-note">تنبيه منهجي: المرجع المعروض مفتاح للتثبت، وليس اقتباسًا كاملًا من المصدر ولا فتوى لحالة شخصية.</p></section>
+      <section class="lesson-block lesson-evidence"><h3>الأدلة والمراجع</h3><p><strong>المرجع الأساس للدرس:</strong> ${ref} <span class="academy-reference-kind">${esc(info.referenceLabel)}</span></p><p>${esc(info.referenceNote)}</p><p>يُرجع إلى نص الآية في المصحف وتفسير موثوق، وإلى مصدر الحديث وحكم أهل الحديث عليه عند الاستدلال بالسنة. وعند وجود مسألة فقهية أو عقدية دقيقة تُراجع الموسوعات العلمية المحكّمة وفتاوى أهل الاختصاص.</p><p class="lesson-ref-note">تنبيه منهجي: المرجع المعروض مفتاح للتثبت، وليس اقتباسًا كاملًا من المصدر ولا فتوى لحالة شخصية.</p></section>
       <section class="lesson-block"><h3>كيف نفهم المسألة خطوة بخطوة؟</h3><ol><li><strong>عرّف الموضوع:</strong> ابدأ بمعنى «${title}» وحدوده حتى لا تختلط به مسائل قريبة.</li><li><strong>ثبّت الأصل:</strong> ارجع إلى ${ref} وتحقق من النص وسياقه.</li><li><strong>اجمع الصورة:</strong> لا تكتف بدليل واحد إذا كان الباب له نصوص أو أحكام متكاملة.</li><li><strong>اعرف الضوابط:</strong> فرّق بين الأصل والاستثناء، وبين الحكم العام وتنزيله على شخص أو واقعة.</li><li><strong>طبّق بعلم:</strong> ${g.practice}</li></ol></section>
       <section class="lesson-block"><h3>تفصيل وتطبيق عملي</h3><p>الفائدة العملية من هذا الدرس أن يتحول العلم إلى فهم منضبط وسلوك صحيح. اسأل نفسك: ما المعلومة التي تغيرت عندي بعد الدرس؟ ما الدليل الذي أستطيع الرجوع إليه؟ وما الجزء الذي لا ينبغي أن أجزم فيه قبل سؤال المختص؟</p><p>${g.practice}</p><div class="lesson-example"><b>تطبيق:</b> اكتب في سطرين خلاصة «${title}»، ثم اذكر المرجع، ثم مثالًا صحيحًا على تطبيق الفكرة، ومثالًا على استعمال خاطئ لها. هذه الطريقة تكشف هل فهمت الدرس أم حفظت ألفاظه فقط.</div></section>
       <section class="lesson-block"><h3>أخطاء ينبغي تجنبها</h3><p>${g.mistakes}</p><ul><li>نقل معلومة بلا مصدر أو نسبة قول إلى عالم دون تحقق.</li><li>الخلط بين ما هو قطعي وما هو اجتهادي أو مختلف فيه.</li><li>تحويل المحتوى التعليمي العام إلى حكم شخصي على حالة لا نعرف تفاصيلها.</li><li>ترك النصوص الواضحة بسبب مقطع مجهول أو منشور مختصر.</li></ul></section>
@@ -531,19 +549,47 @@
   function render(id, cfg){
     const host=document.getElementById(id); if(!host) return;
     host.classList.add('noor-academy-page', `academy-theme-${cfg.color}`);
-    const all = [...(window.NOOR_ISLAMIC_LIBRARY?.[id]?.items || []), ...cfg.paths.map((x,i)=>({c:'المسار التعليمي',t:x[0],d:x[1],r:x[2],lesson:i+1}))];
+    const library=(window.NOOR_ISLAMIC_LIBRARY?.[id]?.items||[]).map(x=>({...x,sourceState:'local-draft'}));
+    const pathItems=cfg.paths.map((x,i)=>({c:'المسار التعليمي',t:x[0],d:x[1],r:x[2],lesson:i+1,sourceState:cfg.contentSource==='published'?'published':'local-draft'}));
+    const all=cfg.contentSource==='published'?[...pathItems,...library]:[...library,...pathItems];
     const unique=[]; const seen=new Set(); for(const x of all){const k=x.t.trim(); if(!seen.has(k)){seen.add(k);unique.push(x)}}
     const done=new Set(state[id]?.done||[]); const pct=Math.round((done.size/Math.max(1,unique.length))*100); const best=state[id]?.best;
     const nextIndex=Math.min(done.size+1, unique.length);
     host.innerHTML=`<section class="academy-hero ${cfg.color}"><div class="academy-hero-main"><span class="academy-icon">${cfg.icon}</span><div><span class="eyebrow">مسار علمي منظم</span><h1>${esc(cfg.title)}</h1><p>${esc(cfg.subtitle||'دروس مرتبة، بحث، متابعة تقدم، أسئلة بعد كل باب، وامتحان نهائي مع شرح الإجابات.')}</p><div class="academy-hero-chips"><span>${unique.length} درس</span><span>${cfg.quizzes.length} سؤال اختبار</span><span>الدرس التالي: ${nextIndex}</span></div></div></div><div class="academy-progress"><b>${pct}%</b><span>نسبة الإنجاز</span><div><i style="width:${pct}%"></i></div><small>${done.size} من ${unique.length} مادة</small></div></section>
+      <aside class="academy-review-notice is-draft" role="note"><strong>تنبيه المحتوى التعليمي</strong><span>الدروس المحلية ملخصات تعليمية قيد المراجعة ولا تُعد فتوى. تظهر المواد المنشورة من قاعدة المحتوى المراجَع بعلامة منفصلة، كما يُبيَّن إن كان المرجع عامًا أو محددًا.</span></aside>
       <section class="academy-insights" aria-label="ملخص المسار"><article><b>${unique.length}</b><span>مواد تعليمية</span></article><article><b>${done.size}</b><span>مكتملة</span></article><article><b>${unique.length-done.size}</b><span>متبقية</span></article><article><b>${best ?? '—'}</b><span>أفضل اختبار</span></article></section>
       <nav class="academy-tabs"><button class="active" data-view="lessons">الدروس</button><button data-view="quiz">الاختبار</button><button data-view="progress">التقدم</button></nav>
       <section class="academy-toolbar"><label><span>بحث سريع</span><input type="search" placeholder="ابحث داخل ${esc(cfg.title)}…"></label><label><span>عرض المواد</span><select><option value="all">جميع المواد</option><option value="done">المكتمل</option><option value="todo">غير المكتمل</option></select></label><output class="academy-count">${unique.length} مادة</output></section>
       <section class="academy-view" data-pane="lessons"><div class="academy-grid"></div></section>
-      <section class="academy-view hidden" data-pane="quiz"><div class="quiz-welcome"><span class="quiz-kicker">اختبار تفاعلي</span><h2>اختبار ${esc(cfg.title)}</h2><p>20 سؤالًا متنوعًا مع تصحيح فوري وشرح مختصر، والنتيجة تحفظ كأفضل محاولة.</p><button class="btn academy-start">ابدأ الاختبار</button></div><div class="academy-quiz hidden"></div></section>
+      <section class="academy-view hidden" data-pane="quiz"><div class="quiz-welcome"><span class="quiz-kicker">اختبار تفاعلي</span><h2>اختبار ${esc(cfg.title)}</h2><p>20 سؤالًا متنوعًا مع تصحيح فوري وشرح مختصر، والنتيجة تحفظ كأفضل محاولة.</p><p class="academy-quiz-note">أسئلة المراجعة المحلية أدوات تعليمية قيد المراجعة وليست فتوى أو اعتمادًا علميًا نهائيًا.</p><button class="btn academy-start">ابدأ الاختبار</button></div><div class="academy-quiz hidden"></div></section>
       <section class="academy-view hidden" data-pane="progress"><div class="progress-card"><span class="quiz-kicker">متابعة شخصية</span><h2>تقدمك في المسار</h2><div class="big-progress">${pct}%</div><p>أكملت ${done.size} من ${unique.length} مادة. ${unique.length-done.size ? 'واصل من الدرس التالي بهدوء وترتيب.' : 'أتممت المسار، راجع الاختبار النهائي لتثبيت المعلومات.'}</p><button class="btn academy-reset">إعادة ضبط التقدم</button></div></section>`;
     const grid=host.querySelector('.academy-grid'), input=host.querySelector('input'), sel=host.querySelector('select'), count=host.querySelector('.academy-count');
-    function draw(){const q=input.value.trim(); const f=sel.value; const rows=unique.filter((x,i)=>{const d=done.has(i);return(!q||`${x.t} ${x.d} ${x.r}`.includes(q))&&(f==='all'||(f==='done'&&d)||(f==='todo'&&!d))}); count.textContent=rows.length+' مادة'; grid.innerHTML=rows.map(x=>{const i=unique.indexOf(x),d=done.has(i);return `<article class="academy-card ${d?'completed':''}" data-open="${i}"><div class="academy-card-top"><span>${String(i+1).padStart(2,'0')}</span><button class="lesson-check" data-i="${i}" aria-label="تحديد كمكتمل">${d?'✓':'○'}</button></div><h3>${esc(x.t)}</h3><p>${esc(x.d)}</p><div class="academy-card-meta"><span>${esc(x.c||'درس')}</span><span>المرجع: ${esc(x.r)}</span></div><button class="btn secondary academy-open" data-open="${i}">فتح الدرس الكامل</button></article>`}).join('')||'<div class="notice">لا توجد نتائج.</div>'; host.querySelectorAll('.lesson-check').forEach(b=>b.onclick=e=>{e.stopPropagation();const i=+b.dataset.i;done.has(i)?done.delete(i):done.add(i);state[id]={...(state[id]||{}),done:[...done]};save();render(id,cfg)}); host.querySelectorAll('.academy-open').forEach(b=>b.onclick=e=>{e.stopPropagation();const i=+b.dataset.open;const x=unique[i];host.querySelector('[data-pane=lessons]').innerHTML=fullLesson(x,id,i);host.querySelector('.academy-toolbar').classList.add('hidden');host.querySelectorAll('.lesson-back').forEach(z=>z.onclick=()=>render(id,cfg));host.querySelector('.lesson-complete').onclick=()=>{done.add(i);state[id]={...(state[id]||{}),done:[...done]};save();render(id,cfg)}});}
+    function draw(){
+      const q=input.value.trim(),f=sel.value;
+      const rows=unique.filter((x,i)=>{
+        const completed=done.has(i);
+        return (!q||`${x.t} ${x.d} ${x.r}`.includes(q))&&(f==='all'||(f==='done'&&completed)||(f==='todo'&&!completed));
+      });
+      count.textContent=rows.length+' مادة';
+      grid.innerHTML=rows.map(x=>{
+        const i=unique.indexOf(x),completed=done.has(i),info=reviewInfo(x);
+        return `<article class="academy-card ${completed?'completed':''}" data-open="${i}"><div class="academy-card-top"><span>${String(i+1).padStart(2,'0')}</span><button class="lesson-check" data-i="${i}" aria-label="تحديد كمكتمل">${completed?'✓':'○'}</button></div><h3>${esc(x.t)}</h3><p>${esc(x.d)}</p><div class="academy-card-meta"><span>${esc(x.c||'درس')}</span><span class="${info.statusClass}">${esc(info.statusLabel)}</span><span>${esc(info.referenceLabel)}: ${esc(x.r)}</span></div><button class="btn secondary academy-open" data-open="${i}">فتح الدرس الكامل</button></article>`;
+      }).join('')||'<div class="notice">لا توجد نتائج.</div>';
+      host.querySelectorAll('.lesson-check').forEach(button=>button.onclick=event=>{
+        event.stopPropagation();
+        const i=+button.dataset.i;
+        done.has(i)?done.delete(i):done.add(i);
+        state[id]={...(state[id]||{}),done:[...done]};save();render(id,cfg);
+      });
+      host.querySelectorAll('.academy-open').forEach(button=>button.onclick=event=>{
+        event.stopPropagation();
+        const i=+button.dataset.open,x=unique[i];
+        host.querySelector('[data-pane=lessons]').innerHTML=fullLesson(x,id,i);
+        host.querySelector('.academy-toolbar').classList.add('hidden');
+        host.querySelectorAll('.lesson-back').forEach(back=>back.onclick=()=>render(id,cfg));
+        host.querySelector('.lesson-complete').onclick=()=>{done.add(i);state[id]={...(state[id]||{}),done:[...done]};save();render(id,cfg)};
+      });
+    }
     input.oninput=draw; sel.onchange=draw; draw();
     host.querySelectorAll('.academy-tabs button').forEach(b=>b.onclick=()=>{host.querySelectorAll('.academy-tabs button').forEach(x=>x.classList.toggle('active',x===b));host.querySelectorAll('[data-pane]').forEach(p=>p.classList.toggle('hidden',p.dataset.pane!==b.dataset.view))});
     host.querySelector('.academy-start').onclick=()=>startQuiz(host,cfg,id);
@@ -565,6 +611,47 @@
     const h=page.querySelector('h1,h2'); if(h) h.textContent='تواصل مع إدارة نور الذكر';
   }
 
-  function init(){const cloud=window.NOOR_V86_CLOUD_LESSONS;if(cloud){for(const id of Object.keys(cloud)){if(A[id]&&cloud[id]?.length)A[id].paths=cloud[id];}} Object.entries(A).forEach(([id,cfg])=>render(id,cfg));improveChat();window.NOOR_ACADEMY=A;}
-  document.addEventListener('DOMContentLoaded',()=>setTimeout(init,80)); setTimeout(init,180);
+  const rendered=new Set();
+  let initialized=false;
+
+  function applyCloudLessons(cloud){
+    const changed=[];
+    if(!cloud)return changed;
+    for(const id of Object.keys(cloud)){
+      if(!A[id]||!cloud[id]?.length)continue;
+      A[id].paths=cloud[id];
+      A[id].contentSource='published';
+      changed.push(id);
+    }
+    return changed;
+  }
+
+  function ensureRendered(id,{force=false}={}){
+    if(!A[id]||!document.getElementById(id))return false;
+    if(rendered.has(id)&&!force)return true;
+    render(id,A[id]);
+    rendered.add(id);
+    document.getElementById(id).dataset.academyRendered='true';
+    return true;
+  }
+
+  function init(){
+    if(initialized)return;
+    initialized=true;
+    applyCloudLessons(window.NOOR_V86_CLOUD_LESSONS);
+    improveChat();
+    const active=document.body.dataset.activePage||document.querySelector('.page.active')?.id;
+    ensureRendered(active);
+  }
+
+  /* Keep the full academy data available to the exams page, but build lesson DOM only when opened. */
+  window.NOOR_ACADEMY=A;
+  window.NOOR_RENDER_ACADEMY_SUBJECT=id=>ensureRendered(id,{force:true});
+  window.addEventListener('noor:navigation',event=>ensureRendered(event.detail?.target||event.detail?.id));
+  window.addEventListener('noor:v86-lessons-ready',event=>{
+    const changed=applyCloudLessons(event.detail);
+    changed.forEach(id=>{if(rendered.has(id))ensureRendered(id,{force:true});});
+  });
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(init,80));
+  setTimeout(init,180);
 })();

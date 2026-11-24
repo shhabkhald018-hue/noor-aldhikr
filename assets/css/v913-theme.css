@@ -1,4 +1,4 @@
-/* Noor AlDhikr V92.1 Single Theme Engine — one visual authority. */
+/* Noor AlDhikr V92.1.1 Single Theme Engine — one visual authority. */
 @font-face{
   font-family:"Hafs 20";
   src:url("../fonts/Hafs_20.woff2") format("woff2");
@@ -161,7 +161,7 @@ html[data-theme="dark"] .v87-nav-label{color:var(--theme-accent)!important}
 .ai-source,.research-source,.evidence-card small{color:var(--theme-muted)!important}
 
 
-/* V92.1 final reading hierarchy — legacy green text can never override content. */
+/* V92.1.1 final reading hierarchy — legacy green text can never override content. */
 .page-intro-card{
   background:var(--theme-surface)!important;
   color:var(--theme-text)!important;
@@ -330,3 +330,45 @@ html[data-theme="dark"] body .v4019-search-actions button{
   .noor-ai-fab{width:54px!important;height:54px!important;padding:0!important;justify-content:center!important}
   .noor-ai-fab b{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 }
+
+/* Preserve the home hero design while keeping a single visible page-level H1. */
+.v38-home-copy h2{
+  font-size:clamp(48px,6.3vw,78px);
+  line-height:1.08;
+  letter-spacing:-2.5px;
+  margin:20px 0 18px;
+  color:var(--theme-text)!important;
+  text-shadow:none!important;
+}
+.v38-home-copy h2 em{font-style:normal;color:var(--theme-accent)!important}
+@media(max-width:680px){.v38-home-copy h2{font-size:44px;letter-spacing:-1.2px}}
+
+/* Academy review state: visible in light/dark themes without blocking the lesson. */
+.academy-review-notice{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin:14px 0 18px;
+  padding:13px 15px;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 34%,var(--theme-border));
+  border-radius:14px;
+  background:color-mix(in srgb,var(--theme-accent) 8%,var(--theme-surface));
+  color:var(--theme-text);
+  line-height:1.75;
+}
+.academy-review-notice strong{white-space:nowrap;color:var(--theme-accent-strong)}
+.academy-review-notice.is-reviewed{border-color:color-mix(in srgb,var(--noor-success) 44%,var(--theme-border));background:color-mix(in srgb,var(--noor-success) 8%,var(--theme-surface))}
+.academy-review-notice.is-draft{border-color:color-mix(in srgb,var(--noor-warning) 48%,var(--theme-border));background:color-mix(in srgb,var(--noor-warning) 9%,var(--theme-surface))}
+.lesson-badges .is-reviewed,.lesson-badges .is-draft,.academy-card-meta .is-reviewed,.academy-card-meta .is-draft,.academy-reference-kind{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:3px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+.lesson-badges .is-reviewed,.academy-card-meta .is-reviewed{background:color-mix(in srgb,var(--noor-success) 16%,var(--theme-surface));color:var(--noor-success)}
+.lesson-badges .is-draft,.academy-card-meta .is-draft,.academy-reference-kind{background:color-mix(in srgb,var(--noor-warning) 16%,var(--theme-surface));color:var(--theme-text)}
+.academy-quiz-note{padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--noor-warning) 10%,var(--theme-surface));color:var(--theme-text-soft)}
+@media(max-width:560px){.academy-review-notice{display:block}.academy-review-notice strong{display:block;margin-bottom:4px;white-space:normal}}

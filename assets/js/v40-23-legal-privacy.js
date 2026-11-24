@@ -11,7 +11,7 @@
   function addLocalDreamNotice(){
     const button=document.getElementById('dreamAiAnalyze'),input=document.getElementById('dreamAiInput');if(!button||!input||document.getElementById('dreamAiAnalyzeLocalNotice'))return;
     const actions=button.closest('.smart-ai-tools,.v4019-search-actions');if(!actions?.parentElement)return;
-    const note=document.createElement('div');note.id='dreamAiAnalyzeLocalNotice';note.className='v4023-local-processing-note';note.textContent='خصوصيتك محفوظة: تفسير الرؤيا في V92.1 يتم محليًا داخل المتصفح من قاموس نور الذكر، ولا يحتاج إرسال نص الحلم إلى خدمة ذكاء اصطناعي خارجية.';
+    const note=document.createElement('div');note.id='dreamAiAnalyzeLocalNotice';note.className='v4023-local-processing-note';note.textContent='خصوصيتك محفوظة: تفسير الرؤيا في V92.1.1 يتم محليًا داخل المتصفح من قاموس نور الذكر، ولا يحتاج إرسال نص الحلم إلى خدمة ذكاء اصطناعي خارجية.';
     actions.parentElement.insertBefore(note,actions);
   }
   function init(){addConsent('ruqyahAiAnalyze','ruqyahAiInput','ruqyah');addLocalDreamNotice();}

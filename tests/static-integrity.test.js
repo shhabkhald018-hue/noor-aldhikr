@@ -98,12 +98,12 @@ test('inline scripts on critical pages parse successfully', () => {
   assert.deepEqual(failures, []);
 });
 
-test('manifest and central release metadata match V92.1', () => {
+test('manifest and central release metadata match V92.1.1', () => {
   const manifest = JSON.parse(read('manifest.webmanifest'));
   assert.match(manifest.name, /نور الذكر/);
   const version = read('assets/js/version.js');
-  assert.match(version, /semver:\s*'92\.1\.0'/);
-  assert.match(version, /noor-aldhikr-v92-1-trusted-content/);
+  assert.match(version, /semver:\s*'92\.1\.1'/);
+  assert.match(version, /noor-aldhikr-v92-1-1-usability-safety/);
   assert.match(read('sw.js'), /assets\/js\/version\.js/);
 });
 

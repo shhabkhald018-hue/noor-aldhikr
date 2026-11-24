@@ -6,24 +6,24 @@
 <meta name="theme-color" content="#176B52">
 <title>الاختبارات الشرعية | نور الذكر</title>
 <link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="assets/css/app.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v43-academy-exams.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v58-exams-150.css?v=92.1.0">
+<link rel="stylesheet" href="assets/css/app.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v43-academy-exams.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v58-exams-150.css?v=92.1.1">
 <style>
 body{margin:0;background:var(--noor-bg);color:var(--noor-text);font-family:"Cairo","Noto Sans Arabic",Tahoma,Arial,sans-serif}
 .exam60-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:color-mix(in srgb,var(--noor-surface) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--noor-border)}
-.exam60-top a{text-decoration:none;color:var(--noor-primary);font-weight:900}.exam60-top h1{font-size:18px;margin:0}.exam60-main{width:min(1120px,calc(100% - 24px));margin:22px auto 70px}
+.exam60-top a{display:inline-flex;align-items:center;min-height:44px;padding-inline:6px;text-decoration:none;color:var(--noor-primary);font-weight:900}.exam60-top h1{font-size:18px;margin:0}.exam60-main{width:min(1120px,calc(100% - 24px));margin:22px auto 70px}
 #academyExams{display:block!important;visibility:visible!important;opacity:1!important;position:static!important}
 .page{display:block!important}.hidden{display:none!important}
 .exam60-note{background:var(--noor-gold-soft);border:1px solid var(--noor-border);padding:12px 15px;border-radius:14px;margin-bottom:16px;font-size:13px}
 @media(max-width:600px){.exam60-top h1{font-size:15px}.exam60-main{width:calc(100% - 12px);margin-top:10px}}
 </style>
-<link rel="stylesheet" href="assets/css/v66-ai-assistant.css?v=92.1.0"><link rel="stylesheet" href="assets/css/v89-ai.css?v=92.1.0"><link rel="canonical" href="https://shhabkhald018-hue.github.io/noor-aldhikr/exams.html"><meta property="og:locale" content="ar_AR"><meta property="og:type" content="website"><meta property="og:title" content="الاختبارات الشرعية | نور الذكر"><meta property="og:description" content="اختبارات العقيدة والفقه والسيرة والحديث بمستويات متعددة واختبار نهائي شامل."><link rel="stylesheet" href="assets/css/v69-production-polish.css?v=92.1.0"><link rel="stylesheet" href="assets/css/v86-global.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v87-components.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v87-exams.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v88-tokens.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v88-core.css?v=92.1.0">
-<link rel="stylesheet" href="assets/css/v913-theme.css?v=92.1.0">
+<link rel="stylesheet" href="assets/css/v66-ai-assistant.css?v=92.1.1"><link rel="stylesheet" href="assets/css/v89-ai.css?v=92.1.1"><link rel="canonical" href="https://shhabkhald018-hue.github.io/noor-aldhikr/exams.html"><meta property="og:locale" content="ar_AR"><meta property="og:type" content="website"><meta property="og:title" content="الاختبارات الشرعية | نور الذكر"><meta property="og:description" content="اختبارات العقيدة والفقه والسيرة والحديث بمستويات متعددة واختبار نهائي شامل."><link rel="stylesheet" href="assets/css/v69-production-polish.css?v=92.1.1"><link rel="stylesheet" href="assets/css/v86-global.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v87-components.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v87-exams.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v88-tokens.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v88-core.css?v=92.1.1">
+<link rel="stylesheet" href="assets/css/v913-theme.css?v=92.1.1">
 </head>
 <body>
 <header class="exam60-top">
@@ -35,15 +35,15 @@ body{margin:0;background:var(--noor-bg);color:var(--noor-text);font-family:"Cair
 <div class="exam60-note">اختر المادة، مستوى الاختبار، وعدد الأسئلة الذي تريده. بنك كل مادة يحتوي على 150 سؤالًا.</div>
 <section id="academyExams"></section>
 </main>
-<script src="assets/js/version.js?v=92.1.0"></script>
-<script src="config.js?v=92.1.0"></script>
+<script src="assets/js/version.js?v=92.1.1"></script>
+<script src="config.js?v=92.1.1"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4"></script>
 <script>if(!window.supabase){document.write('<script src="https://unpkg.com/@supabase/supabase-js@2.112.4"><\/script>')}</script>
-<script src="assets/js/v86-security.js?v=92.1.0"></script>
-<script src="assets/js/v86-academy-cloud.js?v=92.1.0"></script>
-<script src="assets/js/v40-24-islamic-academy.js?v=92.1.0"></script>
-<script src="assets/js/v43-academy-exams.js?v=92.1.0"></script>
-<script defer src="assets/js/v883-ai-runtime.js?v=92.1.0"></script><script defer src="assets/js/v883-ai-core.js?v=92.1.0"></script><script defer src="assets/js/v66-ai-assistant.js?v=92.1.0"></script><script defer src="assets/js/v89-retriever.js?v=92.1.0"></script><script defer src="assets/js/v89-rag-orchestrator.js?v=92.1.0"></script><script defer src="assets/js/v89-ai-runtime.js?v=92.1.0"></script><script defer src="assets/js/v89-ai-ui.js?v=92.1.0"></script><script defer src="assets/js/v913-theme-engine.js?v=92.1.0"></script></body>
+<script src="assets/js/v86-security.js?v=92.1.1"></script>
+<script src="assets/js/v86-academy-cloud.js?v=92.1.1"></script>
+<script src="assets/js/v40-24-islamic-academy.js?v=92.1.1"></script>
+<script src="assets/js/v43-academy-exams.js?v=92.1.1"></script>
+<script defer src="assets/js/v883-ai-runtime.js?v=92.1.1"></script><script defer src="assets/js/v883-ai-core.js?v=92.1.1"></script><script defer src="assets/js/v66-ai-assistant.js?v=92.1.1"></script><script defer src="assets/js/v89-retriever.js?v=92.1.1"></script><script defer src="assets/js/v89-rag-orchestrator.js?v=92.1.1"></script><script defer src="assets/js/v89-ai-runtime.js?v=92.1.1"></script><script defer src="assets/js/v89-ai-ui.js?v=92.1.1"></script><script defer src="assets/js/v913-theme-engine.js?v=92.1.1"></script></body>
 </html>

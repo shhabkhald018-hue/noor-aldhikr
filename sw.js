@@ -1,7 +1,7 @@
 'use strict';
 importScripts('./assets/js/version.js');
 
-const RELEASE=self.NOOR_VERSION||{semver:'92.1.0',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-1-trusted-content'};
+const RELEASE=self.NOOR_VERSION||{semver:'92.1.1',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-1-1-usability-safety'};
 const CACHE_PREFIX=RELEASE.cachePrefix;
 const CACHE_NAME=RELEASE.cacheName;
 const OFFLINE_URL='./offline.html';

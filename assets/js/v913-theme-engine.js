@@ -1,6 +1,6 @@
 'use strict';
 (()=>{
-  const RELEASE=window.NOOR_VERSION||{semver:'92.1.0',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-1-trusted-content'};
+  const RELEASE=window.NOOR_VERSION||{semver:'92.1.1',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-1-1-usability-safety'};
   const VERSION=RELEASE.semver;
   const MODE_KEY='noor_theme_mode_v882';
   const DATA_KEY='noor_v9200_theme_data';

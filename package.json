@@ -1,6 +1,6 @@
 {
   "name": "noor-aldhikr-trusted-content-tests",
-  "version": "92.1.0",
+  "version": "92.1.1",
   "private": true,
   "description": "Automated trust and accuracy regression tests for Noor AlDhikr.",
   "scripts": {

@@ -1,4 +1,4 @@
-// Noor AlDhikr V92.1 — trusted retrieval compatibility endpoint.
+// Noor AlDhikr V92.1.1 — trusted retrieval compatibility endpoint.
 // The production assistant reads only reviewed, published knowledge in the
 // browser. No model, paid provider, secret, or outbound request is used.
 
