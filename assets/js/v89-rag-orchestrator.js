@@ -12,6 +12,14 @@
     return [];
   }
   function sourceOf(h){return String(h.source||h.source_text||'').trim()}
+  function trustedHit(h){
+    if(!h||!sourceOf(h)||!String(h.answer||h.text||'').trim()||h.trust_tier==='review')return false;
+    if(h.origin==='fallback')return true;
+    const trustedTier=h.origin==='local'
+      ?['primary','verified','curated'].includes(String(h.trust_tier||''))
+      :['primary','verified'].includes(String(h.trust_tier||''));
+    return trustedTier&&h.review_status==='published'&&!!String(h.reviewed_at||'').trim()&&(!['academy','local'].includes(h.origin)||!!String(h.reviewed_by||'').trim());
+  }
   function coherentHits(rows=[]){
     if(!rows.length)return[];
     const top=rows[0],topConfidence=Math.max(Number(top.confidence)||0,1),topCategory=String(top.category||'');
@@ -58,7 +66,7 @@
     async function ask(question,ctx={}){
       if(!enabled())throw new Error('AI_DISABLED');
       const ret=await retriever.ask(question,ctx);
-      const hits=coherentHits(asHits(ret).filter(h=>sourceOf(h)));
+      const hits=coherentHits(asHits(ret).filter(trustedHit));
       if(!hits.length)return {mode:'knowledge-fallback',answer:NO_ANSWER,source:'',sources:[],related:ret?.related||[],found:false,confidence:Number(ret?.confidence)||0};
       const sources=uniq(hits.map(sourceOf));
       const fallbackAnswer=String(ret?.answer||hits[0]?.answer||'').trim();
@@ -73,5 +81,5 @@
     }
     return {ask,buildGroundedPrompt};
   }
-  return {create,buildGroundedPrompt,buildContext,safetyFor,guardGenerated,coherentHits,NO_ANSWER};
+  return {create,buildGroundedPrompt,buildContext,safetyFor,guardGenerated,coherentHits,trustedHit,NO_ANSWER};
 });

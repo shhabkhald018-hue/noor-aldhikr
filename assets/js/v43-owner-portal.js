@@ -205,8 +205,8 @@
   async function v50LoadCms(){
     if(!$('v50LessonsTable'))return;
     const [lr,qr]=await Promise.all([
-      safe('academy_lessons',sb.from('academy_lessons').select('id,subject,title,summary,body,reference_text,review_status,active,sort_order,created_at,updated_at').order('updated_at',{ascending:false}).limit(200)),
-      safe('academy_questions',sb.from('academy_questions').select('id,subject,lesson_id,question,options,correct_index,explanation,difficulty,review_status,active,created_at,updated_at').order('updated_at',{ascending:false}).limit(300))
+      safe('academy_lessons',sb.from('academy_lessons').select('id,subject,title,summary,body,reference_text,review_status,reviewed_by,reviewed_at,review_notes,active,sort_order,created_at,updated_at').order('updated_at',{ascending:false}).limit(1000)),
+      safe('academy_questions',sb.from('academy_questions').select('id,subject,lesson_id,question,options,correct_index,explanation,reference_text,difficulty,review_status,reviewed_by,reviewed_at,review_notes,active,created_at,updated_at').order('updated_at',{ascending:false}).limit(1000))
     ]);
     v50Lessons=lr.data||[];v50Questions=qr.data||[];
     v50RenderLessons(lr.error);v50RenderQuestions(qr.error);v50FillLessonSelect();
@@ -214,13 +214,13 @@
   function v50StatusBadge(s){return `<span class="badge">${esc(REVIEW_LABELS[s]||s||'—')}</span>`}
   function v50RenderLessons(error){
     const h=$('v50LessonsTable');if(!h)return;if(error){h.textContent=explain(error);return}
-    h.innerHTML=v50Lessons.length?`<table class="tbl"><tr><th>المادة</th><th>الدرس</th><th>الحالة</th><th>الإجراءات</th></tr>${v50Lessons.map(x=>`<tr><td>${esc(SUBJECT_LABELS[x.subject]||x.subject)}</td><td><b>${esc(x.title)}</b><br><small class="muted">${esc((x.summary||'').slice(0,90))}</small></td><td>${v50StatusBadge(x.review_status)}</td><td><button class="btn ghost v50EditLesson" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteLesson" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد دروس مضافة في قاعدة البيانات.</div>';
+    h.innerHTML=v50Lessons.length?`<table class="tbl"><tr><th>المادة</th><th>الدرس</th><th>المراجعة</th><th>الإجراءات</th></tr>${v50Lessons.map(x=>`<tr><td>${esc(SUBJECT_LABELS[x.subject]||x.subject)}</td><td><b>${esc(x.title)}</b><br><small class="muted">${esc((x.summary||'').slice(0,90))}</small></td><td>${v50StatusBadge(x.review_status)}<br><small class="muted">${x.reviewed_at?'موثق بتاريخ '+esc(new Date(x.reviewed_at).toLocaleDateString('ar')):'لم يُراجع بعد'}</small></td><td><button class="btn ghost v50EditLesson" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteLesson" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد دروس مضافة في قاعدة البيانات.</div>';
     h.querySelectorAll('.v50EditLesson').forEach(b=>b.onclick=()=>v50EditLesson(b.dataset.id));
     h.querySelectorAll('.v50DeleteLesson').forEach(b=>b.onclick=()=>v50DeleteLesson(b.dataset.id));
   }
   function v50RenderQuestions(error){
     const h=$('v50QuestionsTable');if(!h)return;if(error){h.textContent=explain(error);return}
-    h.innerHTML=v50Questions.length?`<table class="tbl"><tr><th>المادة</th><th>السؤال</th><th>المستوى</th><th>الحالة</th><th>الإجراءات</th></tr>${v50Questions.map(x=>`<tr><td>${esc(SUBJECT_LABELS[x.subject]||x.subject)}</td><td><b>${esc(x.question)}</b></td><td>${esc(x.difficulty)}</td><td>${v50StatusBadge(x.review_status)}</td><td><button class="btn ghost v50EditQuestion" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteQuestion" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد أسئلة مضافة في قاعدة البيانات.</div>';
+    h.innerHTML=v50Questions.length?`<table class="tbl"><tr><th>المادة</th><th>السؤال</th><th>المستوى</th><th>المراجعة</th><th>الإجراءات</th></tr>${v50Questions.map(x=>`<tr><td>${esc(SUBJECT_LABELS[x.subject]||x.subject)}</td><td><b>${esc(x.question)}</b></td><td>${esc(x.difficulty)}</td><td>${v50StatusBadge(x.review_status)}<br><small class="muted">${x.reviewed_at?'موثق بتاريخ '+esc(new Date(x.reviewed_at).toLocaleDateString('ar')):'لم يُراجع بعد'}</small></td><td><button class="btn ghost v50EditQuestion" data-id="${x.id}">تعديل</button> <button class="btn danger v50DeleteQuestion" data-id="${x.id}">حذف</button></td></tr>`).join('')}</table>`:'<div class="empty">لا توجد أسئلة مضافة في قاعدة البيانات.</div>';
     h.querySelectorAll('.v50EditQuestion').forEach(b=>b.onclick=()=>v50EditQuestion(b.dataset.id));
     h.querySelectorAll('.v50DeleteQuestion').forEach(b=>b.onclick=()=>v50DeleteQuestion(b.dataset.id));
   }
@@ -231,7 +231,7 @@
   }
   function v50EditLesson(id){
     const x=v50Lessons.find(a=>a.id===id);if(!x)return;
-    $('v50LessonId').value=x.id;$('v50LessonSubject').value=x.subject;$('v50LessonStatus').value=x.review_status||'draft';$('v50LessonTitle').value=x.title||'';$('v50LessonSummary').value=x.summary||'';$('v50LessonBody').value=x.body||'';$('v50LessonRef').value=x.reference_text||'';$('v50LessonCancel').hidden=false;
+    $('v50LessonId').value=x.id;$('v50LessonSubject').value=x.subject;$('v50LessonStatus').value=x.review_status||'draft';$('v50LessonTitle').value=x.title||'';$('v50LessonSummary').value=x.summary||'';$('v50LessonBody').value=x.body||'';$('v50LessonRef').value=x.reference_text||'';$('v50LessonReviewNotes').value=x.review_notes||'';$('v50LessonCancel').hidden=false;
     $('v50LessonForm').scrollIntoView({behavior:'smooth',block:'start'});
   }
   async function v50DeleteLesson(id){
@@ -240,7 +240,8 @@
   }
   async function v50SaveLesson(ev){
     ev.preventDefault();const id=$('v50LessonId').value,status=$('v50LessonStatus').value;
-    const row={subject:$('v50LessonSubject').value,title:$('v50LessonTitle').value.trim(),summary:$('v50LessonSummary').value.trim(),body:$('v50LessonBody').value.trim(),reference_text:$('v50LessonRef').value.trim(),active:true};
+    const row={subject:$('v50LessonSubject').value,title:$('v50LessonTitle').value.trim(),summary:$('v50LessonSummary').value.trim(),body:$('v50LessonBody').value.trim(),reference_text:$('v50LessonRef').value.trim(),review_notes:$('v50LessonReviewNotes').value.trim(),active:false};
+    if(['approved','published'].includes(status)&&!row.reference_text){msg('v50LessonMsg','لا يمكن اعتماد الدرس أو نشره دون مرجع دقيق.','error');return}
     msg('v50LessonMsg','جاري الحفظ…','ok');
     try{
       let savedId=id;
@@ -253,7 +254,7 @@
     const x=v50Questions.find(a=>a.id===id);if(!x)return;
     const opts=Array.isArray(x.options)?x.options:[];
     $('v50QuestionId').value=x.id;$('v50QuestionSubject').value=x.subject;$('v50QuestionDifficulty').value=x.difficulty||'متوسط';$('v50QuestionStatus').value=x.review_status||'draft';$('v50QuestionLesson').value=x.lesson_id||'';$('v50QuestionText').value=x.question||'';
-    [0,1,2,3].forEach(i=>{$(`v50Opt${i}`).value=opts[i]||''});$('v50Correct').value=String(x.correct_index??0);$('v50Explanation').value=x.explanation||'';$('v50QuestionCancel').hidden=false;
+    [0,1,2,3].forEach(i=>{$(`v50Opt${i}`).value=opts[i]||''});$('v50Correct').value=String(x.correct_index??0);$('v50Explanation').value=x.explanation||'';$('v50QuestionRef').value=x.reference_text||'';$('v50QuestionReviewNotes').value=x.review_notes||'';$('v50QuestionCancel').hidden=false;
     $('v50QuestionForm').scrollIntoView({behavior:'smooth',block:'start'});
   }
   async function v50DeleteQuestion(id){
@@ -263,7 +264,8 @@
     ev.preventDefault();const id=$('v50QuestionId').value,status=$('v50QuestionStatus').value;
     const options=[0,1,2,3].map(i=>$(`v50Opt${i}`).value.trim());
     if(new Set(options.map(x=>x.toLocaleLowerCase('ar'))).size!==4){msg('v50QuestionMsg','الاختيارات الأربعة يجب أن تكون مختلفة.','error');return}
-    const row={subject:$('v50QuestionSubject').value,lesson_id:$('v50QuestionLesson').value||null,question:$('v50QuestionText').value.trim(),options,correct_index:+$('v50Correct').value,explanation:$('v50Explanation').value.trim(),difficulty:$('v50QuestionDifficulty').value,active:true};
+    const row={subject:$('v50QuestionSubject').value,lesson_id:$('v50QuestionLesson').value||null,question:$('v50QuestionText').value.trim(),options,correct_index:+$('v50Correct').value,explanation:$('v50Explanation').value.trim(),reference_text:$('v50QuestionRef').value.trim(),review_notes:$('v50QuestionReviewNotes').value.trim(),difficulty:$('v50QuestionDifficulty').value,active:false};
+    if(['approved','published'].includes(status)&&!row.reference_text){msg('v50QuestionMsg','لا يمكن اعتماد السؤال أو نشره دون مرجع دقيق.','error');return}
     msg('v50QuestionMsg','جاري الحفظ…','ok');
     try{
       let savedId=id;
@@ -273,9 +275,9 @@
     }catch(error){msg('v50QuestionMsg',explain(error),'error')}
   }
   async function v50RlsCheck(){
-    const h=$('v50RlsResult');if(!h)return;h.className='muted';h.textContent='جاري تشغيل تشخيص V92.0…';
+    const h=$('v50RlsResult');if(!h)return;h.className='muted';h.textContent='جاري تشغيل تشخيص V92.1…';
     const primary=await safe('owner_portal_diagnostics',sb.rpc('owner_portal_diagnostics'),null);
-    if(!primary.error){h.className='ok';h.textContent='✓ تشخيص V92.0 ناجح: '+JSON.stringify(primary.data);return;}
+    if(!primary.error){h.className='ok';h.textContent='✓ تشخيص V92.1 ناجح: '+JSON.stringify(primary.data);return;}
     const fallback=await safe('owner_rls_diagnostics',sb.rpc('owner_rls_diagnostics'),null);
     if(fallback.error){h.className='error';h.textContent=explain(primary.error)+' | '+explain(fallback.error);return}
     h.className='ok';h.textContent='✓ تشخيص RLS القديم ناجح: '+JSON.stringify(fallback.data);

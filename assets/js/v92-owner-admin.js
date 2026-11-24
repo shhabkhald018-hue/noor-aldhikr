@@ -74,7 +74,7 @@
     const kb = $('knowledgeBaseV92');
     if (kb && !kb.dataset.ready) {
       kb.dataset.ready = '1';
-      kb.innerHTML = `<div class="cardx"><div class="toolbar"><div><h2>قاعدة المعرفة</h2><p class="muted">لا تُنشر إجابة للمساعد إلا بعد إضافة مرجع واضح وتحديدها «موثقة» أو «مصدر أولي».</p></div><button class="btn ghost" id="v92KbReload" type="button">تحديث</button></div><form id="v92KbForm"><input id="v92KbId" type="hidden"><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px"><div class="field"><label for="v92KbQuestion">السؤال</label><input id="v92KbQuestion" maxlength="500" required></div><div class="field"><label for="v92KbCategory">التصنيف</label><input id="v92KbCategory" maxlength="100" value="عام"></div><div class="field" style="grid-column:1/-1"><label for="v92KbAnswer">الإجابة</label><textarea id="v92KbAnswer" rows="6" maxlength="12000" required></textarea></div><div class="field" style="grid-column:1/-1"><label for="v92KbSource">المرجع الدقيق</label><input id="v92KbSource" maxlength="1000" placeholder="مثال: صحيح مسلم 362" required></div><div class="field"><label for="v92KbSourceLabel">اسم المصدر</label><input id="v92KbSourceLabel" maxlength="180" placeholder="صحيح مسلم"></div><div class="field"><label for="v92KbSourceType">نوع المصدر</label><select id="v92KbSourceType"><option value="quran">القرآن</option><option value="sunnah">السنة/الحديث</option><option value="scholar">قول عالم موثق</option><option value="book">كتاب موثق</option><option value="owner" selected>محتوى المالك</option><option value="other">مصدر آخر</option></select></div><div class="field"><label for="v92KbTrust">حالة المراجعة</label><select id="v92KbTrust"><option value="review" selected>قيد المراجعة</option><option value="verified">موثق</option><option value="primary">مصدر أولي</option></select></div><div class="field"><label for="v92KbPriority">الأولوية</label><input id="v92KbPriority" type="number" min="0" max="1000" value="100"></div><div class="field" style="grid-column:1/-1"><label for="v92KbKeywords">الكلمات المفتاحية</label><input id="v92KbKeywords" placeholder="افصل الكلمات بفاصلة"></div><label class="field"><span>الحالة</span><span><input id="v92KbActive" type="checkbox"> نشط للمساعد</span></label></div><div class="toolbar" style="justify-content:flex-start"><button class="btn primary" type="submit">حفظ</button><button class="btn ghost" id="v92KbCancel" type="button">إلغاء التعديل</button><span id="v92KbStatus" class="ok"></span></div></form><div id="v92KbTable"></div></div>`;
+      kb.innerHTML = `<div class="cardx"><div class="toolbar"><div><h2>قاعدة المعرفة الموثقة</h2><p class="muted">لا تُنشر إجابة للمساعد إلا بعد مرجع واضح ومراجعة بشرية مسجلة.</p></div><button class="btn ghost" id="v92KbReload" type="button">تحديث</button></div><form id="v92KbForm"><input id="v92KbId" type="hidden"><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px"><div class="field"><label for="v92KbQuestion">السؤال</label><input id="v92KbQuestion" maxlength="500" required></div><div class="field"><label for="v92KbCategory">التصنيف</label><input id="v92KbCategory" maxlength="100" value="عام"></div><div class="field" style="grid-column:1/-1"><label for="v92KbAnswer">الإجابة</label><textarea id="v92KbAnswer" rows="6" maxlength="12000" required></textarea></div><div class="field" style="grid-column:1/-1"><label for="v92KbSource">المرجع الدقيق</label><input id="v92KbSource" maxlength="1000" placeholder="مثال: صحيح مسلم 362" required></div><div class="field"><label for="v92KbSourceLabel">اسم المصدر</label><input id="v92KbSourceLabel" maxlength="180" placeholder="صحيح مسلم"></div><div class="field"><label for="v92KbSourceType">نوع المصدر</label><select id="v92KbSourceType"><option value="quran">القرآن</option><option value="sunnah">السنة/الحديث</option><option value="scholar">قول عالم موثق</option><option value="book">كتاب موثق</option><option value="owner" selected>محتوى المالك</option><option value="other">مصدر آخر</option></select></div><div class="field"><label for="v92KbTrust">حالة المراجعة</label><select id="v92KbTrust"><option value="review" selected>قيد المراجعة</option><option value="verified">موثق</option><option value="primary">مصدر أولي</option></select></div><div class="field"><label for="v92KbPriority">الأولوية</label><input id="v92KbPriority" type="number" min="0" max="1000" value="100"></div><div class="field" style="grid-column:1/-1"><label for="v92KbKeywords">الكلمات المفتاحية</label><input id="v92KbKeywords" placeholder="افصل الكلمات بفاصلة"></div><div class="field" style="grid-column:1/-1"><label for="v92KbReviewNotes">ملاحظات المراجع</label><textarea id="v92KbReviewNotes" rows="3" maxlength="2000" placeholder="اكتب ما تم التحقق منه قبل التفعيل"></textarea></div><label class="field"><span>الحالة</span><span><input id="v92KbActive" type="checkbox"> تمت المراجعة وجاهز للمساعد</span></label></div><div class="toolbar" style="justify-content:flex-start"><button class="btn primary" type="submit">حفظ</button><button class="btn ghost" id="v92KbCancel" type="button">إلغاء التعديل</button><span id="v92KbStatus" class="ok"></span></div></form><div id="v92KbTable"></div></div>`;
     }
 
     const notifications = $('notificationsV92');
@@ -110,7 +110,7 @@
     const versions = $('versionsV92');
     if (versions && !versions.dataset.ready) {
       versions.dataset.ready = '1';
-      versions.innerHTML = `<div class="cardx"><div class="toolbar"><div><h2>الإصدارات</h2><p class="muted">سجل الإصدارات المنشورة وحدد الإصدار النشط.</p></div><button class="btn ghost" id="v92VersionsReload" type="button">تحديث</button></div><form id="v92VersionForm"><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px"><div class="field"><label for="v92VersionNumber">الرقم</label><input id="v92VersionNumber" value="92.0.3" required></div><div class="field"><label for="v92VersionLabel">الاسم</label><input id="v92VersionLabel" value="V92.0 PRO FREE AI" required></div><div class="field" style="grid-column:1/-1"><label for="v92VersionNotes">ملاحظات</label><textarea id="v92VersionNotes" rows="3"></textarea></div><label class="field"><span><input id="v92VersionActive" type="checkbox" checked> الإصدار النشط</span></label></div><button class="btn primary" type="submit">حفظ الإصدار</button><span id="v92VersionStatus" class="ok"></span></form><div id="v92VersionsTable"></div></div>`;
+      versions.innerHTML = `<div class="cardx"><div class="toolbar"><div><h2>الإصدارات</h2><p class="muted">سجل الإصدارات المنشورة وحدد الإصدار النشط.</p></div><button class="btn ghost" id="v92VersionsReload" type="button">تحديث</button></div><form id="v92VersionForm"><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px"><div class="field"><label for="v92VersionNumber">الرقم</label><input id="v92VersionNumber" value="92.1.0" required></div><div class="field"><label for="v92VersionLabel">الاسم</label><input id="v92VersionLabel" value="V92.1 TRUSTED CONTENT FREE AI" required></div><div class="field" style="grid-column:1/-1"><label for="v92VersionNotes">ملاحظات</label><textarea id="v92VersionNotes" rows="3"></textarea></div><label class="field"><span><input id="v92VersionActive" type="checkbox" checked> الإصدار النشط</span></label></div><button class="btn primary" type="submit">حفظ الإصدار</button><span id="v92VersionStatus" class="ok"></span></form><div id="v92VersionsTable"></div></div>`;
     }
   }
 
@@ -130,7 +130,7 @@
     if (!host || !sb) return;
     host.textContent = 'جاري تحميل قاعدة المعرفة…';
     const { data, error } = await sb.from('knowledge_base')
-      .select('id,question,answer,keywords,category,priority,active,source_text,source_type,source_label,trust_tier,updated_at')
+      .select('id,question,answer,keywords,category,priority,active,source_text,source_type,source_label,trust_tier,review_status,reviewed_by,reviewed_at,review_notes,updated_at')
       .order('priority', { ascending: false })
       .order('updated_at', { ascending: false })
       .limit(500);
@@ -147,7 +147,8 @@
         createButton(item.active ? 'إيقاف' : 'تفعيل', 'ghost', () => toggleKnowledge(item)),
         createButton('حذف', 'danger', () => deleteKnowledge(item.id))
       );
-      return [item.question, item.category, item.source_text || 'بلا مرجع', item.trust_tier === 'primary' ? 'مصدر أولي' : item.trust_tier === 'verified' ? 'موثق' : 'قيد المراجعة', item.priority, item.active ? 'نشط' : 'متوقف', actions];
+      const reviewLabel=item.active&&item.review_status==='published'&&item.reviewed_at?'منشور ومراجع':item.trust_tier==='review'?'قيد المراجعة':'غير منشور';
+      return [item.question, item.category, item.source_text || 'بلا مرجع', reviewLabel, item.priority, item.active ? 'نشط' : 'متوقف', actions];
     });
     renderTable(host, ['السؤال', 'التصنيف', 'المرجع', 'المراجعة', 'الأولوية', 'الحالة', 'الإجراءات'], rows, 'لا توجد عناصر في قاعدة المعرفة.');
   }
@@ -166,6 +167,7 @@
     $('v92KbTrust').value = item.trust_tier || 'review';
     $('v92KbPriority').value = String(item.priority ?? 100);
     $('v92KbActive').checked = item.active !== false;
+    $('v92KbReviewNotes').value = item.review_notes || '';
     setStatus('v92KbStatus', 'يتم الآن تعديل العنصر المحدد.');
     $('v92KbQuestion').focus();
   }
@@ -173,6 +175,11 @@
   async function saveKnowledge(event) {
     event.preventDefault();
     const id = $('v92KbId').value;
+    const wantsActive = $('v92KbActive').checked;
+    if (wantsActive && !ownerId) {
+      setStatus('v92KbStatus', 'تعذر تحديد حساب المراجع. أعد فتح لوحة المالك ثم حاول مرة أخرى.', false);
+      return;
+    }
     const row = {
       question: $('v92KbQuestion').value.trim(),
       answer: $('v92KbAnswer').value.trim(),
@@ -183,7 +190,12 @@
       source_label: $('v92KbSourceLabel').value.trim(),
       trust_tier: $('v92KbTrust').value,
       priority: Math.max(0, Math.min(1000, Number($('v92KbPriority').value) || 100)),
-      active: $('v92KbActive').checked
+      active: wantsActive,
+      review_status: wantsActive ? 'published' : 'draft',
+      reviewed_by: wantsActive ? ownerId : null,
+      reviewed_at: wantsActive ? new Date().toISOString() : null,
+      review_notes: $('v92KbReviewNotes').value.trim(),
+      updated_by: ownerId || null
     };
     if (!row.question || !row.answer || !row.source_text) {
       setStatus('v92KbStatus', 'السؤال والإجابة والمرجع الدقيق مطلوبة.', false);
@@ -194,13 +206,31 @@
       return;
     }
     setStatus('v92KbStatus', 'جاري الحفظ…');
+    // تحفظ الكتابة أولًا كمسودة مخفية بواسطة بوابة قاعدة البيانات.
+    // إذا طلب المالك التفعيل، تتم المراجعة في تحديث ثانٍ؛ وأي فشل يتركها مسودة آمنة.
+    const draftRow = {...row, active:false, review_status:'draft', reviewed_by:null, reviewed_at:null};
     const query = id
-      ? sb.from('knowledge_base').update(row).eq('id', id)
-      : sb.from('knowledge_base').insert(row);
-    const { error } = await query;
+      ? sb.from('knowledge_base').update(draftRow).eq('id', id).select('id').single()
+      : sb.from('knowledge_base').insert(draftRow).select('id').single();
+    const { data: saved, error } = await query;
     if (error) {
       setStatus('v92KbStatus', arError(error), false);
       return;
+    }
+    if (wantsActive) {
+      const activation = await sb.from('knowledge_base').update({
+        active:true,
+        review_status:'published',
+        reviewed_by:ownerId,
+        reviewed_at:new Date().toISOString(),
+        review_notes:row.review_notes,
+        updated_by:ownerId
+      }).eq('id', saved.id);
+      if (activation.error) {
+        setStatus('v92KbStatus', 'تم حفظ العنصر كمسودة، لكن تعذر اعتماده: '+arError(activation.error), false);
+        await loadKnowledge();
+        return;
+      }
     }
     resetKnowledgeForm();
     setStatus('v92KbStatus', 'تم حفظ عنصر المعرفة.');
@@ -213,7 +243,15 @@
       alert('أضف مرجعًا دقيقًا وحدد العنصر «موثق» أو «مصدر أولي» قبل تفعيله.');
       return;
     }
-    const { error } = await sb.from('knowledge_base').update({ active: !item.active }).eq('id', item.id);
+    if (!item.active && !ownerId) {
+      alert('تعذر تحديد حساب المراجع. أعد فتح لوحة المالك.');
+      return;
+    }
+    const nextActive=!item.active;
+    const payload=nextActive
+      ? {active:true,review_status:'published',reviewed_by:ownerId,reviewed_at:new Date().toISOString(),updated_by:ownerId}
+      : {active:false,review_status:'draft',reviewed_by:null,reviewed_at:null,updated_by:ownerId||null};
+    const { error } = await sb.from('knowledge_base').update(payload).eq('id', item.id);
     if (error) alert(arError(error));
     else await loadKnowledge();
   }

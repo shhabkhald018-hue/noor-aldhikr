@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const ASSET_VERSION = window.NOOR_VERSION?.assetVersion || '92.0.3';
+  const ASSET_VERSION = window.NOOR_VERSION?.assetVersion || '92.1.0-trusted-content';
   const status = (text, type = 'muted') => {
     const el = document.getElementById('portalDiag');
     if (!el) return;
@@ -72,11 +72,9 @@
       `assets/js/v88-owner-os.js?v=${ASSET_VERSION}`,
       `assets/js/v883-owner-ai-health.js?v=${ASSET_VERSION}`,
       `assets/js/v883-ai-core.js?v=${ASSET_VERSION}`,
-      `assets/js/v89-local-llm.js?v=${ASSET_VERSION}`,
       `assets/js/v89-retriever.js?v=${ASSET_VERSION}`,
       `assets/js/v89-rag-orchestrator.js?v=${ASSET_VERSION}`,
       `assets/js/v90-evidence.js?v=${ASSET_VERSION}`,
-      `assets/js/v90-model-router.js?v=${ASSET_VERSION}`,
       `assets/js/v90-rag-orchestrator.js?v=${ASSET_VERSION}`,
       `assets/js/v89-owner-os.js?v=${ASSET_VERSION}`,
       `assets/js/v92-owner-admin.js?v=${ASSET_VERSION}`,

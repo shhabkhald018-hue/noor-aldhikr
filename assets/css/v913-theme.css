@@ -1,4 +1,4 @@
-/* Noor AlDhikr V92.0 Single Theme Engine — one visual authority. */
+/* Noor AlDhikr V92.1 Single Theme Engine — one visual authority. */
 @font-face{
   font-family:"Hafs 20";
   src:url("../fonts/Hafs_20.woff2") format("woff2");
@@ -161,7 +161,7 @@ html[data-theme="dark"] .v87-nav-label{color:var(--theme-accent)!important}
 .ai-source,.research-source,.evidence-card small{color:var(--theme-muted)!important}
 
 
-/* V92.0 final reading hierarchy — legacy green text can never override content. */
+/* V92.1 final reading hierarchy — legacy green text can never override content. */
 .page-intro-card{
   background:var(--theme-surface)!important;
   color:var(--theme-text)!important;

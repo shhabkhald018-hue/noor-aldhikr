@@ -1,6 +1,6 @@
-// Noor AlDhikr V92 — free/local AI compatibility endpoint.
-// The production assistant runs in the browser from the local knowledge base
-// and optional WebGPU model. No paid provider, secret, or outbound request is used.
+// Noor AlDhikr V92.1 — trusted retrieval compatibility endpoint.
+// The production assistant reads only reviewed, published knowledge in the
+// browser. No model, paid provider, secret, or outbound request is used.
 
 const ALLOWED_ORIGINS = new Set([
   "https://shhabkhald018-hue.github.io",
@@ -75,7 +75,7 @@ Deno.serve(async (req: Request) => {
     sources: [],
     trustedSourceCount: 0,
     confidence: 0,
-    researchMode: "local-free-knowledge-base",
+    researchMode: "trusted-retrieval-only",
     fallbackRecommended: true,
     note: FALLBACK_MESSAGE,
   });

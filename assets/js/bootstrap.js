@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const APP_VERSION = window.NOOR_CONFIG?.appVersion || '87.0.0-unified-quran-owner-os';
+  const APP_VERSION = window.NOOR_CONFIG?.appVersion || window.NOOR_VERSION?.semver || '92.1.0';
   document.documentElement.dataset.appVersion = APP_VERSION;
 
   if (!('serviceWorker' in navigator)) return;

@@ -1,7 +1,7 @@
 'use strict';
 importScripts('./assets/js/version.js');
 
-const RELEASE=self.NOOR_VERSION||{semver:'92.0.3',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-0-3-security1'};
+const RELEASE=self.NOOR_VERSION||{semver:'92.1.0',cachePrefix:'noor-aldhikr-',cacheName:'noor-aldhikr-v92-1-trusted-content'};
 const CACHE_PREFIX=RELEASE.cachePrefix;
 const CACHE_NAME=RELEASE.cacheName;
 const OFFLINE_URL='./offline.html';
@@ -78,16 +78,13 @@ const CORE_ASSETS=[
  './assets/js/v883-ai-runtime.js',
  './assets/js/v883-ai-core.js',
  './assets/js/v66-ai-assistant.js',
- './assets/js/v89-local-llm.js',
  './assets/js/v89-retriever.js',
  './assets/js/v89-rag-orchestrator.js',
  './assets/js/v89-ai-runtime.js',
  './assets/js/v902-dream-engine.js',
- './assets/js/v902-grounded-composer.js',
  './assets/js/v89-ai-ui.js',
  './assets/js/v90-conversation.js',
  './assets/js/v90-evidence.js',
- './assets/js/v90-model-router.js',
  './assets/js/v90-stream.js',
  './assets/js/v90-rag-orchestrator.js',
  './assets/js/v90-ai-runtime.js',

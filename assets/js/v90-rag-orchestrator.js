@@ -42,7 +42,9 @@
       const ret=await retriever.ask(question,ctx);
       const ranked=coherentEvidence(evidence.rankEvidence(ret?.hits||[],settings));
       if(!ranked.length)return {mode:'knowledge-fallback',answer:NO_ANSWER,sources:[],evidence:[],related:ret?.related||[],found:false,confidence:0};
-      const fallback=composer?.compose?composer.compose(question,ranked,settings):String(ret?.answer||ranked[0].answer||ranked[0].text||'').trim();
+      // Retrieval-only fallback must be the exact reviewed answer. Do not
+      // synthesize, merge, or paraphrase religious claims outside generation.
+      const fallback=String(ranked[0].answer||ranked[0].text||ret?.answer||'').trim();
       const sources=ranked.map(sourceObj);
       const loaded=!!model?.status?.().loaded;
       if(!loaded||settings.generationEnabled===false)return {mode:'knowledge-fallback',answer:fallback,sources,evidence:ranked,found:true,confidence:ranked[0].evidenceScore||ranked[0].confidence||0};

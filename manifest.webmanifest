@@ -1,5 +1,5 @@
 {
-  "name": "نور الذكر V92.0.3 PRO FREE AI",
+  "name": "نور الذكر V92.1 TRUSTED CONTENT FREE AI",
   "short_name": "نور الذكر",
   "start_url": "./",
   "display": "standalone",
@@ -10,7 +10,7 @@
   "id": "./",
   "scope": "./",
   "orientation": "any",
-  "description": "نور الذكر V92.0.3 — القرآن والأذكار والعلوم الشرعية ومساعد معرفي مجاني بمصادر موثوقة.",
+  "description": "نور الذكر V92.1 — القرآن والأذكار والعلوم الشرعية ومساعد معرفي مجاني بمصادر موثوقة.",
   "categories": [
     "religion",
     "education",

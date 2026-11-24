@@ -1,15 +1,126 @@
 'use strict';
-(()=>{
-  const KEYS=['v90_memory_turns','v90_max_evidence','v90_answer_style','v90_model_policy','v90_enabled_models','v90_allowed_source_types','v90_generation_enabled','v90_max_new_tokens'];
-  let sb=null,ownerId=null,retriever=null,router=null,rag=null;
-  const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  async function settings(){const out={v90_memory_turns:'8',v90_max_evidence:'5',v90_answer_style:'balanced',v90_model_policy:'auto',v90_enabled_models:'8B,4B,1.7B,0.6B',v90_allowed_source_types:'quran,sunnah,scholar,book,owner,academy,other',v90_generation_enabled:'false',v90_max_new_tokens:'220'};try{const {data,error}=await sb.from('app_settings').select('key,value').in('key',KEYS);if(!error)for(const r of data||[])out[r.key]=String(r.value)}catch(_){}return out}
-  async function saveRows(rows){const payload=rows.map(([key,value])=>({key,value:String(value),public:true,updated_by:ownerId}));const {error}=await sb.from('app_settings').upsert(payload);if(error)throw error}
-  async function buildEntries(){const [cloud,canonical,lessons]=await Promise.all([sb.from('ai_knowledge').select('id,knowledge_key,category,title,answer,keywords,source_text,source_type,source_label,trust_tier,priority,active').eq('active',true).neq('trust_tier','review').limit(500).then(r=>r.data||[]),fetch('assets/data/v883-knowledge.json').then(r=>r.json()).catch(()=>[]),fetch('assets/data/v86-lessons.json').then(r=>r.json()).catch(()=>({}))]);return window.NOOR_AI_CORE.buildEntries({cloud,canonical,lessons,fallback:[]})}
-  function ensureEngine(cfg){if(retriever&&router&&rag)return;retriever=window.NOOR_V89_RETRIEVER_FACTORY.create({core:window.NOOR_AI_CORE,loadEntries:buildEntries,fetcher:window.fetch.bind(window)});const enabled=String(cfg.v90_enabled_models||'').split(',');const candidates=window.NOOR_V90_MODEL_ROUTER_FACTORY.DEFAULT_CANDIDATES.map(c=>({...c,enabled:enabled.includes(c.size)}));router=window.NOOR_V90_MODEL_ROUTER_FACTORY.create({candidates,engineFactory:c=>window.NOOR_V89_LLM_FACTORY.create({env:window,model:c.model,maxNewTokens:+cfg.v90_max_new_tokens||220})});rag=window.NOOR_V90_RAG_FACTORY.create({retriever,model:router,evidence:window.NOOR_V90_EVIDENCE})}
-  async function render(){const host=$('aiQualityV90');if(!host)return;const c=await settings();host.innerHTML=`<section class="cardx v90-quality"><div class="v90q-head"><div><span class="v90q-kicker">OWNER OS V92 PRO</span><h2>AI Quality Studio</h2><p class="muted">تحكم في جودة المساعد، الذاكرة، الأدلة والنماذج واختبر قبل النشر.</p></div><span class="v90q-badge">Pro Max</span></div><form id="v90QualityForm" class="v90q-grid"><label><span>طول ذاكرة المحادثة</span><input id="v90MemoryTurns" type="number" min="2" max="30" value="${esc(c.v90_memory_turns)}"></label><label><span>عدد الأدلة</span><input id="v90MaxEvidence" type="number" min="1" max="10" value="${esc(c.v90_max_evidence)}"></label><label><span>طول الرد</span><select id="v90AnswerStyle"><option value="short">مختصر</option><option value="balanced">متوازن</option><option value="detailed">مفصل</option></select></label><label><span>سياسة اختيار النموذج</span><select id="v90ModelPolicy"><option value="auto">تلقائي حسب قوة الجهاز</option><option value="manual">يدوي</option></select></label><label><span>الحد الأقصى للتوليد</span><input id="v90MaxTokens" type="number" min="80" max="500" value="${esc(c.v90_max_new_tokens)}"></label><label class="v90q-check"><input id="v90GenerationEnabled" type="checkbox" ${c.v90_generation_enabled==='true'?'checked':''}> السماح بالتوليد المحلي</label><fieldset class="v90q-models"><legend>النماذج المسموحة — لا يتم تحميل أي نموذج تلقائيًا</legend>${['8B','4B','1.7B','0.6B'].map(x=>`<label><input type="checkbox" data-v90-model="${x}" ${String(c.v90_enabled_models).includes(x)?'checked':''}> Qwen3 ${x}</label>`).join('')}</fieldset><fieldset class="v90q-models v90q-sources"><legend>أنواع المصادر المسموح للمساعد بالاعتماد عليها</legend>${[['quran','القرآن'],['sunnah','السنة/الحديث'],['scholar','العلماء'],['book','الكتب'],['owner','محتوى المالك'],['academy','الأكاديمية'],['other','مصادر أخرى موثقة']].map(([v,l])=>`<label><input type="checkbox" data-v90-source="${v}" ${String(c.v90_allowed_source_types).includes(v)?'checked':''}> ${l}</label>`).join('')}</fieldset><div class="v90q-actions"><button class="btn primary" type="submit">نشر الإعدادات</button><span id="v90QualityMsg"></span></div></form><div class="v90q-lab"><h3>اختبار السؤال قبل النشر</h3><textarea id="v90LabQuestion" rows="3" placeholder="اكتب سؤالًا لاختبار ترتيب الأدلة وجودة الإجابة…"></textarea><div class="v90q-actions"><button class="btn ghost" id="v90TestRetrieve" type="button">اختبار RAG فقط</button><button class="btn ghost" id="v90TestGenerate" type="button">اختبار بالنموذج المحلي المختار</button></div><div class="v90q-preview"><div><h4>الإجابة</h4><pre id="v90LabAnswer">—</pre></div><div><h4>الأدلة المرتبة</h4><div id="v90LabEvidence">—</div></div></div></div></section>`;$('v90AnswerStyle').value=c.v90_answer_style;$('v90ModelPolicy').value=c.v90_model_policy;ensureEngine(c);$('v90QualityForm').onsubmit=save;$('v90TestRetrieve').onclick=()=>runTest(false);$('v90TestGenerate').onclick=()=>runTest(true)}
-  async function save(e){e.preventDefault();const enabled=[...document.querySelectorAll('[data-v90-model]:checked')].map(x=>x.dataset.v90Model);const sourceTypes=[...document.querySelectorAll('[data-v90-source]:checked')].map(x=>x.dataset.v90Source);const msg=$('v90QualityMsg');try{msg.textContent='جاري التحقق…';if(!enabled.length&&$('v90GenerationEnabled').checked)throw new Error('فعّل نموذجًا واحدًا على الأقل أو عطّل التوليد المحلي.');if(!sourceTypes.length)throw new Error('اختر نوع مصدر واحدًا على الأقل.');await saveRows([['v90_memory_turns',$('v90MemoryTurns').value],['v90_max_evidence',$('v90MaxEvidence').value],['v90_answer_style',$('v90AnswerStyle').value],['v90_model_policy',$('v90ModelPolicy').value],['v90_enabled_models',enabled.join(',')],['v90_allowed_source_types',sourceTypes.join(',')],['v90_generation_enabled',$('v90GenerationEnabled').checked],['v90_max_new_tokens',$('v90MaxTokens').value]]);msg.textContent='تم نشر إعدادات V92 بنجاح.'}catch(err){msg.textContent=err.message}}
-  async function runTest(generate){const q=$('v90LabQuestion').value.trim();if(!q)return;const a=$('v90LabAnswer'),e=$('v90LabEvidence');a.textContent='جاري البحث…';try{const cfg=await settings();ensureEngine(cfg);const ret=await retriever.ask(q,{page:'owner-test',title:'AI Quality Studio'});const ranked=window.NOOR_V90_EVIDENCE.rankEvidence(ret.hits||[],{maxEvidence:+cfg.v90_max_evidence||5,allowedSourceTypes:String(cfg.v90_allowed_source_types||'').split(',').filter(Boolean)});e.innerHTML=ranked.map((h,i)=>`<article><b>${i+1}. ${esc(h.title)}</b><small>${esc(h.source||'')}</small><em>${esc(h.trust_tier)} · ${esc(h.source_type)} · ${esc(h.evidenceScore)}</em></article>`).join('')||'لا توجد أدلة كافية.';if(!generate){a.textContent=ranked[0]?.answer||'لا توجد مادة موثوقة كافية.';return}const selected=router.select();if(!selected)throw new Error('لا يوجد نموذج متاح.');await router.loadSelected({explicitOptIn:true,preferredSize:selected.size});const out=await rag.ask(q,{settings:{maxEvidence:+cfg.v90_max_evidence||5,allowedSourceTypes:String(cfg.v90_allowed_source_types||'').split(',').filter(Boolean),answerStyle:cfg.v90_answer_style,maxNewTokens:+cfg.v90_max_new_tokens||220}});a.textContent=out.answer}catch(err){a.textContent=`خطأ: ${err.message}`}}
-  function boot(ev){sb=window.supabaseClient;ownerId=window.NOOR_OWNER_ID||ev?.detail?.user?.id;if(!sb||!ownerId)return;render();document.querySelectorAll('[data-tab="aiQualityV90"]').forEach(b=>b.addEventListener('click',render))}
-  window.addEventListener('noor:admin-ready',boot);document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{if(window.supabaseClient&&window.NOOR_OWNER_ID)boot()},1600));window.NOOR_V90_OWNER={render};
+(() => {
+  const KEYS = ['v90_max_evidence', 'v90_allowed_source_types', 'v90_generation_enabled'];
+  const REFUSAL = 'لم أجد إجابة موثوقة كافية لهذا السؤال حاليًا. يمكنك إعادة صياغة السؤال أو اختيار أحد الاقتراحات.';
+  let sb = null;
+  let ownerId = null;
+  let retriever = null;
+
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[char]);
+
+  async function settings() {
+    const output = {
+      v90_max_evidence: '5',
+      v90_allowed_source_types: 'quran,sunnah,scholar,book,owner,academy,other',
+      v90_generation_enabled: 'false'
+    };
+    try {
+      const { data, error } = await sb.from('app_settings').select('key,value').in('key', KEYS);
+      if (!error) for (const row of data || []) output[row.key] = String(row.value);
+    } catch (_) {}
+    output.v90_generation_enabled = 'false';
+    return output;
+  }
+
+  async function saveRows(rows) {
+    const payload = rows.map(([key, value]) => ({ key, value: String(value), public: true, updated_by: ownerId }));
+    const { error } = await sb.from('app_settings').upsert(payload);
+    if (error) throw error;
+  }
+
+  async function buildEntries() {
+    const { data, error } = await sb.from('knowledge_base')
+      .select('id,question,answer,keywords,category,source_text,source_type,source_label,trust_tier,priority,active,review_status,reviewed_at,reviewed_by')
+      .eq('active', true)
+      .eq('review_status', 'published')
+      .in('trust_tier', ['primary', 'verified'])
+      .not('reviewed_at', 'is', null)
+      .neq('source_text', '')
+      .limit(1000);
+    if (error) throw error;
+    const cloud = (data || []).map(row => ({
+      ...row,
+      title: row.question,
+      knowledge_key: `knowledge-base-${row.id}`
+    }));
+    return window.NOOR_AI_CORE.buildEntries({ cloud, canonical: [], lessons: {}, fallback: [] });
+  }
+
+  function ensureEngine() {
+    if (retriever) return;
+    retriever = window.NOOR_V89_RETRIEVER_FACTORY.create({
+      core: window.NOOR_AI_CORE,
+      loadEntries: buildEntries,
+      fetcher: window.fetch.bind(window)
+    });
+  }
+
+  async function render() {
+    const host = $('aiQualityV90');
+    if (!host) return;
+    const config = await settings();
+    host.innerHTML = `<section class="cardx v90-quality"><div class="v90q-head"><div><span class="v90q-kicker">V92.1 TRUSTED CONTENT</span><h2>استوديو جودة المساعد</h2><p class="muted">اضبط ترتيب الأدلة واختبر الإجابة المنشورة نفسها. التوليد الحر مقفول لمنع إضافة معلومات غير موجودة في المرجع.</p></div><span class="v90q-badge">Retrieval only</span></div><form id="v90QualityForm" class="v90q-grid"><label><span>أقصى عدد للأدلة</span><input id="v90MaxEvidence" type="number" min="1" max="10" value="${esc(config.v90_max_evidence)}"></label><label class="v90q-check"><input type="checkbox" disabled> التوليد المحلي مقفول أمنيًا</label><fieldset class="v90q-models v90q-sources"><legend>أنواع المصادر المسموح بعرضها</legend>${[['quran','القرآن'],['sunnah','السنة/الحديث'],['scholar','العلماء'],['book','الكتب'],['owner','محتوى المالك'],['academy','الأكاديمية'],['other','مصادر أخرى موثقة']].map(([value,label]) => `<label><input type="checkbox" data-v90-source="${value}" ${String(config.v90_allowed_source_types).includes(value) ? 'checked' : ''}> ${label}</label>`).join('')}</fieldset><div class="v90q-actions"><button class="btn primary" type="submit">حفظ الإعدادات</button><span id="v90QualityMsg"></span></div></form><div class="v90q-lab"><h3>اختبار السؤال قبل النشر</h3><textarea id="v90LabQuestion" rows="3" placeholder="مثال: هل الشك ينقض الوضوء؟"></textarea><div class="v90q-actions"><button class="btn ghost" id="v90TestRetrieve" type="button">اختبار الإجابة الموثقة</button></div><div class="v90q-preview"><div><h4>الإجابة</h4><pre id="v90LabAnswer">—</pre></div><div><h4>الأدلة المرتبة</h4><div id="v90LabEvidence">—</div></div></div></div></section>`;
+    ensureEngine();
+    $('v90QualityForm').onsubmit = save;
+    $('v90TestRetrieve').onclick = runTest;
+  }
+
+  async function save(event) {
+    event.preventDefault();
+    const sourceTypes = [...document.querySelectorAll('[data-v90-source]:checked')].map(node => node.dataset.v90Source);
+    const message = $('v90QualityMsg');
+    try {
+      message.textContent = 'جاري الحفظ…';
+      if (!sourceTypes.length) throw new Error('اختر نوع مصدر واحدًا على الأقل.');
+      await saveRows([
+        ['v90_max_evidence', Math.max(1, Math.min(10, Number($('v90MaxEvidence').value) || 5))],
+        ['v90_allowed_source_types', sourceTypes.join(',')],
+        ['v90_generation_enabled', false]
+      ]);
+      message.textContent = 'تم حفظ إعدادات البحث الموثق.';
+    } catch (error) {
+      console.error('[Noor AI quality]', error);
+      message.textContent = 'تعذر حفظ الإعدادات الآن.';
+    }
+  }
+
+  async function runTest() {
+    const question = $('v90LabQuestion').value.trim();
+    if (!question) return;
+    const answer = $('v90LabAnswer');
+    const evidenceHost = $('v90LabEvidence');
+    answer.textContent = 'جاري البحث…';
+    try {
+      const config = await settings();
+      ensureEngine();
+      const result = await retriever.ask(question, { page: 'owner-test', title: 'AI Quality Studio' });
+      const ranked = window.NOOR_V90_EVIDENCE.rankEvidence(result.hits || [], {
+        maxEvidence: Number(config.v90_max_evidence) || 5,
+        allowedSourceTypes: String(config.v90_allowed_source_types || '').split(',').filter(Boolean)
+      });
+      evidenceHost.innerHTML = ranked.map((hit, index) => `<article><b>${index + 1}. ${esc(hit.title)}</b><small>${esc(hit.source || '')}</small><em>${esc(hit.trust_tier)} · ${esc(hit.source_type)} · ${esc(hit.evidenceScore)}</em></article>`).join('') || 'لا توجد أدلة كافية.';
+      answer.textContent = ranked[0]?.answer || REFUSAL;
+    } catch (error) {
+      console.error('[Noor AI quality test]', error);
+      answer.textContent = 'تعذر تشغيل الاختبار الآن.';
+      evidenceHost.textContent = 'تعذر تحميل الأدلة.';
+    }
+  }
+
+  function boot(event) {
+    sb = window.supabaseClient;
+    ownerId = window.NOOR_OWNER_ID || event?.detail?.user?.id;
+    if (!sb || !ownerId) return;
+    render();
+    document.querySelectorAll('[data-tab="aiQualityV90"]').forEach(button => button.addEventListener('click', render));
+  }
+
+  window.addEventListener('noor:admin-ready', boot);
+  document.addEventListener('DOMContentLoaded', () => setTimeout(() => {
+    if (window.supabaseClient && window.NOOR_OWNER_ID) boot();
+  }, 1600));
+  window.NOOR_V90_OWNER = { render };
 })();
